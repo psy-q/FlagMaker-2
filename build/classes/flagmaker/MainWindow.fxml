@@ -8,43 +8,35 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0"
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="flagmaker.MainWindowController" >
+      fx:controller="flagmaker.MainWindowController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem text="New" />
+            <MenuItem text="Open…" />
+            <MenuItem text="Save" />
+            <MenuItem text="Save As…" />
+            <MenuItem text="Revert" />
+            <SeparatorMenuItem />
+            <MenuItem text="Export PNG" />
+	    <MenuItem text="Export SVG" />
+            <SeparatorMenuItem />
+            <MenuItem text="Bulk export PNG..." />
+	    <MenuItem text="Bulk export SVG..." />
+            <SeparatorMenuItem />
+            <MenuItem text="Quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
+        <Menu text="World flag presets">
           <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
+            <MenuItem text="Todo" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu text="Language">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem text="English" />
           </items>
         </Menu>
       </menus>
@@ -52,9 +44,10 @@
       <ToolBar prefHeight="40.0">
         <items>
             <Label>Ratio:</Label>
-            <TextField fx:id="txtRatioHeight" onKeyReleased="#SetRatio" prefHeight="39.0" prefWidth="43.0" />
+            <TextField fx:id="txtRatioHeight" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="2" />
             <Label>:</Label>
-            <TextField fx:id="txtRatioWidth" onKeyReleased="#SetRatio" prefHeight="39.0" prefWidth="43.0" />
+            <TextField fx:id="txtRatioWidth" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="3" />
+	    <Label>Grid size:</Label>
             <ComboBox fx:id="cmbRatio" prefWidth="150.0" />
         </items>
       </ToolBar>
