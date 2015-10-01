@@ -2,7 +2,7 @@
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="FlagMaker.jnlp">
   <information>
     <title>FlagMaker</title>
-    <vendor>asa</vendor>
+    <vendor></vendor>
     <description>null</description>
     <offline-allowed/>
   </information>
@@ -11,7 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="FlagMaker.jar" size="18890" download="eager" />
+    <jar href="FlagMaker.jar" size="18973" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="FlagMaker" >
     <param name="requiredFXVersion" value="2.2+"/>

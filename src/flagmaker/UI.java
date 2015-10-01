@@ -24,6 +24,7 @@ public class UI extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.titleProperty().setValue("FlagMaker 2.0");
         stage.show();
     }
 
