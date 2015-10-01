@@ -11,27 +11,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author asa
- */
-public class UI extends Application {
-    
+public class UI extends Application
+{
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.titleProperty().setValue("FlagMaker 2.0");
-        stage.show();
+    public void start(Stage stage) throws Exception
+    {
+	Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+
+	Scene scene = new Scene(root);
+
+	stage.setScene(scene);
+	stage.titleProperty().setValue("FlagMaker 2.0");
+	stage.show();
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args)
+    {
+	launch(args);
     }
 }

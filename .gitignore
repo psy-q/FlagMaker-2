@@ -51,3 +51,4 @@ target
 *.properties
 seed.txt
 map.txt
+dist/*

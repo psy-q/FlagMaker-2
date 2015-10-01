@@ -6,7 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="flagmaker.MainWindowController" >
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -47,6 +49,15 @@
         </Menu>
       </menus>
     </MenuBar>
+      <ToolBar prefHeight="40.0">
+        <items>
+            <Label>Ratio:</Label>
+            <TextField fx:id="txtRatioHeight" onKeyReleased="#SetRatio" prefHeight="39.0" prefWidth="43.0" />
+            <Label>:</Label>
+            <TextField fx:id="txtRatioWidth" onKeyReleased="#SetRatio" prefHeight="39.0" prefWidth="43.0" />
+            <ComboBox fx:id="cmbRatio" prefWidth="150.0" />
+        </items>
+      </ToolBar>
       <SplitPane dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
