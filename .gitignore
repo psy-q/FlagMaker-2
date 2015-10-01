@@ -53,3 +53,4 @@ seed.txt
 map.txt
 dist/*
 private/*
+build/*
