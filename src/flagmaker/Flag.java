@@ -3,7 +3,9 @@ package flagmaker;
 import flagmaker.Divisions.Division;
 import flagmaker.Overlays.Overlay;
 import java.util.List;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.SubScene;
+import javafx.scene.canvas.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class Flag
@@ -33,8 +35,10 @@ public class Flag
 		return null;
 	}
 	
-	public void Draw(Canvas canvas)
+	public void Draw(Pane canvas)
 	{
+		// clear canvas
+		Division.Draw(canvas);
 	}
 	
 	public void ExportToPng(Size size, String path)

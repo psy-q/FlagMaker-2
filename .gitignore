@@ -54,3 +54,4 @@ map.txt
 dist/*
 private/*
 build/*
+nbproject/*

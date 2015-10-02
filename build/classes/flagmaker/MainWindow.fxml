@@ -1,61 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="flagmaker.MainWindowController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu text="File">
-          <items>
-            <MenuItem text="New" />
-            <MenuItem text="Open…" />
-            <MenuItem text="Save" />
-            <MenuItem text="Save As…" />
-            <MenuItem text="Revert" />
-            <SeparatorMenuItem />
-            <MenuItem text="Export PNG" />
-	    <MenuItem text="Export SVG" />
-            <SeparatorMenuItem />
-            <MenuItem text="Bulk export PNG..." />
-	    <MenuItem text="Bulk export SVG..." />
-            <SeparatorMenuItem />
-            <MenuItem text="Quit" />
-          </items>
-        </Menu>
-        <Menu text="World flag presets">
-          <items>
-            <MenuItem text="Todo" />
-          </items>
-        </Menu>
-        <Menu text="Language">
-          <items>
-            <MenuItem text="English" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-      <ToolBar prefHeight="40.0">
-        <items>
-            <Label>Ratio:</Label>
-            <TextField fx:id="txtRatioHeight" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="2" />
-            <Label>:</Label>
-            <TextField fx:id="txtRatioWidth" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="3" />
-	    <Label>Grid size:</Label>
-            <ComboBox fx:id="cmbRatio" prefWidth="150.0" />
-        </items>
-      </ToolBar>
-      <SplitPane dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-        </items>
-      </SplitPane>
-  </children>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flagmaker.MainWindowController">
+	<children>
+		<MenuBar VBox.vgrow="NEVER">
+			<menus>
+				<Menu text="File">
+					<items>
+						<MenuItem text="New" />
+						<MenuItem text="Open…" />
+						<MenuItem text="Save" />
+						<MenuItem text="Save As…" />
+						<MenuItem text="Revert" />
+						<SeparatorMenuItem />
+						<MenuItem text="Export PNG" />
+						<MenuItem text="Export SVG" />
+						<SeparatorMenuItem />
+						<MenuItem text="Bulk export PNG..." />
+						<MenuItem text="Bulk export SVG..." />
+						<SeparatorMenuItem />
+						<MenuItem text="Quit" />
+					</items>
+				</Menu>
+				<Menu text="World flag presets">
+					<items>
+						<MenuItem text="Todo" />
+					</items>
+				</Menu>
+				<Menu text="Language">
+					<items>
+						<MenuItem text="English" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+		<ToolBar prefHeight="40.0">
+			<items>
+				<Label>Ratio:</Label>
+				<TextField fx:id="txtRatioHeight" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="2" />
+				<Label>:</Label>
+				<TextField fx:id="txtRatioWidth" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="3" />
+				<Label>Grid size:</Label>
+				<ComboBox fx:id="cmbRatio" prefWidth="150.0" />
+			</items>
+		</ToolBar>
+		<SplitPane fx:id="splitPane" dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+			<items>
+				<AnchorPane fx:id="leftPane" prefHeight="200.0" prefWidth="200.0" minWidth="100.0" style="-fx-background-color: #ffeeee;" />
+				<AnchorPane minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
+					<children>
+						<SplitPane dividerPositions="0.3" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+							<items>
+								<AnchorPane>
+									<children>
+										<Label text="Divisions" />
+									</children>
+								</AnchorPane>
+								<AnchorPane>
+									<children>
+										<Label text="Overlays" />
+									</children>
+								</AnchorPane>
+							</items>
+						</SplitPane>
+					</children>
+				</AnchorPane>
+			</items>
+		</SplitPane>
+	</children>
 </VBox>
