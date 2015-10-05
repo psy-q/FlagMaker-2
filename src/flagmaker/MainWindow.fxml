@@ -52,10 +52,15 @@
 		</ToolBar>
 		<SplitPane fx:id="splitPane" dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 			<items>
-				<AnchorPane fx:id="leftPane" prefHeight="200.0" prefWidth="200.0" minWidth="100.0" style="-fx-background-color: #ffeeee;" />
+				<AnchorPane fx:id="leftAnchor" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: CYAN;">
+					<children>
+						<StackPane fx:id="leftStack" alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" />
+					</children>
+				</AnchorPane>
 				<AnchorPane minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
 					<children>
-						<SplitPane dividerPositions="0.3" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+						<SplitPane dividerPositions="0.3" orientation="VERTICAL" VBox.vgrow="ALWAYS"
+								   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<items>
 								<AnchorPane>
 									<children>

@@ -1,7 +1,5 @@
 package flagmaker.Divisions;
 
-import javafx.scene.SubScene;
-import javafx.scene.canvas.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -20,15 +18,12 @@ public class DivisionPales extends Division
 	
 	public void Draw(Pane canvas)
 	{
-		Rectangle right = new Rectangle();
-		right.fillProperty().set(Colors[2]);
-		right.widthProperty().set(100);
-		right.heightProperty().set(100);
-		canvas.getChildren().add(right);
-		
-		//GraphicsContext context = canvas.getGraphicsContext2D();
-		//context.setFill(Colors[2]);
-		//context.fillRect(0, 0, 100, 100);
+		double height = canvas.getHeight();
+				
+		Rectangle left = new Rectangle(canvas.getWidth() / 3.0, height, Colors[0]);
+		Rectangle center = new Rectangle(canvas.getWidth() * 2.0 / 3.0, height, Colors[1]);
+		Rectangle right = new Rectangle(canvas.getWidth(), height, Colors[2]);
+		canvas.getChildren().addAll(right, center, left);
 	}
 	
 	public void SetColors(Color[] colors)
