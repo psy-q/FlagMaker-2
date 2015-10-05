@@ -3,8 +3,6 @@ package flagmaker;
 import flagmaker.Divisions.Division;
 import flagmaker.Overlays.Overlay;
 import java.util.List;
-import javafx.scene.SubScene;
-import javafx.scene.canvas.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
