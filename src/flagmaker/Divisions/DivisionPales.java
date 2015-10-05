@@ -19,10 +19,11 @@ public class DivisionPales extends Division
 	public void Draw(Pane canvas)
 	{
 		double height = canvas.getHeight();
+		double width = canvas.getWidth();
 				
-		Rectangle left = new Rectangle(canvas.getWidth() / 3.0, height, Colors[0]);
-		Rectangle center = new Rectangle(canvas.getWidth() * 2.0 / 3.0, height, Colors[1]);
-		Rectangle right = new Rectangle(canvas.getWidth(), height, Colors[2]);
+		Rectangle left = new Rectangle(width / 3.0, height, Colors[0]);
+		Rectangle center = new Rectangle(width * 2.0 / 3.0, height, Colors[1]);
+		Rectangle right = new Rectangle(width, height, Colors[2]);
 		canvas.getChildren().addAll(right, center, left);
 	}
 	
