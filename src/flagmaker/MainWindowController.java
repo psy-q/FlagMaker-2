@@ -79,6 +79,7 @@ public class MainWindowController
 
 		ratio = new Ratio(width, height);
 		cmbRatio.getSelectionModel().select(0);
+		leftStack.autosize();
 		
 		Draw();
 	}
