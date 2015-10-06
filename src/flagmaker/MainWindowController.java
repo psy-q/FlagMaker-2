@@ -95,7 +95,13 @@ public class MainWindowController
 		SetAsUnsaved();
 	}
 	
-	@FXML private void DivisionFessesClick(){}
+	@FXML private void DivisionFessesClick()
+	{
+		division = new DivisionFesses(Color.GRAY, Color.WHITE, Color.GRAY, 1, 2, 1);
+		SetDivisionVisibility();
+		Draw();
+		SetAsUnsaved();
+	}
 	
 	@FXML private void DivisionPalesClick()
 	{
@@ -105,9 +111,29 @@ public class MainWindowController
 		SetAsUnsaved();
 	}
 	
-	@FXML private void DivisionBendsForwardClick(){}
-	@FXML private void DivisionBendsBackwardClick(){}
-	@FXML private void DivisionXClick(){}
+	@FXML private void DivisionBendsForwardClick()
+	{
+		division = new DivisionBendsForward(Color.GRAY, Color.WHITE);
+		SetDivisionVisibility();
+		Draw();
+		SetAsUnsaved();
+	}
+	
+	@FXML private void DivisionBendsBackwardClick()
+	{
+		division = new DivisionBendsBackward(Color.GRAY, Color.WHITE);
+		SetDivisionVisibility();
+		Draw();
+		SetAsUnsaved();
+	}
+	
+	@FXML private void DivisionXClick()
+	{
+		division = new DivisionX(Color.GRAY, Color.WHITE);
+		SetDivisionVisibility();
+		Draw();
+		SetAsUnsaved();
+	}
 	
 	// Overlays
 	private void OverlayAdd(){}
