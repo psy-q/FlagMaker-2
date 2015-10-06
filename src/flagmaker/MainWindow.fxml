@@ -5,6 +5,7 @@
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -60,7 +61,7 @@
 				</AnchorPane>
 				<VBox fillWidth="true" SplitPane.resizableWithParent="false">
 					<children>
-						<Label text="Divisions" />
+						<Label style="-fx-font-weight: bold; -fx-font-size: 24;" text="Divisions" />
 						<FlowPane alignment="TOP_LEFT" hgap="4" orientation="HORIZONTAL" vgap="4">
 							<children>
 								<Button onAction="#DivisionGridClick">
@@ -242,13 +243,29 @@
 								<Slider fx:id="divisionSlider3" blockIncrement="1" majorTickUnit="1" max="8" min="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
 							</children>
 						</HBox>
+						<HBox alignment="CENTER_LEFT">
+							<children>
+								<Label style="-fx-font-weight: bold; -fx-font-size: 24;" text="Overlays" />
+								<Button onAction="#OverlayAdd">
+									<HBox.margin>
+										<Insets left="10.0" />
+									</HBox.margin>
+									<tooltip>
+										<Tooltip text="Add new" />
+									</tooltip>
+									<graphic>
+										<ImageView>
+											<image>
+												<Image url="flagmaker/Images/add.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+							</children>
+						</HBox>
 						<ScrollPane fitToWidth="true" style="-fx-background-color:transparent;">
 							<content>
-								<VBox>
-									<children>
-										<Label text="Overlays" />
-									</children>
-								</VBox>
+								<VBox fx:id="lstOverlays" />
 							</content>
 							<padding>
 								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

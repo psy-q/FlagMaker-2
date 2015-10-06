@@ -11,6 +11,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.SubScene;
 import javafx.scene.image.WritableImage;
@@ -36,6 +37,8 @@ public class MainWindowController
 	@FXML private ColorPicker divisionPicker1;
 	@FXML private ColorPicker divisionPicker2;
 	@FXML private ColorPicker divisionPicker3;
+	
+	@FXML private VBox lstOverlays;
 	
 	private SubScene subscene;
 	private Pane pane;
@@ -96,7 +99,19 @@ public class MainWindowController
 	}
 	
 	// Division
-	private void DivisionColorChanged(){}
+	private void DivisionColorChanged()
+	{
+		if (isLoading) return;
+		
+		division.SetColors(new Color[]
+		{
+			divisionPicker1.getValue(),
+			divisionPicker2.getValue(),
+			divisionPicker3.getValue()
+		});
+		Draw();
+		SetAsUnsaved();
+	}
 	
 	private void DivisionSliderChanged()
 	{
@@ -151,7 +166,7 @@ public class MainWindowController
 	
 	@FXML private void DivisionGridClick()
 	{
-		division = new DivisionGrid(Color.WHITE, Color.GRAY, divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue());
+		division = new DivisionGrid(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -159,7 +174,7 @@ public class MainWindowController
 	
 	@FXML private void DivisionFessesClick()
 	{
-		division = new DivisionFesses(Color.GRAY, Color.WHITE, Color.GRAY,
+		division = new DivisionFesses(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionPicker3.getValue(),
 				divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
@@ -168,7 +183,7 @@ public class MainWindowController
 	
 	@FXML private void DivisionPalesClick()
 	{
-		division = new DivisionPales(Color.GRAY, Color.WHITE, Color.GRAY,
+		division = new DivisionPales(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionPicker3.getValue(),
 				divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
@@ -177,7 +192,7 @@ public class MainWindowController
 	
 	@FXML private void DivisionBendsForwardClick()
 	{
-		division = new DivisionBendsForward(Color.GRAY, Color.WHITE);
+		division = new DivisionBendsForward(divisionPicker1.getValue(), divisionPicker2.getValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -185,7 +200,7 @@ public class MainWindowController
 	
 	@FXML private void DivisionBendsBackwardClick()
 	{
-		division = new DivisionBendsBackward(Color.GRAY, Color.WHITE);
+		division = new DivisionBendsBackward(divisionPicker1.getValue(), divisionPicker2.getValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -193,25 +208,40 @@ public class MainWindowController
 	
 	@FXML private void DivisionXClick()
 	{
-		division = new DivisionX(Color.GRAY, Color.WHITE);
+		division = new DivisionX(divisionPicker1.getValue(), divisionPicker2.getValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
 	}
 	
 	// Overlays
-	private void OverlayAdd(){}
+	@FXML private void OverlayAdd()
+	{
+		OverlayAdd(lstOverlays.getChildren().size(), null, false);
+	}
+	
 	private void SetOverlayMargins(){}
-	//private void Draw(){}
 	private void Remove(){}
 	private void MoveUp(){}
 	private void MoveDown(){}
 	private void Clone(){}
-	private void OverlayAdd(int index, Overlay overlay, boolean isLoading){}
+	
+	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
+	{
+		
+	}
 		
 	// Colors
 	private void SetColorsAndSliders()
 	{
+		divisionPicker1.setValue(Color.rgb(198, 12, 48));
+		divisionPicker2.setValue(Color.rgb(253, 200, 47));
+		divisionPicker3.setValue(Color.rgb(0, 38, 100));
+		
+		divisionPicker1.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
+		divisionPicker2.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
+		divisionPicker3.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
+		
 		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
 		divisionSlider2.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
 		divisionSlider3.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
