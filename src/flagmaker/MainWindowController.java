@@ -4,13 +4,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.List;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.SubScene;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Transform;
+import javax.imageio.ImageIO;
 
 public class MainWindowController
 {
@@ -27,7 +35,7 @@ public class MainWindowController
 	private StackPane leftStack;
 
 	private SubScene subscene;
-	private Pane canvas;
+	private Pane pane;
 
 	private Division division;
 	// private ColorItem[] colors;
@@ -52,9 +60,9 @@ public class MainWindowController
 
 	private void AddWorkspace()
 	{
-		canvas = new Pane();
+		pane = new Pane();
 		subscene = new SubScene(leftAnchor, 300, 200);
-		subscene.setRoot(canvas);
+		subscene.setRoot(pane);
 		leftStack.getChildren().add(subscene);
 
 		// Draw whenever the left side changes size
@@ -219,7 +227,7 @@ public class MainWindowController
 	{
 		//_canvas.Width = _ratioWidth * 200;
 		//_canvas.Height = _ratioHeight * 200;
-		Flag().Draw(canvas);
+		Flag().Draw(pane);
 		//DrawTexture(_canvas);
 		//DrawGrid();
 		//SetUsedColorPalettes();
@@ -234,6 +242,27 @@ public class MainWindowController
 	}
 	
 	// Export
+	public void MenuExportPngClick()
+	{
+		WritableImage snapshot = pane.snapshot(new SnapshotParameters(), null);
+		
+		File fileA = new File("export.png");
+		try
+		{
+			ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", fileA);
+		}
+		catch (Exception ex)
+		{
+		}
+	}
+	
+	private void GetPngDimensions(){}
+	private void MenuExportSvgClick(){}
+	private void MenuExportBulkPngClick(){}
+	private void MenuExportBulkSvgClick(){}
+	private void GetFlagFiles(){}
+	private void GetBulkSaveDirectory(){}
+	private void ExportFinished(){}
 	
 	// Load / save
 	public void New()

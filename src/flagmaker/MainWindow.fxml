@@ -20,7 +20,7 @@
 						<MenuItem text="Save As…" />
 						<MenuItem text="Revert" />
 						<SeparatorMenuItem />
-						<MenuItem text="Export PNG" />
+						<MenuItem onAction="#MenuExportPngClick" text="Export PNG" />
 						<MenuItem text="Export SVG" />
 						<SeparatorMenuItem />
 						<MenuItem text="Bulk export PNG..." />
@@ -53,7 +53,7 @@
 		</ToolBar>
 		<SplitPane fx:id="splitPane" dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 			<items>
-				<AnchorPane fx:id="leftAnchor" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: CYAN;">
+				<AnchorPane fx:id="leftAnchor" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
 					<children>
 						<StackPane fx:id="leftStack" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
 					</children>
