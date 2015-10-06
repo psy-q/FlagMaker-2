@@ -6,6 +6,7 @@ import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javafx.beans.binding.Bindings;
@@ -48,11 +49,10 @@ public class MainWindowController
 	private Pane _pane;
 
 	private Division _division;
-	// private ColorItem[] colors;
 
-	private boolean isLoading;
-	private boolean showGrid;
-	private int texture;
+	private boolean _isLoading;
+	private boolean _showGrid;
+	private int _texture;
 
 	private String _headerText;
 	private String _filename;
@@ -120,7 +120,7 @@ public class MainWindowController
 	// Division
 	private void DivisionColorChanged()
 	{
-		if (isLoading) return;
+		if (_isLoading) return;
 		
 		_division.SetColors(new Color[]
 		{
@@ -271,12 +271,33 @@ public class MainWindowController
 		divisionPicker3.setValue(Color.rgb(0, 38, 100));
 	}
 	
-	private void SetUsedColorPalettes(){}
-	private void ShuffleColors(){}
-	private Color GetNextColor(Color c, List<Color> colors)
+	@FXML private void ShuffleColors()
 	{
-		int index = colors.indexOf(c);
-		return colors.get(((index + 1) % colors.size()));
+		boolean skip2 = _division instanceof DivisionGrid && divisionSlider1.getValue() == 1 && divisionSlider2.getValue() == 1;
+		Color[] colors = Flag().ColorsUsed();
+
+		divisionPicker1.setValue(GetNextColor(divisionPicker1.getValue(), colors));
+		
+		if (!skip2)
+		{
+			divisionPicker2.setValue(GetNextColor(divisionPicker2.getValue(), colors));
+		}
+		
+		if (divisionPicker3.visibleProperty().get())
+		{
+			divisionPicker3.setValue(GetNextColor(divisionPicker3.getValue(), colors));
+		}
+
+		for (Overlay overlay : (List<Overlay>)(List<?>)lstOverlays.getChildren())
+		{
+			overlay.Color = GetNextColor(overlay.Color, colors);
+		}
+	}
+	
+	private Color GetNextColor(Color c, Color[] colors)
+	{
+		int index = Arrays.asList(colors).indexOf(c);
+		return colors[(index + 1) % colors.length];
 	}
 	
 	// Grid
@@ -288,7 +309,8 @@ public class MainWindowController
 		FillGridCombobox();
 	}
 	
-	private void GridOnChanged(){}
+	@FXML private void GridOnChanged(){}
+	
 	private void DrawGrid(){}
 	
 	private void FillGridCombobox()
@@ -319,7 +341,7 @@ public class MainWindowController
 		_ratio = new Ratio(width, height);
 		leftStack.autosize();
 		
-		if(!isLoading)
+		if(!_isLoading)
 		{
 			Draw();
 			SetAsUnsaved();
@@ -415,6 +437,7 @@ public class MainWindowController
 	
 	@FXML private void Open()
 	{
+		LoadFlagFromFile("nah");
 	}
 	
 	private boolean CheckUnsaved()

@@ -15,13 +15,13 @@
 			<menus>
 				<Menu mnemonicParsing="true" text="_File">
 					<items>
-						<MenuItem onAction="#New" mnemonicParsing="true"  text="_New" accelerator="Ctrl+N" />
-						<MenuItem onAction="#Open" mnemonicParsing="true" text="_Open…" accelerator="Ctrl+O" />
-						<MenuItem onAction="#Save" mnemonicParsing="true" text="_Save" accelerator="Ctrl+S" />
-						<MenuItem onAction="#SaveAs" mnemonicParsing="true" text="Save _as…" accelerator="Ctrl+Shift+S" />
+						<MenuItem accelerator="Ctrl+N" mnemonicParsing="true" onAction="#New" text="_New" />
+						<MenuItem accelerator="Ctrl+O" mnemonicParsing="true" onAction="#Open" text="_Open…" />
+						<MenuItem accelerator="Ctrl+S" mnemonicParsing="true" onAction="#Save" text="_Save" />
+						<MenuItem accelerator="Ctrl+Shift+S" mnemonicParsing="true" onAction="#SaveAs" text="Save _as…" />
 						<SeparatorMenuItem />
-						<MenuItem onAction="#MenuExportPngClick" mnemonicParsing="true" text="Export as _PNG..." />
-						<MenuItem onAction="#MenuExportSvgClick" mnemonicParsing="true" text="Export as SV_G..." />
+						<MenuItem mnemonicParsing="true" onAction="#MenuExportPngClick" text="Export as _PNG..." />
+						<MenuItem mnemonicParsing="true" onAction="#MenuExportSvgClick" text="Export as SV_G..." />
 						<SeparatorMenuItem />
 						<MenuItem mnemonicParsing="true" text="Bulk export as P_NG..." />
 						<MenuItem mnemonicParsing="true" text="Bulk e_xport as SVG..." />
@@ -45,8 +45,69 @@
 				<TextField fx:id="txtRatioHeight" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="2" />
 				<Label>:</Label>
 				<TextField fx:id="txtRatioWidth" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="3" />
+				
 				<Label>Grid size:</Label>
 				<ComboBox fx:id="cmbRatio" prefWidth="150.0" />
+				
+				<ToggleButton onAction="#GridOnChanged">
+					<tooltip>
+						<Tooltip text="Show/hide grid" />
+					</tooltip>
+					<graphic>
+						<Pane>
+							<children>
+								<Line endX="30" endY="5" startX="0" startY="5" stroke="GRAY" strokeWidth="2" />
+								<Line endX="30" endY="10" startX="0" startY="10" stroke="GRAY" strokeWidth="2" />
+								<Line endX="30" endY="15" startX="0" startY="15" stroke="GRAY" strokeWidth="2" />
+   							
+								<Line endX="5" endY="20" startX="5" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="10" endY="20" startX="10" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="15" endY="20" startX="15" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="20" endY="20" startX="20" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="25" endY="20" startX="25" startY="0" stroke="GRAY" strokeWidth="2" />
+							</children>
+						</Pane>
+					</graphic>
+				</ToggleButton>
+				
+				<TextField fx:id="txtName" style="-fx-pref-width: 200;" />
+				
+				<Button onAction="#ShuffleColors">
+					<tooltip>
+						<Tooltip text="Rotate colors" />
+					</tooltip>
+					<graphic>
+						<ImageView>
+							<image>
+								<Image url="flagmaker/Images/rotate.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button>
+					<tooltip>
+						<Tooltip text="Toggle texture" />
+					</tooltip>
+					<graphic>
+						<ImageView>
+							<image>
+								<Image url="flagmaker/Images/texture.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button>
+					<tooltip>
+						<Tooltip text="Random flag" />
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="30">
+							<image>
+								<Image url="flagmaker/Images/die.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
 			</items>
 		</ToolBar>
 		<SplitPane fx:id="splitPane" dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
