@@ -6,7 +6,10 @@ import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -256,8 +259,19 @@ public class MainWindowController
 		}
 	}
 	
-	private void GetPngDimensions(){}
-	private void MenuExportSvgClick(){}
+	private Size GetPngDimensions(){return null;}
+	
+	public void MenuExportSvgClick()
+	{
+		try
+		{
+			Flag().ExportToSvg("export.svg");
+		}
+		catch (IOException ex)
+		{
+		}
+	}
+	
 	private void MenuExportBulkPngClick(){}
 	private void MenuExportBulkSvgClick(){}
 	private void GetFlagFiles(){}

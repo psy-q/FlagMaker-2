@@ -21,7 +21,7 @@
 						<MenuItem text="Revert" />
 						<SeparatorMenuItem />
 						<MenuItem onAction="#MenuExportPngClick" text="Export PNG" />
-						<MenuItem text="Export SVG" />
+						<MenuItem onAction="#MenuExportSvgClick" text="Export SVG" />
 						<SeparatorMenuItem />
 						<MenuItem text="Bulk export PNG..." />
 						<MenuItem text="Bulk export SVG..." />
