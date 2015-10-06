@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -61,25 +62,160 @@
 					<children>
 						<SplitPane dividerPositions="0.3" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
 							<items>
-								<VBox>
+								<VBox fillWidth="false">
 									<children>
 										<Label text="Divisions" />
 										<FlowPane>
 											<children>
-												<Button onAction="#DivisionGridClick" text="Grid" />
-												<Button onAction="#DivisionFessesClick" text="Fesses" />
-												<Button onAction="#DivisionPalesClick" text="Pales" />
-												<Button onAction="#DivisionBendsForwardClick" text="Bends forward" />
-												<Button onAction="#DivisionBendsBackwardClick" text="Bends backward" />
-												<Button onAction="#DivisionXClick" text="Bends both" />
+												<Button onAction="#DivisionGridClick">
+													<tooltip><Tooltip text="Grid" /></tooltip>
+													<graphic>
+														<Pane>
+															<children>
+																<VBox>
+																	<children>
+																		<HBox>
+																			<children>
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																			</children>
+																		</HBox>
+																		<HBox>
+																			<children>
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																			</children>
+																		</HBox>
+																		<HBox>
+																			<children>
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																			</children>
+																		</HBox>
+																		<HBox>
+																			<children>
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																				<Rectangle fill="RED" height="5" width="6" />
+																				<Rectangle fill="BLUE" height="5" width="6" />
+																			</children>
+																		</HBox>
+																	</children>
+																</VBox>
+															</children>
+														</Pane>
+													</graphic>
+												</Button>
+												<Button onAction="#DivisionFessesClick">
+													<tooltip><Tooltip text="Fesses" /></tooltip>
+													<graphic>
+														<Pane>
+															<children>
+																<VBox>
+																	<children>
+																		<Rectangle fill="RED" height="7" width="30" />
+																		<Rectangle fill="WHITE" height="6" width="30" />
+																		<Rectangle fill="BLUE" height="7" width="30" />
+																	</children>
+																</VBox>
+															</children>
+														</Pane>
+													</graphic>
+												</Button>
+												<Button onAction="#DivisionPalesClick">
+													<tooltip><Tooltip text="Pales" /></tooltip>
+													<graphic>
+														<Pane>
+															<children>
+																<HBox>
+																	<children>
+																		<Rectangle fill="RED" height="20" width="10" />
+																		<Rectangle fill="WHITE" height="20" width="10" />
+																		<Rectangle fill="BLUE" height="20" width="10" />
+																	</children>
+																</HBox>
+															</children>
+														</Pane>
+													</graphic>
+												</Button>
+												<Button onAction="#DivisionBendsForwardClick">
+													<tooltip><Tooltip text="Bends forward" /></tooltip>
+													<graphic>
+														<Pane>
+															<children>
+																<Rectangle fill="RED" height="20" width="30" />
+																<Path fill="BLUE" strokeWidth="0">
+																	<elements>
+																		<MoveTo x="30" y="0" />
+																		<LineTo x="30" y="20" />
+																		<LineTo x="0" y="20" />
+																		<LineTo x="30" y="0" />
+																	</elements>
+																</Path>
+															</children>
+														</Pane>
+													</graphic>
+												</Button>
+												<Button onAction="#DivisionBendsBackwardClick">
+													<tooltip><Tooltip text="Bends backward" /></tooltip>
+													<graphic>
+														<Pane>
+															<children>
+																<Rectangle fill="RED" height="20" width="30" />
+																<Path fill="BLUE" strokeWidth="0">
+																	<elements>
+																		<MoveTo x="30" y="20" />
+																		<LineTo x="0" y="20" />
+																		<LineTo x="0" y="0" />
+																		<LineTo x="30" y="20" />
+																	</elements>
+																</Path>
+															</children>
+														</Pane>
+													</graphic>
+												</Button>
+												<Button onAction="#DivisionXClick">
+													<tooltip><Tooltip text="Bends both" /></tooltip>
+													<graphic>
+														<Pane>
+															<children>
+																<Rectangle fill="RED" height="20" width="30" />
+																<Path fill="BLUE" strokeWidth="0">
+																	<elements>
+																		<MoveTo x="30" y="0" />
+																		<LineTo x="0" y="20" />
+																		<LineTo x="0" y="0" />
+																		<LineTo x="30" y="20" />
+																	</elements>
+																</Path>
+															</children>
+														</Pane>
+													</graphic>
+												</Button>
 											</children>
 										</FlowPane>
 									</children>
+									<padding>
+									   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+									</padding>
 								</VBox>
 								<AnchorPane>
 									<children>
 										<Label text="Overlays" />
 									</children>
+									<padding>
+									   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+									</padding>
 								</AnchorPane>
 							</items>
 						</SplitPane>
