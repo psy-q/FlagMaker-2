@@ -6,7 +6,6 @@ import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -16,9 +15,9 @@ public class Flag
 	public Ratio Ratio;
 	public Ratio GridSize;
 	public Division Division;
-	public List<Overlay> Overlays;
+	public Overlay[] Overlays;
 	
-	public Flag(String name, Ratio ratio, Ratio gridSize, Division division, List<Overlay> overlays)
+	public Flag(String name, Ratio ratio, Ratio gridSize, Division division, Overlay[] overlays)
 	{
 		Name = name;
 		Ratio = ratio;
@@ -62,11 +61,11 @@ public class Flag
 			
 			SetRepeaterOverlays();
 			
-			for (int i = 0; i < Overlays.size(); i++)
+			for (int i = 0; i < Overlays.length; i++)
 			{
-				if (i > 0 && Overlays.get(i - 1) instanceof OverlayRepeater) continue;
+				if (i > 0 && Overlays[i - 1] instanceof OverlayRepeater) continue;
 				
-				Overlay overlay = Overlays.get(i);
+				Overlay overlay = Overlays[i];
 				if (!overlay.IsEnabled) continue;
 				
 				try
@@ -82,7 +81,7 @@ public class Flag
 		}
 	}
 	
-	public List<Color> ColorsUsed()
+	public Color[] ColorsUsed()
 	{
 		return null;
 	}

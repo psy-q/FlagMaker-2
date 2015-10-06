@@ -333,7 +333,7 @@ public class MainWindowController
 	
 	public Flag Flag()
 	{
-		return new Flag("", ratio, gridSize, division, null);
+		return new Flag("", ratio, gridSize, division, new Overlay[]{});
 	}
 
 	private boolean CanParseInt(String value)
