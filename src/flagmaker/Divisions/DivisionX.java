@@ -1,5 +1,6 @@
 package flagmaker.Divisions;
 
+import flagmaker.ColorExtensions;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
@@ -31,10 +32,10 @@ public class DivisionX extends Division
 		
 		Path p = new Path(new PathElement[]
 		{
-			new MoveTo(0, 0),
+			new MoveTo(0, height),
+			new LineTo(width, 0),
 			new LineTo(width, height),
-			new LineTo(0, height),
-			new LineTo(width, 0)
+			new LineTo(0, 0)
 		});
 		p.fillProperty().set(Colors[1]);
 		p.strokeWidthProperty().set(0);
@@ -44,19 +45,28 @@ public class DivisionX extends Division
 	@Override
 	public void SetColors(Color[] colors)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Colors[0] = colors[0];
+		Colors[1] = colors[1];
 	}
 
 	@Override
 	public void SetValues(int[] values)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("<rect width=\"%d\" height=\"%d\" x=\"0\" y=\"0\" %s />",
+				width,
+				height,
+				ColorExtensions.ToSvgFillWithOpacity(Colors[0])));
+		sb.append(String.format("<polygon points=\"0,0 %1$d,%2$d %1$d,0 0,%2$d\" %3$s />",
+				width,
+				height,
+				ColorExtensions.ToSvgFillWithOpacity(Colors[1])));
+		return sb.toString();
 	}
 	
 }

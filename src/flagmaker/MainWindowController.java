@@ -4,12 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,24 +16,24 @@ import javafx.scene.SubScene;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Scale;
-import javafx.scene.transform.Transform;
 import javax.imageio.ImageIO;
 
 public class MainWindowController
 {
-	@FXML
-	private TextField txtRatioHeight;
-	@FXML
-	private TextField txtRatioWidth;
-	@FXML
-	private ComboBox cmbRatio;
+	@FXML private TextField txtRatioHeight;
+	@FXML private TextField txtRatioWidth;
+	@FXML private ComboBox cmbRatio;
 
-	@FXML
-	private AnchorPane leftAnchor;
-	@FXML
-	private StackPane leftStack;
+	@FXML private AnchorPane leftAnchor;
+	@FXML private StackPane leftStack;
 
+	@FXML private Slider divisionSlider1;
+	@FXML private Slider divisionSlider2;
+	@FXML private Slider divisionSlider3;
+	@FXML private Label divisionLabel1;
+	@FXML private Label divisionLabel2;
+	@FXML private Label divisionLabel3;
+	
 	private SubScene subscene;
 	private Pane pane;
 
@@ -58,6 +55,8 @@ public class MainWindowController
 	protected void initialize()
 	{
 		AddWorkspace();
+		SetColorsAndSliders();
+		LoadPresets();
 		New();
 	}
 
@@ -85,7 +84,7 @@ public class MainWindowController
 				leftStack.widthProperty(), leftStack.heightProperty(), txtRatioHeight.textProperty(), txtRatioWidth.textProperty()));
 	}
 
-		private void SetLanguages()
+	private void SetLanguages()
 	{
 	}
 
@@ -95,7 +94,17 @@ public class MainWindowController
 	
 	// Division
 	private void DivisionColorChanged(){}
-	private void DivisionSliderChanged(){}
+	
+	private void DivisionSliderChanged()
+	{
+		divisionLabel1.setText(String.format("%d", divisionSlider1.valueProperty().intValue()));
+		divisionLabel2.setText(String.format("%d", divisionSlider2.valueProperty().intValue()));
+		divisionLabel3.setText(String.format("%d", divisionSlider3.valueProperty().intValue()));
+		division.SetValues(new int[]{ divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue() });
+		Draw();
+		SetAsUnsaved();
+	}
+	
 	private void SetDivisionVisibility(){}
 	
 	@FXML private void DivisionGridClick()
@@ -157,7 +166,13 @@ public class MainWindowController
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading){}
 		
 	// Colors
-	private void SetColorsAndSliders(){}
+	private void SetColorsAndSliders()
+	{
+		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
+		divisionSlider2.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
+		divisionSlider3.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
+	}
+	
 	private void SetUsedColorPalettes(){}
 	private void ShuffleColors(){}
 	private Color GetNextColor(Color c, List<Color> colors)
@@ -217,7 +232,7 @@ public class MainWindowController
 	
 	private void GridSizeDropdownChanged(){}
 	
-		// Other	
+	// Other	
 	private void NameChanged()
 	{
 	}

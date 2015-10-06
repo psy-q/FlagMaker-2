@@ -45,13 +45,15 @@ public class DivisionGrid extends Division
 	@Override
 	public void SetColors(Color[] colors)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Colors[0] = colors[0];
+		Colors[1] = colors[1];
 	}
 
 	@Override
 	public void SetValues(int[] values)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Values[0] = values[0];
+		Values[1] = values[1];
 	}
 
 	@Override
