@@ -1,5 +1,6 @@
 package flagmaker.Divisions;
 
+import flagmaker.ColorExtensions;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -59,6 +60,25 @@ public class DivisionGrid extends Division
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("<rect width=\"%d\" height=\"%d\" x=\"0\" y=\"0\" %s />",
+				width,
+				height,
+				ColorExtensions.ToSvgFillWithOpacity(Colors[0])));
+		
+		double h = height / (double)Values[1];
+		double w = width / (double)Values[0];
+			
+		for	(int x = 0; x < Values[0]; x++)
+		{
+			for (int y = 0; y < Values[1]; y++)
+			{
+				sb.append(String.format("<rect width=\"%.3f\" height=\"%.3f\" x=\"%.3f\" y=\"%.3f\" %s />",
+					w, h, x * w, y * h,
+					ColorExtensions.ToSvgFillWithOpacity((x + y) % 2 == 0 ? Colors[0] : Colors[1])));
+			}
+		}
+		
+		return sb.toString();
 	}
 }
