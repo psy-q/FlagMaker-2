@@ -13,7 +13,7 @@
 			<menus>
 				<Menu text="File">
 					<items>
-						<MenuItem text="New" onAction="#New" />
+						<MenuItem onAction="#New" text="New" />
 						<MenuItem text="Open…" />
 						<MenuItem text="Save" />
 						<MenuItem text="Save As…" />
@@ -61,11 +61,21 @@
 					<children>
 						<SplitPane dividerPositions="0.3" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
 							<items>
-								<AnchorPane>
+								<VBox>
 									<children>
 										<Label text="Divisions" />
+										<FlowPane>
+											<children>
+												<Button onAction="#DivisionGridClick" text="Grid" />
+												<Button onAction="#DivisionFessesClick" text="Fesses" />
+												<Button onAction="#DivisionPalesClick" text="Pales" />
+												<Button onAction="#DivisionBendsForwardClick" text="Bends forward" />
+												<Button onAction="#DivisionBendsBackwardClick" text="Bends backward" />
+												<Button onAction="#DivisionXClick" text="Bends both" />
+											</children>
+										</FlowPane>
 									</children>
-								</AnchorPane>
+								</VBox>
 								<AnchorPane>
 									<children>
 										<Label text="Overlays" />

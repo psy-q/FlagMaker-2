@@ -83,12 +83,31 @@ public class MainWindowController
 	}
 	
 	// Division
-	private void DivisionGridClick(){}
-	private void DivisionFessesClick(){}
-	private void DivisionPalesClick(){}
-	private void DivisionBendsForwardClick(){}
-	private void DivisionBendsBackwardClick(){}
-	private void DivisionXClick(){}
+	private void DivisionColorChanged(){}
+	private void DivisionSliderChanged(){}
+	private void SetDivisionVisibility(){}
+	
+	@FXML private void DivisionGridClick()
+	{
+		division = new DivisionGrid(Color.WHITE, Color.GRAY, 2, 2);
+		SetDivisionVisibility();
+		Draw();
+		SetAsUnsaved();
+	}
+	
+	@FXML private void DivisionFessesClick(){}
+	
+	@FXML private void DivisionPalesClick()
+	{
+		division = new DivisionPales(Color.GRAY, Color.WHITE, Color.GRAY, 1, 2, 1);
+		SetDivisionVisibility();
+		Draw();
+		SetAsUnsaved();
+	}
+	
+	@FXML private void DivisionBendsForwardClick(){}
+	@FXML private void DivisionBendsBackwardClick(){}
+	@FXML private void DivisionXClick(){}
 	
 	// Overlays
 	private void OverlayAdd(){}
@@ -224,7 +243,7 @@ public class MainWindowController
 	
 	private void PlainPreset(int slider1, int slider2)
 	{
-		division = new DivisionPales(new Color[] { Color.GRAY, Color.WHITE, Color.GRAY }, new Double[] { 1.0, 1.0, 1.0 });
+		DivisionGridClick();
 	}
 	
 	private void LoadPresets(){}

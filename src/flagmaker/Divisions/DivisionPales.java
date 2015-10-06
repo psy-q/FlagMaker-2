@@ -6,16 +6,18 @@ import javafx.scene.shape.Rectangle;
 
 public class DivisionPales extends Division 
 {
-	public DivisionPales(Color[] colors, Double[] values)
+	public DivisionPales(Color color1, Color color2, Color color3, int v1, int v2, int v3)
 	{
-		super(colors, values);
+		super(new Color[] { color1, color2, color3 }, new int[] { v1, v2, v3 });
 	}
 
+	@Override
 	public String Name()
 	{
 		return "pales";
 	}
 	
+	@Override
 	public void Draw(Pane canvas)
 	{
 		double height = canvas.getHeight();
@@ -27,14 +29,17 @@ public class DivisionPales extends Division
 		canvas.getChildren().addAll(right, center, left);
 	}
 	
+	@Override
 	public void SetColors(Color[] colors)
 	{
 	}
 	
-	public void SetValues(Double[] values)
+	@Override
+	public void SetValues(int[] values)
 	{
 	}
 	
+	@Override
 	public String ExportSvg(int width, int height)
 	{
 		return "";
