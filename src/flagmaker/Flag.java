@@ -26,7 +26,7 @@ public class Flag
 		Overlays = overlays;
 	}
 	
-	public static Flag LoadFromFile(String filename)
+	public static Flag LoadFromFile(String filename) throws Exception
 	{
 		return null;
 	}

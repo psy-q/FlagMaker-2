@@ -13,29 +13,26 @@
 	<children>
 		<MenuBar VBox.vgrow="NEVER">
 			<menus>
-				<Menu text="File">
+				<Menu mnemonicParsing="true" text="_File">
 					<items>
-						<MenuItem onAction="#New" text="New" />
-						<MenuItem text="Open…" />
-						<MenuItem text="Save" />
-						<MenuItem text="Save As…" />
-						<MenuItem text="Revert" />
+						<MenuItem onAction="#New" mnemonicParsing="true"  text="_New" accelerator="Ctrl+N" />
+						<MenuItem onAction="#Open" mnemonicParsing="true" text="_Open…" accelerator="Ctrl+O" />
+						<MenuItem onAction="#Save" mnemonicParsing="true" text="_Save" accelerator="Ctrl+S" />
+						<MenuItem onAction="#SaveAs" mnemonicParsing="true" text="Save _as…" accelerator="Ctrl+Shift+S" />
 						<SeparatorMenuItem />
-						<MenuItem onAction="#MenuExportPngClick" text="Export PNG" />
-						<MenuItem onAction="#MenuExportSvgClick" text="Export SVG" />
+						<MenuItem onAction="#MenuExportPngClick" mnemonicParsing="true" text="Export as _PNG..." />
+						<MenuItem onAction="#MenuExportSvgClick" mnemonicParsing="true" text="Export as SV_G..." />
 						<SeparatorMenuItem />
-						<MenuItem text="Bulk export PNG..." />
-						<MenuItem text="Bulk export SVG..." />
-						<SeparatorMenuItem />
-						<MenuItem text="Quit" />
+						<MenuItem mnemonicParsing="true" text="Bulk export as P_NG..." />
+						<MenuItem mnemonicParsing="true" text="Bulk e_xport as SVG..." />
 					</items>
 				</Menu>
-				<Menu text="World flag presets">
+				<Menu mnemonicParsing="true" text="_World flag presets">
 					<items>
 						<MenuItem text="Todo" />
 					</items>
 				</Menu>
-				<Menu text="Language">
+				<Menu mnemonicParsing="true" text="_Language">
 					<items>
 						<MenuItem text="English" />
 					</items>
