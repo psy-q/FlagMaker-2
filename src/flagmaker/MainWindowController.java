@@ -19,6 +19,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class MainWindowController
@@ -42,6 +43,7 @@ public class MainWindowController
 	
 	@FXML private VBox lstOverlays;
 	
+	private Stage _stage;
 	private SubScene _subScene;
 	private Pane _pane;
 
@@ -63,9 +65,17 @@ public class MainWindowController
 	protected void initialize()
 	{
 		AddWorkspace();
+		
+		_headerText = String.format(" - FlagMaker %s", getClass().getPackage().getImplementationVersion());
+		
 		SetColorsAndSliders();
 		LoadPresets();
 		New();
+	}
+	
+	public void SetPrimaryStage(Stage stage)
+	{
+		_stage = stage;
 	}
 
 	private void AddWorkspace()
@@ -98,6 +108,13 @@ public class MainWindowController
 
 	private void SetTitle()
 	{
+		String title = String.format("%s%s%s",
+				StringExtensions.IsNullOrWhitespace(_filename)
+					? "Untitled"
+					: StringExtensions.GetFilenameWithoutExtension(_filename),
+				_isUnsaved ? "*" : "",
+				_headerText);
+		_stage.setTitle(title);
 	}
 	
 	// Division

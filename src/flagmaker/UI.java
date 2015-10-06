@@ -2,8 +2,8 @@ package flagmaker;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UI extends Application
@@ -11,11 +11,26 @@ public class UI extends Application
 	@Override
 	public void start(Stage stage) throws Exception
 	{
-		Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		loader.setControllerFactory((Class<?> type) ->
+		{
+			try
+			{
+				Object controller = type.newInstance();
+				if (controller instanceof MainWindowController)
+				{
+					((MainWindowController) controller).SetPrimaryStage(stage);
+				}
+				return controller;
+			}
+			catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
+		});
 
+		VBox root = loader.load();
 		Scene scene = new Scene(root);
-
-		stage.titleProperty().setValue("FlagMaker 2.0");
 		//stage.getIcons().add(new Image("/images/icon.png"));
 		stage.setScene(scene);
 		stage.show();
