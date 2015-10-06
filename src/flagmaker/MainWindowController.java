@@ -33,6 +33,9 @@ public class MainWindowController
 	@FXML private Label divisionLabel1;
 	@FXML private Label divisionLabel2;
 	@FXML private Label divisionLabel3;
+	@FXML private ColorPicker divisionPicker1;
+	@FXML private ColorPicker divisionPicker2;
+	@FXML private ColorPicker divisionPicker3;
 	
 	private SubScene subscene;
 	private Pane pane;
@@ -105,11 +108,50 @@ public class MainWindowController
 		SetAsUnsaved();
 	}
 	
-	private void SetDivisionVisibility(){}
+	private void SetDivisionVisibility()
+	{
+		divisionPicker1.setValue(division.Colors[0]);
+		divisionPicker2.setValue(division.Colors[1]);
+				
+		if (division.Colors.length > 2)
+		{
+			divisionPicker3.setValue(division.Colors[2]);
+			Show(divisionPicker3);
+		}
+		else
+		{
+			Hide(divisionPicker3);
+		}
+
+		Hide(divisionSlider1);
+		Hide(divisionSlider2);
+		Hide(divisionSlider3);
+		Hide(divisionLabel1);
+		Hide(divisionLabel2);
+		Hide(divisionLabel3);
+
+		if (division.Values.length <= 0) return;
+		divisionSlider1.setValue(division.Values[0]);
+		Show(divisionSlider1);
+		divisionLabel1.setText(String.format("%d", division.Values[0]));
+		Show(divisionLabel1);
+
+		if (division.Values.length <= 1) return;
+		divisionSlider2.setValue(division.Values[1]);
+		Show(divisionSlider2);
+		divisionLabel2.setText(String.format("%d", division.Values[1]));
+		Show(divisionLabel2);
+
+		if (division.Values.length <= 2) return;
+		divisionSlider3.setValue(division.Values[2]);
+		Show(divisionSlider3);
+		divisionLabel3.setText(String.format("%d", division.Values[2]));
+		Show(divisionLabel3);
+	}
 	
 	@FXML private void DivisionGridClick()
 	{
-		division = new DivisionGrid(Color.WHITE, Color.GRAY, 2, 2);
+		division = new DivisionGrid(Color.WHITE, Color.GRAY, divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -117,7 +159,8 @@ public class MainWindowController
 	
 	@FXML private void DivisionFessesClick()
 	{
-		division = new DivisionFesses(Color.GRAY, Color.WHITE, Color.GRAY, 1, 2, 1);
+		division = new DivisionFesses(Color.GRAY, Color.WHITE, Color.GRAY,
+				divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -125,7 +168,8 @@ public class MainWindowController
 	
 	@FXML private void DivisionPalesClick()
 	{
-		division = new DivisionPales(Color.GRAY, Color.WHITE, Color.GRAY, 1, 2, 1);
+		division = new DivisionPales(Color.GRAY, Color.WHITE, Color.GRAY,
+				divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -301,8 +345,8 @@ public class MainWindowController
 		//	return;
 		//}
 		PlainPreset(2, 2);
-		//_divisionPicker1.SelectedColor = _divisionPicker1.StandardColors[1].Color;
-		//_divisionPicker2.SelectedColor = _divisionPicker2.StandardColors[5].Color;
+		//divisionSlider1.SelectedColor = divisionSlider1.StandardColors[1].Color;
+		//divisionSlider2.SelectedColor = divisionSlider2.StandardColors[5].Color;
 		//_lstOverlays.Children.Clear();
 		SetRatio(3, 2);
 		RatioTextboxChanged();
@@ -328,6 +372,9 @@ public class MainWindowController
 	private void PlainPreset(int slider1, int slider2)
 	{
 		DivisionGridClick();
+		divisionSlider1.valueProperty().set(slider1);
+		divisionSlider2.valueProperty().set(slider2);
+		divisionSlider3.valueProperty().set(1);
 	}
 	
 	private void LoadPresets(){}
@@ -362,5 +409,17 @@ public class MainWindowController
 		{
 			return false;
 		}
+	}
+	
+	private void Hide(Control object)
+	{
+		object.visibleProperty().set(false);
+		object.managedProperty().set(false);
+	}
+	
+	private void Show(Control object)
+	{
+		object.visibleProperty().set(true);
+		object.managedProperty().set(true);
 	}
 }

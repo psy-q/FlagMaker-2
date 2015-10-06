@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" fx:controller="flagmaker.MainWindowController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flagmaker.MainWindowController">
 	<children>
 		<MenuBar VBox.vgrow="NEVER">
 			<menus>
@@ -61,10 +61,12 @@
 				<VBox fillWidth="true" SplitPane.resizableWithParent="false">
 					<children>
 						<Label text="Divisions" />
-						<FlowPane orientation="HORIZONTAL" vgap="4" hgap="4" alignment="TOP_LEFT">
+						<FlowPane alignment="TOP_LEFT" hgap="4" orientation="HORIZONTAL" vgap="4">
 							<children>
 								<Button onAction="#DivisionGridClick">
-									<tooltip><Tooltip text="Grid" /></tooltip>
+									<tooltip>
+										<Tooltip text="Grid" />
+									</tooltip>
 									<graphic>
 										<Pane>
 											<children>
@@ -113,7 +115,9 @@
 									</graphic>
 								</Button>
 								<Button onAction="#DivisionFessesClick">
-									<tooltip><Tooltip text="Fesses" /></tooltip>
+									<tooltip>
+										<Tooltip text="Fesses" />
+									</tooltip>
 									<graphic>
 										<Pane>
 											<children>
@@ -129,7 +133,9 @@
 									</graphic>
 								</Button>
 								<Button onAction="#DivisionPalesClick">
-									<tooltip><Tooltip text="Pales" /></tooltip>
+									<tooltip>
+										<Tooltip text="Pales" />
+									</tooltip>
 									<graphic>
 										<Pane>
 											<children>
@@ -145,7 +151,9 @@
 									</graphic>
 								</Button>
 								<Button onAction="#DivisionBendsForwardClick">
-									<tooltip><Tooltip text="Bends forward" /></tooltip>
+									<tooltip>
+										<Tooltip text="Bends forward" />
+									</tooltip>
 									<graphic>
 										<Pane>
 											<children>
@@ -163,7 +171,9 @@
 									</graphic>
 								</Button>
 								<Button onAction="#DivisionBendsBackwardClick">
-									<tooltip><Tooltip text="Bends backward" /></tooltip>
+									<tooltip>
+										<Tooltip text="Bends backward" />
+									</tooltip>
 									<graphic>
 										<Pane>
 											<children>
@@ -181,7 +191,9 @@
 									</graphic>
 								</Button>
 								<Button onAction="#DivisionXClick">
-									<tooltip><Tooltip text="Bends both" /></tooltip>
+									<tooltip>
+										<Tooltip text="Bends both" />
+									</tooltip>
 									<graphic>
 										<Pane>
 											<children>
@@ -200,29 +212,51 @@
 								</Button>
 							</children>
 						</FlowPane>
+						
+						<HBox spacing="5.0">
+							<children>
+								<ColorPicker fx:id="divisionPicker1" style="-fx-color-label-visible: false;" />
+								<ColorPicker fx:id="divisionPicker2" style="-fx-color-label-visible: false;" />
+								<ColorPicker fx:id="divisionPicker3" style="-fx-color-label-visible: false;" />
+							</children>
+							<padding>
+								<Insets bottom="5.0" top="5.0" />
+							</padding>
+						</HBox>
+												
 						<HBox>
-							<Label fx:id="divisionLabel1" HBox.hgrow="NEVER" text="1" /> 
-							<Slider fx:id="divisionSlider1" showTickMarks="true" blockIncrement="1" majorTickUnit="1" minorTickCount="0" snapToTicks="true" min="1" max="8" HBox.hgrow="ALWAYS" />
+							<children>
+								<Label fx:id="divisionLabel1" text="1" HBox.hgrow="NEVER" /> 
+								<Slider fx:id="divisionSlider1" blockIncrement="1" majorTickUnit="1" max="8" min="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
+							</children>
 						</HBox>
 						<HBox>
-							<Label fx:id="divisionLabel2" HBox.hgrow="NEVER" text="1" /> 
-							<Slider fx:id="divisionSlider2" showTickMarks="true" blockIncrement="1" majorTickUnit="1" minorTickCount="0" snapToTicks="true" min="1" max="8" HBox.hgrow="ALWAYS" />
+							<children>
+								<Label fx:id="divisionLabel2" text="1" HBox.hgrow="NEVER" /> 
+								<Slider fx:id="divisionSlider2" blockIncrement="1" majorTickUnit="1" max="8" min="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
+							</children>
 						</HBox>
 						<HBox>
-							<Label fx:id="divisionLabel3" HBox.hgrow="NEVER" text="1" /> 
-							<Slider fx:id="divisionSlider3" showTickMarks="true" blockIncrement="1" majorTickUnit="1" minorTickCount="0" snapToTicks="true" min="1" max="8" HBox.hgrow="ALWAYS" />
+							<children>
+								<Label fx:id="divisionLabel3" text="1" HBox.hgrow="NEVER" /> 
+								<Slider fx:id="divisionSlider3" blockIncrement="1" majorTickUnit="1" max="8" min="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
+							</children>
 						</HBox>
 						<ScrollPane fitToWidth="true" style="-fx-background-color:transparent;">
-							<VBox>
-								<Label text="Overlays" />
-							</VBox>
+							<content>
+								<VBox>
+									<children>
+										<Label text="Overlays" />
+									</children>
+								</VBox>
+							</content>
 							<padding>
-							   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 							</padding>
 						</ScrollPane>
 					</children>
 					<padding>
-					   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 					</padding>
 				</VBox>
 			</items>
