@@ -1,27 +1,28 @@
 package flagmaker;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
+import flagmaker.Overlays.OverlayControl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import javax.imageio.ImageIO;
+import javafx.fxml.FXML;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.SubScene;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.SubScene;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 
 public class MainWindowController
 {
@@ -32,6 +33,7 @@ public class MainWindowController
 	@FXML private AnchorPane leftAnchor;
 	@FXML private StackPane leftStack;
 
+	@FXML private TextField txtName;
 	@FXML private Slider divisionSlider1;
 	@FXML private Slider divisionSlider2;
 	@FXML private Slider divisionSlider3;
@@ -247,7 +249,8 @@ public class MainWindowController
 	
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{
-		
+		OverlayControl oc = new OverlayControl();
+		lstOverlays.getChildren().add(oc);
 	}
 		
 	// Colors
@@ -439,7 +442,7 @@ public class MainWindowController
 		lstOverlays.getChildren().clear();
 		SetRatio(3, 2);
 		RatioTextboxChanged();
-		//_txtName.Text = strings.Untitled;
+		txtName.textProperty().set("Untitled");
 		_filename = "";
 		_isUnsaved = false;
 		SetTitle();

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1">
+	<HBox>
+		<Button>
+			<tooltip>
+				<Tooltip text="Change type" />
+			</tooltip>
+			<graphic>
+				<ImageView fitHeight="32.0" fitWidth="32.0">
+					<image>
+						<Image url="flagmaker/Images/rotate.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<Button>
+			<tooltip>
+				<Tooltip text="Toggle visibility" />
+			</tooltip>
+			<graphic>
+				<ImageView fitHeight="32.0" fitWidth="32.0">
+					<image>
+						<Image url="flagmaker/Images/check_on.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<Button>
+			<tooltip>
+				<Tooltip text="Remove" />
+			</tooltip>
+			<graphic>
+				<ImageView fitHeight="32.0" fitWidth="32.0">
+					<image>
+						<Image url="flagmaker/Images/remove.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<Button>
+			<tooltip>
+				<Tooltip text="Move up" />
+			</tooltip>
+			<graphic>
+				<ImageView fitHeight="32.0" fitWidth="32.0">
+					<image>
+						<Image url="flagmaker/Images/moveup.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<Button>
+			<tooltip>
+				<Tooltip text="Move down" />
+			</tooltip>
+			<graphic>
+				<ImageView fitHeight="32.0" fitWidth="32.0">
+					<image>
+						<Image url="flagmaker/Images/movedown.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<Button>
+			<tooltip>
+				<Tooltip text="Clone" />
+			</tooltip>
+			<graphic>
+				<ImageView fitHeight="32.0" fitWidth="32.0">
+					<image>
+						<Image url="flagmaker/Images/clone.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+	</HBox>
+	
+	<ColorPicker fx:id="overlayPicker" style="-fx-color-label-visible: false;" />
+	<VBox fx:id="pnlSliders" />
+	<ColorPicker fx:id="strokePicker" style="-fx-color-label-visible: false;" />
+</fx:root>
