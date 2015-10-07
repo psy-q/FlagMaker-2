@@ -1,11 +1,15 @@
 package flagmaker;
 
 import flagmaker.Divisions.Division;
+import flagmaker.Divisions.DivisionGrid;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -83,7 +87,38 @@ public class Flag
 	
 	public Color[] ColorsUsed()
 	{
-		return null;
+		ArrayList<Color> colors = new ArrayList<Color>();
+		
+		if (Division instanceof DivisionGrid && Division.Values[0] == 1 && Division.Values[1] == 1)
+		{
+			colors.add(Division.Colors[0]);
+		}
+		else
+		{
+			colors.addAll(Arrays.asList(Division.Colors));
+		}
+		
+		for (Overlay overlay : Overlays)
+		{
+//			var flag = overlay as OverlayFlag;
+//			if (flag != null)
+//			{
+//				colors.AddRange(flag.Flag.ColorsUsed());
+//			}
+//			else if (!(overlay is OverlayRepeater || overlay is OverlayImage))
+//			{
+				colors.add(overlay.Color);
+
+//				var path = overlay as OverlayPath;
+//				if (path != null && path.StrokeColor.A > 0 && path.Attributes.Get(strings.Stroke).Value > 0)
+//				{
+//					colors.Add(path.StrokeColor);
+//				}
+//			}
+		}
+		
+		Color[] returnValue = new Color[]{};
+		return colors.toArray(returnValue);
 	}
 	
 	private void SetRepeaterOverlays()

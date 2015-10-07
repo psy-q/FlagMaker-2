@@ -273,7 +273,9 @@ public class MainWindowController
 	
 	@FXML private void ShuffleColors()
 	{
-		boolean skip2 = _division instanceof DivisionGrid && divisionSlider1.getValue() == 1 && divisionSlider2.getValue() == 1;
+		boolean skip2 = (_division instanceof DivisionGrid) &&
+				(divisionSlider1.getValue() == 1) &&
+				(divisionSlider2.getValue() == 1);
 		Color[] colors = Flag().ColorsUsed();
 
 		divisionPicker1.setValue(GetNextColor(divisionPicker1.getValue(), colors));
@@ -408,11 +410,22 @@ public class MainWindowController
 		}
 	}
 	
-	private void MenuExportBulkPngClick(){}
-	private void MenuExportBulkSvgClick(){}
+	@FXML private void MenuExportBulkPngClick(){}
+	@FXML private void MenuExportBulkSvgClick(){}
 	private void GetFlagFiles(){}
 	private void GetBulkSaveDirectory(){}
-	private void ExportFinished(){}
+	
+	private void ExportFinished(boolean errorOccurred)
+	{
+		if (errorOccurred)
+		{
+			new Alert(AlertType.ERROR, "Export bulk error", ButtonType.OK).showAndWait();
+		}
+		else
+		{
+			new Alert(AlertType.INFORMATION, "Export bulk success", ButtonType.OK).showAndWait();
+		}
+	}
 	
 	// Load / save
 	@FXML private void New()
@@ -473,8 +486,7 @@ public class MainWindowController
 		}
 		catch(Exception e)
 		{
-			Alert alert = new Alert(AlertType.ERROR, "Could not load file.", ButtonType.OK);
-			alert.showAndWait();
+			new Alert(AlertType.ERROR, "Could not load file.", ButtonType.OK).showAndWait();
 		}
 	}
 	

@@ -23,8 +23,8 @@
 						<MenuItem mnemonicParsing="true" onAction="#MenuExportPngClick" text="Export as _PNG..." />
 						<MenuItem mnemonicParsing="true" onAction="#MenuExportSvgClick" text="Export as SV_G..." />
 						<SeparatorMenuItem />
-						<MenuItem mnemonicParsing="true" text="Bulk export as P_NG..." />
-						<MenuItem mnemonicParsing="true" text="Bulk e_xport as SVG..." />
+						<MenuItem mnemonicParsing="true" onAction="#MenuExportBulkPngClick" text="Bulk export as P_NG..." />
+						<MenuItem mnemonicParsing="true" onAction="#MenuExportBulkSvgClick" text="Bulk e_xport as SVG..." />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="true" text="_World flag presets">
