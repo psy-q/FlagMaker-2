@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flagmaker.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flagmaker.MainWindowController">
 	<children>
 		<MenuBar VBox.vgrow="NEVER">
 			<menus>
@@ -77,7 +77,7 @@
 						<Tooltip text="Rotate colors" />
 					</tooltip>
 					<graphic>
-						<ImageView>
+						<ImageView fitHeight="32.0" fitWidth="32.0">
 							<image>
 								<Image url="flagmaker/Images/rotate.png" />
 							</image>
@@ -89,9 +89,9 @@
 						<Tooltip text="Toggle texture" />
 					</tooltip>
 					<graphic>
-						<ImageView>
+						<ImageView fitHeight="32.0" fitWidth="32.0">
 							<image>
-								<Image url="flagmaker/Images/texture.png" />
+								<Image url="flagmaker/Images/Texture/1.png" />
 							</image>
 						</ImageView>
 					</graphic>
@@ -101,7 +101,7 @@
 						<Tooltip text="Random flag" />
 					</tooltip>
 					<graphic>
-						<ImageView fitHeight="30">
+						<ImageView fitHeight="32.0" fitWidth="32.0">
 							<image>
 								<Image url="flagmaker/Images/die.png" />
 							</image>
@@ -312,7 +312,7 @@
 										<Tooltip text="Add new" />
 									</tooltip>
 									<graphic>
-										<ImageView>
+										<ImageView fitHeight="32.0" fitWidth="32.0">
 											<image>
 												<Image url="flagmaker/Images/add.png" />
 											</image>
