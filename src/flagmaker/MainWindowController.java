@@ -61,8 +61,7 @@ public class MainWindowController
 	private boolean _isUnsaved;
 
 	private Ratio _ratio;
-	private Ratio _gridSize;
-
+	
 	@FXML
 	protected void initialize()
 	{
@@ -94,7 +93,7 @@ public class MainWindowController
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				Draw();
+				GridSizeDropdownChanged();
 			}
 		});
 
@@ -249,8 +248,27 @@ public class MainWindowController
 	
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{
-		OverlayControl oc = new OverlayControl();
-		lstOverlays.getChildren().add(oc);
+		Ratio gridSize = SelectedGridSize();
+		OverlayControl control = new OverlayControl(_stage, gridSize.Width, gridSize.Height, isLoading);
+		
+		if (control.WasCanceled)
+		{
+			return;
+		}
+		
+		if (overlay != null)
+		{
+			control.SetOverlay(overlay);
+		}
+		
+		lstOverlays.getChildren().add(control);
+		SetOverlayMargins();
+		
+		if (!isLoading)
+		{
+			Draw();
+			SetAsUnsaved();
+		}
 	}
 		
 	// Colors
@@ -306,6 +324,21 @@ public class MainWindowController
 	}
 	
 	// Grid
+	private Ratio SelectedGridSize()
+	{
+		String value = (String)cmbRatio.valueProperty().getValue();
+		
+		if (value == null)
+		{
+			return new Ratio(2, 3);
+		}
+		
+		String[] parts = value.split(":");
+		int height = Integer.parseInt(parts[0]);
+		int width = Integer.parseInt(parts[1]);
+		return new Ratio(width, height);
+	}
+	
 	private void SetRatio(int width, int height)
 	{
 		txtRatioHeight.setText(height + "");
@@ -355,7 +388,28 @@ public class MainWindowController
 		FillGridCombobox();
 	}
 	
-	private void GridSizeDropdownChanged(){}
+	@FXML
+	private void GridSizeDropdownChanged()
+	{
+		if (cmbRatio.getItems().size() == 0) return;
+		Ratio gridSize = SelectedGridSize();
+		int sliderMax = Math.max(gridSize.Width, gridSize.Height);
+		
+		divisionSlider1.maxProperty().set(sliderMax);
+		divisionSlider2.maxProperty().set(sliderMax);
+		divisionSlider3.maxProperty().set(sliderMax);
+		
+		for (OverlayControl overlay : (List<OverlayControl>)(List<?>)lstOverlays.getChildren())
+		{
+			((OverlayControl)overlay).SetMaximum(gridSize.Width, gridSize.Height);
+		}
+		
+		if (!_isLoading)
+		{
+			Draw();
+			SetAsUnsaved();
+		}
+	}
 	
 	// Other	
 	private void NameChanged()
@@ -534,7 +588,7 @@ public class MainWindowController
 	
 	public Flag Flag()
 	{
-		return new Flag("", _ratio, _gridSize, _division, new Overlay[]{});
+		return new Flag("", _ratio, SelectedGridSize(), _division, new Overlay[]{});
 	}
 
 	private boolean CanParseInt(String value)
