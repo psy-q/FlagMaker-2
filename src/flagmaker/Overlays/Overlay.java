@@ -1,6 +1,7 @@
 package flagmaker.Overlays;
 
 import java.util.List;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
@@ -15,7 +16,7 @@ public abstract class Overlay
 	public abstract String Name();
 	protected abstract Shape[] Thumbnail();
 	
-	public abstract void Draw();
+	public abstract void Draw(Pane canvas);
 	public abstract void SetValues(List<Double> values);
 	public abstract String ExportSvg(int width, int height);
 	

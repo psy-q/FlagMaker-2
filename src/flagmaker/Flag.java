@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -42,8 +41,19 @@ public class Flag
 	
 	public void Draw(Pane canvas)
 	{
-		// clear canvas
+		canvas.getChildren().clear();
 		Division.Draw(canvas);
+		SetRepeaterOverlays();
+		
+		for (int i = 0; i < Overlays.length; i++)
+		{
+			// Skip overlays used in repeaters
+			if (i > 0 && Overlays[i - 1] instanceof OverlayRepeater) continue;
+
+			if (!Overlays[i].IsEnabled) continue;
+
+			Overlays[i].Draw(canvas);
+		}
 	}
 	
 	public void ExportToPng(Size size, String path)
@@ -87,7 +97,7 @@ public class Flag
 	
 	public Color[] ColorsUsed()
 	{
-		ArrayList<Color> colors = new ArrayList<Color>();
+		ArrayList<Color> colors = new ArrayList<>();
 		
 		if (Division instanceof DivisionGrid && Division.Values[0] == 1 && Division.Values[1] == 1)
 		{
@@ -123,15 +133,50 @@ public class Flag
 	
 	private void SetRepeaterOverlays()
 	{
+		// Clear last repeater in list
+		if (Overlays.length > 0 && Overlays[Overlays.length - 1] instanceof OverlayRepeater)
+		{
+			((OverlayRepeater)Overlays[Overlays.length - 1]).SetOverlay(null);
+		}
+
+		// Set overlays for others
+		for (int i = Overlays.length - 1; i > 0; i--)
+		{
+			if (Overlays[i - 1] instanceof OverlayRepeater)
+			{
+				OverlayRepeater repeater = (OverlayRepeater)Overlays[i - 1];
+				repeater.SetOverlay(Overlays[i]);
+			}
+		}
 	}
 	
 	private Color ParseColor(String str)
 	{
-		return null;
+		double a = 1.0;
+		byte r, b, g;
+
+		if (str.length() == 8)
+		{
+			a = ((double)Byte.parseByte(str.substring(0, 2), 16)) / 255.0;
+			r = Byte.parseByte(str.substring(2, 2), 16);
+			g = Byte.parseByte(str.substring(4, 2), 16);
+			b = Byte.parseByte(str.substring(6, 2), 16);
+		}
+		else
+		{
+			r = Byte.parseByte(str.substring(0, 2), 16);
+			g = Byte.parseByte(str.substring(2, 2), 16);
+			b = Byte.parseByte(str.substring(4, 2), 16);
+		}
+
+		return Color.rgb(r, g, b, a);
 	}
 	
 	private static Double GetDoubleFromString(String data)
 	{
-		return null;
+		// Doubles in files can be written as "123.45" or "123,45".
+		// (Ignore thousands separators - not really applicable for FlagMaker.)
+		// If the user saved a file with commas, replace and parse with invariant culture.
+		return Double.parseDouble(data.replace(',', '.'));
 	}
 }
