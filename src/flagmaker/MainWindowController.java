@@ -314,9 +314,9 @@ public class MainWindowController
 			divisionPicker3.setValue(GetNextColor(divisionPicker3.getValue(), colors));
 		}
 
-		for (Overlay overlay : (List<Overlay>)(List<?>)lstOverlays.getChildren())
+		for (OverlayControl overlay : (List<OverlayControl>)(List<?>)lstOverlays.getChildren())
 		{
-			overlay.Color = GetNextColor(overlay.Color, colors);
+			overlay.SetColor(GetNextColor(overlay.GetColor(), colors));
 		}
 	}
 	
