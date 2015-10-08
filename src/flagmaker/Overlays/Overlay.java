@@ -54,8 +54,9 @@ public abstract class Overlay
 	
 		for (Shape thumb : Thumbnail())
 		{
-			thumb.strokeProperty().set(Color.BLACK);
-			thumb.fillProperty().set(Color.BLACK);
+			thumb.setStroke(Color.BLACK);
+			if (thumb.getStrokeWidth() == 1.0) thumb.setStrokeWidth(0);
+			thumb.setFill(Color.BLACK);
 			p.getChildren().add(thumb);
 		}
 		
