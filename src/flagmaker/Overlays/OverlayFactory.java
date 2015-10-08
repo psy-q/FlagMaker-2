@@ -21,6 +21,7 @@ public class OverlayFactory
 		_typeMap.put("fimbriation backward", "flagmaker.Overlays.OverlayTypes.OverlayFimbriationBackward");
 		_typeMap.put("fimbriation forward", "flagmaker.Overlays.OverlayTypes.OverlayFimbriationForward");
 		_typeMap.put("half ellipse", "flagmaker.Overlays.OverlayTypes.OverlayHalfEllipse");
+		_typeMap.put("half saltire", "flagmaker.Overlays.OverlayTypes.OverlayHalfSaltire");
 	}
 	
 	public static Overlay[] GetShapes()
@@ -35,7 +36,8 @@ public class OverlayFactory
 			new OverlayEllipse(0, 0),
 			new OverlayFimbriationBackward(0, 0),
 			new OverlayFimbriationForward(0, 0),
-			new OverlayHalfEllipse(0, 0)
+			new OverlayHalfEllipse(0, 0),
+			new OverlayHalfSaltire(0, 0)
 		};
 	}
 	
