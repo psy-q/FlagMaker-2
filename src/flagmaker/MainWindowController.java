@@ -154,37 +154,37 @@ public class MainWindowController
 		if (_division.Colors.length > 2)
 		{
 			divisionPicker3.setValue(_division.Colors[2]);
-			ShowControl(divisionPicker3);
+			ControlExtensions.ShowControl(divisionPicker3);
 		}
 		else
 		{
-			HideControl(divisionPicker3);
+			ControlExtensions.HideControl(divisionPicker3);
 		}
 
-		HideControl(divisionSlider1);
-		HideControl(divisionSlider2);
-		HideControl(divisionSlider3);
-		HideControl(divisionLabel1);
-		HideControl(divisionLabel2);
-		HideControl(divisionLabel3);
+		ControlExtensions.HideControl(divisionSlider1);
+		ControlExtensions.HideControl(divisionSlider2);
+		ControlExtensions.HideControl(divisionSlider3);
+		ControlExtensions.HideControl(divisionLabel1);
+		ControlExtensions.HideControl(divisionLabel2);
+		ControlExtensions.HideControl(divisionLabel3);
 
 		if (_division.Values.length <= 0) return;
 		divisionSlider1.setValue(_division.Values[0]);
-		ShowControl(divisionSlider1);
+		ControlExtensions.ShowControl(divisionSlider1);
 		divisionLabel1.setText(String.format("%d", _division.Values[0]));
-		ShowControl(divisionLabel1);
+		ControlExtensions.ShowControl(divisionLabel1);
 
 		if (_division.Values.length <= 1) return;
 		divisionSlider2.setValue(_division.Values[1]);
-		ShowControl(divisionSlider2);
+		ControlExtensions.ShowControl(divisionSlider2);
 		divisionLabel2.setText(String.format("%d", _division.Values[1]));
-		ShowControl(divisionLabel2);
+		ControlExtensions.ShowControl(divisionLabel2);
 
 		if (_division.Values.length <= 2) return;
 		divisionSlider3.setValue(_division.Values[2]);
-		ShowControl(divisionSlider3);
+		ControlExtensions.ShowControl(divisionSlider3);
 		divisionLabel3.setText(String.format("%d", _division.Values[2]));
-		ShowControl(divisionLabel3);
+		ControlExtensions.ShowControl(divisionLabel3);
 	}
 	
 	@FXML private void DivisionGridClick()
@@ -605,18 +605,6 @@ public class MainWindowController
 		{
 			return false;
 		}
-	}
-	
-	private void HideControl(Control object)
-	{
-		object.visibleProperty().set(false);
-		object.managedProperty().set(false);
-	}
-	
-	private void ShowControl(Control object)
-	{
-		object.visibleProperty().set(true);
-		object.managedProperty().set(true);
 	}
 	
 	private Overlay[] GetOverlays()

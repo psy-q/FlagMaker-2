@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root prefHeight="32" prefWidth="300.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label fx:id="lblName" text="Width" prefWidth="100" HBox.hgrow="NEVER" />
+		<Label fx:id="lblValue" style="-fx-cursor: HAND;" prefWidth="40" text="1.3" HBox.hgrow="ALWAYS" />
+		<Slider fx:id="slider" blockIncrement="1" majorTickUnit="1" min="0" minorTickCount="0" showTickMarks="true" HBox.hgrow="ALWAYS" />
+		<CheckBox fx:id="chkDiscrete" HBox.hgrow="NEVER" />
+	</children>
+</fx:root>

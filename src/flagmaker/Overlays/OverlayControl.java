@@ -1,10 +1,13 @@
 package flagmaker.Overlays;
 
 import flagmaker.MainWindowController;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -12,7 +15,9 @@ import javafx.stage.Stage;
 
 public class OverlayControl extends VBox
 {
+	@FXML private Button btnOverlay;
 	@FXML private ColorPicker overlayPicker;
+	@FXML private VBox pnlSliders;
 	
 	private Stage _stage;
 	
@@ -49,7 +54,35 @@ public class OverlayControl extends VBox
 	public void SetOverlay(Overlay value)
 	{
 		_overlay = value;
-		//...
+		btnOverlay.graphicProperty().set(_overlay.PaneThumbnail());
+		btnOverlay.tooltipProperty().set(new Tooltip(_overlay.Name()));
+		
+		if (!_isFirst && !IsLoading)
+		{
+			Double[] sliderValues = GetAttributeSliderValues();
+			//...
+		}
+//		else if (value instanceof OverlayPath)
+//		{
+//			
+//		}
+		
+		// Set color picker visibility
+		
+		overlayPicker.setValue(_overlay.Color);
+		SetVisibilityButton();
+		
+		pnlSliders.getChildren().clear();
+		for (Attribute a : _overlay.Attributes)
+		{
+			AttributeSlider s = new AttributeSlider(this, a.Name, a.IsDiscrete, a.Value, a.UseMaxX ? _defaultMaximumX : _defaultMaximumY);
+			pnlSliders.getChildren().add(s);
+		}
+		
+		// Set stroke color picker visibility
+		
+		_isFirst = false;
+		IsLoading = false;
 	}
 	
 	public Color GetColor()
@@ -88,9 +121,9 @@ public class OverlayControl extends VBox
 		Draw();
 	}
 	
-	private void OverlaySliderChanged()
+	public void OverlaySliderChanged()
 	{
-		//Overlay.SetValues(_pnlSliders.Children.OfType<AttributeSlider>().Select(s => s.Value).ToList());
+		_overlay.SetValues(GetAttributeSliderValues());
 		Draw();
 	}
 
@@ -112,7 +145,7 @@ public class OverlayControl extends VBox
 			return;
 		}
 
-		_overlay = control.GetSelectedOverlay();
+		SetOverlay(o);
 		if (!IsLoading) Draw();
 	}
 
@@ -183,5 +216,18 @@ public class OverlayControl extends VBox
 		{
 			String s = ex.getMessage();
 		}
+	}
+	
+	private Double[] GetAttributeSliderValues()
+	{
+		ArrayList<Double> list = new ArrayList<>();
+		for (Object control : pnlSliders.getChildren())
+		{
+			AttributeSlider slider = (AttributeSlider)control;
+			list.add(slider.GetValue());
+		}
+		
+		Double[] returnValue = new Double[]{};
+		return list.toArray(returnValue);
 	}
 }
