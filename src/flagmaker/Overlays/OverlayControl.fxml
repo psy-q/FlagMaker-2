@@ -8,18 +8,11 @@
 <?import javafx.scene.layout.*?>
 
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1">
-	<HBox>
+	<FlowPane orientation="HORIZONTAL">
 		<Button fx:id="btnOverlay">
 			<tooltip>
 				<Tooltip text="Change type" />
 			</tooltip>
-			<graphic>
-				<ImageView fitHeight="32.0" fitWidth="32.0">
-					<image>
-						<Image url="flagmaker/Images/rotate.png" />
-					</image>
-				</ImageView>
-			</graphic>
 		</Button>
 		<Button>
 			<tooltip>
@@ -81,7 +74,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-	</HBox>
+	</FlowPane>
 	
 	<ColorPicker fx:id="overlayPicker" style="-fx-color-label-visible: false;" />
 	<VBox fx:id="pnlSliders" />
