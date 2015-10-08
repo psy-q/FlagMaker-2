@@ -61,6 +61,7 @@ public class OverlayDiamond extends OverlayShape
 			new LineTo(0, height / 2)
 		});
 		path.setFill(Color);
+		path.setStrokeWidth(0);
 		path.setLayoutX(left);
 		path.setLayoutY(top);
 		canvas.getChildren().add(path);

@@ -55,11 +55,12 @@ public class OverlayEllipse extends OverlayShape
 		double h = GetAttribute("Height").Value == 0
 				? w
 				: height * (GetAttribute("Height").Value / MaximumY);
-		return String.format("<rect width=\"%.3f\" height=\"%.3f\" x=\"%.3f\" y=\"%.3f\" %s />",
-				w,
-				h,
-				width * (GetAttribute("X").Value / MaximumX),
-				height * (GetAttribute("Y").Value / MaximumY),
+		
+		double x = width * (GetAttribute("X").Value / MaximumX);
+		double y = height * (GetAttribute("Y").Value / MaximumY);
+		
+		return String.format("<ellipse cx=\"%.3f\" cy=\"%.3f\" rx=\"%.3f\" ry=\"%.3f\" %s />",
+				x, y, w / 2, h / 2,
 				ColorExtensions.ToSvgFillWithOpacity(Color));
 	}
 }
