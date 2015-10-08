@@ -2,6 +2,7 @@ package flagmaker.Overlays;
 
 import flagmaker.MainWindowController;
 import java.util.ArrayList;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,6 +40,8 @@ public class OverlayControl extends VBox
 		_defaultMaximumX = defaultMaximumX;
 		_defaultMaximumY = defaultMaximumY;
 		_isFirst = true;
+		
+		overlayPicker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> OverlayColorChanged());
 		
 		if (!IsLoading)
 		{
@@ -117,7 +120,7 @@ public class OverlayControl extends VBox
 	private void OverlayColorChanged()
 	{
 		if (_overlay == null) return;
-		//Overlay.SetColor(overlayPicker.getValue());
+		_overlay.SetColor(overlayPicker.getValue());
 		Draw();
 	}
 	
