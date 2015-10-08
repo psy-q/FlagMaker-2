@@ -12,6 +12,8 @@ public class OverlayFactory
 	{
 		_typeMap = new HashMap<>();
 		_typeMap.put("box", "flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayBox");
+		_typeMap.put("diamond", "flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayDiamond");
+		_typeMap.put("ellipse", "flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayEllipse");
 	}
 	
 	public static Overlay[] GetShapes()
@@ -19,7 +21,8 @@ public class OverlayFactory
 		return new Overlay[]
 		{
 			new OverlayBox(0, 0),
-			new OverlayBox(0, 0)
+			new OverlayDiamond(0, 0),
+			new OverlayEllipse(0, 0)
 		};
 	}
 	

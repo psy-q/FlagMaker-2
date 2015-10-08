@@ -54,8 +54,8 @@ public abstract class Overlay
 	
 		for (Shape thumb : Thumbnail())
 		{
-			if (thumb.strokeProperty() == null) thumb.strokeProperty().set(Color.BLACK);
-			if (thumb.fillProperty() == null) thumb.fillProperty().set(Color.BLACK);
+			thumb.strokeProperty().set(Color.BLACK);
+			thumb.fillProperty().set(Color.BLACK);
 			p.getChildren().add(thumb);
 		}
 		
