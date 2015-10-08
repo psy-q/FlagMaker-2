@@ -18,6 +18,8 @@ public class OverlayFactory
 		_typeMap.put("cross", "flagmaker.Overlays.OverlayTypes.OverlayCross");
 		_typeMap.put("diamond", "flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayDiamond");
 		_typeMap.put("ellipse", "flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayEllipse");
+		_typeMap.put("fimbriation backward", "flagmaker.Overlays.OverlayTypes.OverlayFimbriationBackward");
+		_typeMap.put("fimbriation forward", "flagmaker.Overlays.OverlayTypes.OverlayFimbriationForward");
 	}
 	
 	public static Overlay[] GetShapes()
@@ -29,7 +31,9 @@ public class OverlayFactory
 			new OverlayCheckerboard(0, 0),
 			new OverlayCross(0, 0),
 			new OverlayDiamond(0, 0),
-			new OverlayEllipse(0, 0)
+			new OverlayEllipse(0, 0),
+			new OverlayFimbriationBackward(0, 0),
+			new OverlayFimbriationForward(0, 0)
 		};
 	}
 	
