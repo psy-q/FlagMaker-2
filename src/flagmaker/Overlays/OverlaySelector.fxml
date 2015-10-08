@@ -9,6 +9,8 @@
 <fx:root type="javafx.scene.layout.VBox" id="vbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" />
-		<Button onAction="#Cancel" cancelButton="true" text="Cancel" VBox.vgrow="NEVER" />
+		<AnchorPane VBox.vgrow="NEVER">
+			<Button onAction="#Cancel" cancelButton="true" text="Cancel" AnchorPane.rightAnchor="0"  />
+		</AnchorPane>
 	</children>
 </fx:root>

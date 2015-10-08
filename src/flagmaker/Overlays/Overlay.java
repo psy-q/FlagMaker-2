@@ -1,6 +1,5 @@
 package flagmaker.Overlays;
 
-import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -17,7 +16,7 @@ public abstract class Overlay
 	protected abstract Shape[] Thumbnail();
 	
 	public abstract void Draw(Pane canvas);
-	public abstract void SetValues(List<Double> values);
+	public abstract void SetValues(Double[] values);
 	public abstract String ExportSvg(int width, int height);
 	
 	protected Overlay(Attribute[] attributes, int maximumX, int maximumY)
@@ -28,14 +27,66 @@ public abstract class Overlay
 		SetMaximum(maximumX, maximumY);
 	}
 	
+	protected Overlay(Color color, Attribute[] attributes, int maximumX, int maximumY)
+	{
+		IsEnabled = true;
+		Color = color;
+		Attributes = attributes;
+		SetMaximum(maximumX, maximumY);
+	}
+	
 	public void SetColor(Color color)
 	{
 		Color = color;
 	}
 	
-	public void SetMaximum(int maximumX, int maximumY)
+	public final void SetMaximum(int maximumX, int maximumY)
 	{
 		MaximumX = maximumX;
 		MaximumY = maximumY;
+	}
+	
+	public Pane PaneThumbnail()
+	{
+		Pane p = new Pane();
+		p.setMinHeight(30);
+		p.setMinWidth(30);
+	
+		for (Shape thumb : Thumbnail())
+		{
+			if (thumb.strokeProperty() == null) thumb.strokeProperty().set(Color.BLACK);
+			if (thumb.fillProperty() == null) thumb.fillProperty().set(Color.BLACK);
+			p.getChildren().add(thumb);
+		}
+		
+		return p;
+	}
+	
+	public void SetAttribute(String name, double value)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name == name)
+			{
+				a.Value = value;
+				return;
+			}
+		}
+		
+		// Attribute not found
+	}
+	
+	public Attribute GetAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name == name)
+			{
+				return a;
+			}
+		}
+		
+		// Attribute not found
+		return null;
 	}
 }

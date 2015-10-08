@@ -1,5 +1,6 @@
 package flagmaker.Overlays;
 
+import flagmaker.MainWindowController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,15 +20,17 @@ public class OverlayControl extends VBox
 	private int _defaultMaximumX;
 	private int _defaultMaximumY;
 	private boolean _isFirst;
+	private final MainWindowController _mainWindow;
 	
 	public boolean IsLoading;
 	public boolean WasCanceled;
-	
-	public OverlayControl(Stage stage, int defaultMaximumX, int defaultMaximumY, boolean isLoading)
+		
+	public OverlayControl(Stage stage, MainWindowController mainWindow, int defaultMaximumX, int defaultMaximumY, boolean isLoading)
 	{
 		Load(stage);
 		
 		IsLoading = isLoading;
+		_mainWindow = mainWindow;
 		_defaultMaximumX = defaultMaximumX;
 		_defaultMaximumY = defaultMaximumY;
 		_isFirst = true;
@@ -102,7 +105,8 @@ public class OverlayControl extends VBox
 		dialog.setScene(dialogScene);
 		dialog.showAndWait();
 		
-		if (control.GetSelectedOverlay() == null)
+		Overlay o = control.GetSelectedOverlay();
+		if (o == null)
 		{
 			WasCanceled = true;
 			return;
@@ -114,10 +118,7 @@ public class OverlayControl extends VBox
 
 	private void Draw()
 	{
-//		if (OnDraw != null)
-//		{
-//			OnDraw(null, new EventArgs());
-//		}
+		_mainWindow.Draw();
 	}
 
 	private void Remove()

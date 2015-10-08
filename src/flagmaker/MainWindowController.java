@@ -3,8 +3,10 @@ package flagmaker;
 import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
+import flagmaker.Overlays.OverlayFactory;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -71,6 +73,7 @@ public class MainWindowController
 		
 		SetColorsAndSliders();
 		LoadPresets();
+		OverlayFactory.SetUpTypeMap();
 		New();
 	}
 	
@@ -249,7 +252,7 @@ public class MainWindowController
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{
 		Ratio gridSize = SelectedGridSize();
-		OverlayControl control = new OverlayControl(_stage, gridSize.Width, gridSize.Height, isLoading);
+		OverlayControl control = new OverlayControl(_stage, this, gridSize.Width, gridSize.Height, isLoading);
 		
 		if (control.WasCanceled)
 		{
@@ -423,7 +426,7 @@ public class MainWindowController
 		SetTitle();
 	}
 
-	private void Draw()
+	public void Draw()
 	{
 		Flag().Draw(_pane);
 		//DrawTexture(_canvas);
@@ -588,7 +591,7 @@ public class MainWindowController
 	
 	public Flag Flag()
 	{
-		return new Flag("", _ratio, SelectedGridSize(), _division, new Overlay[]{});
+		return new Flag("", _ratio, SelectedGridSize(), _division, GetOverlays());
 	}
 
 	private boolean CanParseInt(String value)
@@ -614,5 +617,19 @@ public class MainWindowController
 	{
 		object.visibleProperty().set(true);
 		object.managedProperty().set(true);
+	}
+	
+	private Overlay[] GetOverlays()
+	{
+		ArrayList<Overlay> list = new ArrayList<>();
+		for (Object control : lstOverlays.getChildren())
+		{
+			OverlayControl oc = (OverlayControl)control;
+			Overlay o = oc.GetOverlay();
+			list.add(o);
+		}
+		
+		Overlay[] returnValue = new Overlay[]{};
+		return list.toArray(returnValue);
 	}
 }

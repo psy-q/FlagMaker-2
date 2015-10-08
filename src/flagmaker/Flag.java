@@ -50,6 +50,7 @@ public class Flag
 			// Skip overlays used in repeaters
 			if (i > 0 && Overlays[i - 1] instanceof OverlayRepeater) continue;
 
+			// Skip overlays disabled in editor
 			if (!Overlays[i].IsEnabled) continue;
 
 			Overlays[i].Draw(canvas);

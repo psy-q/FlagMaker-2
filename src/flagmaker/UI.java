@@ -12,7 +12,7 @@ public class UI extends Application
 	public void start(Stage stage) throws Exception
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
-		loader.setControllerFactory((Class<?> type) ->
+		loader.setControllerFactory(type ->
 		{
 			try
 			{
