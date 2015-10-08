@@ -3,6 +3,7 @@ package flagmaker.Overlays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -56,6 +57,7 @@ public class OverlaySelector extends VBox
 	{
 		Tab tab = new Tab(tabName);
 		FlowPane panel = new FlowPane(Orientation.HORIZONTAL);
+		panel.setPadding(new Insets(5));
 		panel.hgapProperty().set(5);
 		panel.vgapProperty().set(5);
 		

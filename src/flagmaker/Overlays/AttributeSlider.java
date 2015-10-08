@@ -14,7 +14,7 @@ public class AttributeSlider extends HBox
 	@FXML private Label lblName;
 	@FXML private Label lblValue;
 	@FXML private Slider slider;
-	@FXML private CheckBox chkDiscrete;
+	@FXML public CheckBox chkDiscrete;
 	
 	private boolean _isDiscrete;
 	private final OverlayControl _parent;

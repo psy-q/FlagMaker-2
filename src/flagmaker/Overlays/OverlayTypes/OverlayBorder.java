@@ -1,5 +1,6 @@
 package flagmaker.Overlays.OverlayTypes;
 
+import flagmaker.ColorExtensions;
 import flagmaker.Overlays.Attribute;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
@@ -66,7 +67,6 @@ public class OverlayBorder extends Overlay
 		{
 			thickness = canvas.getWidth() / 2;
 		}
-
 		if (canvas.getHeight() - thickness * 2 < 0)
 		{
 			thickness = canvas.getHeight() / 2;
@@ -100,6 +100,23 @@ public class OverlayBorder extends Overlay
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		return "";
+		double thickness = width * (GetAttribute("Thickness").Value / MaximumX) / 2;
+
+		// Prevent the border from overlapping itself
+		if (width - thickness * 2 < 0)
+		{
+			thickness = width / 2.0;
+		}
+		if (height - thickness * 2 < 0)
+		{
+			thickness = height / 2.0;
+		}
+
+		return String.format("<path d=\"M 0,0 %1$d,0 %1$d,%2$d 0,%2$d Z M %3$.3f,%3$.3f %4$.3f,%3$.3f %4$.3f,%5$.3f %3$.3f,%5$.3f Z\" %6$s fill-rule=\"evenodd\" />",
+			width, height,
+			thickness,
+			width - thickness,
+			height - thickness,
+			ColorExtensions.ToSvgFillWithOpacity(Color));
 	}
 }

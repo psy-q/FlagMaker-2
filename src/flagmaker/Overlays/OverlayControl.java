@@ -104,17 +104,17 @@ public class OverlayControl extends VBox
 		_defaultMaximumY = maximumY;
 
 		_overlay.SetMaximum(maximumX, maximumY);
-
-//		var sliders = _pnlSliders.Children.OfType<AttributeSlider>().ToList();
-//		for (int i = 0; i < _overlay.Attributes.Count; i++)
-//		{
-//			var slider = sliders[i];
-//			var max = _overlay.Attributes[i].UseMaxX ? maximumX : maximumY;
-//			var newValue = slider.Value * ((double)max / slider.Maximum);
-//			slider._chkDiscrete.IsChecked = newValue % 1 == 0;
-//			slider.Maximum = max;
-//			slider.Value = newValue;
-//		}
+		
+		AttributeSlider[] sliders = GetAttributeSliders();
+		for (int i = 0; i < sliders.length; i++)
+		{
+			AttributeSlider slider = sliders[i];
+			int max = _overlay.Attributes[i].UseMaxX ? maximumX : maximumY;
+			double newValue = slider.GetValue() * ((double)max / slider.GetMaximum());
+			slider.chkDiscrete.setSelected(newValue % 1 == 0);
+			slider.SetMaximum(max);
+			slider.SetValue(newValue);
+		}
 	}
 	
 	private void OverlayColorChanged()
@@ -219,6 +219,19 @@ public class OverlayControl extends VBox
 		{
 			String s = ex.getMessage();
 		}
+	}
+	
+	private AttributeSlider[] GetAttributeSliders()
+	{
+		ArrayList<AttributeSlider> list = new ArrayList<>();
+		for (Object control : pnlSliders.getChildren())
+		{
+			AttributeSlider slider = (AttributeSlider)control;
+			list.add(slider);
+		}
+		
+		AttributeSlider[] returnValue = new AttributeSlider[]{};
+		return list.toArray(returnValue);
 	}
 	
 	private Double[] GetAttributeSliderValues()
