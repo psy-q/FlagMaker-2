@@ -9,7 +9,7 @@
 
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1">
 	<FlowPane orientation="HORIZONTAL">
-		<Button fx:id="btnOverlay">
+		<Button fx:id="btnOverlay" onAction="#OverlaySelect">
 			<tooltip>
 				<Tooltip text="Change type" />
 			</tooltip>
@@ -26,7 +26,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button>
+		<Button onAction="#Remove">
 			<tooltip>
 				<Tooltip text="Remove" />
 			</tooltip>
@@ -38,7 +38,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button>
+		<Button onAction="#MoveUp">
 			<tooltip>
 				<Tooltip text="Move up" />
 			</tooltip>
@@ -50,7 +50,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button>
+		<Button onAction="#MoveDown">
 			<tooltip>
 				<Tooltip text="Move down" />
 			</tooltip>
@@ -62,7 +62,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button>
+		<Button onAction="#Clone">
 			<tooltip>
 				<Tooltip text="Clone" />
 			</tooltip>

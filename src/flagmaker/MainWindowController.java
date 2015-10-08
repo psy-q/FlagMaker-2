@@ -244,10 +244,19 @@ public class MainWindowController
 	}
 	
 	private void SetOverlayMargins(){}
-	private void Remove(){}
-	private void MoveUp(){}
-	private void MoveDown(){}
-	private void Clone(){}
+	
+	public void Remove(OverlayControl overlayControl)
+	{
+		lstOverlays.getChildren().remove(overlayControl);
+		Draw();
+		SetAsUnsaved();
+	}
+	
+	public void MoveUp(OverlayControl overlayControl){}
+		
+	public void MoveDown(OverlayControl overlayControl){}
+	
+	public void Clone(OverlayControl overlayControl){}
 	
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{

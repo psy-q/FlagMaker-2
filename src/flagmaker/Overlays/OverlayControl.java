@@ -130,7 +130,7 @@ public class OverlayControl extends VBox
 		Draw();
 	}
 
-	private void OverlaySelect()
+	@FXML private void OverlaySelect()
 	{
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
@@ -157,36 +157,24 @@ public class OverlayControl extends VBox
 		_mainWindow.Draw();
 	}
 
-	private void Remove()
+	@FXML private void Remove()
 	{
-//		if (OnRemove != null)
-//		{
-//			OnRemove(this, new EventArgs());
-//		}
+		_mainWindow.Remove(this);
 	}
 
-	private void MoveUp()
+	@FXML private void MoveUp()
 	{
-//		if (OnMoveUp != null)
-//		{
-//			OnMoveUp(this, new EventArgs());
-//		}
+		_mainWindow.MoveUp(this);
 	}
 
-	private void MoveDown()
+	@FXML private void MoveDown()
 	{
-//		if (OnMoveDown != null)
-//		{
-//			OnMoveDown(this, new EventArgs());
-//		}
+		_mainWindow.MoveDown(this);
 	}
 
-	private void Clone()
+	@FXML private void Clone()
 	{
-//		if (OnClone != null)
-//		{
-//			OnClone(this, new EventArgs());
-//		}
+		_mainWindow.Clone(this);
 	}
 
 	private void SetVisibility()
