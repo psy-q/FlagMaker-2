@@ -71,7 +71,7 @@ public class OverlaySelector extends VBox
 			b.addEventHandler(ActionEvent.ACTION, event ->
 			{
 				String name = b.getTooltip().getText();
-				SetSelectedOverlay(OverlayFactory.GetInstance(name, _defaultMaximumX, _defaultMaximumY));
+				SetSelectedOverlay(OverlayFactory.GetInstanceByShortName(name, _defaultMaximumX, _defaultMaximumY));
 			});
 			panel.getChildren().add(b);
 		}

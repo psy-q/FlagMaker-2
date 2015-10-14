@@ -4,6 +4,8 @@ import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
+import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -314,7 +316,35 @@ public class MainWindowController
 		SetAsUnsaved();
 	}
 	
-	public void Clone(OverlayControl overlayControl){}
+	public void Clone(OverlayControl controlToClone)
+	{
+		int index = lstOverlays.getChildren().indexOf(controlToClone);
+		Overlay original = controlToClone.GetOverlay();
+		Class type = original.getClass();
+		Overlay copy = OverlayFactory.GetInstanceByLongName(type.getName(), 1, 1);
+		
+		for (int i = 0; i < original.Attributes.length; i++)
+		{
+			copy.Attributes[i].Value = original.Attributes[i].Value;
+			copy.Attributes[i].IsDiscrete = original.Attributes[i].IsDiscrete;
+		}
+		
+		copy.SetColor(original.Color);
+		
+		if (type.isAssignableFrom(OverlayPath.class))
+		{
+			((OverlayPath)copy).StrokeColor = ((OverlayPath)original).StrokeColor;
+		}
+		else if (type.isAssignableFrom(OverlayFlag.class))
+		{
+			((OverlayFlag)copy).Flag = ((OverlayFlag)original).Flag;
+		}
+		
+		Ratio gridSize = SelectedGridSize();
+		copy.SetMaximum(gridSize.Width, gridSize.Height);
+		
+		OverlayAdd(index + 1, copy, true);
+	}
 	
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{

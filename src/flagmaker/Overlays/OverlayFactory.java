@@ -55,14 +55,39 @@ public class OverlayFactory
 	{
 		return new Overlay[]{};
 	}
+	
+	public static Overlay GetInstanceByLongName(String name, int defaultMaximumX, int defaultMaximumY)
+	{
+		try
+		{
+			Class c = Class.forName(name);
+			return GetInstance(c, defaultMaximumX, defaultMaximumY);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}		
+	}
 
-	public static Overlay GetInstance(String name, int _defaultMaximumX, int _defaultMaximumY)
+	public static Overlay GetInstanceByShortName(String name, int defaultMaximumX, int defaultMaximumY)
 	{
 		try
 		{
 			Class c = Class.forName(_typeMap.get(name));
+			return GetInstance(c, defaultMaximumX, defaultMaximumY);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}		
+	}
+	
+	private static Overlay GetInstance(Class c, int defaultMaximumX, int defaultMaximumY)
+	{
+		try
+		{
 			Constructor<Overlay> constructor = c.getDeclaredConstructor(new Class[] { int.class, int.class });
-			Overlay o = constructor.newInstance(_defaultMaximumX, _defaultMaximumY);
+			Overlay o = constructor.newInstance(defaultMaximumX, defaultMaximumY);
 			return o;
 		}
 		catch (Exception ex)

@@ -27,6 +27,17 @@ public abstract class OverlayShape extends Overlay
 			new Attribute("Height", true, height, false)
 		}, maximumX, maximumY);
 	}
+	
+	protected OverlayShape(double x, double y, double width, double height, int maximumX, int maximumY)
+	{
+		super(new Attribute[]
+		{
+			new Attribute("X", true, x, true),
+			new Attribute("Y", true, y, false),
+			new Attribute("Width", true, width, true),
+			new Attribute("Height", true, height, false)
+		}, maximumX, maximumY);
+	}
 
 	@Override
 	public void SetValues(Double[] values)
