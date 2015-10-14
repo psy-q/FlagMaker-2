@@ -18,6 +18,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -245,7 +246,13 @@ public class MainWindowController
 		OverlayAdd(lstOverlays.getChildren().size(), null, false);
 	}
 	
-	private void SetOverlayMargins(){}
+	private void SetOverlayMargins()
+	{
+		for (int i = 0; i < lstOverlays.getChildren().size() - 1; i++)
+		{
+			((OverlayControl)lstOverlays.getChildren().get(i)).setPadding(new Insets(0, 0, 20, 0));
+		}
+	}
 	
 	public void Remove(OverlayControl overlayControl)
 	{
