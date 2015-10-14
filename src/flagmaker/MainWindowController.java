@@ -27,6 +27,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.SubScene;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class MainWindowController
@@ -49,12 +50,15 @@ public class MainWindowController
 	@FXML private ColorPicker divisionPicker2;
 	@FXML private ColorPicker divisionPicker3;
 	@FXML private ComboBox cmbPresets;
-	
+
 	@FXML private VBox lstOverlays;
-	
+
 	private Stage _stage;
 	private SubScene _subScene;
 	private Pane _pane;
+
+	private SubScene _gridSubScene;
+	private Pane _gridPane;
 
 	private Division _division;
 
@@ -67,20 +71,20 @@ public class MainWindowController
 	private boolean _isUnsaved;
 
 	private Ratio _ratio;
-	
+
 	@FXML
 	protected void initialize()
 	{
 		AddWorkspace();
-		
+
 		_headerText = String.format(" - FlagMaker %s", getClass().getPackage().getImplementationVersion());
-		
+
 		SetColorsAndSliders();
 		LoadPresets();
 		OverlayFactory.SetUpTypeMap();
 		New();
 	}
-	
+
 	public void SetPrimaryStage(Stage stage)
 	{
 		_stage = stage;
@@ -92,6 +96,12 @@ public class MainWindowController
 		_subScene = new SubScene(leftAnchor, 300, 200);
 		_subScene.setRoot(_pane);
 		leftStack.getChildren().add(_subScene);
+
+		_gridPane = new Pane();
+		_gridPane.setBackground(Background.EMPTY);
+		_gridSubScene = new SubScene(leftAnchor, 300, 200);
+		_gridSubScene.setRoot(_gridPane);
+		leftStack.getChildren().add(_gridSubScene);
 
 		// Draw whenever the left side changes size
 		leftStack.widthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> Draw()); // lags
@@ -108,6 +118,9 @@ public class MainWindowController
 		_subScene.widthProperty().bind(Bindings.createDoubleBinding(() -> leftStack.getWidth() - 10, leftStack.widthProperty(), leftStack.heightProperty()));
 		_subScene.heightProperty().bind(Bindings.createDoubleBinding(() -> (leftStack.getWidth() - 10) * _ratio.Height / _ratio.Width,
 				leftStack.widthProperty(), leftStack.heightProperty(), txtRatioHeight.textProperty(), txtRatioWidth.textProperty()));
+		_gridSubScene.widthProperty().bind(Bindings.createDoubleBinding(() -> leftStack.getWidth() - 10, leftStack.widthProperty(), leftStack.heightProperty()));
+		_gridSubScene.heightProperty().bind(Bindings.createDoubleBinding(() -> (leftStack.getWidth() - 10) * _ratio.Height / _ratio.Width,
+				leftStack.widthProperty(), leftStack.heightProperty(), txtRatioHeight.textProperty(), txtRatioWidth.textProperty()));
 	}
 
 	private void SetLanguages()
@@ -118,18 +131,18 @@ public class MainWindowController
 	{
 		String title = String.format("%s%s%s",
 				StringExtensions.IsNullOrWhitespace(_filename)
-					? "Untitled"
-					: StringExtensions.GetFilenameWithoutExtension(_filename),
+						? "Untitled"
+						: StringExtensions.GetFilenameWithoutExtension(_filename),
 				_isUnsaved ? "*" : "",
 				_headerText);
 		_stage.setTitle(title);
 	}
-	
+
 	// Division
 	private void DivisionColorChanged()
 	{
 		if (_isLoading) return;
-		
+
 		_division.SetColors(new Color[]
 		{
 			divisionPicker1.getValue(),
@@ -139,22 +152,25 @@ public class MainWindowController
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	private void DivisionSliderChanged()
 	{
 		divisionLabel1.setText(String.format("%d", divisionSlider1.valueProperty().intValue()));
 		divisionLabel2.setText(String.format("%d", divisionSlider2.valueProperty().intValue()));
 		divisionLabel3.setText(String.format("%d", divisionSlider3.valueProperty().intValue()));
-		_division.SetValues(new int[]{ divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue() });
+		_division.SetValues(new int[]
+		{
+			divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue()
+		});
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	private void SetDivisionVisibility()
 	{
 		divisionPicker1.setValue(_division.Colors[0]);
 		divisionPicker2.setValue(_division.Colors[1]);
-				
+
 		if (_division.Colors.length > 2)
 		{
 			divisionPicker3.setValue(_division.Colors[2]);
@@ -190,7 +206,7 @@ public class MainWindowController
 		divisionLabel3.setText(String.format("%d", _division.Values[2]));
 		ControlExtensions.ShowControl(divisionLabel3);
 	}
-	
+
 	@FXML private void DivisionGridClick()
 	{
 		_division = new DivisionGrid(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue());
@@ -198,7 +214,7 @@ public class MainWindowController
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	@FXML private void DivisionFessesClick()
 	{
 		_division = new DivisionFesses(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionPicker3.getValue(),
@@ -207,7 +223,7 @@ public class MainWindowController
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	@FXML private void DivisionPalesClick()
 	{
 		_division = new DivisionPales(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionPicker3.getValue(),
@@ -216,7 +232,7 @@ public class MainWindowController
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	@FXML private void DivisionBendsForwardClick()
 	{
 		_division = new DivisionBendsForward(divisionPicker1.getValue(), divisionPicker2.getValue());
@@ -224,7 +240,7 @@ public class MainWindowController
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	@FXML private void DivisionBendsBackwardClick()
 	{
 		_division = new DivisionBendsBackward(divisionPicker1.getValue(), divisionPicker2.getValue());
@@ -232,7 +248,7 @@ public class MainWindowController
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	@FXML private void DivisionXClick()
 	{
 		_division = new DivisionX(divisionPicker1.getValue(), divisionPicker2.getValue());
@@ -240,213 +256,213 @@ public class MainWindowController
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	// Overlays
 	@FXML private void OverlayAdd()
 	{
 		OverlayAdd(lstOverlays.getChildren().size(), null, false);
 	}
-	
+
 	private void SetOverlayMargins()
 	{
 		for (int i = 0; i < lstOverlays.getChildren().size() - 1; i++)
 		{
-			((OverlayControl)lstOverlays.getChildren().get(i)).setPadding(new Insets(0, 0, 20, 0));
+			((OverlayControl) lstOverlays.getChildren().get(i)).setPadding(new Insets(0, 0, 20, 0));
 		}
 	}
-	
+
 	public void Remove(OverlayControl overlayControl)
 	{
 		lstOverlays.getChildren().remove(overlayControl);
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	public void MoveUp(OverlayControl overlayControl)
 	{
 		int index = lstOverlays.getChildren().indexOf(overlayControl);
 		if (index == 0) return;
-		
+
 		ArrayList<OverlayControl> controls = new ArrayList<>();
 		for (int i = 0; i < lstOverlays.getChildren().size(); i++)
 		{
 			if (i + 1 == index)
 			{
-				controls.add((OverlayControl)lstOverlays.getChildren().get(i + 1));
-				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+				controls.add((OverlayControl) lstOverlays.getChildren().get(i + 1));
+				controls.add((OverlayControl) lstOverlays.getChildren().get(i));
 				i++;
 			}
 			else
 			{
-				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+				controls.add((OverlayControl) lstOverlays.getChildren().get(i));
 			}
 		}
-		
+
 		lstOverlays.getChildren().clear();
 		for (OverlayControl control : controls)
 		{
 			lstOverlays.getChildren().add(control);
 		}
-		
+
 		SetOverlayMargins();
 		Draw();
 		SetAsUnsaved();
 	}
-		
+
 	public void MoveDown(OverlayControl overlayControl)
 	{
 		int index = lstOverlays.getChildren().indexOf(overlayControl);
 		if (index == lstOverlays.getChildren().size() - 1) return;
-		
+
 		ArrayList<OverlayControl> controls = new ArrayList<>();
 		for (int i = 0; i < lstOverlays.getChildren().size(); i++)
 		{
 			if (i == index)
 			{
-				controls.add((OverlayControl)lstOverlays.getChildren().get(i + 1));
-				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+				controls.add((OverlayControl) lstOverlays.getChildren().get(i + 1));
+				controls.add((OverlayControl) lstOverlays.getChildren().get(i));
 				i++;
 			}
 			else
 			{
-				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+				controls.add((OverlayControl) lstOverlays.getChildren().get(i));
 			}
 		}
-		
+
 		lstOverlays.getChildren().clear();
 		for (OverlayControl control : controls)
 		{
 			lstOverlays.getChildren().add(control);
 		}
-		
+
 		SetOverlayMargins();
 		Draw();
 		SetAsUnsaved();
 	}
-	
+
 	public void Clone(OverlayControl controlToClone)
 	{
 		int index = lstOverlays.getChildren().indexOf(controlToClone);
 		Overlay original = controlToClone.GetOverlay();
 		Class type = original.getClass();
 		Overlay copy = OverlayFactory.GetInstanceByLongName(type.getName(), 1, 1);
-		
+
 		for (int i = 0; i < original.Attributes.length; i++)
 		{
 			copy.Attributes[i].Value = original.Attributes[i].Value;
 			copy.Attributes[i].IsDiscrete = original.Attributes[i].IsDiscrete;
 		}
-		
+
 		copy.SetColor(original.Color);
-		
+
 		if (type.isAssignableFrom(OverlayPath.class))
 		{
-			((OverlayPath)copy).StrokeColor = ((OverlayPath)original).StrokeColor;
+			((OverlayPath) copy).StrokeColor = ((OverlayPath) original).StrokeColor;
 		}
 		else if (type.isAssignableFrom(OverlayFlag.class))
 		{
-			((OverlayFlag)copy).Flag = ((OverlayFlag)original).Flag;
+			((OverlayFlag) copy).Flag = ((OverlayFlag) original).Flag;
 		}
-		
+
 		Ratio gridSize = SelectedGridSize();
 		copy.SetMaximum(gridSize.Width, gridSize.Height);
-		
+
 		OverlayAdd(index + 1, copy, true);
 	}
-	
+
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{
 		Ratio gridSize = SelectedGridSize();
 		OverlayControl control = new OverlayControl(_stage, this, gridSize.Width, gridSize.Height, isLoading);
-		
+
 		if (control.WasCanceled)
 		{
 			return;
 		}
-		
+
 		if (overlay != null)
 		{
 			control.SetOverlay(overlay);
 		}
-		
+
 		lstOverlays.getChildren().add(control);
 		SetOverlayMargins();
-		
+
 		if (!isLoading)
 		{
 			Draw();
 			SetAsUnsaved();
 		}
 	}
-		
+
 	// Colors
 	private void SetColorsAndSliders()
 	{
 		SetDefaultColors();
-		
+
 		divisionPicker1.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
 		divisionPicker2.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
 		divisionPicker3.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
-		
+
 		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
 		divisionSlider2.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
 		divisionSlider3.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
 	}
-	
+
 	private void SetDefaultColors()
 	{
 		divisionPicker1.setValue(Color.rgb(198, 12, 48));
 		divisionPicker2.setValue(Color.rgb(253, 200, 47));
 		divisionPicker3.setValue(Color.rgb(0, 38, 100));
 	}
-	
+
 	@FXML private void ShuffleColors()
 	{
-		boolean skip2 = (_division instanceof DivisionGrid) &&
-				(divisionSlider1.getValue() == 1) &&
-				(divisionSlider2.getValue() == 1);
+		boolean skip2 = (_division instanceof DivisionGrid)
+				&& (divisionSlider1.getValue() == 1)
+				&& (divisionSlider2.getValue() == 1);
 		Color[] colors = Flag().ColorsUsed();
 
 		divisionPicker1.setValue(GetNextColor(divisionPicker1.getValue(), colors));
-		
+
 		if (!skip2)
 		{
 			divisionPicker2.setValue(GetNextColor(divisionPicker2.getValue(), colors));
 		}
-		
+
 		if (divisionPicker3.visibleProperty().get())
 		{
 			divisionPicker3.setValue(GetNextColor(divisionPicker3.getValue(), colors));
 		}
 
-		for (OverlayControl overlay : (List<OverlayControl>)(List<?>)lstOverlays.getChildren())
+		for (OverlayControl overlay : (List<OverlayControl>) (List<?>) lstOverlays.getChildren())
 		{
 			overlay.SetColor(GetNextColor(overlay.GetColor(), colors));
 		}
 	}
-	
+
 	private Color GetNextColor(Color c, Color[] colors)
 	{
 		int index = Arrays.asList(colors).indexOf(c);
 		return colors[(index + 1) % colors.length];
 	}
-	
+
 	// Grid
 	private Ratio SelectedGridSize()
 	{
-		String value = (String)cmbRatio.getValue();
-		
+		String value = (String) cmbRatio.getValue();
+
 		if (value == null)
 		{
 			return new Ratio(2, 3);
 		}
-		
+
 		String[] parts = value.split(":");
 		int height = Integer.parseInt(parts[0]);
 		int width = Integer.parseInt(parts[1]);
 		return new Ratio(width, height);
 	}
-	
+
 	private void SetRatio(int width, int height)
 	{
 		txtRatioHeight.setText(height + "");
@@ -454,11 +470,47 @@ public class MainWindowController
 		_ratio = new Ratio(width, height);
 		FillGridCombobox();
 	}
-	
-	@FXML private void GridOnChanged(){}
-	
-	private void DrawGrid(){}
-	
+
+	@FXML
+	private void GridOnChanged()
+	{
+		_showGrid = !_showGrid;
+		DrawGrid();
+	}
+
+	private void DrawGrid()
+	{
+		_gridPane.getChildren().clear();
+		if (!_showGrid)
+		{
+			return;
+		}
+		if (cmbRatio.getItems().size() == 0)
+		{
+			return;
+		}
+
+		Ratio gridSize = SelectedGridSize();
+		double intervalX = _gridPane.getWidth() / gridSize.Width;
+		double intervalY = _gridPane.getHeight() / gridSize.Height;
+
+		for (int x = 0; x <= gridSize.Width; x++)
+		{
+			Line line = new Line(x * intervalX, 0, x * intervalX, _gridPane.getHeight());
+			line.setStrokeWidth(5);
+			line.setStroke(Color.SILVER);
+			_gridPane.getChildren().add(line);
+		}
+		
+		for (int y = 0; y <= gridSize.Height; y++)
+		{
+			Line line = new Line(0, y * intervalY, _gridPane.getWidth(), y * intervalX);
+			line.setStrokeWidth(5);
+			line.setStroke(Color.SILVER);
+			_gridPane.getChildren().add(line);
+		}
+	}
+
 	private void FillGridCombobox()
 	{
 		cmbRatio.getItems().clear();
@@ -470,7 +522,7 @@ public class MainWindowController
 		}
 		cmbRatio.getSelectionModel().select(0);
 	}
-	
+
 	@FXML
 	public void RatioTextboxChanged()
 	{
@@ -486,39 +538,39 @@ public class MainWindowController
 
 		_ratio = new Ratio(width, height);
 		leftStack.autosize();
-		
-		if(!_isLoading)
+
+		if (!_isLoading)
 		{
 			Draw();
 			SetAsUnsaved();
 		}
-		
+
 		FillGridCombobox();
 	}
-	
+
 	@FXML
 	private void GridSizeDropdownChanged()
 	{
 		if (cmbRatio.getItems().size() == 0) return;
 		Ratio gridSize = SelectedGridSize();
 		int sliderMax = Math.max(gridSize.Width, gridSize.Height);
-		
+
 		divisionSlider1.setMax(sliderMax);
 		divisionSlider2.setMax(sliderMax);
 		divisionSlider3.setMax(sliderMax);
-		
+
 		for (OverlayControl overlay : (List<OverlayControl>)(List<?>)lstOverlays.getChildren())
 		{
 			((OverlayControl)overlay).SetMaximum(gridSize.Width, gridSize.Height);
 		}
-		
+
 		if (!_isLoading)
 		{
 			Draw();
 			SetAsUnsaved();
 		}
 	}
-	
+
 	// Other	
 	private void NameChanged()
 	{
@@ -535,23 +587,23 @@ public class MainWindowController
 	{
 		Flag().Draw(_pane);
 		//DrawTexture(_canvas);
-		//DrawGrid();
+		DrawGrid();
 		//SetUsedColorPalettes();
 	}
 
 	private void DrawTexture(Pane canvas)
 	{
 	}
-	
+
 	private void ToggleTexture()
-	{	
+	{
 	}
-	
+
 	// Export
 	public void MenuExportPngClick()
 	{
 		WritableImage snapshot = _pane.snapshot(new SnapshotParameters(), null);
-		
+
 		File fileA = new File("export.png");
 		try
 		{
@@ -561,9 +613,9 @@ public class MainWindowController
 		{
 		}
 	}
-	
+
 	private Size GetPngDimensions(){return null;}
-	
+
 	public void MenuExportSvgClick()
 	{
 		try
@@ -574,12 +626,12 @@ public class MainWindowController
 		{
 		}
 	}
-	
+
 	@FXML private void MenuExportBulkPngClick(){}
 	@FXML private void MenuExportBulkSvgClick(){}
 	private void GetFlagFiles(){}
 	private void GetBulkSaveDirectory(){}
-	
+
 	private void ExportFinished(boolean errorOccurred)
 	{
 		if (errorOccurred)
@@ -591,7 +643,7 @@ public class MainWindowController
 			new Alert(AlertType.INFORMATION, "Export bulk success", ButtonType.OK).showAndWait();
 		}
 	}
-	
+
 	// Load / save
 	@FXML private void New()
 	{
@@ -609,15 +661,15 @@ public class MainWindowController
 		_isUnsaved = false;
 		SetTitle();
 	}
-	
+
 	@FXML private void Save(){}
 	@FXML private void SaveAs(){}
-	
+
 	@FXML private void Open()
 	{
 		LoadFlagFromFile("nah");
 	}
-	
+
 	private boolean CheckUnsaved()
 	{
 		if (!_isUnsaved) return false;
@@ -630,18 +682,18 @@ public class MainWindowController
 		alert.setHeaderText("Not saved");
 		alert.setContentText("Save changes?");
 		alert.getButtonTypes().setAll(buttonYes, buttonNo, buttonCancel);
-		
+
 		Optional<ButtonType> result = alert.showAndWait();
-		
+
 		ButtonType b = result.get();
 		if (b == buttonYes)
 		{
 			Save();
 		}
-		
+
 		return b == buttonCancel;
 	}
-	
+
 	private void LoadFlagFromFile(String filename)
 	{
 		try
@@ -649,35 +701,35 @@ public class MainWindowController
 			LoadFlag(Flag.LoadFromFile(filename));
 			_filename = filename;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			new Alert(AlertType.ERROR, "Could not load file.", ButtonType.OK).showAndWait();
 		}
 	}
-	
+
 	private void LoadFlag(Flag flag){}
-	
+
 	// Presets
 	private void PresetBlank()
 	{
 		PlainPreset(1, 1);
 	}
-	
+
 	private void PresetHorizontal()
 	{
 		PlainPreset(1, 2);
 	}
-	
+
 	private void PresetVertical()
 	{
 		PlainPreset(2, 1);
 	}
-	
+
 	private void PresetQuad()
 	{
 		PlainPreset(2, 2);
 	}
-	
+
 	private void PresetStripes()
 	{
 		for (int i = 0; i < cmbRatio.getItems().size(); i++)
@@ -691,7 +743,7 @@ public class MainWindowController
 
 		PlainPreset(1, 7);
 	}
-	
+
 	private void PlainPreset(int slider1, int slider2)
 	{
 		DivisionGridClick();
@@ -699,7 +751,7 @@ public class MainWindowController
 		divisionSlider2.setValue(slider2);
 		divisionSlider3.setValue(1);
 	}
-	
+
 	private void LoadPresets()
 	{
 		cmbPresets.getItems().add("Blank");
@@ -707,7 +759,7 @@ public class MainWindowController
 		cmbPresets.getItems().add("Vertical");
 		cmbPresets.getItems().add("Quad");
 		cmbPresets.getItems().add("Stripes");
-				
+
 		cmbPresets.valueProperty().addListener(new ChangeListener<String>()
 		{
 			@Override
@@ -715,7 +767,7 @@ public class MainWindowController
 			{
 				String preset = (String)cmbPresets.getValue();
 				cmbPresets.setValue(null);
-				
+
 				switch (preset)
 				{
 					case "Blank": PresetBlank(); return;
@@ -727,21 +779,21 @@ public class MainWindowController
 			}
 		});
 	}
-	
+
 	private void LoadPreset(){}
-		
+
 	private void GetPresetFlagName(){}
-	
+
 	private void GenerateRandomFlag(){}
-	
+
 	private void OnClosing()
 	{
 	}
-	
+
 	private void LanguageChange()
 	{
 	}
-	
+
 	public Flag Flag()
 	{
 		return new Flag("", _ratio, SelectedGridSize(), _division, GetOverlays());
@@ -759,7 +811,7 @@ public class MainWindowController
 			return false;
 		}
 	}
-	
+
 	private Overlay[] GetOverlays()
 	{
 		ArrayList<Overlay> list = new ArrayList<>();
@@ -769,7 +821,7 @@ public class MainWindowController
 			Overlay o = oc.GetOverlay();
 			list.add(o);
 		}
-		
+
 		Overlay[] returnValue = new Overlay[]{};
 		return list.toArray(returnValue);
 	}
