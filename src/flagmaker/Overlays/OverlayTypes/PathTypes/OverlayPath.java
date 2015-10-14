@@ -12,18 +12,33 @@ import javafx.scene.shape.StrokeLineJoin;
 
 public class OverlayPath extends Overlay
 {
-	private final String _name;
-	private final Vector _pathSize;
-	private final String _path;
+	private String _name;
+	private Vector _pathSize;
+	private String _path;
 	
 	public Color StrokeColor;
+	
+	public OverlayPath(int maximumX, int maximumY)
+	{
+		super(new Attribute[]
+		{
+			new Attribute("X", true, 1, true),
+			new Attribute("Y", true, 1, false),
+			new Attribute("Size", true, 1, true),
+			new Attribute("Rotation", true, 0, true),
+			new Attribute("Stroke", true, 0, true),
+			new Attribute("StrokeCurved", true, 0, true)
+		}, maximumX, maximumY);
+		
+		StrokeColor = Color.WHITE;
+	}
 	
 	public OverlayPath(String name, String path, Vector pathSize, int maximumX, int maximumY)
 	{
 		super(new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, true),
+			new Attribute("Y", true, 1, false),
 			new Attribute("Size", true, 1, true),
 			new Attribute("Rotation", true, 0, true),
 			new Attribute("Stroke", true, 0, true),
@@ -36,22 +51,11 @@ public class OverlayPath extends Overlay
 		StrokeColor = Color.WHITE;
 	}
 	
-	protected OverlayPath(Color color, String name, String path, Vector pathSize, int maximumX, int maximumY)
+	protected void Constructor(String name, String path, Vector pathSize)
 	{
-		super(new Attribute[]
-		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, true),
-			new Attribute("Size", true, 1, true),
-			new Attribute("Rotation", true, 0, true),
-			new Attribute("Stroke", true, 0, true),
-			new Attribute("StrokeCurved", true, 0, true)
-		}, maximumX, maximumY);
-		
 		_name = name;
 		_path = path;
 		_pathSize = pathSize;
-		StrokeColor = Color.WHITE;
 	}
 	
 	@Override
@@ -69,8 +73,8 @@ public class OverlayPath extends Overlay
 		path.setContent(_path);
 		path.setScaleX(scale);
 		path.setScaleY(scale);
-		path.setTranslateX(thumbSize / 2);
-		path.setTranslateY(thumbSize / 2);
+		path.setLayoutX(thumbSize / 2);
+		path.setLayoutY(thumbSize / 2);
 		return new Shape[] { path };
 	}
 

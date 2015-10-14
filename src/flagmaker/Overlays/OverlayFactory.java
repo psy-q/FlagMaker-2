@@ -1,6 +1,7 @@
 package flagmaker.Overlays;
 
 import flagmaker.Overlays.OverlayTypes.*;
+import flagmaker.Overlays.OverlayTypes.PathTypes.*;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.*;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -22,6 +23,11 @@ public class OverlayFactory
 		_typeMap.put("fimbriation forward", "flagmaker.Overlays.OverlayTypes.OverlayFimbriationForward");
 		_typeMap.put("half ellipse", "flagmaker.Overlays.OverlayTypes.OverlayHalfEllipse");
 		_typeMap.put("half saltire", "flagmaker.Overlays.OverlayTypes.OverlayHalfSaltire");
+		
+		_typeMap.put("maple leaf", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMapleLeaf");
+		_typeMap.put("maltese cross", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMalteseCross");
+		_typeMap.put("laurel", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayLaurel");
+		_typeMap.put("star", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStar");
 	}
 	
 	public static Overlay[] GetShapes()
@@ -43,7 +49,13 @@ public class OverlayFactory
 	
 	public static Overlay[] GetEmblems()
 	{
-		return new Overlay[]{};
+		return new Overlay[]
+		{
+			new OverlayMapleLeaf(0, 0),
+			new OverlayMalteseCross(0, 0),
+			new OverlayLaurel(0, 0),
+			new OverlayStar(0, 0)
+		};
 	}
 	
 	public static Overlay[] GetCustom()
