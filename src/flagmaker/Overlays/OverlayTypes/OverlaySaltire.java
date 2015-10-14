@@ -54,7 +54,7 @@ public class OverlaySaltire extends Overlay
 		
 		path1.setContent(String.format("M %1$.3f,0 0,0 0,%2$.3f %3$.3f,%4$.3f %5$.3f,%4$.3f %5$.3f,%6$.3f %1$.3f,0",
 				widthX, widthY, canvas.getWidth() - widthX, canvas.getHeight(), canvas.getWidth(), canvas.getHeight() - widthY));
-		path1.setContent(String.format("M %1$.3f,0 %2$.3f,0 %2$.3f,%6$.3f %3$.3f,%4$.3f 0,%4$.3f 0,%5$.3f %1$.3f,0",
+		path2.setContent(String.format("M %1$.3f,0 %2$.3f,0 %2$.3f,%6$.3f %3$.3f,%4$.3f 0,%4$.3f 0,%5$.3f %1$.3f,0",
 				canvas.getWidth() - widthX, canvas.getWidth(), widthX, canvas.getHeight(), canvas.getHeight() - widthY, widthY));
 
 		path1.setFill(Color);

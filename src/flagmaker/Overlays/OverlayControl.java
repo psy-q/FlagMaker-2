@@ -215,7 +215,7 @@ public class OverlayControl extends VBox
 		_mainWindow.Clone(this);
 	}
 
-	private void SetVisibility()
+	@FXML private void SetVisibility()
 	{
 		_overlay.IsEnabled = !_overlay.IsEnabled;
 		SetVisibilityButton();

@@ -19,7 +19,7 @@ public class OverlayTriangle extends Overlay
 			new Attribute("X2", true, 1, true),
 			new Attribute("Y2", true, 2, false),
 			new Attribute("X3", true, 2, true),
-			new Attribute("Y3", true, 2, false)
+			new Attribute("Y3", true, 1, false)
 		}, maximumX, maximumY);
 	}
 

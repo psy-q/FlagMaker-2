@@ -48,6 +48,7 @@ public class MainWindowController
 	@FXML private ColorPicker divisionPicker1;
 	@FXML private ColorPicker divisionPicker2;
 	@FXML private ColorPicker divisionPicker3;
+	@FXML private ComboBox cmbPresets;
 	
 	@FXML private VBox lstOverlays;
 	
@@ -433,7 +434,7 @@ public class MainWindowController
 	// Grid
 	private Ratio SelectedGridSize()
 	{
-		String value = (String)cmbRatio.valueProperty().getValue();
+		String value = (String)cmbRatio.getValue();
 		
 		if (value == null)
 		{
@@ -502,9 +503,9 @@ public class MainWindowController
 		Ratio gridSize = SelectedGridSize();
 		int sliderMax = Math.max(gridSize.Width, gridSize.Height);
 		
-		divisionSlider1.maxProperty().set(sliderMax);
-		divisionSlider2.maxProperty().set(sliderMax);
-		divisionSlider3.maxProperty().set(sliderMax);
+		divisionSlider1.setMax(sliderMax);
+		divisionSlider2.setMax(sliderMax);
+		divisionSlider3.setMax(sliderMax);
 		
 		for (OverlayControl overlay : (List<OverlayControl>)(List<?>)lstOverlays.getChildren())
 		{
@@ -603,7 +604,7 @@ public class MainWindowController
 		lstOverlays.getChildren().clear();
 		SetRatio(3, 2);
 		RatioTextboxChanged();
-		txtName.textProperty().set("Untitled");
+		txtName.setText("Untitled");
 		_filename = "";
 		_isUnsaved = false;
 		SetTitle();
@@ -657,27 +658,75 @@ public class MainWindowController
 	private void LoadFlag(Flag flag){}
 	
 	// Presets
-	private void PresetChanged(){}
+	private void PresetBlank()
+	{
+		PlainPreset(1, 1);
+	}
 	
-	private void PresetBlank(){}
+	private void PresetHorizontal()
+	{
+		PlainPreset(1, 2);
+	}
 	
-	private void PresetHorizontal(){}
+	private void PresetVertical()
+	{
+		PlainPreset(2, 1);
+	}
 	
-	private void PresetVertical(){}
+	private void PresetQuad()
+	{
+		PlainPreset(2, 2);
+	}
 	
-	private void PresetQuad(){}
-	
-	private void PresetStripes(){}
+	private void PresetStripes()
+	{
+		for (int i = 0; i < cmbRatio.getItems().size(); i++)
+		{
+			if (((Ratio)cmbRatio.getItems().get(i)).Width >= 7)
+			{
+				cmbRatio.getSelectionModel().select(i);
+				break;
+			}
+		}
+
+		PlainPreset(1, 7);
+	}
 	
 	private void PlainPreset(int slider1, int slider2)
 	{
 		DivisionGridClick();
-		divisionSlider1.valueProperty().set(slider1);
-		divisionSlider2.valueProperty().set(slider2);
-		divisionSlider3.valueProperty().set(1);
+		divisionSlider1.setValue(slider1);
+		divisionSlider2.setValue(slider2);
+		divisionSlider3.setValue(1);
 	}
 	
-	private void LoadPresets(){}
+	private void LoadPresets()
+	{
+		cmbPresets.getItems().add("Blank");
+		cmbPresets.getItems().add("Horizontal");
+		cmbPresets.getItems().add("Vertical");
+		cmbPresets.getItems().add("Quad");
+		cmbPresets.getItems().add("Stripes");
+				
+		cmbPresets.valueProperty().addListener(new ChangeListener<String>()
+		{
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+			{
+				String preset = (String)cmbPresets.getValue();
+				cmbPresets.setValue(null);
+				
+				switch (preset)
+				{
+					case "Blank": PresetBlank(); return;
+					case "Horizontal": PresetHorizontal(); return;
+					case "Vertical": PresetVertical(); return;
+					case "Quad": PresetQuad(); return;
+					case "Stripes": PresetStripes(); return;
+				}
+			}
+		});
+	}
 	
 	private void LoadPreset(){}
 		

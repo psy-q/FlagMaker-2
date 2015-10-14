@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import flagmaker.Overlays.* ?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" fx:controller="flagmaker.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flagmaker.MainWindowController">
 	<children>
 		<MenuBar VBox.vgrow="NEVER">
 			<menus>
@@ -272,6 +272,23 @@
 								</Button>
 							</children>
 						</FlowPane>
+						
+						<HBox alignment="CENTER_LEFT">
+							<children>
+								<Label text="Presets" HBox.hgrow="NEVER">
+									<padding>
+										<Insets right="10.0" />
+									</padding>
+									<HBox.margin>
+										<Insets />
+									</HBox.margin>
+								</Label> 
+								<ComboBox fx:id="cmbPresets" />
+							</children>
+							<padding>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</padding>
+						</HBox>
 						
 						<HBox spacing="5.0">
 							<children>
