@@ -7,13 +7,19 @@ import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javax.imageio.ImageIO;
 
 public class Flag
 {
@@ -32,7 +38,7 @@ public class Flag
 		Overlays = overlays;
 	}
 	
-	public static Flag LoadFromFile(String filename) throws Exception
+	public static Flag LoadFromFile(File file) throws Exception
 	{
 		return null;
 	}
@@ -115,6 +121,23 @@ public class Flag
 	
 	public void ExportToPng(Size size, String path)
 	{
+		AnchorPane a = new AnchorPane();
+		Scene s = new Scene(a, size.X, size.Y);
+		Pane p = new Pane();
+		s.setRoot(p);
+		
+		Draw(p);
+		
+		WritableImage snapshot = p.snapshot(new SnapshotParameters(), null);
+
+		File fileA = new File(path);
+		try
+		{
+			ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", fileA);
+		}
+		catch (Exception ex)
+		{
+		}
 	}
 	
 	public void ExportToSvg(String path) throws IOException
