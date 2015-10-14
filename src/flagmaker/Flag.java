@@ -3,7 +3,10 @@ package flagmaker;
 import flagmaker.Divisions.Division;
 import flagmaker.Divisions.DivisionGrid;
 import flagmaker.Overlays.Overlay;
+import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,6 +57,59 @@ public class Flag
 			if (!Overlays[i].IsEnabled) continue;
 
 			Overlays[i].Draw(canvas);
+		}
+	}
+	
+	public void Save(String path) throws IOException
+	{
+		try (FileWriter writer = new FileWriter(path, false); PrintWriter printLine = new PrintWriter(writer))
+		{
+			printLine.printf("name=%s\n", Name);
+			printLine.printf("ratio=%d:%d\n", Ratio.Height, Ratio.Width);
+			printLine.printf("gridSize=%s\n\n", GridSize.ToString());
+			
+			printLine.printf("division\n");
+			printLine.printf("type=%s\n", Division.Name());
+			
+			for (int i = 0; i < Division.Colors.length; i++)
+			{
+				printLine.printf("color%d=%s\n", i + 1, ColorExtensions.ToHexString(Division.Colors[i], false));
+			}
+			
+			for (int i = 0; i < Division.Values.length; i++)
+			{
+				printLine.printf("size%d=%d\n", i + 1, Division.Values[0]);
+			}
+			
+			for (Overlay overlay : Overlays)
+			{
+				printLine.printf("\noverlay\n");
+				printLine.printf("type=%s\n", overlay.Name());
+				
+				if (overlay.Name().equals("flag"))
+				{
+					printLine.printf("path=%s\n", ((OverlayFlag)overlay).Path);
+				}
+				
+				if (overlay.Name().equals("image"))
+				{
+					printLine.printf("path=%s\n", ((OverlayImage)overlay).GetPath());
+				}
+				else
+				{
+					printLine.printf("color=%s\n", ColorExtensions.ToHexString(overlay.Color, true));
+				}
+
+				for (int i = 0; i < overlay.Attributes.length; i++)
+				{
+					printLine.printf("size%d=%f\n", i + 1, overlay.Attributes[i].Value);
+				}
+
+				if (overlay instanceof OverlayPath)
+				{
+					printLine.printf("stroke=%s\n", ColorExtensions.ToHexString(((OverlayPath)overlay).StrokeColor, true));
+				}
+			}
 		}
 	}
 	

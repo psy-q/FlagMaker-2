@@ -8,6 +8,7 @@ import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -662,8 +663,40 @@ public class MainWindowController
 		SetTitle();
 	}
 
-	@FXML private void Save(){}
-	@FXML private void SaveAs(){}
+	@FXML private void Save()
+	{
+		if (StringExtensions.IsNullOrWhitespace(_filename))
+		{
+			SaveAs();
+		}
+		else
+		{
+			SaveFlag();
+		}
+		
+		SetTitle();
+	}
+	
+	private void SaveFlag()
+	{
+		try
+		{
+			Flag().Save(_filename);
+		}
+		catch (IOException ex)
+		{
+			//
+		}
+		
+		_isUnsaved = false;
+		LoadPresets();
+	}
+	
+	@FXML private void SaveAs()
+	{
+		_filename = "export.flag";
+		SaveFlag();
+	}
 
 	@FXML private void Open()
 	{
@@ -796,7 +829,12 @@ public class MainWindowController
 
 	public Flag Flag()
 	{
-		return new Flag("", _ratio, SelectedGridSize(), _division, GetOverlays());
+		String name = StringExtensions.IsNullOrWhitespace(txtName.getText())
+				? StringExtensions.IsNullOrWhitespace(_filename)
+					? ""
+					: Paths.get(_filename).getFileName().toString()
+				: txtName.getText();
+		return new Flag(name, _ratio, SelectedGridSize(), _division, GetOverlays());
 	}
 
 	private boolean CanParseInt(String value)
