@@ -29,6 +29,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.SubScene;
 import javafx.scene.shape.Line;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class MainWindowController
@@ -628,10 +631,47 @@ public class MainWindowController
 		}
 	}
 
-	@FXML private void MenuExportBulkPngClick(){}
+	@FXML private void MenuExportBulkPngClick()
+	{
+		boolean error = false;
+		List<File> files = GetFlagFiles();
+		if (files == null || files.isEmpty()) return;
+		
+		File directory = GetBulkSaveDirectory(files.get(0));
+		if (!directory.exists() || !directory.canWrite()) return;
+		
+		for (File file : files)
+		{
+			try
+			{
+				Flag.LoadFromFile(file).ExportToSvg(String.format("%s\\%s.svg", directory.getParent(), file.getName()));
+			}
+			catch (Exception ex)
+			{
+				error = true;
+			}
+		}
+		
+		ExportFinished(error);
+	}
+	
 	@FXML private void MenuExportBulkSvgClick(){}
-	private void GetFlagFiles(){}
-	private void GetBulkSaveDirectory(){}
+	
+	private List<File> GetFlagFiles()
+	{
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Select files");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag files", "*.flag"));
+		return fileChooser.showOpenMultipleDialog(_stage);
+	}
+	
+	private File GetBulkSaveDirectory(File defaultDirectory)
+	{
+		DirectoryChooser dc = new DirectoryChooser();
+		dc.setInitialDirectory(defaultDirectory);
+		dc.setTitle("Select directory to save in");
+		return dc.showDialog(_stage);
+	}
 
 	private void ExportFinished(boolean errorOccurred)
 	{
@@ -700,7 +740,11 @@ public class MainWindowController
 
 	@FXML private void Open()
 	{
-		LoadFlagFromFile("nah");
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open flag");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag files", "*.flag"));
+		File file = fileChooser.showOpenDialog(_stage);
+		LoadFlagFromFile(file);
 	}
 
 	private boolean CheckUnsaved()
@@ -727,12 +771,12 @@ public class MainWindowController
 		return b == buttonCancel;
 	}
 
-	private void LoadFlagFromFile(String filename)
+	private void LoadFlagFromFile(File filename)
 	{
 		try
 		{
 			LoadFlag(Flag.LoadFromFile(filename));
-			_filename = filename;
+			_filename = filename.getPath();
 		}
 		catch (Exception e)
 		{

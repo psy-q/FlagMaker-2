@@ -75,7 +75,7 @@ public class OverlayQuadrilateral extends Overlay
 	}
 
 	@Override
-	public void SetValues(Double[] values)
+	public void SetValues(double[] values)
 	{
 		SetAttribute("X1", values[0]);
 		SetAttribute("Y1", values[1]);

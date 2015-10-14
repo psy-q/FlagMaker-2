@@ -40,7 +40,7 @@ public abstract class OverlayShape extends Overlay
 	}
 
 	@Override
-	public void SetValues(Double[] values)
+	public void SetValues(double[] values)
 	{
 		SetAttribute("X", values[0]);
 		SetAttribute("Y", values[1]);

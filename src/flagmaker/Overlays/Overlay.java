@@ -16,7 +16,7 @@ public abstract class Overlay
 	protected abstract Shape[] Thumbnail();
 	
 	public abstract void Draw(Pane canvas);
-	public abstract void SetValues(Double[] values);
+	public abstract void SetValues(double[] values);
 	public abstract String ExportSvg(int width, int height);
 	
 	protected Overlay(Attribute[] attributes, int maximumX, int maximumY)

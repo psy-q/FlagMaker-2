@@ -56,7 +56,7 @@ public class OverlayLineHorizontal extends Overlay
 	}
 
 	@Override
-	public void SetValues(Double[] values)
+	public void SetValues(double[] values)
 	{
 		SetAttribute("Y", values[0]);
 		SetAttribute("Thickness", values[1]);

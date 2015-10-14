@@ -1,6 +1,6 @@
 package flagmaker.Overlays.OverlayTypes.ShapeTypes;
 
-import flagmaker.StringExtensions;
+import java.io.File;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -11,43 +11,38 @@ import javafx.scene.shape.Shape;
 
 public class OverlayImage extends OverlayShape
 {
-	private String _path;
-	private final String _directory;
+	private File _path;
 	private Image _bitmap;
 
 	public OverlayImage(int maximumX, int maximumY)
 	{
 		super(maximumX, maximumY);
-		SetPath("");
-		_directory = "";
 	}
 	
-	public OverlayImage(String path, String directory, int maximumX, int maximumY)
+	public OverlayImage(File path, int maximumX, int maximumY)
 	{
 		super(maximumX, maximumY);
-		_directory = directory;
 		SetPath(path);
 	}
 	
-	public OverlayImage(String path, double x, double y, double width, double height, int maximumX, int maximumY)
+	public OverlayImage(File path, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
 		super(x, y, width, height, maximumX, maximumY);
 		SetPath(path);
-		_directory = "";
 	}
 	
-	public String GetPath()
+	public File GetPath()
 	{
 		return _path;
 	}
 	
-	public void SetPath(String value)
+	public void SetPath(File value)
 	{
 		_path = value;
 		
-		if (!StringExtensions.IsNullOrWhitespace(_path))
+		if (_path.exists())
 		{
-			_bitmap = new Image(_path);
+			_bitmap = new Image(_path.getPath());
 		}
 	}
 

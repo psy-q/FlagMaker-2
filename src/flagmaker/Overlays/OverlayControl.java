@@ -7,7 +7,6 @@ import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,16 +71,15 @@ public class OverlayControl extends VBox
 		
 		if (!_isFirst && !IsLoading)
 		{
-			ArrayList<Double> sliderValues = new ArrayList<>(Arrays.asList(GetAttributeSliderValues()));
-			if (sliderValues.size() > 0)
+			double[] sliderValues = GetAttributeSliderValues();
+			if (sliderValues.length > 0)
 			{
-				for (int i = sliderValues.size(); i < _overlay.Attributes.length; i++)
+				for (int i = sliderValues.length; i < _overlay.Attributes.length; i++)
 				{
-					sliderValues.add(0.0);
+					sliderValues[i] = 0.0;
 				}
 				
-				Double[] a = new Double[] {};
-				_overlay.SetValues(sliderValues.toArray(a));
+				_overlay.SetValues(sliderValues);
 				_overlay.SetColor(overlayPicker.getValue());
 				
 				if (_overlay instanceof OverlayPath)
@@ -259,16 +257,17 @@ public class OverlayControl extends VBox
 		return list.toArray(returnValue);
 	}
 	
-	private Double[] GetAttributeSliderValues()
+	private double[] GetAttributeSliderValues()
 	{
-		ArrayList<Double> list = new ArrayList<>();
-		for (Object control : pnlSliders.getChildren())
+		int sliderCount = pnlSliders.getChildren().size();
+		double[] list = new double[sliderCount];
+		
+		for (int i = 0; i < sliderCount; i++)
 		{
-			AttributeSlider slider = (AttributeSlider)control;
-			list.add(slider.GetValue());
+			AttributeSlider slider = (AttributeSlider)pnlSliders.getChildren().get(i);
+			list[i] = slider.GetValue();
 		}
 		
-		Double[] returnValue = new Double[]{};
-		return list.toArray(returnValue);
+		return list;
 	}
 }

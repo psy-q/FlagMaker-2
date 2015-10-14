@@ -66,7 +66,7 @@ public class OverlayFimbriationBackward extends Overlay
 	}
 
 	@Override
-	public void SetValues(Double[] values)
+	public void SetValues(double[] values)
 	{
 		SetAttribute("Thickness", values[0]);
 	}

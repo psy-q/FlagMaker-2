@@ -4,6 +4,7 @@ import flagmaker.Divisions.DivisionGrid;
 import flagmaker.Flag;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Ratio;
+import java.io.File;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -13,7 +14,7 @@ import javafx.scene.shape.Shape;
 public class OverlayFlag extends OverlayShape
 {
 	public Flag Flag;
-	public String Path;
+	public File Path;
 
 	public OverlayFlag(int maximumX, int maximumY)
 	{
@@ -21,7 +22,14 @@ public class OverlayFlag extends OverlayShape
 		Flag = new Flag("flag", new Ratio(2, 3), new Ratio(2, 3), new DivisionGrid(Color.WHITE, Color.BLACK, 2, 2), new Overlay[]{});
 	}
 	
-	public OverlayFlag(Flag flag, String path, double x, double y, double width, double height, int maximumX, int maximumY)
+	public OverlayFlag(Flag flag, File path, int maximumX, int maximumY)
+	{
+		super(maximumX, maximumY);
+		Flag = flag;
+		Path = path;
+	}
+	
+	public OverlayFlag(Flag flag, File path, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
 		super(x, y, width, height, maximumX, maximumY);
 		Flag = flag;

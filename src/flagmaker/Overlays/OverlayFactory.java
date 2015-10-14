@@ -1,8 +1,10 @@
 package flagmaker.Overlays;
 
+import flagmaker.Flag;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.*;
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
@@ -88,6 +90,16 @@ public class OverlayFactory
 			new OverlayFlag(0, 0),
 			new OverlayImage(0, 0)
 		};
+	}
+	
+	public static Overlay GetFlagInstance(File path, int maximumX, int maximumY) throws Exception
+	{
+		return new OverlayFlag(Flag.LoadFromFile(path), path, maximumX, maximumY);
+	}
+	
+	public static Overlay GetImageInstance(File path, int maximumX, int maximumY)
+	{
+		return new OverlayImage(path, maximumX, maximumY);
 	}
 	
 	public static Overlay GetInstanceByLongName(String name, int defaultMaximumX, int defaultMaximumY)
