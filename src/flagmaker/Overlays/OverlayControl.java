@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -26,6 +28,7 @@ public class OverlayControl extends VBox
 	@FXML private ColorPicker overlayPicker;
 	@FXML private VBox pnlSliders;
 	@FXML private ColorPicker strokePicker;
+	@FXML private ImageView btnVisibility;
 	
 	private Stage _stage;
 	
@@ -87,9 +90,9 @@ public class OverlayControl extends VBox
 				}
 			}
 		}
-		else if (value instanceof OverlayPath)
+		else if (_overlay instanceof OverlayPath)
 		{
-			strokePicker.setValue(((OverlayPath)value).StrokeColor);
+			strokePicker.setValue(((OverlayPath)_overlay).StrokeColor);
 		}
 		
 		if (_overlay instanceof OverlayFlag || _overlay instanceof OverlayRepeater || _overlay instanceof OverlayImage)
@@ -111,7 +114,14 @@ public class OverlayControl extends VBox
 			pnlSliders.getChildren().add(s);
 		}
 		
-		// Set stroke color picker visibility
+		if (_overlay instanceof OverlayPath)
+		{
+			ControlExtensions.ShowControl(strokePicker);
+		}
+		else
+		{
+			ControlExtensions.HideControl(strokePicker);
+		}
 		
 		_isFirst = false;
 		IsLoading = false;
@@ -140,7 +150,7 @@ public class OverlayControl extends VBox
 			AttributeSlider slider = sliders[i];
 			int max = _overlay.Attributes[i].UseMaxX ? maximumX : maximumY;
 			double newValue = slider.GetValue() * ((double)max / slider.GetMaximum());
-			slider.chkDiscrete.setSelected(newValue % 1 == 0);
+			slider.SetDiscrete(newValue % 1 == 0);
 			slider.SetMaximum(max);
 			slider.SetValue(newValue);
 		}
@@ -164,7 +174,6 @@ public class OverlayControl extends VBox
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		dialog.initOwner(_stage);
-		dialog.setResizable(false);
 		OverlaySelector control = new OverlaySelector(dialog, _defaultMaximumX, _defaultMaximumY);
 		Scene dialogScene = new Scene(control, 400, 300);
 		dialog.setScene(dialogScene);
@@ -215,10 +224,9 @@ public class OverlayControl extends VBox
 
 	private void SetVisibilityButton()
 	{
-//		((Image)_btnVisibility.Content).Source = new BitmapImage(
-//			_overlay.IsEnabled
-//				? new Uri(@"..\Images\check_on.png", UriKind.Relative)
-//				: new Uri(@"..\Images\check_off.png", UriKind.Relative));
+		btnVisibility.setImage(new Image(_overlay.IsEnabled
+				? "flagmaker/Images/check_on.png"
+				: "flagmaker/Images/check_off.png"));
 	}
 	
 	private void Load(Stage stage)

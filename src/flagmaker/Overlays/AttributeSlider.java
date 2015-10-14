@@ -14,7 +14,7 @@ public class AttributeSlider extends HBox
 	@FXML private Label lblName;
 	@FXML private Label lblValue;
 	@FXML private Slider slider;
-	@FXML public CheckBox chkDiscrete;
+	@FXML private CheckBox chkDiscrete;
 	
 	private boolean _isDiscrete;
 	private final OverlayControl _parent;
@@ -56,6 +56,12 @@ public class AttributeSlider extends HBox
 	{
 		slider.setValue(value);
 		SliderValueChanged();
+	}
+	
+	public void SetDiscrete(boolean isDiscrete)
+	{
+		_isDiscrete = isDiscrete;
+		chkDiscrete.setSelected(isDiscrete);
 	}
 	
 	private void SliderValueChanged()

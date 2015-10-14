@@ -14,12 +14,12 @@
 				<Tooltip text="Change type" />
 			</tooltip>
 		</Button>
-		<Button>
+		<Button onAction="#SetVisibility">
 			<tooltip>
 				<Tooltip text="Toggle visibility" />
 			</tooltip>
 			<graphic>
-				<ImageView fitHeight="32.0" fitWidth="32.0">
+				<ImageView fx:id="btnVisibility" fitHeight="32.0" fitWidth="32.0">
 					<image>
 						<Image url="flagmaker/Images/check_on.png" />
 					</image>

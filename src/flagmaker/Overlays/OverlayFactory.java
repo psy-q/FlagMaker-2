@@ -23,6 +23,15 @@ public class OverlayFactory
 		_typeMap.put("fimbriation forward", "flagmaker.Overlays.OverlayTypes.OverlayFimbriationForward");
 		_typeMap.put("half ellipse", "flagmaker.Overlays.OverlayTypes.OverlayHalfEllipse");
 		_typeMap.put("half saltire", "flagmaker.Overlays.OverlayTypes.OverlayHalfSaltire");
+		_typeMap.put("line", "flagmaker.Overlays.OverlayTypes.OverlayLine");
+		_typeMap.put("line horizontal", "flagmaker.Overlays.OverlayTypes.OverlayLineHorizontal");
+		_typeMap.put("line vertical", "flagmaker.Overlays.OverlayTypes.OverlayLineVertical");
+		_typeMap.put("pall", "flagmaker.Overlays.OverlayTypes.OverlayPall");
+		_typeMap.put("quadrilateral", "flagmaker.Overlays.OverlayTypes.OverlayQuadrilateral");
+		_typeMap.put("rays", "flagmaker.Overlays.OverlayTypes.OverlayRays");
+		_typeMap.put("ring", "flagmaker.Overlays.OverlayTypes.OverlayRing");
+		_typeMap.put("saltire", "flagmaker.Overlays.OverlayTypes.OverlaySaltire");
+		_typeMap.put("triangle", "flagmaker.Overlays.OverlayTypes.OverlayTriangle");
 		
 		_typeMap.put("maple leaf", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMapleLeaf");
 		_typeMap.put("maltese cross", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMalteseCross");
@@ -43,7 +52,16 @@ public class OverlayFactory
 			new OverlayFimbriationBackward(0, 0),
 			new OverlayFimbriationForward(0, 0),
 			new OverlayHalfEllipse(0, 0),
-			new OverlayHalfSaltire(0, 0)
+			new OverlayHalfSaltire(0, 0),
+			new OverlayLine(0, 0),
+			new OverlayLineHorizontal(0, 0),
+			new OverlayLineVertical(0, 0),
+			new OverlayPall(0, 0),
+			new OverlayQuadrilateral(0, 0),
+			new OverlayRays(0, 0),
+			new OverlayRing(0, 0),
+			new OverlaySaltire(0, 0),
+			new OverlayTriangle(0, 0)
 		};
 	}
 	
