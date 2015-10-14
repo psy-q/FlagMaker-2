@@ -56,7 +56,7 @@ public abstract class Overlay
 		{
 			thumb.setStroke(Color.BLACK);
 			if (thumb.getStrokeWidth() == 1.0) thumb.setStrokeWidth(0);
-			thumb.setFill(Color.BLACK);
+			if (thumb.fillProperty().get() == null) thumb.setFill(Color.BLACK);
 			p.getChildren().add(thumb);
 		}
 		

@@ -53,7 +53,11 @@ public class OverlayFactory
 	
 	public static Overlay[] GetSpecial()
 	{
-		return new Overlay[]{};
+		return new Overlay[]
+		{
+			new OverlayFlag(0, 0),
+			new OverlayImage(0, 0)
+		};
 	}
 	
 	public static Overlay GetInstanceByLongName(String name, int defaultMaximumX, int defaultMaximumY)

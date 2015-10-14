@@ -1,7 +1,13 @@
 package flagmaker.Overlays;
 
+import flagmaker.ControlExtensions;
 import flagmaker.MainWindowController;
+import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
+import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +25,7 @@ public class OverlayControl extends VBox
 	@FXML private Button btnOverlay;
 	@FXML private ColorPicker overlayPicker;
 	@FXML private VBox pnlSliders;
+	@FXML private ColorPicker strokePicker;
 	
 	private Stage _stage;
 	
@@ -62,15 +69,37 @@ public class OverlayControl extends VBox
 		
 		if (!_isFirst && !IsLoading)
 		{
-			Double[] sliderValues = GetAttributeSliderValues();
-			//...
+			ArrayList<Double> sliderValues = new ArrayList<>(Arrays.asList(GetAttributeSliderValues()));
+			if (sliderValues.size() > 0)
+			{
+				for (int i = sliderValues.size(); i < _overlay.Attributes.length; i++)
+				{
+					sliderValues.add(0.0);
+				}
+				
+				Double[] a = new Double[] {};
+				_overlay.SetValues(sliderValues.toArray(a));
+				_overlay.SetColor(overlayPicker.getValue());
+				
+				if (_overlay instanceof OverlayPath)
+				{
+					((OverlayPath)_overlay).StrokeColor = strokePicker.getValue();
+				}
+			}
 		}
-//		else if (value instanceof OverlayPath)
-//		{
-//			
-//		}
+		else if (value instanceof OverlayPath)
+		{
+			strokePicker.setValue(((OverlayPath)value).StrokeColor);
+		}
 		
-		// Set color picker visibility
+		if (_overlay instanceof OverlayFlag || _overlay instanceof OverlayRepeater || _overlay instanceof OverlayImage)
+		{
+			ControlExtensions.HideControl(overlayPicker);
+		}
+		else
+		{
+			ControlExtensions.ShowControl(overlayPicker);
+		}
 		
 		overlayPicker.setValue(_overlay.Color);
 		SetVisibilityButton();

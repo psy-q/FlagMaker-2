@@ -5,6 +5,9 @@ import flagmaker.Flag;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Ratio;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class OverlayFlag extends OverlayShape
@@ -34,10 +37,17 @@ public class OverlayFlag extends OverlayShape
 	@Override
 	protected Shape[] Thumbnail()
 	{
-		return new Shape[]
-		{
-
-		};
+		Rectangle base = new Rectangle(30, 20, new Color(0, 0, 0, 0));
+		base.setLayoutY(5);
+		base.setStrokeWidth(3);
+		
+		Line l1 = new Line(10, 7, 10, 23);
+		l1.setStrokeWidth(5);
+		
+		Line l2 = new Line(2, 15, 28, 15);
+		l2.setStrokeWidth(5);
+		
+		return new Shape[] { base, l1, l2 };
 	}
 
 	@Override
