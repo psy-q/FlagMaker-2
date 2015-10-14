@@ -252,9 +252,67 @@ public class MainWindowController
 		SetAsUnsaved();
 	}
 	
-	public void MoveUp(OverlayControl overlayControl){}
+	public void MoveUp(OverlayControl overlayControl)
+	{
+		int index = lstOverlays.getChildren().indexOf(overlayControl);
+		if (index == 0) return;
 		
-	public void MoveDown(OverlayControl overlayControl){}
+		ArrayList<OverlayControl> controls = new ArrayList<>();
+		for (int i = 0; i < lstOverlays.getChildren().size(); i++)
+		{
+			if (i + 1 == index)
+			{
+				controls.add((OverlayControl)lstOverlays.getChildren().get(i + 1));
+				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+				i++;
+			}
+			else
+			{
+				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+			}
+		}
+		
+		lstOverlays.getChildren().clear();
+		for (OverlayControl control : controls)
+		{
+			lstOverlays.getChildren().add(control);
+		}
+		
+		SetOverlayMargins();
+		Draw();
+		SetAsUnsaved();
+	}
+		
+	public void MoveDown(OverlayControl overlayControl)
+	{
+		int index = lstOverlays.getChildren().indexOf(overlayControl);
+		if (index == lstOverlays.getChildren().size() - 1) return;
+		
+		ArrayList<OverlayControl> controls = new ArrayList<>();
+		for (int i = 0; i < lstOverlays.getChildren().size(); i++)
+		{
+			if (i == index)
+			{
+				controls.add((OverlayControl)lstOverlays.getChildren().get(i + 1));
+				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+				i++;
+			}
+			else
+			{
+				controls.add((OverlayControl)lstOverlays.getChildren().get(i));
+			}
+		}
+		
+		lstOverlays.getChildren().clear();
+		for (OverlayControl control : controls)
+		{
+			lstOverlays.getChildren().add(control);
+		}
+		
+		SetOverlayMargins();
+		Draw();
+		SetAsUnsaved();
+	}
 	
 	public void Clone(OverlayControl overlayControl){}
 	
