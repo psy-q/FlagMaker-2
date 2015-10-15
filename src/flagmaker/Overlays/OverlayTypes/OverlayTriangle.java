@@ -88,8 +88,6 @@ public class OverlayTriangle extends Overlay
 		double y2 = height * (GetAttribute("Y2").Value / MaximumY);
 		double x3 = width * (GetAttribute("X3").Value / MaximumX);
 		double y3 = height * (GetAttribute("Y3").Value / MaximumY);
-		double x4 = width * (GetAttribute("X4").Value / MaximumX);
-		double y4 = height * (GetAttribute("Y4").Value / MaximumY);
 
 		return String.format("<polygon points=\"%.3f,%.3f %.3f,%.3f %.3f,%.3f\" %s />",
 				x1, y1, x2, y2, x3, y3, ColorExtensions.ToSvgFillWithOpacity(Color));
