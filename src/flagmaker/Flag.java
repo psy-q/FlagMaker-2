@@ -279,7 +279,7 @@ public class Flag
 		}
 	}
 	
-	public void ExportToPng(Size size, String path)
+	public void ExportToPng(Size size, File path)
 	{
 		AnchorPane a = new AnchorPane();
 		Scene s = new Scene(a, size.X, size.Y);
@@ -292,10 +292,9 @@ public class Flag
 		
 		WritableImage snapshot = p.snapshot(new SnapshotParameters(), null);
 
-		File fileA = new File(path);
 		try
 		{
-			ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", fileA);
+			ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", path);
 		}
 		catch (Exception ex)
 		{

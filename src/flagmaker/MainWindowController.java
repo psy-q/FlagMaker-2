@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import javax.imageio.ImageIO;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
@@ -29,10 +28,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.SubScene;
 import javafx.scene.shape.Line;
 import javafx.stage.DirectoryChooser;
@@ -618,10 +615,69 @@ public class MainWindowController
 	// Export
 	public void MenuExportPngClick()
 	{
-		Flag().ExportToPng(new Size(300, 200), "export.png");
+		Size dimensions = GetPngDimensions(true);
+		if (dimensions.X == 0 || dimensions.Y == 0) return;
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Export as PNG");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("PNG (*.png)", "*.png"));
+		File file = fileChooser.showSaveDialog(_stage);
+		
+		if (file != null)
+		{
+			Flag().ExportToPng(dimensions, file);
+		}
 	}
 
-	private Size GetPngDimensions(){return null;}
+	private Size GetPngDimensions(boolean constrain)
+	{
+		Dialog<Size> dialog = new Dialog<>();
+		dialog.setTitle("Export as PNG");
+		dialog.setHeaderText("Enter desired PNG size, in pixels");
+		ButtonType saveButtonType = new ButtonType("Save", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+		
+		// Create the username and password labels and fields.
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(20, 150, 10, 10));
+
+		TextField width = new TextField();
+		width.setPromptText("Width");
+		TextField height = new TextField();
+		height.setPromptText("Height");
+
+		grid.add(new Label("Width:"), 0, 0);
+		grid.add(width, 1, 0);
+		grid.add(new Label("Height:"), 0, 1);
+		grid.add(height, 1, 1);
+
+		// Enable/Disable login button depending on whether a username was entered.
+		Node saveButton = dialog.getDialogPane().lookupButton(saveButtonType);
+		saveButton.setDisable(true);
+
+		// Do some validation (using the Java 8 lambda syntax).
+		width.textProperty().addListener((observable, oldValue, newValue) -> {
+			saveButton.setDisable(newValue.trim().isEmpty());
+		});
+
+		dialog.getDialogPane().setContent(grid);
+
+		// Request focus on the username field by default.
+		Platform.runLater(() -> width.requestFocus());
+
+		// Convert the result to a username-password-pair when the login button is clicked.
+		dialog.setResultConverter(dialogButton -> {
+			if (dialogButton == saveButtonType) {
+				return new Size(Integer.parseInt(width.getText()), Integer.parseInt(height.getText()));
+			}
+			return null;
+		});
+
+		Optional<Size> result = dialog.showAndWait();
+		return result.isPresent() ? result.get() : new Size(0, 0);
+	}
 
 	public void MenuExportSvgClick()
 	{
@@ -640,6 +696,9 @@ public class MainWindowController
 		List<File> files = GetFlagFiles();
 		if (files == null || files.isEmpty()) return;
 		
+		Size dimensions = GetPngDimensions(true);
+		if (dimensions.X == 0 || dimensions.Y == 0) return;
+		
 		File directory = GetBulkSaveDirectory(files.get(0).getParentFile());
 		if (!directory.exists() || !directory.canWrite()) return;
 		
@@ -648,7 +707,7 @@ public class MainWindowController
 			try
 			{
 				Flag flag = Flag.LoadFromFile(file);
-				flag.ExportToPng(new Size(300, 200), String.format("%s\\%s.png", directory, StringExtensions.GetFilenameWithoutExtension(file.getName())));
+				flag.ExportToPng(dimensions, new File(String.format("%s\\%s.png", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
 			{
@@ -769,7 +828,7 @@ public class MainWindowController
 	{
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open flag");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag files", "*.flag"));
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag files (*.flag)", "*.flag"));
 		File file = fileChooser.showOpenDialog(_stage);
 		LoadFlagFromFile(file);
 	}
