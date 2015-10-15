@@ -674,7 +674,25 @@ public class MainWindowController
 
 		// Do some validation (using the Java 8 lambda syntax).
 		width.textProperty().addListener((observable, oldValue, newValue) -> {
-			saveButton.setDisable(newValue.trim().isEmpty());
+			saveButton.setDisable(newValue.trim().isEmpty() || height.getText().isEmpty() || !CanParseInt(newValue));
+			
+			if (CanParseInt(newValue) && constrain)
+			{
+				Integer w = Integer.parseInt(newValue);
+				Ratio r = SelectedGridSize();
+				height.setText(Integer.toString((int)(r.Height / (double)r.Width * w)));
+			}
+		});
+		
+		height.textProperty().addListener((observable, oldValue, newValue) -> {
+			saveButton.setDisable(newValue.trim().isEmpty() || width.getText().isEmpty() || !CanParseInt(newValue));
+			
+			if (CanParseInt(newValue) && constrain)
+			{
+				Integer h = Integer.parseInt(newValue);
+				Ratio r = SelectedGridSize();
+				width.setText(Integer.toString((int)(r.Width / (double)r.Height * h)));
+			}
 		});
 
 		dialog.getDialogPane().setContent(grid);
