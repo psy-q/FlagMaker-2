@@ -41,6 +41,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class MainWindowController
 {
@@ -147,6 +148,8 @@ public class MainWindowController
 				SetAsUnsaved();
 			}
 		});
+		
+		_stage.setOnCloseRequest(event -> OnClosing(event));
 	}
 
 	private void SetLanguages()
@@ -1091,8 +1094,12 @@ public class MainWindowController
 		SetTitle();
 	}
 
-	private void OnClosing()
+	private void OnClosing(WindowEvent event)
 	{
+		if (CheckUnsaved())
+		{
+			event.consume();
+		}
 	}
 
 	private void LanguageChange()
