@@ -3,7 +3,7 @@ package flagmaker.Overlays;
 import flagmaker.Flag;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;
-import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterLateral;
+import flagmaker.Overlays.OverlayTypes.RepeaterTypes.*;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -37,6 +37,7 @@ public class OverlayFactory
 		_typeMap.put("triangle", "flagmaker.Overlays.OverlayTypes.OverlayTriangle");
 		
 		_typeMap.put("repeater lateral", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterLateral");
+		_typeMap.put("repeater radial", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterRadial");
 		
 		_typeMap.put("anchor", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAnchor");
 		_typeMap.put("angola", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAngola");
@@ -114,7 +115,8 @@ public class OverlayFactory
 		{
 			new OverlayFlag(0, 0),
 			new OverlayImage(0, 0),
-			new OverlayRepeaterLateral(0, 0)
+			new OverlayRepeaterLateral(0, 0),
+			new OverlayRepeaterRadial(0, 0)
 		};
 	}
 	
