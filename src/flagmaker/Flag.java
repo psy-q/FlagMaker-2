@@ -244,7 +244,7 @@ public class Flag
 			
 			for (int i = 0; i < Division.Values.length; i++)
 			{
-				printLine.printf("size%d=%d\n", i + 1, Division.Values[0]);
+				printLine.printf("size%d=%d\n", i + 1, Division.Values[i]);
 			}
 			
 			for (Overlay overlay : Overlays)

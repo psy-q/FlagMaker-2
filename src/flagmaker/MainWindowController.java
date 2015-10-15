@@ -856,7 +856,6 @@ public class MainWindowController
 		}
 		catch (IOException ex)
 		{
-			//
 		}
 		
 		_isUnsaved = false;
@@ -865,8 +864,16 @@ public class MainWindowController
 	
 	@FXML private void SaveAs()
 	{
-		_filename = "export.flag";
-		SaveFlag();
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag file (*.flag)", "*.flag"));
+		File file = fileChooser.showSaveDialog(_stage);
+		
+		if (file != null)
+		{
+			_filename = file.getPath();
+			SaveFlag();
+		}	
 	}
 
 	@FXML private void Open()
