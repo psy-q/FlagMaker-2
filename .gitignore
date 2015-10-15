@@ -54,4 +54,7 @@ map.txt
 dist/*
 private/*
 build/*
-nbproject/*
+nbproject/private/*
+${build.dir}/*
+${build.classes.dir}/*
+${dist.jar}
