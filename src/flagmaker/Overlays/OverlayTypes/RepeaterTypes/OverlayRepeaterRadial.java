@@ -85,7 +85,7 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 			
 			if (rotate)
 			{
-				p.setRotate(i * 360 / GetAttribute("Count").Value);
+				p.getTransforms().add(new Rotate(i * 360 / GetAttribute("Count").Value, 0, 0));
 			}
 
 			Overlay.Draw(p);
