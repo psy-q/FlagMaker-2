@@ -289,9 +289,9 @@
 						
 						<HBox spacing="5.0">
 							<children>
-								<ColorPicker fx:id="divisionPicker1" style="-fx-color-label-visible: false;" />
-								<ColorPicker fx:id="divisionPicker2" style="-fx-color-label-visible: false;" />
-								<ColorPicker fx:id="divisionPicker3" style="-fx-color-label-visible: false;" />
+								<ColorPicker fx:id="divisionPicker1" minHeight="28.0" style="-fx-color-label-visible: false;" />
+								<ColorPicker fx:id="divisionPicker2" minHeight="28.0" style="-fx-color-label-visible: false;" />
+								<ColorPicker fx:id="divisionPicker3" minHeight="28.0" style="-fx-color-label-visible: false;" />
 							</children>
 							<padding>
 								<Insets bottom="5.0" top="5.0" />
