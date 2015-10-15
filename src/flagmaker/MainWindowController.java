@@ -6,8 +6,11 @@ import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +22,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -37,6 +42,8 @@ import javafx.stage.Stage;
 
 public class MainWindowController
 {
+	@FXML private Menu mnuPresets;
+	
 	@FXML private TextField txtRatioHeight;
 	@FXML private TextField txtRatioWidth;
 	@FXML private ComboBox cmbRatio;
@@ -85,7 +92,8 @@ public class MainWindowController
 		_headerText = String.format(" - FlagMaker %s", getClass().getPackage().getImplementationVersion());
 
 		SetColorsAndSliders();
-		LoadPresets();
+		LoadBasicPresets();
+		LoadFilePresets();
 		OverlayFactory.SetUpTypeMap();
 		New();
 	}
@@ -732,7 +740,7 @@ public class MainWindowController
 		}
 		
 		_isUnsaved = false;
-		LoadPresets();
+		LoadFilePresets();
 	}
 	
 	@FXML private void SaveAs()
@@ -866,9 +874,10 @@ public class MainWindowController
 		divisionSlider1.setValue(slider1);
 		divisionSlider2.setValue(slider2);
 		divisionSlider3.setValue(1);
+		cmbPresets.getSelectionModel().clearSelection();
 	}
 
-	private void LoadPresets()
+	private void LoadBasicPresets()
 	{
 		cmbPresets.getItems().add("Blank");
 		cmbPresets.getItems().add("Horizontal");
@@ -881,10 +890,8 @@ public class MainWindowController
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				String preset = (String)cmbPresets.getValue();
-				cmbPresets.setValue(null);
-
-				switch (preset)
+				if (StringExtensions.IsNullOrWhitespace(newValue)) return;
+				switch (newValue)
 				{
 					case "Blank": PresetBlank(); return;
 					case "Horizontal": PresetHorizontal(); return;
@@ -895,10 +902,65 @@ public class MainWindowController
 			}
 		});
 	}
+	
+	private void LoadFilePresets()
+	{
+		mnuPresets.getItems().clear();
+		
+		try
+		{
+			File directory = new File(new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + "\\Presets");
+			File[] files = directory.listFiles();
+			if (files == null) return;
+			for (File fileEntry : files)
+			{
+				if (fileEntry.getName().endsWith(".flag"))
+				{
+					String name = GetPresetFlagName(fileEntry);
+					if (!StringExtensions.IsNullOrWhitespace(name))
+					{
+						MenuItem item = new MenuItem(name);
+						item.addEventHandler(EventType.ROOT, (Event event) ->
+						{
+							LoadPreset(fileEntry);
+						});
+						mnuPresets.getItems().add(item);
+					}
+				}
+			}
+		}
+		catch (URISyntaxException ex)
+		{
+		}
+	}
 
-	private void LoadPreset(){}
+	private void LoadPreset(File file)
+	{
+		if (CheckUnsaved()) return;
+		LoadFlagFromFile(file);
+		SetTitle();
+	}
 
-	private void GetPresetFlagName(){}
+	private String GetPresetFlagName(File file)
+	{
+		try (FileReader fr = new FileReader(file); BufferedReader sr = new BufferedReader(fr))
+		{
+			String line;
+			while ((line = sr.readLine()) != null)
+			{
+				if (line.startsWith("name="))
+				{
+					return line.split("=")[1];
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			return "";
+		}
+		
+		return "";
+	}
 
 	private void GenerateRandomFlag(){}
 

@@ -58,11 +58,8 @@ public class Flag
 		ArrayList<TempOverlay> overlays = new ArrayList<>();
 
 		String line = "";
-		try
+		try (FileReader fr = new FileReader(file); BufferedReader sr = new BufferedReader(fr))
 		{
-			FileReader fr = new FileReader(file);
-			BufferedReader sr = new BufferedReader(fr);
-			
 			boolean isDivision = false;
 			int overlayIndex = -1;
 

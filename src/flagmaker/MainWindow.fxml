@@ -28,7 +28,7 @@
 						<MenuItem mnemonicParsing="true" onAction="#MenuExportBulkSvgClick" text="Bulk e_xport as SVG..." />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="true" text="_World flag presets">
+				<Menu fx:id="mnuPresets" mnemonicParsing="true" text="_World flag presets">
 					<items>
 						<MenuItem text="Todo" />
 					</items>
