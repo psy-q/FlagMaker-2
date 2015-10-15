@@ -35,6 +35,17 @@ public class OverlayFactory
 		_typeMap.put("saltire", "flagmaker.Overlays.OverlayTypes.OverlaySaltire");
 		_typeMap.put("triangle", "flagmaker.Overlays.OverlayTypes.OverlayTriangle");
 		
+		_typeMap.put("anchor", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAnchor");
+		_typeMap.put("angola", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAngola");
+		_typeMap.put("bolnisi cross", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBolnisiCross");
+		_typeMap.put("branches", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBranches");
+		_typeMap.put("cedar", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCedar");
+		_typeMap.put("chakra", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayChakra");
+		_typeMap.put("coronet", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCoronet");
+		_typeMap.put("cpusa", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCpusa");
+		_typeMap.put("crescent", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrescent");
+		_typeMap.put("crown", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrown");
+		_typeMap.put("eagle", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayEagle");
 		_typeMap.put("maple leaf", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMapleLeaf");
 		_typeMap.put("maltese cross", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMalteseCross");
 		_typeMap.put("laurel", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayLaurel");
@@ -71,6 +82,17 @@ public class OverlayFactory
 	{
 		return new Overlay[]
 		{
+			new OverlayAnchor(0, 0),
+			new OverlayAngola(0, 0),
+			new OverlayBolnisiCross(0, 0),
+			new OverlayBranches(0, 0),
+			new OverlayCedar(0, 0),
+			new OverlayChakra(0, 0),
+			new OverlayCoronet(0, 0),
+			new OverlayCpusa(0, 0),
+			new OverlayCrescent(0, 0),
+			new OverlayCrown(0, 0),
+			new OverlayEagle(0, 0),
 			new OverlayMapleLeaf(0, 0),
 			new OverlayMalteseCross(0, 0),
 			new OverlayLaurel(0, 0),
