@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.SubScene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Line;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -93,7 +97,6 @@ public class MainWindowController
 		LoadFilePresets();
 		OverlayFactory.SetUpTypeMap();
 		New();
-		
 	}
 
 	public void SetPrimaryStage(Stage stage)
@@ -598,18 +601,30 @@ public class MainWindowController
 		if (!_isLoading)
 		{
 			Flag().Draw(_pane);
-			//DrawTexture(_canvas);
+			DrawTexture(_pane);
 			DrawGrid();
-			//SetUsedColorPalettes();
 		}
 	}
 
 	private void DrawTexture(Pane canvas)
 	{
+		if (_texture == 0) return;
+		
+		double width = canvas.getWidth();
+		double height = canvas.getHeight();
+		InputStream is = MainWindowController.class.getResourceAsStream(String.format("Images/Texture/%d.png", _texture));
+		Image i = new Image(is, width, height, false, true);
+		Canvas c = new Canvas(width, height);
+		GraphicsContext gc = c.getGraphicsContext2D();
+		gc.drawImage(i, 0, 0);
+		canvas.getChildren().add(c);
 	}
 
+	@FXML
 	private void ToggleTexture()
 	{
+		_texture = (_texture + 1) % 6;
+		Draw();
 	}
 
 	// Export

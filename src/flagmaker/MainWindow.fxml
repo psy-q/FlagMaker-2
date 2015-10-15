@@ -85,7 +85,7 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button>
+				<Button onAction="#ToggleTexture">
 					<tooltip>
 						<Tooltip text="Toggle texture" />
 					</tooltip>
