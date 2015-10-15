@@ -74,12 +74,10 @@ public class Flag
 						name = line.split("=")[1];
 						break;
 					case "ratio":
-						String[] ratioStrings = line.split("=")[1].split(":");
-						ratio = new Ratio(Integer.parseInt(ratioStrings[1]), Integer.parseInt(ratioStrings[0]));
+						ratio = new Ratio(line.split("=")[1]);
 						break;
 					case "gridsize":
-						String[] data = line.split("=")[1].split(":");
-						gridRatio = new Ratio(Integer.parseInt(data[1]), Integer.parseInt(data[0]));
+						gridRatio = new Ratio(line.split("=")[1]);
 						break;
 					case "division":
 						isDivision = true;
@@ -101,16 +99,16 @@ public class Flag
 						}
 						break;
 					case "color1":
-						divisionColor1 = ParseColor(line.split("=")[1]);
+						divisionColor1 = ColorExtensions.ParseColor(line.split("=")[1]);
 						break;
 					case "color2":
-						divisionColor2 = ParseColor(line.split("=")[1]);
+						divisionColor2 = ColorExtensions.ParseColor(line.split("=")[1]);
 						break;
 					case "color3":
-						divisionColor3 = ParseColor(line.split("=")[1]);
+						divisionColor3 = ColorExtensions.ParseColor(line.split("=")[1]);
 						break;
 					case "color":
-						overlays.get(overlayIndex).Color = ParseColor(line.split("=")[1]);
+						overlays.get(overlayIndex).Color = ColorExtensions.ParseColor(line.split("=")[1]);
 						break;
 					case "size1":
 						if (isDivision)
@@ -161,7 +159,7 @@ public class Flag
 						overlays.get(overlayIndex).Path = new File(line.split("=")[1]);
 						break;
 					case "stroke":
-						overlays.get(overlayIndex).StrokeColor = ParseColor(line.split("=")[1]);
+						overlays.get(overlayIndex).StrokeColor = ColorExtensions.ParseColor(line.split("=")[1]);
 						break;
 				}
 			}
@@ -397,28 +395,6 @@ public class Flag
 				repeater.SetOverlay(Overlays[i]);
 			}
 		}
-	}
-	
-	private static Color ParseColor(String str)
-	{
-		double a = 1.0;
-		byte r, b, g;
-
-		if (str.length() == 8)
-		{
-			a = ((double)Byte.parseByte(str.substring(0, 2), 16)) / 255.0;
-			r = Byte.parseByte(str.substring(2, 2), 16);
-			g = Byte.parseByte(str.substring(4, 2), 16);
-			b = Byte.parseByte(str.substring(6, 2), 16);
-		}
-		else
-		{
-			r = Byte.parseByte(str.substring(0, 2), 16);
-			g = Byte.parseByte(str.substring(2, 2), 16);
-			b = Byte.parseByte(str.substring(4, 2), 16);
-		}
-
-		return Color.rgb(r, g, b, a);
 	}
 	
 	private static Double GetDoubleFromString(String data)

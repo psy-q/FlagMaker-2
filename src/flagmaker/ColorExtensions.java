@@ -21,6 +21,28 @@ public class ColorExtensions
 						? String.format(" fill=opacity=\"%s\"", c.getOpacity())
 						: "");
 	}
+	
+	public static Color ParseColor(String str)
+	{
+		double a = 1.0;
+		int r, b, g;
+
+		if (str.length() == 8)
+		{
+			a = ((double)Integer.parseInt(str.substring(0, 2), 16)) / 255.0;
+			r = Integer.parseInt(str.substring(2, 4), 16);
+			g = Integer.parseInt(str.substring(4, 6), 16);
+			b = Integer.parseInt(str.substring(6, 8), 16);
+		}
+		else
+		{
+			r = Integer.parseInt(str.substring(0, 2), 16);
+			g = Integer.parseInt(str.substring(2, 4), 16);
+			b = Integer.parseInt(str.substring(4, 6), 16);
+		}
+
+		return Color.rgb(r, g, b, a);
+	}
 
 	private static String IntToHex(int value)
 	{

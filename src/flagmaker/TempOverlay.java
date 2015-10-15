@@ -34,6 +34,8 @@ public class TempOverlay
 	{
 		Overlay overlay;
 
+		if (Path == null) return null;
+		
 		if (Path.exists())
 		{
 			overlay = Type.equals("flag")
