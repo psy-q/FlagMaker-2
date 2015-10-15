@@ -29,7 +29,7 @@ public class AttributeSlider extends HBox
 		_isDiscrete = isDiscrete && (value % 1 == 0);
 		chkDiscrete.setSelected(_isDiscrete);
 		chkDiscrete.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean oldval, Boolean newval) -> CheckChanged());
-		lblValue.setText(Double.toString(value));
+		lblValue.setText(String.format("%.3f", value));
 		slider.setMax(maximum);
 		slider.setSnapToTicks(_isDiscrete);
 		slider.setValue(value);
@@ -68,7 +68,7 @@ public class AttributeSlider extends HBox
 	{
 		lblValue.setText(_isDiscrete
 				? String.format("%d", (int)slider.getValue())
-				: String.format("%.2f", slider.getValue()));
+				: String.format("%.3f", slider.getValue()));
 		_parent.OverlaySliderChanged();
 	}
 	

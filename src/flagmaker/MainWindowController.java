@@ -20,6 +20,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -159,6 +160,8 @@ public class MainWindowController
 
 	private void DivisionSliderChanged()
 	{
+		if (_isLoading) return;
+		
 		divisionLabel1.setText(String.format("%d", divisionSlider1.valueProperty().intValue()));
 		divisionLabel2.setText(String.format("%d", divisionSlider2.valueProperty().intValue()));
 		divisionLabel3.setText(String.format("%d", divisionSlider3.valueProperty().intValue()));
@@ -390,10 +393,10 @@ public class MainWindowController
 		}
 
 		lstOverlays.getChildren().add(control);
-		SetOverlayMargins();
 
 		if (!isLoading)
 		{
+			SetOverlayMargins();
 			Draw();
 			SetAsUnsaved();
 		}
@@ -586,10 +589,13 @@ public class MainWindowController
 
 	public void Draw()
 	{
-		Flag().Draw(_pane);
-		//DrawTexture(_canvas);
-		DrawGrid();
-		//SetUsedColorPalettes();
+		if (!_isLoading)
+		{
+			Flag().Draw(_pane);
+			//DrawTexture(_canvas);
+			DrawGrid();
+			//SetUsedColorPalettes();
+		}
 	}
 
 	private void DrawTexture(Pane canvas)
@@ -777,11 +783,45 @@ public class MainWindowController
 		}
 		catch (Exception e)
 		{
-			new Alert(AlertType.ERROR, "Could not load file.", ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, String.format("Could not load file. Error on line:\n%s", e.getMessage()), ButtonType.OK).showAndWait();
 		}
 	}
 
-	private void LoadFlag(Flag flag){}
+	private void LoadFlag(Flag flag)
+	{
+		_isLoading = true;
+		txtRatioHeight.setText(Integer.toString(flag.Ratio.Height));
+		txtRatioWidth.setText(Integer.toString(flag.Ratio.Width));
+		
+		for (int i = 0; i < cmbRatio.getItems().size(); i++)
+		{
+			if (new Ratio(cmbRatio.getItems().get(i).toString()).Width != flag.GridSize.Width)
+				continue;
+			
+			cmbRatio.getSelectionModel().select(i);
+			break;
+		}
+		
+		_division = flag.Division;
+		SetDivisionVisibility();
+		
+		lstOverlays.getChildren().clear();
+		for (Overlay overlay : flag.Overlays)
+		{
+			OverlayAdd(lstOverlays.getChildren().size(), overlay, true);
+		}
+		
+		txtName.setText(flag.Name);
+		_isUnsaved = false;
+		_isLoading = false;
+		
+		Draw();
+		
+		for (Node n : lstOverlays.getChildren())
+		{
+			((OverlayControl)n).IsLoading = false;
+		}
+	}
 
 	// Presets
 	private void PresetBlank()

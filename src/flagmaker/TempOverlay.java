@@ -34,9 +34,7 @@ public class TempOverlay
 	{
 		Overlay overlay;
 
-		if (Path == null) return null;
-		
-		if (Path.exists())
+		if (Path != null && Path.exists())
 		{
 			overlay = Type.equals("flag")
 				? OverlayFactory.GetFlagInstance(Path, maximumX, maximumY)
