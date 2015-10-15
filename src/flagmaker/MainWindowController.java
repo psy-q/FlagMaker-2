@@ -729,7 +729,7 @@ public class MainWindowController
 		List<File> files = GetFlagFiles();
 		if (files == null || files.isEmpty()) return;
 		
-		Size dimensions = GetPngDimensions(true);
+		Size dimensions = GetPngDimensions(false);
 		if (dimensions.X == 0 || dimensions.Y == 0) return;
 		
 		File directory = GetBulkSaveDirectory(files.get(0).getParentFile());
