@@ -11,6 +11,13 @@ public class Ratio
 		Height = height;
 	}
 	
+	public Ratio (String asString)
+	{
+		String[] parts = asString.split(":");
+		Height = Integer.parseInt(parts[0]);
+		Width = Integer.parseInt(parts[1]);
+	}
+	
 	public String ToString()
 	{
 		return Height + ":" + Width;

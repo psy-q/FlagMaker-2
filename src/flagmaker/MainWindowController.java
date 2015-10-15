@@ -461,10 +461,7 @@ public class MainWindowController
 			return new Ratio(2, 3);
 		}
 
-		String[] parts = value.split(":");
-		int height = Integer.parseInt(parts[0]);
-		int width = Integer.parseInt(parts[1]);
-		return new Ratio(width, height);
+		return new Ratio(value);
 	}
 
 	private void SetRatio(int width, int height)
@@ -811,7 +808,9 @@ public class MainWindowController
 	{
 		for (int i = 0; i < cmbRatio.getItems().size(); i++)
 		{
-			if (((Ratio)cmbRatio.getItems().get(i)).Width >= 7)
+			Object item = cmbRatio.getItems().get(i);
+			Ratio ratio = new Ratio((String)item);
+			if (ratio.Width >= 7)
 			{
 				cmbRatio.getSelectionModel().select(i);
 				break;
