@@ -22,6 +22,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
 
 public class Flag
@@ -282,7 +283,9 @@ public class Flag
 	{
 		AnchorPane a = new AnchorPane();
 		Scene s = new Scene(a, size.X, size.Y);
+		Rectangle clip = new Rectangle(size.X, size.Y);
 		Pane p = new Pane();
+		p.setClip(clip);
 		s.setRoot(p);
 		
 		Draw(p);

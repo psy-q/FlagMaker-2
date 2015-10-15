@@ -96,6 +96,7 @@ public class MainWindowController
 		LoadFilePresets();
 		OverlayFactory.SetUpTypeMap();
 		New();
+		
 	}
 
 	public void SetPrimaryStage(Stage stage)
@@ -617,16 +618,7 @@ public class MainWindowController
 	// Export
 	public void MenuExportPngClick()
 	{
-		WritableImage snapshot = _pane.snapshot(new SnapshotParameters(), null);
-
-		File fileA = new File("export.png");
-		try
-		{
-			ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", fileA);
-		}
-		catch (Exception ex)
-		{
-		}
+		Flag().ExportToPng(new Size(300, 200), "export.png");
 	}
 
 	private Size GetPngDimensions(){return null;}
