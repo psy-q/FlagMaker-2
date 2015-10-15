@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -352,25 +354,30 @@ public class Flag
 		
 		for (Overlay overlay : Overlays)
 		{
-//			var flag = overlay as OverlayFlag;
-//			if (flag != null)
-//			{
-//				colors.AddRange(flag.Flag.ColorsUsed());
-//			}
-//			else if (!(overlay is OverlayRepeater || overlay is OverlayImage))
-//			{
+			if (overlay instanceof OverlayFlag)
+			{
+				colors.addAll(Arrays.asList(((OverlayFlag)overlay).Flag.ColorsUsed()));
+			}
+			else if (!(overlay instanceof OverlayRepeater || overlay instanceof OverlayImage))
+			{
 				colors.add(overlay.Color);
 
-//				var path = overlay as OverlayPath;
-//				if (path != null && path.StrokeColor.A > 0 && path.Attributes.Get(strings.Stroke).Value > 0)
-//				{
-//					colors.Add(path.StrokeColor);
-//				}
-//			}
+				if (overlay instanceof OverlayPath)
+				{
+					OverlayPath path = (OverlayPath)overlay;
+					
+					if (path.StrokeColor.getOpacity() > 0 && path.GetAttribute("Stroke").Value > 0)
+					{
+						colors.add(path.StrokeColor);
+					}
+				}
+			}
 		}
 		
+		Set<Color> hs = new HashSet<>();
+		hs.addAll(colors);
 		Color[] returnValue = new Color[]{};
-		return colors.toArray(returnValue);
+		return hs.toArray(returnValue);
 	}
 	
 	private void SetRepeaterOverlays()

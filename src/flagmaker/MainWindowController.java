@@ -422,9 +422,9 @@ public class MainWindowController
 
 	@FXML private void ShuffleColors()
 	{
-		boolean skip2 = (_division instanceof DivisionGrid)
-				&& (divisionSlider1.getValue() == 1)
-				&& (divisionSlider2.getValue() == 1);
+		boolean skip2 = _division instanceof DivisionGrid &&
+				divisionSlider1.getValue() == 1 &&
+				divisionSlider2.getValue() == 1;
 		Color[] colors = Flag().ColorsUsed();
 
 		divisionPicker1.setValue(GetNextColor(divisionPicker1.getValue(), colors));
