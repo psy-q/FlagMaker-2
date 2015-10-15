@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -78,5 +79,12 @@
 	
 	<ColorPicker fx:id="overlayPicker" style="-fx-color-label-visible: false;" />
 	<VBox fx:id="pnlSliders" />
-	<ColorPicker fx:id="strokePicker" style="-fx-color-label-visible: false;" />
+	<HBox fx:id="strokeBox" alignment="CENTER_LEFT">
+		<Label text="Stroke">
+			<padding>
+				<Insets right="10.0" />
+			</padding>
+		</Label>
+		<ColorPicker fx:id="strokePicker" style="-fx-color-label-visible: false;" />
+	</HBox>
 </fx:root>

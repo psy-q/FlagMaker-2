@@ -279,10 +279,7 @@
 									<padding>
 										<Insets right="10.0" />
 									</padding>
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Label> 
+								</Label>
 								<ComboBox fx:id="cmbPresets" />
 							</children>
 							<padding>

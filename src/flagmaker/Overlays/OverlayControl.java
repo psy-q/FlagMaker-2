@@ -7,6 +7,7 @@ import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -26,6 +28,7 @@ public class OverlayControl extends VBox
 	@FXML private Button btnOverlay;
 	@FXML private ColorPicker overlayPicker;
 	@FXML private VBox pnlSliders;
+	@FXML private HBox strokeBox;
 	@FXML private ColorPicker strokePicker;
 	@FXML private ImageView btnVisibility;
 	
@@ -51,6 +54,11 @@ public class OverlayControl extends VBox
 		_isFirst = true;
 		
 		overlayPicker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> OverlayColorChanged());
+		strokePicker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
+		{
+			((OverlayPath)_overlay).StrokeColor = strokePicker.getValue();
+			Draw();
+		});
 		
 		if (!IsLoading)
 		{
@@ -76,7 +84,7 @@ public class OverlayControl extends VBox
 			{
 				for (int i = sliderValues.length; i < _overlay.Attributes.length; i++)
 				{
-					sliderValues[i] = 0.0;
+					sliderValues = AddElement(sliderValues, 0.0);
 				}
 				
 				_overlay.SetValues(sliderValues);
@@ -114,11 +122,11 @@ public class OverlayControl extends VBox
 		
 		if (_overlay instanceof OverlayPath)
 		{
-			ControlExtensions.ShowControl(strokePicker);
+			ControlExtensions.ShowControl(strokeBox);
 		}
 		else
 		{
-			ControlExtensions.HideControl(strokePicker);
+			ControlExtensions.HideControl(strokeBox);
 		}
 		
 		_isFirst = false;
@@ -269,5 +277,12 @@ public class OverlayControl extends VBox
 		}
 		
 		return list;
+	}
+	
+	double[] AddElement(double[] original, double added)
+	{
+		double[] result = Arrays.copyOf(original, original.length +1);
+		result[original.length] = added;
+		return result;
 	}
 }
