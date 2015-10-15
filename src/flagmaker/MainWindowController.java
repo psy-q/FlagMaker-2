@@ -648,14 +648,15 @@ public class MainWindowController
 		List<File> files = GetFlagFiles();
 		if (files == null || files.isEmpty()) return;
 		
-		File directory = GetBulkSaveDirectory(files.get(0));
+		File directory = GetBulkSaveDirectory(files.get(0).getParentFile());
 		if (!directory.exists() || !directory.canWrite()) return;
 		
 		for (File file : files)
 		{
 			try
 			{
-				Flag.LoadFromFile(file).ExportToSvg(String.format("%s\\%s.svg", directory.getParent(), file.getName()));
+				Flag flag = Flag.LoadFromFile(file);
+				flag.ExportToPng(new Size(300, 200), String.format("%s\\%s.png", directory, StringExtensions.GetFilenameWithoutExtension(file.getName())));
 			}
 			catch (Exception ex)
 			{
@@ -666,7 +667,30 @@ public class MainWindowController
 		ExportFinished(error);
 	}
 	
-	@FXML private void MenuExportBulkSvgClick(){}
+	@FXML private void MenuExportBulkSvgClick()
+	{
+		boolean error = false;
+		List<File> files = GetFlagFiles();
+		if (files == null || files.isEmpty()) return;
+		
+		File directory = GetBulkSaveDirectory(files.get(0).getParentFile());
+		if (!directory.exists() || !directory.canWrite()) return;
+		
+		for (File file : files)
+		{
+			try
+			{
+				Flag flag = Flag.LoadFromFile(file);
+				flag.ExportToSvg(String.format("%s\\%s.svg", directory, StringExtensions.GetFilenameWithoutExtension(file.getName())));
+			}
+			catch (Exception ex)
+			{
+				error = true;
+			}
+		}
+		
+		ExportFinished(error);
+	}
 	
 	private List<File> GetFlagFiles()
 	{
