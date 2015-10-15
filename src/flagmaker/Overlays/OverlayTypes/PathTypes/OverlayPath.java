@@ -33,16 +33,16 @@ public class OverlayPath extends Overlay
 		StrokeColor = Color.WHITE;
 	}
 	
-	public OverlayPath(String name, String path, Vector pathSize, int maximumX, int maximumY)
+	public OverlayPath(String name, String path, Vector pathSize, double x, double y, double size, double rotation, double stroke, double strokeCurved, int maximumX, int maximumY)
 	{
 		super(new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, false),
-			new Attribute("Size", true, 1, true),
-			new Attribute("Rotation", true, 0, true),
-			new Attribute("Stroke", true, 0, true),
-			new Attribute("StrokeCurved", true, 0, true)
+			new Attribute("X", true, x, true),
+			new Attribute("Y", true, y, false),
+			new Attribute("Size", true, size, true),
+			new Attribute("Rotation", true, rotation, true),
+			new Attribute("Stroke", true, stroke, true),
+			new Attribute("StrokeCurved", true, strokeCurved, true)
 		}, maximumX, maximumY);
 		
 		_name = name;

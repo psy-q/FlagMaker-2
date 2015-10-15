@@ -6,6 +6,7 @@ import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import flagmaker.RandomFlag.RandomFlagFactory;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -596,7 +597,7 @@ public class MainWindowController
 	}
 
 	// Other
-	private void SetAsUnsaved()
+	public void SetAsUnsaved()
 	{
 		_isUnsaved = true;
 		SetTitle();
@@ -914,8 +915,10 @@ public class MainWindowController
 	private void LoadFlag(Flag flag)
 	{
 		_isLoading = true;
+		_ratio = flag.Ratio;
 		txtRatioHeight.setText(Integer.toString(flag.Ratio.Height));
 		txtRatioWidth.setText(Integer.toString(flag.Ratio.Width));
+		FillGridCombobox();
 		
 		for (int i = 0; i < cmbRatio.getItems().size(); i++)
 		{
@@ -1079,7 +1082,14 @@ public class MainWindowController
 	}
 
 	@FXML
-	private void GenerateRandomFlag(){}
+	private void GenerateRandomFlag()
+	{
+		if (CheckUnsaved()) return;
+		Flag f = new RandomFlagFactory().GenerateFlag();
+		LoadFlag(f);
+		_filename = "";
+		SetTitle();
+	}
 
 	private void OnClosing()
 	{

@@ -97,7 +97,7 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button>
+				<Button onAction="#GenerateRandomFlag">
 					<tooltip>
 						<Tooltip text="Random flag" />
 					</tooltip>

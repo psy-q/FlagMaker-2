@@ -167,12 +167,14 @@ public class OverlayControl extends VBox
 		if (_overlay == null) return;
 		_overlay.SetColor(overlayPicker.getValue());
 		Draw();
+		_mainWindow.SetAsUnsaved();
 	}
 	
 	public void OverlaySliderChanged()
 	{
 		_overlay.SetValues(GetAttributeSliderValues());
 		Draw();
+		_mainWindow.SetAsUnsaved();
 	}
 
 	@FXML private void OverlaySelect()
