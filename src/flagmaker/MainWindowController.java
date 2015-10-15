@@ -95,6 +95,7 @@ public class MainWindowController
 		SetColorsAndSliders();
 		LoadBasicPresets();
 		LoadFilePresets();
+		HookUpEvents();
 		OverlayFactory.SetUpTypeMap();
 		New();
 	}
@@ -135,6 +136,16 @@ public class MainWindowController
 		_gridSubScene.widthProperty().bind(Bindings.createDoubleBinding(() -> leftStack.getWidth() - 10, leftStack.widthProperty(), leftStack.heightProperty()));
 		_gridSubScene.heightProperty().bind(Bindings.createDoubleBinding(() -> (leftStack.getWidth() - 10) * _ratio.Height / _ratio.Width,
 				leftStack.widthProperty(), leftStack.heightProperty(), txtRatioHeight.textProperty(), txtRatioWidth.textProperty()));
+	}
+	
+	private void HookUpEvents()
+	{
+		txtName.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue.equals(oldValue))
+			{
+				SetAsUnsaved();
+			}
+		});
 	}
 
 	private void SetLanguages()
@@ -584,12 +595,7 @@ public class MainWindowController
 		}
 	}
 
-	// Other	
-	private void NameChanged()
-	{
-		SetAsUnsaved();
-	}
-
+	// Other
 	private void SetAsUnsaved()
 	{
 		_isUnsaved = true;
@@ -714,12 +720,14 @@ public class MainWindowController
 
 	public void MenuExportSvgClick()
 	{
-		try
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Export as SVG");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("SVG (*.svg)", "*.svg"));
+		File file = fileChooser.showSaveDialog(_stage);
+		
+		if (file != null)
 		{
-			Flag().ExportToSvg("export.svg");
-		}
-		catch (IOException ex)
-		{
+			Flag().ExportToSvg(file);
 		}
 	}
 
@@ -765,7 +773,7 @@ public class MainWindowController
 			try
 			{
 				Flag flag = Flag.LoadFromFile(file);
-				flag.ExportToSvg(String.format("%s\\%s.svg", directory, StringExtensions.GetFilenameWithoutExtension(file.getName())));
+				flag.ExportToSvg(new File(String.format("%s\\%s.svg", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
 			{
@@ -1070,6 +1078,7 @@ public class MainWindowController
 		return "";
 	}
 
+	@FXML
 	private void GenerateRandomFlag(){}
 
 	private void OnClosing()

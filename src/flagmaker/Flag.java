@@ -301,12 +301,12 @@ public class Flag
 		}
 	}
 	
-	public void ExportToSvg(String path) throws IOException
+	public void ExportToSvg(File file)
 	{
 		final int width = 600;
 		int height = (int)(((double)Ratio.Height / Ratio.Width) * width);
 		
-		try (FileWriter writer = new FileWriter(path, false); PrintWriter printLine = new PrintWriter(writer))
+		try (FileWriter writer = new FileWriter(file, false); PrintWriter printLine = new PrintWriter(writer))
 		{
 			printLine.printf("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n");
 			printLine.printf("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
@@ -333,6 +333,9 @@ public class Flag
 			}
 			
 			printLine.printf("</svg>\n");
+		}
+		catch(Exception e)
+		{
 		}
 	}
 	
