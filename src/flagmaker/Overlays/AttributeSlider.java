@@ -33,7 +33,13 @@ public class AttributeSlider extends HBox
 		slider.setMax(maximum);
 		slider.setSnapToTicks(_isDiscrete);
 		slider.setValue(value);
-		slider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> SliderValueChanged());
+		slider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval))
+			{
+				SliderValueChanged();
+			}
+		});
 		//txtValue.Visibility = Visibility.Hidden;
 	}
 	
