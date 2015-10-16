@@ -16,8 +16,13 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.beans.binding.Bindings;
@@ -1041,20 +1046,32 @@ public class MainWindowController
 			File directory = new File(new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + "\\Presets");
 			File[] files = directory.listFiles();
 			if (files == null) return;
+						
+			Map<String, File> presets = new HashMap<>();
+			
 			for (File fileEntry : files)
 			{
 				if (fileEntry.getName().endsWith(".flag"))
 				{
 					String name = GetPresetFlagName(fileEntry);
-					if (!StringExtensions.IsNullOrWhitespace(name))
+					
+					presets.put(name, fileEntry);
+				}
+			}
+			
+			SortedSet<String> names = new TreeSet<>(presets.keySet());
+						
+			for (String name : names)
+			{
+				File fileEntry = presets.get(name);
+				if (!StringExtensions.IsNullOrWhitespace(name))
+				{
+					MenuItem item = new MenuItem(name);
+					item.addEventHandler(EventType.ROOT, (Event event) ->
 					{
-						MenuItem item = new MenuItem(name);
-						item.addEventHandler(EventType.ROOT, (Event event) ->
-						{
-							LoadPreset(fileEntry);
-						});
-						mnuPresets.getItems().add(item);
-					}
+						LoadPreset(fileEntry);
+					});
+					mnuPresets.getItems().add(item);
 				}
 			}
 		}
