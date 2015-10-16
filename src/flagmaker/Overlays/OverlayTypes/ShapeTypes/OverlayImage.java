@@ -1,6 +1,15 @@
 package flagmaker.Overlays.OverlayTypes.ShapeTypes;
 
+import flagmaker.StringExtensions;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.Base64;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -36,13 +45,23 @@ public class OverlayImage extends OverlayShape
 		return _path;
 	}
 	
-	public void SetPath(File value)
+	public final void SetPath(File value)
 	{
 		_path = value;
 		
 		if (_path.exists())
 		{
-			_bitmap = new Image(_path.getPath());
+			try
+			{
+				URI uri = _path.toURI();
+				String path = uri.getPath();
+				URL url = uri.toURL();
+				_bitmap = new Image(url.toString());
+			}
+			catch (Exception e)
+			{
+				String s = e.getMessage();
+			}
 		}
 	}
 
@@ -78,12 +97,51 @@ public class OverlayImage extends OverlayShape
 	@Override
 	public void Draw(Pane canvas)
 	{
+		double width = canvas.getWidth() * GetAttribute("Width").Value / MaximumX;
+		double height = canvas.getHeight() * GetAttribute("Height").Value / MaximumY;
 		
+		if (height == 0)
+		{
+			double ratio = _bitmap.getHeight() / _bitmap.getWidth();
+			height = width * ratio;
+		}
+
+		Canvas c = new Canvas(width, height);
+		GraphicsContext gc = c.getGraphicsContext2D();
+		gc.drawImage(_bitmap, 0, 0, width, height);
+
+		c.setLayoutX((canvas.getWidth() * (GetAttribute("X").Value / MaximumX)) - width / 2);
+		c.setLayoutY((canvas.getHeight() * (GetAttribute("Y").Value / MaximumY)) - height / 2);
+		canvas.getChildren().add(c);
 	}
 
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		return "";
+		try
+		{
+			double imageWidth = width * GetAttribute("Width").Value / MaximumX;
+			double imageHeight = height * GetAttribute("Height").Value / MaximumY;
+			if (imageHeight <= 0)
+			{
+				double ratio = _bitmap.getHeight() / _bitmap.getWidth();
+				imageHeight = imageWidth * ratio;
+			}
+			
+			byte[] bytes = Base64.getEncoder().encode(Files.readAllBytes(_path.toPath()));
+			String base64String = new String(bytes);
+			
+			return String.format("<image x=\"%.3f\" y=\"%.3f\" width=\"%.3f\" height=\"%.3f\" preserveAspectRatio=\"none\" xlink:href=\"data:image/%s;base64,%s\" />",
+					width * (GetAttribute("X").Value / MaximumX) - imageWidth / 2,
+					height * (GetAttribute("Y").Value / MaximumY) - imageHeight / 2,
+					imageWidth,
+					imageHeight,
+					StringExtensions.GetFilenameExtension(_path.getPath()),
+					base64String);
+		}
+		catch (IOException ex)
+		{
+			return "";
+		}
 	}
 }

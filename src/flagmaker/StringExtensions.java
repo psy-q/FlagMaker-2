@@ -16,6 +16,16 @@ public class StringExtensions
 		}
 		return fname;
 	}
+	
+	public static String GetFilenameExtension(String fname)
+	{
+		int period = fname.lastIndexOf(".");
+		if (period > 0)
+		{
+			return fname.substring(period + 1, fname.length());
+		}
+		return "";
+	}
 
 	public static boolean IsNullOrWhitespace(String s)
 	{

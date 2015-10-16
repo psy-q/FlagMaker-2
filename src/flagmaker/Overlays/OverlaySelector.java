@@ -1,5 +1,9 @@
 package flagmaker.Overlays;
 
+import flagmaker.Flag;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +15,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class OverlaySelector extends VBox
@@ -71,13 +76,56 @@ public class OverlaySelector extends VBox
 			b.addEventHandler(ActionEvent.ACTION, event ->
 			{
 				String name = b.getTooltip().getText();
-				SetSelectedOverlay(OverlayFactory.GetInstanceByShortName(name, _defaultMaximumX, _defaultMaximumY));
+				switch (name)
+				{
+					case "flag":
+						LoadFlag();
+						break;
+					case "image":
+						LoadImage();
+						break;
+					default:
+						SetSelectedOverlay(OverlayFactory.GetInstanceByShortName(name, _defaultMaximumX, _defaultMaximumY));
+						break;
+				}
 			});
 			panel.getChildren().add(b);
 		}
 		
 		tab.setContent(panel);
 		tabs.getTabs().add(tab);
+	}
+
+	private void LoadFlag()
+	{
+		FileChooser fileChooserF = new FileChooser();
+		fileChooserF.setTitle("Open flag");
+		fileChooserF.getExtensionFilters().add(new FileChooser.ExtensionFilter("Flag files (*.flag)", "*.flag"));
+		File flagFile = fileChooserF.showOpenDialog(_stage);
+		if (flagFile != null)
+		{
+			Flag flag;
+			try
+			{
+				flag = Flag.LoadFromFile(flagFile);
+				SetSelectedOverlay(new OverlayFlag(flag, flagFile, _defaultMaximumX, _defaultMaximumY));
+			}
+			catch (Exception ex)
+			{
+			}
+		}
+	}
+
+	private void LoadImage()
+	{
+		FileChooser fileChooserI = new FileChooser();
+		fileChooserI.setTitle("Open image");
+		fileChooserI.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image files (*.png, *.jpg)", "*.png;*.jpg"));
+		File imageFile = fileChooserI.showOpenDialog(_stage);
+		if (imageFile != null)
+		{
+			SetSelectedOverlay(new OverlayImage(imageFile, _defaultMaximumX, _defaultMaximumY));
+		}
 	}
 
 	@FXML
