@@ -1,18 +1,26 @@
 package flagmaker.Overlays;
 
+import flagmaker.ControlExtensions;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
 public class AttributeSlider extends HBox
 {
 	@FXML private Label lblName;
 	@FXML private Label lblValue;
+	@FXML private TextField txtValue;
 	@FXML private Slider slider;
 	@FXML private CheckBox chkDiscrete;
 	
@@ -40,7 +48,15 @@ public class AttributeSlider extends HBox
 				SliderValueChanged();
 			}
 		});
-		//txtValue.Visibility = Visibility.Hidden;
+		ControlExtensions.HideControl(txtValue);
+		txtValue.setOnKeyPressed((KeyEvent event) -> TxtValueKeyDown(event));
+		txtValue.focusedProperty().addListener((arg0, oldval, newval) ->
+		{
+			if (oldval && !newval)
+			{
+				HideTxtValue();
+			}
+		});
 	}
 	
 	public int GetMaximum()
@@ -103,5 +119,112 @@ public class AttributeSlider extends HBox
 		{
 			String s = ex.getMessage();
 		}
+	}
+	
+	@FXML
+	private void Clicked()
+	{
+		ControlExtensions.HideControl(lblValue);
+		ControlExtensions.ShowControl(txtValue);
+		txtValue.setText(Double.toString(slider.getValue()));
+		txtValue.selectAll();
+		txtValue.requestFocus();
+	}
+	
+	@FXML
+	private void TxtValueKeyDown(KeyEvent e)
+	{
+		KeyCode k = e.getCode();
+		switch (k)
+		{
+			case ENTER:
+				HideTxtValue();
+				String text = txtValue.getText();
+				
+				if (text.contains("%"))
+				{
+					String stringVal = text.split("%")[0];
+					try
+					{
+						double percentValue = Double.parseDouble(stringVal);
+						SetValueByFraction(percentValue / 100);
+					}
+					catch (Exception ex)
+					{
+					}
+				}
+				else if (text.contains("/"))
+				{
+					String[] fraction = text.split("/");
+					if (fraction.length != 2)
+					{
+						return;
+					}
+
+					String numerator = fraction[0];
+					String denominator = fraction[1];
+					try
+					{
+						double num = Double.parseDouble(numerator);
+						double den = Double.parseDouble(denominator);
+						if (den <= 0) return;
+						SetValueByFraction(num / den);
+					}
+					catch (Exception ex)
+					{
+					}
+				}
+				else
+				{
+					try
+					{
+						double value = Double.parseDouble(text);
+						chkDiscrete.setSelected(value % 1 == 0);
+						slider.setValue(value);
+					}
+					catch (Exception ex)
+					{
+					}
+				}
+				break;
+			case ESCAPE:
+				HideTxtValue();
+				break;
+			case DOWN:
+			case UP:
+				try
+				{
+					double value = Double.parseDouble(txtValue.getText());
+					value = value + (k == KeyCode.UP ? 0.01 : -0.01);
+					
+					if (value < 0.0) value = 0.0;
+					if (value > slider.getMax()) value = slider.getMax();
+					
+					chkDiscrete.setSelected(false);
+					txtValue.setText(String.format("%.3f", value));
+					slider.setValue(value);
+				}
+				catch (Exception ex)
+				{
+				}
+				break;
+		}
+	}
+	
+	private void SetValueByFraction(double fraction)
+	{
+		if (fraction > 1) fraction = 1;
+		if (fraction < 0) fraction = 0;
+		double result = fraction * slider.getMax();
+		result = new BigDecimal(result).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+
+		chkDiscrete.setSelected(result % 1 == 0);
+		slider.setValue(result);
+	}
+	
+	private void HideTxtValue()
+	{
+		ControlExtensions.HideControl(txtValue);
+		ControlExtensions.ShowControl(lblValue);
 	}
 }
