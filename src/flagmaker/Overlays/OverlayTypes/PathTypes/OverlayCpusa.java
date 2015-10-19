@@ -9,7 +9,7 @@ public class OverlayCpusa extends OverlayPath
 	
 	public OverlayCpusa(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("cpusa", Path, PathSize);
+		super("cpusa", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

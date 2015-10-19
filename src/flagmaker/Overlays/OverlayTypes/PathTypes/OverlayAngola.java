@@ -9,7 +9,7 @@ public class OverlayAngola extends OverlayPath
 	
 	public OverlayAngola(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("angola", Path, PathSize);
+		super("angola", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

@@ -9,7 +9,7 @@ public class OverlayCrescent extends OverlayPath
 	
 	public OverlayCrescent(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("crescent", Path, PathSize);
+		super("crescent", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

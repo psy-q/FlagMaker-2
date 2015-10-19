@@ -9,7 +9,7 @@ public class OverlayCrown extends OverlayPath
 	
 	public OverlayCrown(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("crown", Path, PathSize);
+		super("crown", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

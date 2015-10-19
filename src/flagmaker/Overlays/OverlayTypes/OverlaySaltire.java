@@ -13,7 +13,7 @@ public class OverlaySaltire extends Overlay
 {
 	public OverlaySaltire(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("saltire", new Attribute[]
 		{
 			new Attribute("Thickness", true, 1, true)
 		}, maximumX, maximumY);
@@ -21,16 +21,10 @@ public class OverlaySaltire extends Overlay
 
 	public OverlaySaltire(Color color, double thickness, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("saltire", color, new Attribute[]
 		{
 			new Attribute("Thickness", true, thickness, true)
 		}, maximumX, maximumY);
-	}
-	
-	@Override
-	public String Name()
-	{
-		return "saltire";
 	}
 
 	@Override

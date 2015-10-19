@@ -9,7 +9,7 @@ public class OverlayEagle extends OverlayPath
 	
 	public OverlayEagle(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("eagle", Path, PathSize);
+		super("eagle", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

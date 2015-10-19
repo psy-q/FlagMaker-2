@@ -12,15 +12,14 @@ import javafx.scene.shape.StrokeLineJoin;
 
 public class OverlayPath extends Overlay
 {
-	private String _name;
 	private Vector _pathSize;
 	private String _path;
 	
 	public Color StrokeColor;
 	
-	public OverlayPath(int maximumX, int maximumY)
+	public OverlayPath(String name, int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super(name, new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -35,7 +34,7 @@ public class OverlayPath extends Overlay
 	
 	public OverlayPath(String name, String path, Vector pathSize, double x, double y, double size, double rotation, double stroke, double strokeCurved, int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super(name, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
@@ -45,23 +44,15 @@ public class OverlayPath extends Overlay
 			new Attribute("StrokeCurved", true, strokeCurved, true)
 		}, maximumX, maximumY);
 		
-		_name = name;
 		_path = path;
 		_pathSize = pathSize;
 		StrokeColor = Color.WHITE;
 	}
 	
-	protected void Constructor(String name, String path, Vector pathSize)
+	protected void Constructor(String path, Vector pathSize)
 	{
-		_name = name;
 		_path = path;
 		_pathSize = pathSize;
-	}
-	
-	@Override
-	public String Name()
-	{
-		return _name;
 	}
 
 	@Override

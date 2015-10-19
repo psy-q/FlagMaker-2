@@ -14,7 +14,7 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 {
 	public OverlayRepeaterRadial(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("repeater radial", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -26,7 +26,7 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 	
 	public OverlayRepeaterRadial(double x, double y, double radius, int count, double rotate, int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("repeater radial", new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
@@ -34,12 +34,6 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 			new Attribute("Count", true, count, true),
 			new Attribute("Rotate", true, rotate, true)
 		}, maximumX, maximumY);
-	}
-	
-	@Override
-	public String Name()
-	{
-		return "repeater radial";
 	}
 
 	@Override

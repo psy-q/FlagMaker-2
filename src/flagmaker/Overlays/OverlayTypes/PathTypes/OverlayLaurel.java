@@ -9,7 +9,7 @@ public class OverlayLaurel extends OverlayPath
 	
 	public OverlayLaurel(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("laurel", Path, PathSize);
+		super("laurel", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

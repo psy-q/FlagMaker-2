@@ -15,7 +15,7 @@ public class OverlayRays extends Overlay
 {
 	public OverlayRays(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("rays", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -26,19 +26,13 @@ public class OverlayRays extends Overlay
 	
 	public OverlayRays(Color color, double x, double y, double count, double rotation, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("rays", color, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
 			new Attribute("Count", true, count, true),
 			new Attribute("Rotation", true, rotation, true),
 		}, maximumX, maximumY);
-	}
-	
-	@Override
-	public String Name()
-	{
-		return "rays";
 	}
 
 	@Override

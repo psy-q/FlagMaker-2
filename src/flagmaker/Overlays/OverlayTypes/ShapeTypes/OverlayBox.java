@@ -10,18 +10,12 @@ public class OverlayBox extends OverlayShape
 {
 	public OverlayBox(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
+		super("box", maximumX, maximumY);
 	}
 
 	public OverlayBox(Color color, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
-		super(color, x, y, width, height, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "box";
+		super("box", color, x, y, width, height, maximumX, maximumY);
 	}
 
 	@Override

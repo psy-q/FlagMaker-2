@@ -6,29 +6,31 @@ import javafx.scene.shape.Shape;
 
 public abstract class Overlay
 {
+	public final String Name;
 	public boolean IsEnabled;
 	public Color Color;
 	public Attribute[] Attributes;
 	protected int MaximumX;
 	protected int MaximumY;
 	
-	public abstract String Name();
 	protected abstract Shape[] Thumbnail();
 	
 	public abstract void Draw(Pane canvas);
 	public abstract void SetValues(double[] values);
 	public abstract String ExportSvg(int width, int height);
 	
-	protected Overlay(Attribute[] attributes, int maximumX, int maximumY)
+	protected Overlay(String name, Attribute[] attributes, int maximumX, int maximumY)
 	{
+		Name = name;
 		IsEnabled = true;
 		Color = Color.BLACK;
 		Attributes = attributes;
 		SetMaximum(maximumX, maximumY);
 	}
 	
-	protected Overlay(Color color, Attribute[] attributes, int maximumX, int maximumY)
+	protected Overlay(String name, Color color, Attribute[] attributes, int maximumX, int maximumY)
 	{
+		Name = name;
 		IsEnabled = true;
 		Color = color;
 		Attributes = attributes;

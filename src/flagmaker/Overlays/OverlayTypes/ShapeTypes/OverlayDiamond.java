@@ -13,18 +13,12 @@ public class OverlayDiamond extends OverlayShape
 {
 	public OverlayDiamond(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
+		super("diamond", maximumX, maximumY);
 	}
 
 	public OverlayDiamond(Color color, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
-		super(color, x, y, width, height, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "diamond";
+		super("diamond", color, x, y, width, height, maximumX, maximumY);
 	}
 
 	@Override

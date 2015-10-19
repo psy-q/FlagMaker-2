@@ -7,9 +7,9 @@ public abstract class OverlayRepeater extends Overlay
 {	
 	protected Overlay Overlay;
 	
-	public OverlayRepeater(Attribute[] attributes, int maximumX, int maximumY)
+	public OverlayRepeater(String name, Attribute[] attributes, int maximumX, int maximumY)
 	{
-		super(attributes, maximumX, maximumY);
+		super(name, attributes, maximumX, maximumY);
 	}
 	
 	public void SetOverlay(Overlay overlay)

@@ -12,7 +12,7 @@ public class OverlayQuadrilateral extends Overlay
 {
 	public OverlayQuadrilateral(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("quadrilateral", new Attribute[]
 		{
 			new Attribute("X1", true, 1, true),
 			new Attribute("Y1", true, 1, false),
@@ -28,7 +28,7 @@ public class OverlayQuadrilateral extends Overlay
 	public OverlayQuadrilateral(Color color, double x1, double y1, double x2,
 			double y2, double x3, double y3, double x4, double y4, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("quadrilateral", color, new Attribute[]
 		{
 			new Attribute("X1", true, x1, true),
 			new Attribute("Y1", true, y1, false),
@@ -39,12 +39,6 @@ public class OverlayQuadrilateral extends Overlay
 			new Attribute("X4", true, x4, true),
 			new Attribute("Y4", true, y4, false)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "quadrilateral";
 	}
 
 	@Override

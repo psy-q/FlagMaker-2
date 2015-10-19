@@ -25,18 +25,18 @@ public class OverlayImage extends OverlayShape
 
 	public OverlayImage(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
+		super("image", maximumX, maximumY);
 	}
 	
 	public OverlayImage(File path, int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
+		super("image", maximumX, maximumY);
 		SetPath(path);
 	}
 	
 	public OverlayImage(File path, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
-		super(x, y, width, height, maximumX, maximumY);
+		super("image", x, y, width, height, maximumX, maximumY);
 		SetPath(path);
 	}
 	
@@ -63,12 +63,6 @@ public class OverlayImage extends OverlayShape
 				String s = e.getMessage();
 			}
 		}
-	}
-
-	@Override
-	public String Name()
-	{
-		return "image";
 	}
 
 	@Override

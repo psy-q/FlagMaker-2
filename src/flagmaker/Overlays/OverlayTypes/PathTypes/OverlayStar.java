@@ -9,7 +9,7 @@ public class OverlayStar extends OverlayPath
 	
 	public OverlayStar(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("star", Path, PathSize);
+		super("star", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

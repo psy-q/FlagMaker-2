@@ -9,7 +9,7 @@ public class OverlayMalteseCross extends OverlayPath
 	
 	public OverlayMalteseCross(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("maltese cross", Path, PathSize);
+		super("maltese cross", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

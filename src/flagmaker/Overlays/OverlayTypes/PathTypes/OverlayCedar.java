@@ -9,7 +9,7 @@ public class OverlayCedar extends OverlayPath
 	
 	public OverlayCedar(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("cedar", Path, PathSize);
+		super("cedar", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

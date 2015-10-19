@@ -13,7 +13,7 @@ public class OverlayPall extends Overlay
 {
 	public OverlayPall(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("pall", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Width", true, 1, true)
@@ -22,17 +22,11 @@ public class OverlayPall extends Overlay
 	
 	public OverlayPall(Color color, double x, double width, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("pall", color, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Width", true, width, true)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "pall";
 	}
 
 	@Override

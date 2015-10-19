@@ -15,7 +15,7 @@ public class OverlayBorder extends Overlay
 {
 	public OverlayBorder(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("border", new Attribute[]
 		{
 			new Attribute("Thickness", true, 1, true)
 		}, maximumX, maximumY);
@@ -23,16 +23,10 @@ public class OverlayBorder extends Overlay
 
 	public OverlayBorder(Color color, double thickness, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("border", color, new Attribute[]
 		{
-			new Attribute("Thickness", true, 1, true)
+			new Attribute("Thickness", true, thickness, true)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "border";
 	}
 
 	@Override

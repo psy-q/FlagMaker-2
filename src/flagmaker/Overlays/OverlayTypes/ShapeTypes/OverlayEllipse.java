@@ -4,25 +4,18 @@ import flagmaker.ColorExtensions;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class OverlayEllipse extends OverlayShape
 {
 	public OverlayEllipse(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
+		super("ellipse", maximumX, maximumY);
 	}
 
 	public OverlayEllipse(Color color, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
-		super(color, x, y, width, height, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "ellipse";
+		super("ellipse", color, x, y, width, height, maximumX, maximumY);
 	}
 
 	@Override

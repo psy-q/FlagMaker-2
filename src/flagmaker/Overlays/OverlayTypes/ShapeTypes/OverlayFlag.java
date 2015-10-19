@@ -21,28 +21,22 @@ public class OverlayFlag extends OverlayShape
 
 	public OverlayFlag(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
+		super("flag", maximumX, maximumY);
 		Flag = new Flag("flag", new Ratio(2, 3), new Ratio(2, 3), new DivisionGrid(Color.WHITE, Color.BLACK, 2, 2), new Overlay[]{});
 	}
 	
 	public OverlayFlag(Flag flag, File path, int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
+		super("flag", maximumX, maximumY);
 		Flag = flag;
 		Path = path;
 	}
 	
 	public OverlayFlag(Flag flag, File path, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
-		super(x, y, width, height, maximumX, maximumY);
+		super("flag", x, y, width, height, maximumX, maximumY);
 		Flag = flag;
 		Path = path;
-	}
-
-	@Override
-	public String Name()
-	{
-		return "flag";
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class OverlayHalfEllipse extends Overlay
 {
 	public OverlayHalfEllipse(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("half ellipse", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -28,7 +28,7 @@ public class OverlayHalfEllipse extends Overlay
 
 	public OverlayHalfEllipse(Color color, double x, double y, double width, double height, double rotation, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("half ellipse", color, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
@@ -36,12 +36,6 @@ public class OverlayHalfEllipse extends Overlay
 			new Attribute("Height", true, height, false),
 			new Attribute("Rotation", true, rotation, true)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "half ellipse";
 	}
 
 	@Override

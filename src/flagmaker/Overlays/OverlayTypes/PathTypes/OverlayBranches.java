@@ -9,7 +9,7 @@ public class OverlayBranches extends OverlayPath
 	
 	public OverlayBranches(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("branches", Path, PathSize);
+		super("branches", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

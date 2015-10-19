@@ -12,7 +12,7 @@ public class OverlayTriangle extends Overlay
 {
 	public OverlayTriangle(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("triangle", new Attribute[]
 		{
 			new Attribute("X1", true, 1, true),
 			new Attribute("Y1", true, 1, false),
@@ -26,7 +26,7 @@ public class OverlayTriangle extends Overlay
 	public OverlayTriangle(Color color, double x1, double y1, double x2,
 			double y2, double x3, double y3, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("triangle", color, new Attribute[]
 		{
 			new Attribute("X1", true, x1, true),
 			new Attribute("Y1", true, y1, false),
@@ -35,12 +35,6 @@ public class OverlayTriangle extends Overlay
 			new Attribute("X3", true, x3, true),
 			new Attribute("Y3", true, y3, false)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "triangle";
 	}
 
 	@Override

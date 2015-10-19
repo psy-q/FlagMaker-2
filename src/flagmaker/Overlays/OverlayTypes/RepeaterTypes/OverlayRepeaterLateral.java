@@ -13,7 +13,7 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 {
 	public OverlayRepeaterLateral(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("repeater lateral", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -26,7 +26,7 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 	
 	public OverlayRepeaterLateral(double x, double y, double width, double height, int countX, int countY, int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("repeater lateral", new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
@@ -35,12 +35,6 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 			new Attribute("CountX", true, countX, true),
 			new Attribute("CountY", true, countY, false)
 		}, maximumX, maximumY);
-	}
-	
-	@Override
-	public String Name()
-	{
-		return "repeater lateral";
 	}
 
 	@Override

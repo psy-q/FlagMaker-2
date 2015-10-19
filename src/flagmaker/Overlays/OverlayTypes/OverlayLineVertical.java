@@ -12,7 +12,7 @@ public class OverlayLineVertical extends Overlay
 {
 	public OverlayLineVertical(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("line vertical", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Thickness", true, 0.5, false)
@@ -21,17 +21,11 @@ public class OverlayLineVertical extends Overlay
 
 	public OverlayLineVertical(Color color, double x, double thickness, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("line vertical", color, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Thickness", true, thickness, false)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "line vertical";
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class OverlayCross extends Overlay
 {
 	public OverlayCross(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("cross", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -23,18 +23,12 @@ public class OverlayCross extends Overlay
 
 	public OverlayCross(Color color, double thickness, double x, double y, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("cross", color, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
 			new Attribute("Thickness", true, thickness, true)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "cross";
 	}
 
 	@Override

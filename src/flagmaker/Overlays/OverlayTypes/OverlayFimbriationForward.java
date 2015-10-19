@@ -16,7 +16,7 @@ public class OverlayFimbriationForward extends Overlay
 {
 	public OverlayFimbriationForward(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("fimbriation forward", new Attribute[]
 		{
 			new Attribute("Thickness", true, 1, true)
 		}, maximumX, maximumY);
@@ -24,16 +24,10 @@ public class OverlayFimbriationForward extends Overlay
 
 	public OverlayFimbriationForward(Color color, double thickness, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("fimbriation forward", color, new Attribute[]
 		{
 			new Attribute("Thickness", true, thickness, true)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "fimbriation forward";
 	}
 
 	@Override

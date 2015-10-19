@@ -9,7 +9,7 @@ public class OverlayBolnisiCross extends OverlayPath
 	
 	public OverlayBolnisiCross(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("bolnisi cross", Path, PathSize);
+		super("bolnisi cross", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

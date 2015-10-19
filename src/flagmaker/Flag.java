@@ -250,14 +250,14 @@ public class Flag
 			for (Overlay overlay : Overlays)
 			{
 				printLine.printf("\noverlay\n");
-				printLine.printf("type=%s\n", overlay.Name());
+				printLine.printf("type=%s\n", overlay.Name);
 				
-				if (overlay.Name().equals("flag"))
+				if (overlay.Name.equals("flag"))
 				{
 					printLine.printf("path=%s\n", ((OverlayFlag)overlay).Path);
 				}
 				
-				if (overlay.Name().equals("image"))
+				if (overlay.Name.equals("image"))
 				{
 					printLine.printf("path=%s\n", ((OverlayImage)overlay).GetPath());
 				}

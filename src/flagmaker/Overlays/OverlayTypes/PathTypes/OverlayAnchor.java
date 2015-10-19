@@ -9,7 +9,7 @@ public class OverlayAnchor extends OverlayPath
 	
 	public OverlayAnchor(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("anchor", Path, PathSize);
+		super("anchor", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

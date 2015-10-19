@@ -13,7 +13,7 @@ public class OverlayCheckerboard extends Overlay
 {
 	public OverlayCheckerboard(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("checkerboard", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -26,7 +26,7 @@ public class OverlayCheckerboard extends Overlay
 
 	public OverlayCheckerboard(Color color, double x, double y, double width, double height, double countX, double countY, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("checkerboard", color, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
@@ -35,12 +35,6 @@ public class OverlayCheckerboard extends Overlay
 			new Attribute("CountX", true, countX, true),
 			new Attribute("CountY", true, countY, true)
 		}, maximumX, maximumY);
-	}
-
-	@Override
-	public String Name()
-	{
-		return "checkerboard";
 	}
 
 	@Override

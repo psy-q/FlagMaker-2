@@ -9,7 +9,7 @@ public class OverlayMapleLeaf extends OverlayPath
 	
 	public OverlayMapleLeaf(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("maple leaf", Path, PathSize);
+		super("maple leaf", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

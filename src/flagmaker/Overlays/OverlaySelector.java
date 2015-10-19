@@ -74,7 +74,7 @@ public class OverlaySelector extends VBox
 			b.setPrefHeight(30);
 			b.setPrefWidth(30);
 			b.graphicProperty().set(overlay.PaneThumbnail());
-			b.tooltipProperty().set(new Tooltip(overlay.Name()));
+			b.tooltipProperty().set(new Tooltip(overlay.Name));
 			b.addEventHandler(ActionEvent.ACTION, event ->
 			{
 				String name = b.getTooltip().getText();

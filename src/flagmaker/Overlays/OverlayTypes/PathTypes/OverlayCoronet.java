@@ -9,7 +9,7 @@ public class OverlayCoronet extends OverlayPath
 	
 	public OverlayCoronet(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("coronet", Path, PathSize);
+		super("coronet", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

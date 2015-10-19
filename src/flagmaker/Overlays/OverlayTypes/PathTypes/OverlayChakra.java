@@ -9,7 +9,7 @@ public class OverlayChakra extends OverlayPath
 	
 	public OverlayChakra(int maximumX, int maximumY)
 	{
-		super(maximumX, maximumY);
-		Constructor("chakra", Path, PathSize);
+		super("chakra", maximumX, maximumY);
+		Constructor(Path, PathSize);
 	}	
 }

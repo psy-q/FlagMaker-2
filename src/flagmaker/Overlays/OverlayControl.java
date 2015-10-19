@@ -86,7 +86,7 @@ public class OverlayControl extends VBox
 	{
 		_overlay = value;
 		btnOverlay.graphicProperty().set(_overlay.PaneThumbnail());
-		btnOverlay.tooltipProperty().set(new Tooltip(_overlay.Name()));
+		btnOverlay.tooltipProperty().set(new Tooltip(_overlay.Name));
 		
 		if (!_isFirst && !IsLoading)
 		{

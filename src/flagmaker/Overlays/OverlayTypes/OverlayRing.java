@@ -13,7 +13,7 @@ public class OverlayRing extends Overlay
 {
 	public OverlayRing(int maximumX, int maximumY)
 	{
-		super(new Attribute[]
+		super("ring", new Attribute[]
 		{
 			new Attribute("X", true, 1, true),
 			new Attribute("Y", true, 1, false),
@@ -25,7 +25,7 @@ public class OverlayRing extends Overlay
 
 	public OverlayRing(Color color, double x, double y, double width, double height, double size, int maximumX, int maximumY)
 	{
-		super(color, new Attribute[]
+		super("ring", color, new Attribute[]
 		{
 			new Attribute("X", true, x, true),
 			new Attribute("Y", true, y, false),
@@ -33,12 +33,6 @@ public class OverlayRing extends Overlay
 			new Attribute("Height", true, height, false),
 			new Attribute("Size", true, size, true)
 		}, maximumX, maximumY);
-	}
-	
-	@Override
-	public String Name()
-	{
-		return "ring";
 	}
 
 	@Override
