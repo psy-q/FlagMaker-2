@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import javafx.application.Platform;
@@ -86,6 +85,8 @@ public class MainWindowController
 	
 	@FXML private Label lblDivisions;
 
+	private LocalizationHandler _lh;
+	
 	private Stage _stage;
 	private SubScene _subScene;
 	private Pane _pane;
@@ -130,9 +131,8 @@ public class MainWindowController
 	{
 		LoadLanguageMenu();
 		
-		Locale currentLocale = Locale.getDefault();
-		if (currentLocale == null) currentLocale = Locale.US;
-		SetWindowStrings(ResourceBundle.getBundle("bundles.strings", currentLocale));
+		_lh = new LocalizationHandler();
+		SetWindowStrings();
 	}
 	
 	private void LoadLanguageMenu()
@@ -154,21 +154,21 @@ public class MainWindowController
 		}
 	}
 
-	private void SetWindowStrings(ResourceBundle bundle)
+	private void SetWindowStrings()
 	{
-		mnuFile.setText(bundle.getString("File"));
-		mnuNew.setText(bundle.getString("New"));
-		mnuOpen.setText(bundle.getString("Open"));
-		mnuSave.setText(bundle.getString("SaveMenu"));
-		mnuSaveAs.setText(bundle.getString("SaveAs"));
-		mnuExportPng.setText(bundle.getString("ExportAsPngMenu"));
-		mnuExportSvg.setText(bundle.getString("ExportAsSvgMenu"));
-		mnuBulkExportPng.setText(bundle.getString("ExportBulkAsPng"));
-		mnuBulkExportSvg.setText(bundle.getString("ExportBulkAsSvg"));
-		mnuPresets.setText(bundle.getString("WorldFlagPresets"));
-		mnuLanguages.setText(bundle.getString("Language"));
+		mnuFile.setText(_lh.Get("File"));
+		mnuNew.setText(_lh.Get("New"));
+		mnuOpen.setText(_lh.Get("Open"));
+		mnuSave.setText(_lh.Get("SaveMenu"));
+		mnuSaveAs.setText(_lh.Get("SaveAs"));
+		mnuExportPng.setText(_lh.Get("ExportAsPngMenu"));
+		mnuExportSvg.setText(_lh.Get("ExportAsSvgMenu"));
+		mnuBulkExportPng.setText(_lh.Get("ExportBulkAsPng"));
+		mnuBulkExportSvg.setText(_lh.Get("ExportBulkAsSvg"));
+		mnuPresets.setText(_lh.Get("WorldFlagPresets"));
+		mnuLanguages.setText(_lh.Get("Language"));
 		
-		lblDivisions.setText(bundle.getString("Division"));
+		lblDivisions.setText(_lh.Get("Division"));
 	}
 	
 	private void AddWorkspace()
