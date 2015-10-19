@@ -34,17 +34,17 @@
 		</MenuBar>
 		<ToolBar prefHeight="40.0">
 			<items>
-				<Label>Ratio:</Label>
+				<Label fx:id="lblRatio" />
 				<TextField fx:id="txtRatioHeight" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="2" />
 				<Label>:</Label>
 				<TextField fx:id="txtRatioWidth" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="3" />
 				
-				<Label>Grid size:</Label>
+				<Label fx:id="lblGridSize" />
 				<ComboBox fx:id="cmbRatio" prefWidth="150.0" />
 				
 				<ToggleButton onAction="#GridOnChanged">
 					<tooltip>
-						<Tooltip text="Show/hide grid" />
+						<Tooltip fx:id="ttpShowGrid" />
 					</tooltip>
 					<graphic>
 						<Pane>
@@ -67,7 +67,7 @@
 				
 				<Button onAction="#ShuffleColors">
 					<tooltip>
-						<Tooltip text="Rotate colors" />
+						<Tooltip fx:id="ttpShuffleColors" />
 					</tooltip>
 					<graphic>
 						<ImageView fitHeight="32.0" fitWidth="32.0">
@@ -79,7 +79,7 @@
 				</Button>
 				<Button onAction="#ToggleTexture">
 					<tooltip>
-						<Tooltip text="Toggle texture" />
+						<Tooltip fx:id="ttpToggleTexture" />
 					</tooltip>
 					<graphic>
 						<ImageView fitHeight="32.0" fitWidth="51.0">
@@ -91,7 +91,7 @@
 				</Button>
 				<Button onAction="#GenerateRandomFlag">
 					<tooltip>
-						<Tooltip text="Random flag" />
+						<Tooltip fx:id="ttpRandomFlag" />
 					</tooltip>
 					<graphic>
 						<ImageView fitHeight="32.0" fitWidth="32.0">
@@ -117,7 +117,7 @@
 							<children>
 								<Button onAction="#DivisionGridClick">
 									<tooltip>
-										<Tooltip text="Grid" />
+										<Tooltip fx:id="ttpDivisionGrid" />
 									</tooltip>
 									<graphic>
 										<Pane>
@@ -168,7 +168,7 @@
 								</Button>
 								<Button onAction="#DivisionFessesClick">
 									<tooltip>
-										<Tooltip text="Fesses" />
+										<Tooltip fx:id="ttpDivisionFesses" />
 									</tooltip>
 									<graphic>
 										<Pane>
@@ -186,7 +186,7 @@
 								</Button>
 								<Button onAction="#DivisionPalesClick">
 									<tooltip>
-										<Tooltip text="Pales" />
+										<Tooltip fx:id="ttpDivisionPales" />
 									</tooltip>
 									<graphic>
 										<Pane>
@@ -204,7 +204,7 @@
 								</Button>
 								<Button onAction="#DivisionBendsForwardClick">
 									<tooltip>
-										<Tooltip text="Bends forward" />
+										<Tooltip fx:id="ttpDivisionBendsForward" />
 									</tooltip>
 									<graphic>
 										<Pane>
@@ -224,7 +224,7 @@
 								</Button>
 								<Button onAction="#DivisionBendsBackwardClick">
 									<tooltip>
-										<Tooltip text="Bends backward" />
+										<Tooltip fx:id="ttpDivisionBendsBackward" />
 									</tooltip>
 									<graphic>
 										<Pane>
@@ -244,7 +244,7 @@
 								</Button>
 								<Button onAction="#DivisionXClick">
 									<tooltip>
-										<Tooltip text="Bends both" />
+										<Tooltip fx:id="ttpDivisionBendsBoth" />
 									</tooltip>
 									<graphic>
 										<Pane>
@@ -267,7 +267,7 @@
 						
 						<HBox alignment="CENTER_LEFT">
 							<children>
-								<Label text="Presets" HBox.hgrow="NEVER">
+								<Label fx:id="lblPresets" HBox.hgrow="NEVER">
 									<padding>
 										<Insets right="10.0" />
 									</padding>
@@ -289,7 +289,7 @@
 								<Insets bottom="5.0" top="5.0" />
 							</padding>
 						</HBox>
-												
+						
 						<HBox>
 							<children>
 								<Label fx:id="divisionLabel1" text="1" HBox.hgrow="NEVER" /> 
@@ -310,13 +310,13 @@
 						</HBox>
 						<HBox alignment="CENTER_LEFT">
 							<children>
-								<Label style="-fx-font-weight: bold; -fx-font-size: 24;" text="Overlays" />
+								<Label fx:id="lblOverlays" style="-fx-font-weight: bold; -fx-font-size: 24;" />
 								<Button onAction="#OverlayAdd">
 									<HBox.margin>
 										<Insets left="10.0" />
 									</HBox.margin>
 									<tooltip>
-										<Tooltip text="Add new" />
+										<Tooltip fx:id="ttpOverlayAddNew" />
 									</tooltip>
 									<graphic>
 										<ImageView fitHeight="32.0" fitWidth="32.0">

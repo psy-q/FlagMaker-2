@@ -62,9 +62,25 @@ public class MainWindowController
 	@FXML private Menu mnuPresets;
 	@FXML private Menu mnuLanguages;
 	
+	@FXML private Label lblRatio;
+	@FXML private Label lblGridSize;
 	@FXML private TextField txtRatioHeight;
 	@FXML private TextField txtRatioWidth;
 	@FXML private ComboBox cmbRatio;
+	
+	@FXML private Tooltip ttpShowGrid;
+	@FXML private Tooltip ttpShuffleColors;
+	@FXML private Tooltip ttpToggleTexture;
+	@FXML private Tooltip ttpRandomFlag;
+	
+	@FXML private Tooltip ttpDivisionGrid;
+	@FXML private Tooltip ttpDivisionFesses;
+	@FXML private Tooltip ttpDivisionPales;
+	@FXML private Tooltip ttpDivisionBendsForward;
+	@FXML private Tooltip ttpDivisionBendsBackward;
+	@FXML private Tooltip ttpDivisionBendsBoth;
+	@FXML private Label lblPresets;
+	@FXML private Label lblOverlays;
 
 	@FXML private AnchorPane leftAnchor;
 	@FXML private StackPane leftStack;
@@ -82,6 +98,7 @@ public class MainWindowController
 	@FXML private ComboBox cmbPresets;
 
 	@FXML private VBox lstOverlays;
+	@FXML private Tooltip ttpOverlayAddNew;
 	
 	@FXML private Label lblDivisions;
 
@@ -112,7 +129,7 @@ public class MainWindowController
 		LoadLocalization();
 		AddWorkspace();
 
-		_headerText = String.format(" - FlagMaker %s", getClass().getPackage().getImplementationVersion());
+		_headerText = String.format(" - %s", GetNameWithVersion());
 
 		SetColorsAndSliders();
 		LoadBasicPresets();
@@ -168,7 +185,25 @@ public class MainWindowController
 		mnuPresets.setText(_lh.Get("WorldFlagPresets"));
 		mnuLanguages.setText(_lh.Get("Language"));
 		
+		lblRatio.setText(_lh.Get("Ratio"));
+		lblGridSize.setText(_lh.Get("GridSize"));
+		ttpShowGrid.setText(_lh.Get("ShowGrid"));
+		ttpShuffleColors.setText(_lh.Get("ShuffleColors"));
+		ttpToggleTexture.setText(_lh.Get("ToggleTexture"));
+		ttpRandomFlag.setText(_lh.Get("GenerateRandomFlag"));
+		
 		lblDivisions.setText(_lh.Get("Division"));
+		ttpDivisionGrid.setText(_lh.Get("DivisionGrid"));
+		ttpDivisionFesses.setText(_lh.Get("DivisionFesses"));
+		ttpDivisionPales.setText(_lh.Get("DivisionPales"));
+		ttpDivisionBendsForward.setText(_lh.Get("DivisionBendsForward"));
+		ttpDivisionBendsBackward.setText(_lh.Get("DivisionBendsBackward"));
+		ttpDivisionBendsBoth.setText(_lh.Get("DivisionBendsBoth"));
+		lblPresets.setText(_lh.Get("DivisionPresets"));
+				
+		lblOverlays.setText(_lh.Get("Overlays"));
+		ttpOverlayAddNew.setText(_lh.Get("OverlayAdd"));
+		
 	}
 	
 	private void AddWorkspace()
@@ -220,7 +255,7 @@ public class MainWindowController
 	{
 		String title = String.format("%s%s%s",
 				StringExtensions.IsNullOrWhitespace(_filename)
-						? "Untitled"
+						? _lh.Get("Untitled")
 						: StringExtensions.GetFilenameWithoutExtension(_filename),
 				_isUnsaved ? "*" : "",
 				_headerText);
@@ -704,7 +739,7 @@ public class MainWindowController
 		if (dimensions.X == 0 || dimensions.Y == 0) return;
 		
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Export as PNG");
+		fileChooser.setTitle(_lh.Get("ExportAsPng"));
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("PNG (*.png)", "*.png"));
 		File file = fileChooser.showSaveDialog(_stage);
 		
@@ -717,9 +752,9 @@ public class MainWindowController
 	private Size GetPngDimensions(boolean constrain)
 	{
 		Dialog<Size> dialog = new Dialog<>();
-		dialog.setTitle("Export as PNG");
-		dialog.setHeaderText("Enter desired PNG size, in pixels");
-		ButtonType saveButtonType = new ButtonType("Save", ButtonData.OK_DONE);
+		dialog.setTitle(_lh.Get("ExportAsPng"));
+		dialog.setHeaderText("Enter desired PNG size, in pixels"); // TODO
+		ButtonType saveButtonType = new ButtonType(_lh.Get("Save"), ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 		
 		// Create the username and password labels and fields.
@@ -729,13 +764,13 @@ public class MainWindowController
 		grid.setPadding(new Insets(20, 150, 10, 10));
 
 		TextField width = new TextField();
-		width.setPromptText("Width");
+		width.setPromptText(_lh.Get("Width"));
 		TextField height = new TextField();
-		height.setPromptText("Height");
+		height.setPromptText(_lh.Get("Height"));
 
-		grid.add(new Label("Width:"), 0, 0);
+		grid.add(new Label(_lh.Get("Width")), 0, 0);
 		grid.add(width, 1, 0);
-		grid.add(new Label("Height:"), 0, 1);
+		grid.add(new Label(_lh.Get("Height")), 0, 1);
 		grid.add(height, 1, 1);
 
 		// Enable/Disable login button depending on whether a username was entered.
@@ -785,7 +820,7 @@ public class MainWindowController
 	public void MenuExportSvgClick()
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Export as SVG");
+		fileChooser.setTitle(_lh.Get("ExportAsSVG"));
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("SVG (*.svg)", "*.svg"));
 		File file = fileChooser.showSaveDialog(_stage);
 		
@@ -851,8 +886,8 @@ public class MainWindowController
 	private List<File> GetFlagFiles()
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Select files");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag files", "*.flag"));
+		fileChooser.setTitle(_lh.Get("SelectFiles"));
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(_lh.Get("FlagFileFilter"), "*.flag"));
 		return fileChooser.showOpenMultipleDialog(_stage);
 	}
 	
@@ -860,7 +895,7 @@ public class MainWindowController
 	{
 		DirectoryChooser dc = new DirectoryChooser();
 		dc.setInitialDirectory(defaultDirectory);
-		dc.setTitle("Select directory to save in");
+		dc.setTitle(_lh.Get("SelectDirectory"));
 		return dc.showDialog(_stage);
 	}
 
@@ -868,11 +903,11 @@ public class MainWindowController
 	{
 		if (errorOccurred)
 		{
-			new Alert(AlertType.ERROR, "Export bulk error", ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, _lh.Get("ExportBulkError"), ButtonType.OK).showAndWait();
 		}
 		else
 		{
-			new Alert(AlertType.INFORMATION, "Export bulk success", ButtonType.OK).showAndWait();
+			new Alert(AlertType.INFORMATION, _lh.Get("ExportBulkSuccess"), ButtonType.OK).showAndWait();
 		}
 	}
 
@@ -888,7 +923,7 @@ public class MainWindowController
 		lstOverlays.getChildren().clear();
 		SetRatio(3, 2);
 		RatioTextboxChanged();
-		txtName.setText("Untitled");
+		txtName.setText(_lh.Get("Untitled"));
 		_filename = "";
 		_isUnsaved = false;
 		SetTitle();
@@ -926,7 +961,7 @@ public class MainWindowController
 	{
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag file (*.flag)", "*.flag"));
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(_lh.Get("FlagFileFilter"), "*.flag"));
 		File file = fileChooser.showSaveDialog(_stage);
 		
 		if (file != null)
@@ -939,8 +974,8 @@ public class MainWindowController
 	@FXML private void Open()
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open flag");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Flag files (*.flag)", "*.flag"));
+		fileChooser.setTitle(_lh.Get("Open"));
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(_lh.Get("FlagFileFilter"), "*.flag"));
 		File file = fileChooser.showOpenDialog(_stage);
 		LoadFlagFromFile(file);
 	}
@@ -950,12 +985,12 @@ public class MainWindowController
 		if (!_isUnsaved) return false;
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		ButtonType buttonYes = new ButtonType("Yes");
-		ButtonType buttonNo = new ButtonType("No");
-		ButtonType buttonCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-		alert.setTitle("FlagMaker 2.0");
-		alert.setHeaderText("Not saved");
-		alert.setContentText("Save changes?");
+		ButtonType buttonYes = new ButtonType(_lh.Get("Yes"));
+		ButtonType buttonNo = new ButtonType(_lh.Get("No"));
+		ButtonType buttonCancel = new ButtonType(_lh.Get("Cancel"), ButtonData.CANCEL_CLOSE);
+		alert.setTitle(GetNameWithVersion());
+		alert.setHeaderText(_lh.Get("NotSaved"));
+		alert.setContentText(String.format(_lh.Get("SaveChangesPrompt"), txtName.getText()));
 		alert.getButtonTypes().setAll(buttonYes, buttonNo, buttonCancel);
 
 		Optional<ButtonType> result = alert.showAndWait();
@@ -978,7 +1013,7 @@ public class MainWindowController
 		}
 		catch (Exception e)
 		{
-			new Alert(AlertType.ERROR, String.format("Could not load file. Error on line:\n%s", e.getMessage()), ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, String.format(_lh.Get("CouldNotOpenError"), e.getMessage()), ButtonType.OK).showAndWait();
 		}
 	}
 
@@ -1068,11 +1103,11 @@ public class MainWindowController
 
 	private void LoadBasicPresets()
 	{
-		cmbPresets.getItems().add("Blank");
-		cmbPresets.getItems().add("Horizontal");
-		cmbPresets.getItems().add("Vertical");
-		cmbPresets.getItems().add("Quad");
-		cmbPresets.getItems().add("Stripes");
+		cmbPresets.getItems().add(_lh.Get("DivisionBlank"));
+		cmbPresets.getItems().add(_lh.Get("DivisionHorizontalHalves"));
+		cmbPresets.getItems().add(_lh.Get("DivisionVerticalHalves"));
+		cmbPresets.getItems().add(_lh.Get("DivisionQuartered"));
+		cmbPresets.getItems().add(_lh.Get("DivisionStripes"));
 
 		cmbPresets.valueProperty().addListener(new ChangeListener<String>()
 		{
@@ -1080,14 +1115,11 @@ public class MainWindowController
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
 				if (StringExtensions.IsNullOrWhitespace(newValue)) return;
-				switch (newValue)
-				{
-					case "Blank": PresetBlank(); return;
-					case "Horizontal": PresetHorizontal(); return;
-					case "Vertical": PresetVertical(); return;
-					case "Quad": PresetQuad(); return;
-					case "Stripes": PresetStripes(); return;
-				}
+				else if (newValue.equals(_lh.Get("DivisionBlank"))) PresetBlank();
+				else if (newValue.equals(_lh.Get("DivisionHorizontalHalves"))) PresetHorizontal();
+				else if (newValue.equals(_lh.Get("DivisionVerticalHalves"))) PresetVertical();
+				else if (newValue.equals(_lh.Get("DivisionQuartered"))) PresetQuad();
+				else if (newValue.equals(_lh.Get("DivisionStripes"))) PresetStripes();
 			}
 		});
 	}
@@ -1220,5 +1252,10 @@ public class MainWindowController
 
 		Overlay[] returnValue = new Overlay[]{};
 		return list.toArray(returnValue);
+	}
+	
+	private String GetNameWithVersion()
+	{
+		return String.format("FlagMaker %s", getClass().getPackage().getImplementationVersion());
 	}
 }
