@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import javafx.application.Platform;
@@ -71,6 +73,8 @@ public class MainWindowController
 	@FXML private ComboBox cmbPresets;
 
 	@FXML private VBox lstOverlays;
+	
+	@FXML private Label lblDivisions;
 
 	private Stage _stage;
 	private SubScene _subScene;
@@ -94,6 +98,7 @@ public class MainWindowController
 	@FXML
 	protected void initialize()
 	{
+		LoadLocalization();
 		AddWorkspace();
 
 		_headerText = String.format(" - FlagMaker %s", getClass().getPackage().getImplementationVersion());
@@ -109,6 +114,12 @@ public class MainWindowController
 	public void SetPrimaryStage(Stage stage)
 	{
 		_stage = stage;
+	}
+	
+	private void LoadLocalization()
+	{
+		ResourceBundle bundle = ResourceBundle.getBundle("bundles.strings", new Locale("en", "EN"));
+		lblDivisions.setText(bundle.getString("Division"));
 	}
 
 	private void AddWorkspace()

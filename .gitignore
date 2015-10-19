@@ -48,7 +48,6 @@ target
 *.swp
 *.orig
 *.log
-*.properties
 seed.txt
 map.txt
 dist/*

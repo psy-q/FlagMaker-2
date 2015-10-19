@@ -120,7 +120,7 @@
 				</AnchorPane>
 				<VBox fillWidth="true" SplitPane.resizableWithParent="false">
 					<children>
-						<Label style="-fx-font-weight: bold; -fx-font-size: 24;" text="Divisions" />
+						<Label fx:id="lblDivisions" style="-fx-font-weight: bold; -fx-font-size: 24;" />
 						<FlowPane alignment="TOP_LEFT" hgap="4" orientation="HORIZONTAL" vgap="4">
 							<children>
 								<Button onAction="#DivisionGridClick">
