@@ -14,26 +14,22 @@
 	<children>
 		<MenuBar VBox.vgrow="NEVER">
 			<menus>
-				<Menu mnemonicParsing="true" text="_File">
+				<Menu fx:id="mnuFile" mnemonicParsing="true">
 					<items>
-						<MenuItem accelerator="Ctrl+N" mnemonicParsing="true" onAction="#New" text="_New" />
-						<MenuItem accelerator="Ctrl+O" mnemonicParsing="true" onAction="#Open" text="_Open…" />
-						<MenuItem accelerator="Ctrl+S" mnemonicParsing="true" onAction="#Save" text="_Save" />
-						<MenuItem accelerator="Ctrl+Shift+S" mnemonicParsing="true" onAction="#SaveAs" text="Save _as…" />
+						<MenuItem fx:id="mnuNew" accelerator="Ctrl+N" mnemonicParsing="true" onAction="#New" />
+						<MenuItem fx:id="mnuOpen" accelerator="Ctrl+O" mnemonicParsing="true" onAction="#Open" />
+						<MenuItem fx:id="mnuSave" accelerator="Ctrl+S" mnemonicParsing="true" onAction="#Save" />
+						<MenuItem fx:id="mnuSaveAs" accelerator="Ctrl+Shift+S" mnemonicParsing="true" onAction="#SaveAs" />
 						<SeparatorMenuItem />
-						<MenuItem mnemonicParsing="true" onAction="#MenuExportPngClick" text="Export as _PNG..." />
-						<MenuItem mnemonicParsing="true" onAction="#MenuExportSvgClick" text="Export as SV_G..." />
+						<MenuItem fx:id="mnuExportPng" mnemonicParsing="true" onAction="#MenuExportPngClick" />
+						<MenuItem fx:id="mnuExportSvg" mnemonicParsing="true" onAction="#MenuExportSvgClick" />
 						<SeparatorMenuItem />
-						<MenuItem mnemonicParsing="true" onAction="#MenuExportBulkPngClick" text="Bulk export as P_NG..." />
-						<MenuItem mnemonicParsing="true" onAction="#MenuExportBulkSvgClick" text="Bulk e_xport as SVG..." />
+						<MenuItem fx:id="mnuBulkExportPng" mnemonicParsing="true" onAction="#MenuExportBulkPngClick" />
+						<MenuItem fx:id="mnuBulkExportSvg" mnemonicParsing="true" onAction="#MenuExportBulkSvgClick" />
 					</items>
 				</Menu>
-				<Menu fx:id="mnuPresets" mnemonicParsing="true" text="_World flag presets">
-					<items>
-						<MenuItem text="Todo" />
-					</items>
-				</Menu>
-				<Menu fx:id="mnuLanguages" mnemonicParsing="true" text="_Language" />
+				<Menu fx:id="mnuPresets" mnemonicParsing="true" />
+				<Menu fx:id="mnuLanguages" mnemonicParsing="true" />
 			</menus>
 		</MenuBar>
 		<ToolBar prefHeight="40.0">

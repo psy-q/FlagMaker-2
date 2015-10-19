@@ -51,6 +51,15 @@ import javafx.stage.WindowEvent;
 
 public class MainWindowController
 {
+	@FXML private Menu mnuFile;
+	@FXML private MenuItem mnuNew;
+	@FXML private MenuItem mnuOpen;
+	@FXML private MenuItem mnuSave;
+	@FXML private MenuItem mnuSaveAs;
+	@FXML private MenuItem mnuExportPng;
+	@FXML private MenuItem mnuExportSvg;
+	@FXML private MenuItem mnuBulkExportPng;
+	@FXML private MenuItem mnuBulkExportSvg;
 	@FXML private Menu mnuPresets;
 	@FXML private Menu mnuLanguages;
 	
@@ -122,8 +131,8 @@ public class MainWindowController
 		LoadLanguageMenu();
 		
 		Locale currentLocale = Locale.getDefault();
-		ResourceBundle bundle = ResourceBundle.getBundle("bundles.strings", currentLocale);
-		lblDivisions.setText(bundle.getString("Division"));
+		if (currentLocale == null) currentLocale = Locale.US;
+		SetWindowStrings(ResourceBundle.getBundle("bundles.strings", currentLocale));
 	}
 	
 	private void LoadLanguageMenu()
@@ -145,6 +154,23 @@ public class MainWindowController
 		}
 	}
 
+	private void SetWindowStrings(ResourceBundle bundle)
+	{
+		mnuFile.setText(bundle.getString("File"));
+		mnuNew.setText(bundle.getString("New"));
+		mnuOpen.setText(bundle.getString("Open"));
+		mnuSave.setText(bundle.getString("SaveMenu"));
+		mnuSaveAs.setText(bundle.getString("SaveAs"));
+		mnuExportPng.setText(bundle.getString("ExportAsPngMenu"));
+		mnuExportSvg.setText(bundle.getString("ExportAsSvgMenu"));
+		mnuBulkExportPng.setText(bundle.getString("ExportBulkAsPng"));
+		mnuBulkExportSvg.setText(bundle.getString("ExportBulkAsSvg"));
+		mnuPresets.setText(bundle.getString("WorldFlagPresets"));
+		mnuLanguages.setText(bundle.getString("Language"));
+		
+		lblDivisions.setText(bundle.getString("Division"));
+	}
+	
 	private void AddWorkspace()
 	{
 		_pane = new Pane();
