@@ -52,6 +52,7 @@ import javafx.stage.WindowEvent;
 public class MainWindowController
 {
 	@FXML private Menu mnuPresets;
+	@FXML private Menu mnuLanguages;
 	
 	@FXML private TextField txtRatioHeight;
 	@FXML private TextField txtRatioWidth;
@@ -118,8 +119,30 @@ public class MainWindowController
 	
 	private void LoadLocalization()
 	{
-		ResourceBundle bundle = ResourceBundle.getBundle("bundles.strings", new Locale("en", "EN"));
+		LoadLanguageMenu();
+		
+		Locale currentLocale = Locale.getDefault();
+		ResourceBundle bundle = ResourceBundle.getBundle("bundles.strings", currentLocale);
 		lblDivisions.setText(bundle.getString("Division"));
+	}
+	
+	private void LoadLanguageMenu()
+	{
+		Locale[] locales = new Locale[]
+		{
+			new Locale("en", "US"),
+			new Locale("ru", "RU")
+		};
+		
+		for (Locale locale : locales)
+		{
+			MenuItem item = new MenuItem(locale.getDisplayName());
+			item.addEventHandler(EventType.ROOT, (Event event) ->
+			{
+				// change language
+			});
+			mnuLanguages.getItems().add(item);
+		}
 	}
 
 	private void AddWorkspace()
@@ -165,10 +188,6 @@ public class MainWindowController
 		});
 		
 		_stage.setOnCloseRequest(event -> OnClosing(event));
-	}
-
-	private void SetLanguages()
-	{
 	}
 
 	private void SetTitle()

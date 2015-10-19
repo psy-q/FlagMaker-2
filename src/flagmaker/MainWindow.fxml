@@ -33,11 +33,7 @@
 						<MenuItem text="Todo" />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="true" text="_Language">
-					<items>
-						<MenuItem text="English" />
-					</items>
-				</Menu>
+				<Menu fx:id="mnuLanguages" mnemonicParsing="true" text="_Language" />
 			</menus>
 		</MenuBar>
 		<ToolBar prefHeight="40.0">
