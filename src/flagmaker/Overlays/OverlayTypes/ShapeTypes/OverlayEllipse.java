@@ -30,12 +30,12 @@ public class OverlayEllipse extends OverlayShape
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double width = canvas.getWidth() * (GetAttribute("Width").Value / (double)MaximumX);
-		double height = GetAttribute("Height").Value == 0
+		double width = canvas.getWidth() * (GetDoubleAttribute("Width") / (double)MaximumX);
+		double height = GetDoubleAttribute("Height") == 0
 				? width
-				: canvas.getHeight() * (GetAttribute("Height").Value / MaximumY);
-		double left = canvas.getWidth() * (GetAttribute("X").Value / MaximumX);
-		double top = canvas.getHeight() * (GetAttribute("Y").Value / MaximumY);
+				: canvas.getHeight() * (GetDoubleAttribute("Height") / MaximumY);
+		double left = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX);
+		double top = canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY);
 		Ellipse ellipse = new Ellipse(left, top, width / 2, height / 2);
 		ellipse.setFill(Color);
 		canvas.getChildren().add(ellipse);
@@ -44,13 +44,13 @@ public class OverlayEllipse extends OverlayShape
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double w = width * (GetAttribute("Width").Value / (double)MaximumX);
-		double h = GetAttribute("Height").Value == 0
+		double w = width * (GetDoubleAttribute("Width") / (double)MaximumX);
+		double h = GetDoubleAttribute("Height") == 0
 				? w
-				: height * (GetAttribute("Height").Value / MaximumY);
+				: height * (GetDoubleAttribute("Height") / MaximumY);
 		
-		double x = width * (GetAttribute("X").Value / MaximumX);
-		double y = height * (GetAttribute("Y").Value / MaximumY);
+		double x = width * (GetDoubleAttribute("X") / MaximumX);
+		double y = height * (GetDoubleAttribute("Y") / MaximumY);
 		
 		return String.format("<ellipse cx=\"%.3f\" cy=\"%.3f\" rx=\"%.3f\" ry=\"%.3f\" %s />",
 				x, y, w / 2, h / 2,

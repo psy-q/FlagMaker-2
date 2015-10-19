@@ -268,7 +268,7 @@ public class Flag
 
 				for (int i = 0; i < overlay.Attributes.length; i++)
 				{
-					printLine.printf("size%d=%f\n", i + 1, overlay.Attributes[i].Value);
+					printLine.printf("size%d=%f\n", i + 1, overlay.Attributes[i].GetValue());
 				}
 
 				if (overlay instanceof OverlayPath)
@@ -366,7 +366,7 @@ public class Flag
 				{
 					OverlayPath path = (OverlayPath)overlay;
 					
-					if (path.StrokeColor.getOpacity() > 0 && path.GetAttribute("Stroke").Value > 0)
+					if (path.StrokeColor.getOpacity() > 0 && (double)path.GetAttribute("Stroke").GetValue() > 0)
 					{
 						colors.add(path.StrokeColor);
 					}

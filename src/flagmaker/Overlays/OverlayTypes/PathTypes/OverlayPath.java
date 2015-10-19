@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes.PathTypes;
 
 import flagmaker.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Vector;
 import javafx.scene.layout.Pane;
@@ -21,27 +21,27 @@ public class OverlayPath extends Overlay
 	{
 		super(name, new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, false),
-			new Attribute("Size", true, 1, true),
-			new Attribute("Rotation", true, 0, true),
-			new Attribute("Stroke", true, 0, true),
-			new Attribute("StrokeCurved", true, 0, true)
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new DoubleAttribute("Size", 1, maximumX, true),
+			new DoubleAttribute("Rotation", 0, maximumX, true),
+			new DoubleAttribute("Stroke", 0, maximumX, true),
+			new BooleanAttribute("StrokeCurved", false)
 		}, maximumX, maximumY);
 		
 		StrokeColor = Color.WHITE;
 	}
 	
-	public OverlayPath(String name, String path, Vector pathSize, double x, double y, double size, double rotation, double stroke, double strokeCurved, int maximumX, int maximumY)
+	public OverlayPath(String name, String path, Vector pathSize, double x, double y, double size, double rotation, double stroke, boolean strokeCurved, int maximumX, int maximumY)
 	{
 		super(name, new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Y", true, y, false),
-			new Attribute("Size", true, size, true),
-			new Attribute("Rotation", true, rotation, true),
-			new Attribute("Stroke", true, stroke, true),
-			new Attribute("StrokeCurved", true, strokeCurved, true)
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Y", y, maximumY, false),
+			new DoubleAttribute("Size", size, maximumX, true),
+			new DoubleAttribute("Rotation", rotation, maximumX, true),
+			new DoubleAttribute("Stroke", stroke, maximumX, true),
+			new BooleanAttribute("StrokeCurved", strokeCurved)
 		}, maximumX, maximumY);
 		
 		_path = path;
@@ -77,8 +77,8 @@ public class OverlayPath extends Overlay
 			double xGridSize = canvas.getWidth() / MaximumX;
 			double yGridSize = canvas.getHeight() / MaximumY;
 			
-			double x = GetAttribute("X").Value;
-			double y = GetAttribute("Y").Value;
+			double x = GetDoubleAttribute("X");
+			double y = GetDoubleAttribute("Y");
 			
 			Vector finalCenterPoint = new Vector(x * xGridSize, y * yGridSize);
 			double scaleFactor = ScaleFactor(canvas.getWidth(), canvas.getHeight());
@@ -88,11 +88,11 @@ public class OverlayPath extends Overlay
 			path.setFill(Color);
 			path.setStroke(StrokeColor);
 			path.setStrokeWidth(StrokeThickness(canvas.getWidth(), canvas.getHeight()));
-			path.setStrokeLineJoin(GetAttribute("StrokeCurved").Value > MaximumX / 2.0
+			path.setStrokeLineJoin(GetBooleanAttribute("StrokeCurved")
 				? StrokeLineJoin.ROUND
 				: StrokeLineJoin.MITER);
 			
-			path.setRotate(GetAttribute("Rotation").Value / MaximumX * 360);
+			path.setRotate(GetDoubleAttribute("Rotation") / MaximumX * 360);
 			path.setScaleX(scaleFactor);
 			path.setScaleY(scaleFactor);
 			
@@ -108,7 +108,7 @@ public class OverlayPath extends Overlay
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("X", values[0]);
 		SetAttribute("Y", values[1]);
@@ -124,17 +124,17 @@ public class OverlayPath extends Overlay
 		double xGridSize = (double)width / MaximumX;
 		double yGridSize = (double)height / MaximumY;
 
-		double x = GetAttribute("X").Value;
-		double y = GetAttribute("Y").Value;
+		double x = GetDoubleAttribute("X");
+		double y = GetDoubleAttribute("Y");
 
 		Vector finalCenterPoint = new Vector(x * xGridSize, y * yGridSize);
 
-		double idealPixelSize = GetAttribute("Size").Value / MaximumX * Math.max(width, height);
+		double idealPixelSize = GetDoubleAttribute("Size") / MaximumX * Math.max(width, height);
 		double scaleFactor = idealPixelSize / Math.max(_pathSize.X, _pathSize.Y);
-		double rotate = (GetAttribute("Rotation").Value / MaximumX) * 360;
+		double rotate = (GetDoubleAttribute("Rotation") / MaximumX) * 360;
 
 		double strokeThickness = StrokeThickness(width, height);
-		boolean strokeCurved = GetAttribute("StrokeCurved").Value > MaximumX / 2.0;
+		boolean strokeCurved = GetBooleanAttribute("StrokeCurved");
 
 		return String.format("<g transform=\"translate(%.3f,%.3f) rotate(%.3f) scale(%.3f)\"><path d=\"%s\" %s %s /></g>",
 			finalCenterPoint.X, finalCenterPoint.Y, rotate, scaleFactor, _path, ColorExtensions.ToSvgFillWithOpacity(Color),
@@ -146,12 +146,12 @@ public class OverlayPath extends Overlay
 	
 	private double StrokeThickness(double canvasWidth, double canvasHeight)
 	{
-		return canvasWidth * GetAttribute("Stroke").Value / 32 / ScaleFactor(canvasWidth, canvasHeight) / MaximumX;
+		return canvasWidth * GetDoubleAttribute("Stroke") / 32 / ScaleFactor(canvasWidth, canvasHeight) / MaximumX;
 	}
 	
 	private double ScaleFactor(double canvasWidth, double canvasHeight)
 	{
-		double idealPixelSize = GetAttribute("Size").Value / MaximumX * Math.max(canvasWidth, canvasHeight);
+		double idealPixelSize = GetDoubleAttribute("Size") / MaximumX * Math.max(canvasWidth, canvasHeight);
 		return idealPixelSize / Math.max(_pathSize.X, _pathSize.Y);
 	}
 }

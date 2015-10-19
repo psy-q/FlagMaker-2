@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -17,7 +17,7 @@ public class OverlayBorder extends Overlay
 	{
 		super("border", new Attribute[]
 		{
-			new Attribute("Thickness", true, 1, true)
+			new DoubleAttribute("Thickness", 1, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -25,7 +25,7 @@ public class OverlayBorder extends Overlay
 	{
 		super("border", color, new Attribute[]
 		{
-			new Attribute("Thickness", true, thickness, true)
+			new DoubleAttribute("Thickness", thickness, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -53,7 +53,7 @@ public class OverlayBorder extends Overlay
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double thickness = canvas.getWidth() * (GetAttribute("Thickness").Value / MaximumX) / 2;
+		double thickness = canvas.getWidth() * (GetDoubleAttribute("Thickness") / MaximumX) / 2;
 
 		// Prevent the border from overlapping itself
 		if (canvas.getWidth() - thickness * 2 < 0)
@@ -85,7 +85,7 @@ public class OverlayBorder extends Overlay
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("Thickness", values[0]);
 	}
@@ -93,7 +93,7 @@ public class OverlayBorder extends Overlay
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double thickness = width * (GetAttribute("Thickness").Value / MaximumX) / 2;
+		double thickness = width * (GetDoubleAttribute("Thickness") / MaximumX) / 2;
 
 		// Prevent the border from overlapping itself
 		if (width - thickness * 2 < 0)

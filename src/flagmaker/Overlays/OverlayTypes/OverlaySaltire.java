@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,7 +15,7 @@ public class OverlaySaltire extends Overlay
 	{
 		super("saltire", new Attribute[]
 		{
-			new Attribute("Thickness", true, 1, true)
+			new DoubleAttribute("Thickness", 1, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -23,7 +23,7 @@ public class OverlaySaltire extends Overlay
 	{
 		super("saltire", color, new Attribute[]
 		{
-			new Attribute("Thickness", true, thickness, true)
+			new DoubleAttribute("Thickness", thickness, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -40,8 +40,8 @@ public class OverlaySaltire extends Overlay
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double widthX = canvas.getWidth() * (GetAttribute("Thickness").Value / MaximumX) / 2;
-		double widthY = canvas.getHeight() * (GetAttribute("Thickness").Value / MaximumX) / 2;
+		double widthX = canvas.getWidth() * (GetDoubleAttribute("Thickness") / MaximumX) / 2;
+		double widthY = canvas.getHeight() * (GetDoubleAttribute("Thickness") / MaximumX) / 2;
 
 		SVGPath path1 = new SVGPath();
 		SVGPath path2 = new SVGPath();
@@ -58,7 +58,7 @@ public class OverlaySaltire extends Overlay
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("Thickness", values[0]);
 	}
@@ -66,8 +66,8 @@ public class OverlaySaltire extends Overlay
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double wX = width * (GetAttribute("Thickness").Value / MaximumX) / 2;
-		double wY = height * (GetAttribute("Thickness").Value / MaximumX) / 2;
+		double wX = width * (GetDoubleAttribute("Thickness") / MaximumX) / 2;
+		double wY = height * (GetDoubleAttribute("Thickness") / MaximumX) / 2;
 
 		return String.format("<polygon points=\"%1$.3f,0 0,0 0,%6$.3f %2$.3f,%3$d %4$d,%3$d %4$d,%5$.3f %1$.3f,0\" %7$s /><polygon points=\"%2$.3f,0 %4$d,0 %4$d,%6$.3f %1$.3f,%3$d 0,%3$d 0,%5$.3f %2$.3f,0\" %7$s />",
 			wX, width - wX, height, width, height - wY, wY, ColorExtensions.ToSvgFillWithOpacity(Color));

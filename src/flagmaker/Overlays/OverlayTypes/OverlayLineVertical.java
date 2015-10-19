@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -14,8 +14,8 @@ public class OverlayLineVertical extends Overlay
 	{
 		super("line vertical", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Thickness", true, 0.5, false)
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Thickness", 0.5, maximumX, false)
 		}, maximumX, maximumY);
 	}
 
@@ -23,8 +23,8 @@ public class OverlayLineVertical extends Overlay
 	{
 		super("line vertical", color, new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Thickness", true, thickness, false)
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Thickness", thickness, maximumX, false)
 		}, maximumX, maximumY);
 	}
 
@@ -40,17 +40,17 @@ public class OverlayLineVertical extends Overlay
 	public void Draw(Pane canvas)
 	{
 		Line line = new Line(
-				canvas.getWidth() * GetAttribute("X").Value / MaximumX,
+				canvas.getWidth() * GetDoubleAttribute("X") / MaximumX,
 				0,
-				canvas.getWidth() * GetAttribute("X").Value / MaximumX,
+				canvas.getWidth() * GetDoubleAttribute("X") / MaximumX,
 				canvas.getHeight());
-		line.setStrokeWidth(canvas.getWidth() * (GetAttribute("Thickness").Value / MaximumX));
+		line.setStrokeWidth(canvas.getWidth() * (GetDoubleAttribute("Thickness") / MaximumX));
 		line.setStroke(Color);
 		canvas.getChildren().add(line);
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("X", values[0]);
 		SetAttribute("Thickness", values[1]);
@@ -60,10 +60,10 @@ public class OverlayLineVertical extends Overlay
 	public String ExportSvg(int width, int height)
 	{
 		return String.format("<line x1=\"%.3f\" y1=\"0\" x2=\"%3f\" y2=\"%d\" stroke=\"#%s\" stroke-width=\"%.3f\" />",
-			width * GetAttribute("X").Value / MaximumX,
-			width * GetAttribute("X").Value / MaximumX,
+			width * GetDoubleAttribute("X") / MaximumX,
+			width * GetDoubleAttribute("X") / MaximumX,
 			height,
 			ColorExtensions.ToHexString(Color, false),
-			width * (GetAttribute("Thickness").Value / MaximumX));
+			width * (GetDoubleAttribute("Thickness") / MaximumX));
 	}
 }

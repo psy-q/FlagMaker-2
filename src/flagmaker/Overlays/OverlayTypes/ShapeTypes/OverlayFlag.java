@@ -58,8 +58,8 @@ public class OverlayFlag extends OverlayShape
 	@Override
 	public void Draw(Pane canvas)
 	{		
-		double canvasWidth = canvas.getWidth() * GetAttribute("Width").Value / MaximumX;
-		double canvasHeight = canvas.getHeight() * GetAttribute("Height").Value / MaximumY;
+		double canvasWidth = canvas.getWidth() * GetDoubleAttribute("Width") / MaximumX;
+		double canvasHeight = canvas.getHeight() * GetDoubleAttribute("Height") / MaximumY;
 		
 		AnchorPane a = new AnchorPane();
 		Scene s = new Scene(a, canvasWidth, canvasHeight);
@@ -69,8 +69,8 @@ public class OverlayFlag extends OverlayShape
 		s.setRoot(p);
 		Flag.Draw(p);
 		
-		p.setLayoutX(canvas.getWidth() * GetAttribute("X").Value / MaximumX);
-		p.setLayoutY(canvas.getHeight() * GetAttribute("Y").Value / MaximumX);
+		p.setLayoutX(canvas.getWidth() * GetDoubleAttribute("X") / MaximumX);
+		p.setLayoutY(canvas.getHeight() * GetDoubleAttribute("Y") / MaximumX);
 		canvas.getChildren().add(p);
 	}
 
@@ -80,10 +80,10 @@ public class OverlayFlag extends OverlayShape
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(String.format("<g transform=\"translate(%.3f,%.3f) scale(%.3f %.3f)\">\n",
-			width * (GetAttribute("X").Value / MaximumX),
-			height * (GetAttribute("Y").Value / MaximumY),
-			GetAttribute("Width").Value / MaximumX,
-			GetAttribute("Height").Value / MaximumY));
+			width * (GetDoubleAttribute("X") / MaximumX),
+			height * (GetDoubleAttribute("Y") / MaximumY),
+			GetDoubleAttribute("Width") / MaximumX,
+			GetDoubleAttribute("Height") / MaximumY));
 
 		sb.append(Flag.Division.ExportSvg(width, height));
 

@@ -1,6 +1,6 @@
 package flagmaker.Overlays.OverlayTypes.RepeaterTypes;
 
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import java.util.UUID;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -16,23 +16,23 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 	{
 		super("repeater radial", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, false),
-			new Attribute("Radius", true, 1, true),
-			new Attribute("Count", true, 1, true),
-			new Attribute("Rotate", true, 1, true)
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new DoubleAttribute("Radius", 1, maximumX, true),
+			new IntegerAttribute("Count", 1, maximumX, true),
+			new BooleanAttribute("Rotate", true)
 		}, maximumX, maximumY);
 	}
 	
-	public OverlayRepeaterRadial(double x, double y, double radius, int count, double rotate, int maximumX, int maximumY)
+	public OverlayRepeaterRadial(double x, double y, double radius, int count, boolean rotate, int maximumX, int maximumY)
 	{
 		super("repeater radial", new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Y", true, y, false),
-			new Attribute("Radius", true, radius, true),
-			new Attribute("Count", true, count, true),
-			new Attribute("Rotate", true, rotate, true)
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Y", y, maximumY, false),
+			new DoubleAttribute("Radius", radius, maximumX, true),
+			new IntegerAttribute("Count", count, maximumX, true),
+			new BooleanAttribute("Rotate", rotate)
 		}, maximumX, maximumY);
 	}
 
@@ -59,13 +59,13 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 	{
 		if (Overlay == null || !Overlay.IsEnabled) return;
 
-		double locX = canvas.getWidth() * (GetAttribute("X").Value / MaximumX);
-		double locY = canvas.getHeight() * (GetAttribute("Y").Value / MaximumY);
-		double radius = canvas.getWidth() * (GetAttribute("Radius").Value / MaximumX);
-		double interval = 2 * Math.PI / GetAttribute("Count").Value;
-		boolean rotate = GetAttribute("Rotate").Value > MaximumX / 2.0;
+		double locX = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX);
+		double locY = canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY);
+		double radius = canvas.getWidth() * (GetDoubleAttribute("Radius") / MaximumX);
+		double interval = 2 * Math.PI / GetIntegerAttribute("Count");
+		boolean rotate = GetBooleanAttribute("Rotate");
 
-		for (int i = 0; i < GetAttribute("Count").Value; i++)
+		for (int i = 0; i < GetIntegerAttribute("Count"); i++)
 		{
 			AnchorPane a = new AnchorPane();
 			a.setBackground(Background.EMPTY);
@@ -79,7 +79,7 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 			
 			if (rotate)
 			{
-				p.getTransforms().add(new Rotate(i * 360 / GetAttribute("Count").Value, 0, 0));
+				p.getTransforms().add(new Rotate(i * 360 / GetIntegerAttribute("Count"), 0, 0));
 			}
 
 			Overlay.Draw(p);
@@ -91,7 +91,7 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("X", values[0]);
 		SetAttribute("Y", values[1]);
@@ -106,11 +106,11 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 		if (Overlay == null) return "";
 		if (!Overlay.IsEnabled) return "";
 
-		double locX = width * (GetAttribute("X").Value / MaximumX);
-		double locY = height * (GetAttribute("Y").Value / MaximumY);
-		double radius = width * (GetAttribute("Radius").Value / MaximumX);
-		double interval = 2 * Math.PI / GetAttribute("Count").Value;
-		boolean rotate = GetAttribute("Rotate").Value > MaximumX / 2.0;
+		double locX = width * (GetDoubleAttribute("X") / MaximumX);
+		double locY = height * (GetDoubleAttribute("Y") / MaximumY);
+		double radius = width * (GetDoubleAttribute("Radius") / MaximumX);
+		double interval = 2 * Math.PI / GetIntegerAttribute("Count");
+		boolean rotate = GetBooleanAttribute("Rotate");
 
 		UUID id = UUID.randomUUID();
 		StringBuilder sb = new StringBuilder();
@@ -118,12 +118,12 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 		sb.append(String.format("<defs><g id=\"%s\">%s</g></defs>",
 			id.toString(), Overlay.ExportSvg((int)radius, (int)radius)));
 
-		for (int i = 0; i < GetAttribute("Count").Value; i++)
+		for (int i = 0; i < GetIntegerAttribute("Count"); i++)
 		{
 			sb.append(String.format("<g transform=\"translate(%.3f,%.3f)%s\">\n",
 				locX + Math.cos(i * interval - Math.PI / 2) * radius,
 				locY + Math.sin(i * interval - Math.PI / 2) * radius,
-				rotate ? String.format("rotate(%.3f)", i * 360 / GetAttribute("Count").Value) : ""));
+				rotate ? String.format("rotate(%.3f)", i * 360.0 / GetIntegerAttribute("Count")) : ""));
 			sb.append(String.format("<use xlink:href=\"#%s\" />\n", id.toString()));
 			sb.append("</g>\n");
 		}

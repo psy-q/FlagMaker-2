@@ -772,12 +772,12 @@ public class RandomFlagFactory
 		{
 			emblem.SetColor(colorIfStroked);
 			emblem.StrokeColor = color;
-			emblem.SetValues(new double[] { x, y, _gridSize.Width / (isBig ? 3.0 : 6.0), 0, 2, _gridSize.Width });
+			emblem.SetValues(new Object[] { x, y, _gridSize.Width / (isBig ? 3.0 : 6.0), 0, 2, _gridSize.Width });
 		}
 		else
 		{
 			emblem.SetColor(color);
-			emblem.SetValues(new double[] { x, y, _gridSize.Width / (isBig ? 3.0 : 6.0), 0, 0, 0 });
+			emblem.SetValues(new Object[] { x, y, _gridSize.Width / (isBig ? 3.0 : 6.0), 0, 0, 0 });
 		}
 
 		_overlays.add(emblem);

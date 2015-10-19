@@ -1,8 +1,10 @@
 package flagmaker.Overlays;
 
+import flagmaker.Overlays.Attributes.Attribute;
 import flagmaker.ControlExtensions;
 import flagmaker.LocalizationHandler;
 import flagmaker.MainWindowController;
+import flagmaker.Overlays.Attributes.Sliders.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
@@ -90,7 +92,7 @@ public class OverlayControl extends VBox
 		
 		if (!_isFirst && !IsLoading)
 		{
-			double[] sliderValues = GetAttributeSliderValues();
+			Object[] sliderValues = GetAttributeSliderValues();
 			if (sliderValues.length > 0)
 			{
 				for (int i = sliderValues.length; i < _overlay.Attributes.length; i++)
@@ -127,8 +129,7 @@ public class OverlayControl extends VBox
 		pnlSliders.getChildren().clear();
 		for (Attribute a : _overlay.Attributes)
 		{
-			AttributeSlider s = new AttributeSlider(this, a.Name, a.IsDiscrete, a.Value, a.UseMaxX ? _defaultMaximumX : _defaultMaximumY);
-			pnlSliders.getChildren().add(s);
+			pnlSliders.getChildren().add(a.GetSlider(this));
 		}
 		
 		if (_overlay instanceof OverlayPath)
@@ -162,14 +163,14 @@ public class OverlayControl extends VBox
 		_overlay.SetMaximum(maximumX, maximumY);
 		
 		AttributeSlider[] sliders = GetAttributeSliders();
-		for (int i = 0; i < sliders.length; i++)
+		for (AttributeSlider slider : sliders)
 		{
-			AttributeSlider slider = sliders[i];
-			int max = _overlay.Attributes[i].UseMaxX ? maximumX : maximumY;
-			double newValue = slider.GetValue() * ((double)max / slider.GetMaximum());
-			slider.SetDiscrete(newValue % 1 == 0);
-			slider.SetMaximum(max);
-			slider.SetValue(newValue);
+			if (slider instanceof NumericAttributeSlider)
+			{
+				((NumericAttributeSlider)slider).SetMaximum(((NumericAttributeSlider)slider).UseMaxX
+						? _defaultMaximumX
+						: _defaultMaximumY);
+			}
 		}
 	}
 	
@@ -281,18 +282,17 @@ public class OverlayControl extends VBox
 		ArrayList<AttributeSlider> list = new ArrayList<>();
 		for (Object control : pnlSliders.getChildren())
 		{
-			AttributeSlider slider = (AttributeSlider)control;
-			list.add(slider);
+			list.add((AttributeSlider)control);
 		}
 		
 		AttributeSlider[] returnValue = new AttributeSlider[]{};
 		return list.toArray(returnValue);
 	}
 	
-	private double[] GetAttributeSliderValues()
+	private Object[] GetAttributeSliderValues()
 	{
 		int sliderCount = pnlSliders.getChildren().size();
-		double[] list = new double[sliderCount];
+		Object[] list = new Object[sliderCount];
 		
 		for (int i = 0; i < sliderCount; i++)
 		{
@@ -303,9 +303,9 @@ public class OverlayControl extends VBox
 		return list;
 	}
 	
-	double[] AddElement(double[] original, double added)
+	Object[] AddElement(Object[] original, double added)
 	{
-		double[] result = Arrays.copyOf(original, original.length +1);
+		Object[] result = Arrays.copyOf(original, original.length +1);
 		result[original.length] = added;
 		return result;
 	}

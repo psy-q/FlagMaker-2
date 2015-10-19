@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -18,11 +18,11 @@ public class OverlayHalfEllipse extends Overlay
 	{
 		super("half ellipse", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, false),
-			new Attribute("Width", true, 1, true),
-			new Attribute("Height", true, 1, false),
-			new Attribute("Rotation", true, 0, true)
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new DoubleAttribute("Width", 1, maximumX, true),
+			new DoubleAttribute("Height", 1, maximumY, false),
+			new DoubleAttribute("Rotation", 0, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -30,11 +30,11 @@ public class OverlayHalfEllipse extends Overlay
 	{
 		super("half ellipse", color, new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Y", true, y, false),
-			new Attribute("Width", true, width, true),
-			new Attribute("Height", true, height, false),
-			new Attribute("Rotation", true, rotation, true)
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Y", y, maximumY, false),
+			new DoubleAttribute("Width", width, maximumX, true),
+			new DoubleAttribute("Height", height, maximumY, false),
+			new DoubleAttribute("Rotation", rotation, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -55,12 +55,12 @@ public class OverlayHalfEllipse extends Overlay
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double x = canvas.getWidth() * GetAttribute("X").Value / MaximumX;
-		double y = canvas.getHeight() * GetAttribute("Y").Value / MaximumY;
-		double radX = canvas.getWidth() * (GetAttribute("Width").Value / MaximumX) / 2;
-		double radY = canvas.getHeight() * GetAttribute("Height").Value / MaximumY;
+		double x = canvas.getWidth() * GetDoubleAttribute("X") / MaximumX;
+		double y = canvas.getHeight() * GetDoubleAttribute("Y") / MaximumY;
+		double radX = canvas.getWidth() * (GetDoubleAttribute("Width") / MaximumX) / 2;
+		double radY = canvas.getHeight() * GetDoubleAttribute("Height") / MaximumY;
 
-		double angle = 2 * Math.PI * GetAttribute("Rotation").Value / MaximumX;
+		double angle = 2 * Math.PI * GetDoubleAttribute("Rotation") / MaximumX;
 		double xOffset = radX - radX * Math.cos(angle);
 		double yOffset = radX * Math.sin(angle);
 
@@ -81,7 +81,7 @@ public class OverlayHalfEllipse extends Overlay
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("X", values[0]);
 		SetAttribute("Y", values[1]);
@@ -93,12 +93,12 @@ public class OverlayHalfEllipse extends Overlay
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double x = width * GetAttribute("X").Value / MaximumX;
-		double y = height * GetAttribute("Y").Value / MaximumY;
-		double radX = width * (GetAttribute("Width").Value / MaximumX) / 2;
-		double radY = height * GetAttribute("Height").Value / MaximumY;
+		double x = width * GetDoubleAttribute("X") / MaximumX;
+		double y = height * GetDoubleAttribute("Y") / MaximumY;
+		double radX = width * (GetDoubleAttribute("Width") / MaximumX) / 2;
+		double radY = height * GetDoubleAttribute("Height") / MaximumY;
 
-		double angle = 2 * Math.PI * GetAttribute("Rotation").Value / MaximumX;
+		double angle = 2 * Math.PI * GetDoubleAttribute("Rotation") / MaximumX;
 		double xOffset = radX - radX * Math.cos(angle);
 		double yOffset = radX * Math.sin(angle);
 

@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import java.util.ArrayList;
 import javafx.scene.layout.Pane;
@@ -15,25 +15,25 @@ public class OverlayCheckerboard extends Overlay
 	{
 		super("checkerboard", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, false),
-			new Attribute("Width", true, 1, true),
-			new Attribute("Height", true, 1, false),
-			new Attribute("CountX", true, 4, true),
-			new Attribute("CountY", true, 4, true)
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new DoubleAttribute("Width", 1, maximumX, true),
+			new DoubleAttribute("Height", 1, maximumY, false),
+			new IntegerAttribute("CountX", 4, maximumX, true),
+			new IntegerAttribute("CountY", 4, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
-	public OverlayCheckerboard(Color color, double x, double y, double width, double height, double countX, double countY, int maximumX, int maximumY)
+	public OverlayCheckerboard(Color color, double x, double y, double width, double height, int countX, int countY, int maximumX, int maximumY)
 	{
 		super("checkerboard", color, new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Y", true, y, false),
-			new Attribute("Width", true, width, true),
-			new Attribute("Height", true, height, false),
-			new Attribute("CountX", true, countX, true),
-			new Attribute("CountY", true, countY, true)
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Y", y, maximumY, false),
+			new DoubleAttribute("Width", width, maximumX, true),
+			new DoubleAttribute("Height", height, maximumY, false),
+			new IntegerAttribute("CountX", countX, maximumX, true),
+			new IntegerAttribute("CountY", countY, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -62,13 +62,13 @@ public class OverlayCheckerboard extends Overlay
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double centerX = canvas.getWidth() * (GetAttribute("X").Value / MaximumX);
-		double centerY = canvas.getHeight() * (GetAttribute("Y").Value / MaximumY);
-		double width = canvas.getWidth() * (GetAttribute("Width").Value / MaximumX);
-		double height = canvas.getHeight() * (GetAttribute("Height").Value / MaximumY);
+		double centerX = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX);
+		double centerY = canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY);
+		double width = canvas.getWidth() * (GetDoubleAttribute("Width") / MaximumX);
+		double height = canvas.getHeight() * (GetDoubleAttribute("Height") / MaximumY);
 		if (height == 0) height = width;
-		double countX = GetAttribute("CountX").Value;
-		double countY = GetAttribute("CountY").Value;
+		int countX = GetIntegerAttribute("CountX");
+		int countY = GetIntegerAttribute("CountY");
 
 		double left = centerX - width / 2;
 		double top = centerY - height / 2;
@@ -89,7 +89,7 @@ public class OverlayCheckerboard extends Overlay
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("X", values[0]);
 		SetAttribute("Y", values[1]);
@@ -102,13 +102,13 @@ public class OverlayCheckerboard extends Overlay
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double centerX = width * (GetAttribute("X").Value / MaximumX);
-		double centerY = height * (GetAttribute("Y").Value / MaximumY);
-		double w = width * (GetAttribute("Width").Value / MaximumX);
-		double h = height * (GetAttribute("Height").Value / MaximumY);
+		double centerX = width * (GetDoubleAttribute("X") / MaximumX);
+		double centerY = height * (GetDoubleAttribute("Y") / MaximumY);
+		double w = width * (GetDoubleAttribute("Width") / MaximumX);
+		double h = height * (GetDoubleAttribute("Height") / MaximumY);
 		if (h == 0) h = w;
-		double countX = GetAttribute("CountX").Value;
-		double countY = GetAttribute("CountY").Value;
+		int countX = GetIntegerAttribute("CountX");
+		int countY = GetIntegerAttribute("CountY");
 
 		double left = centerX - w / 2;
 		double top = centerY - h / 2;

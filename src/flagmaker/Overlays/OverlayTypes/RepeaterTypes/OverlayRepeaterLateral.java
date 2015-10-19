@@ -1,6 +1,6 @@
 package flagmaker.Overlays.OverlayTypes.RepeaterTypes;
 
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import java.util.UUID;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -15,12 +15,12 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 	{
 		super("repeater lateral", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, false),
-			new Attribute("Width", true, 1, true),
-			new Attribute("Height", true, 1, false),
-			new Attribute("CountX", true, 1, true),
-			new Attribute("CountY", true, 1, false)
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new DoubleAttribute("Width", 1, maximumX, true),
+			new DoubleAttribute("Height", 1, maximumY, false),
+			new IntegerAttribute("CountX", 1, maximumX, true),
+			new IntegerAttribute("CountY", 1, maximumY, false)
 		}, maximumX, maximumY);
 	}
 	
@@ -28,12 +28,12 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 	{
 		super("repeater lateral", new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Y", true, y, false),
-			new Attribute("Width", true, width, true),
-			new Attribute("Height", true, height, false),
-			new Attribute("CountX", true, countX, true),
-			new Attribute("CountY", true, countY, false)
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Y", y, maximumY, false),
+			new DoubleAttribute("Width", width, maximumX, true),
+			new DoubleAttribute("Height", height, maximumY, false),
+			new IntegerAttribute("CountX", countX, maximumX, true),
+			new IntegerAttribute("CountY", countY, maximumY, false)
 		}, maximumX, maximumY);
 	}
 
@@ -53,13 +53,13 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 	{
 		if (Overlay == null || !Overlay.IsEnabled) return;
 
-		int countX = (int)GetAttribute("CountX").Value;
-		int countY = (int)GetAttribute("CountY").Value;
-		double width = canvas.getWidth() * (GetAttribute("Width").Value / MaximumX);
-		double height = canvas.getHeight() * (GetAttribute("Height").Value / MaximumY);
+		int countX = GetIntegerAttribute("CountX");
+		int countY = GetIntegerAttribute("CountY");
+		double width = canvas.getWidth() * (GetDoubleAttribute("Width") / MaximumX);
+		double height = canvas.getHeight() * (GetDoubleAttribute("Height") / MaximumY);
 
-		double locX = canvas.getWidth() * (GetAttribute("X").Value / MaximumX) - width / 2;
-		double locY = canvas.getHeight() * (GetAttribute("Y").Value / MaximumY) - height / 2;
+		double locX = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX) - width / 2;
+		double locY = canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY) - height / 2;
 
 		double intervalX = width / (countX > 1 ? countX - 1 : countX);
 		double intervalY = height / (countY > 1 ? countY - 1 : countY);
@@ -92,7 +92,7 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 	}
 
 	@Override
-	public void SetValues(double[] values)
+	public void SetValues(Object[] values)
 	{
 		SetAttribute("X", values[0]);
 		SetAttribute("Y", values[1]);
@@ -108,13 +108,13 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 		if (Overlay == null) return "";
 		if (!Overlay.IsEnabled) return "";
 
-		double countX = (int)GetAttribute("CountX").Value;
-		double countY = (int)GetAttribute("CountY").Value;
-		double w = width * (GetAttribute("Width").Value / MaximumX);
-		double h = height * (GetAttribute("Height").Value / MaximumY);
+		int countX = GetIntegerAttribute("CountX");
+		int countY = GetIntegerAttribute("CountY");
+		double w = width * (GetDoubleAttribute("Width") / MaximumX);
+		double h = height * (GetDoubleAttribute("Height") / MaximumY);
 
-		double locX = width * (GetAttribute("X").Value / MaximumX) - w / 2;
-		double locY = height * (GetAttribute("Y").Value / MaximumY) - h / 2;
+		double locX = width * (GetDoubleAttribute("X") / MaximumX) - w / 2;
+		double locY = height * (GetDoubleAttribute("Y") / MaximumY) - h / 2;
 
 		double intervalX = w / (countX > 1 ? countX - 1 : countX);
 		double intervalY = h / (countY > 1 ? countY - 1 : countY);

@@ -477,8 +477,7 @@ public class MainWindowController
 
 		for (int i = 0; i < original.Attributes.length; i++)
 		{
-			copy.Attributes[i].Value = original.Attributes[i].Value;
-			copy.Attributes[i].IsDiscrete = original.Attributes[i].IsDiscrete;
+			copy.Attributes[i] = original.Attributes[i].Clone();
 		}
 
 		copy.SetColor(original.Color);

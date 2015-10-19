@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 public class TempOverlay
 {
 	public String Type;
-	public final double[] Values;
+	public final Object[] Values;
 	public Color Color;
 	public File Path;
 
@@ -17,7 +17,7 @@ public class TempOverlay
 
 	public TempOverlay()
 	{
-		Values = new double[]
+		Values = new Object[]
 		{
 			0,
 			0,

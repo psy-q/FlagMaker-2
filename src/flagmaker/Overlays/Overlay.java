@@ -1,5 +1,6 @@
 package flagmaker.Overlays;
 
+import flagmaker.Overlays.Attributes.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -16,7 +17,7 @@ public abstract class Overlay
 	protected abstract Shape[] Thumbnail();
 	
 	public abstract void Draw(Pane canvas);
-	public abstract void SetValues(double[] values);
+	public abstract void SetValues(Object[] values);
 	public abstract String ExportSvg(int width, int height);
 	
 	protected Overlay(String name, Attribute[] attributes, int maximumX, int maximumY)
@@ -65,13 +66,13 @@ public abstract class Overlay
 		return p;
 	}
 	
-	public void SetAttribute(String name, double value)
+	public <T> void SetAttribute(String name, T value)
 	{
 		for (Attribute a : Attributes)
 		{
 			if (a.Name.equals(name))
 			{
-				a.Value = value;
+				a.SetValue(value);
 				return;
 			}
 		}
@@ -91,5 +92,47 @@ public abstract class Overlay
 		
 		// Attribute not found
 		return null;
+	}
+	
+	public double GetDoubleAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name.equals(name) && a instanceof DoubleAttribute)
+			{
+				return ((DoubleAttribute)a).Value;
+			}
+		}
+		
+		// Attribute not found
+		return 0;
+	}
+	
+	public int GetIntegerAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name.equals(name) && a instanceof IntegerAttribute)
+			{
+				return ((IntegerAttribute)a).Value;
+			}
+		}
+		
+		// Attribute not found
+		return 0;
+	}
+	
+	public boolean GetBooleanAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name.equals(name) && a instanceof BooleanAttribute)
+			{
+				return ((BooleanAttribute)a).Value;
+			}
+		}
+		
+		// Attribute not found
+		return false;
 	}
 }
