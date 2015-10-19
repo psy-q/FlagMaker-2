@@ -18,163 +18,115 @@ public class FileHandler
 {
 	public static Flag LoadFromFile(File file) throws Exception
 	{
-		String name = "";
-		Ratio ratio = new Ratio(3, 2);
-		Ratio gridRatio = new Ratio(3, 2);
+		ArrayList<String> lines = ReadAllLines(file);
+		ArrayList<ArrayList<String>> groups = SplitLines(lines);
 		
-		String divisionType = "grid";
-		Color divisionColor1 = Color.WHITE;
-		Color divisionColor2 = Color.WHITE;
-		Color divisionColor3 = Color.WHITE;
-		int divisionVal1 = 1;
-		int divisionVal2 = 1;
-		int divisionVal3 = 1;
+		String name = GetValue(groups.get(0), "name", "name= ");
+		Ratio ratio = new Ratio(GetValue(groups.get(0), "ratio", "ratio=2:3"));
+		Ratio gridRatio = new Ratio(GetValue(groups.get(0), "gridSize", "ratio=2:3"));
+		
+		Division division = ReadDivision(groups.get(1));
+		
+		ArrayList<Overlay> overlays = new ArrayList<>();
+		for (int i = 2; i < groups.size(); i++)
+		{
+			overlays.add(ReadOverlay(groups.get(i), gridRatio.Width, gridRatio.Height, file.getParent()));
+		}
 
-		ArrayList<TempOverlay> overlays = new ArrayList<>();
-
+		Overlay[] finalOverlays = new Overlay[]{};
+		return new Flag(name, ratio, gridRatio, division, overlays.toArray(finalOverlays));
+	}
+	
+	private static ArrayList<String> ReadAllLines(File file) throws Exception
+	{
+		ArrayList<String> lines = new ArrayList<>();
 		String line = "";
 		try (FileReader fr = new FileReader(file); BufferedReader sr = new BufferedReader(fr))
 		{
-			boolean isDivision = false;
-			int overlayIndex = -1;
-
 			while ((line = sr.readLine()) != null)
 			{
-				switch (line.split("=")[0].toLowerCase())
-				{
-					case "name":
-						name = line.split("=")[1];
-						break;
-					case "ratio":
-						ratio = new Ratio(line.split("=")[1]);
-						break;
-					case "gridsize":
-						gridRatio = new Ratio(line.split("=")[1]);
-						break;
-					case "division":
-						isDivision = true;
-						break;
-					case "overlay":
-						isDivision = false;
-						overlayIndex++;
-						TempOverlay to = new TempOverlay();
-						overlays.add(to);
-						break;
-					case "type":
-						if (isDivision)
-						{
-							divisionType = line.split("=")[1];
-						}
-						else
-						{
-							overlays.get(overlayIndex).Type = line.split("=")[1];
-						}
-						break;
-					case "color1":
-						divisionColor1 = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					case "color2":
-						divisionColor2 = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					case "color3":
-						divisionColor3 = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					case "color":
-						overlays.get(overlayIndex).Color = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					case "size1":
-						if (isDivision)
-						{
-							divisionVal1 = Integer.parseInt(line.split("=")[1]);
-						}
-						else
-						{
-							overlays.get(overlayIndex).Values[0] = GetDoubleFromString(line.split("=")[1]);
-						}
-						break;
-					case "size2":
-						if (isDivision)
-						{
-							divisionVal2 = Integer.parseInt(line.split("=")[1]);
-						}
-						else
-						{
-							overlays.get(overlayIndex).Values[1] = GetDoubleFromString(line.split("=")[1]);
-						}
-						break;
-					case "size3":
-						if (isDivision)
-						{
-							divisionVal3 = Integer.parseInt(line.split("=")[1]);
-						}
-						else
-						{
-							overlays.get(overlayIndex).Values[2] = GetDoubleFromString(line.split("=")[1]);
-						}
-						break;
-					case "size4":
-						overlays.get(overlayIndex).Values[3] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size5":
-						overlays.get(overlayIndex).Values[4] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size6":
-						overlays.get(overlayIndex).Values[5] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size7":
-						overlays.get(overlayIndex).Values[6] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size8":
-						overlays.get(overlayIndex).Values[7] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "path":
-						overlays.get(overlayIndex).Path = new File(line.split("=")[1]);
-						break;
-					case "stroke":
-						overlays.get(overlayIndex).StrokeColor = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-				}
+				lines.add(line);
 			}
-
-			Division division;
-			switch (divisionType)
-			{
-				case "fesses":
-					division = new DivisionFesses(divisionColor1, divisionColor2, divisionColor3, divisionVal1, divisionVal2,
-						divisionVal3);
-					break;
-				case "pales":
-					division = new DivisionPales(divisionColor1, divisionColor2, divisionColor3, divisionVal1, divisionVal2,
-						divisionVal3);
-					break;
-				case "bends forward":
-					division = new DivisionBendsForward(divisionColor1, divisionColor2);
-					break;
-				case "bends backward":
-					division = new DivisionBendsBackward(divisionColor1, divisionColor2);
-					break;
-				case "bends both":
-					division = new DivisionX(divisionColor1, divisionColor2);
-					break;
-				default:
-					division = new DivisionGrid(divisionColor1, divisionColor2, divisionVal1, divisionVal2);
-					break;
-			}
-			
-			Overlay[] finalOverlays = new Overlay[overlays.size()];
-			
-			for (int i = 0; i < overlays.size(); i++)
-			{
-				Overlay o = overlays.get(i).ToOverlay(gridRatio.Width, gridRatio.Height, file.getParent());
-				finalOverlays[i] = o;
-			}
-
-			return new Flag(name, ratio, gridRatio, division, finalOverlays);
 		}
 		catch (Exception ex)
 		{
 			throw new Exception(line, ex);
 		}
+		
+		return lines;
+	}
+	
+	private static ArrayList<ArrayList<String>> SplitLines(ArrayList<String> lines)
+	{
+		ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
+		
+		ArrayList<String> currentSection = new ArrayList<>();
+		for (String line : lines)
+		{
+			if (StringExtensions.IsNullOrWhitespace(line) && !currentSection.isEmpty())
+			{
+				returnValue.add((ArrayList<String>)currentSection.clone());
+				currentSection.clear();
+			}
+			else
+			{
+				currentSection.add(line);
+			}
+		}
+		
+		returnValue.add((ArrayList<String>)currentSection.clone());
+		return returnValue;
+	}
+	
+	private static Division ReadDivision(ArrayList<String> lines)
+	{
+		String type = GetValue(lines, "type", "type=grid");
+		
+		Color color1 = ColorExtensions.ParseColor(GetValue(lines, "color1", "color1=ffffff"));
+		Color color2 = ColorExtensions.ParseColor(GetValue(lines, "color2", "color2=ffffff"));
+		Color color3 = ColorExtensions.ParseColor(GetValue(lines, "color3", "color3=ffffff"));
+		
+		int divisionVal1 = Integer.parseInt(GetValue(lines, "size1", "size1=1"));
+		int divisionVal2 = Integer.parseInt(GetValue(lines, "size2", "size2=1"));
+		int divisionVal3 = Integer.parseInt(GetValue(lines, "size3", "size3=1"));
+		
+		switch (type)
+		{
+			case "fesses":
+				return new DivisionFesses(color1, color2, color3, divisionVal1, divisionVal2, divisionVal3);
+			case "pales":
+				return new DivisionPales(color1, color2, color3, divisionVal1, divisionVal2, divisionVal3);
+			case "bends forward":
+				return new DivisionBendsForward(color1, color2);
+			case "bends backward":
+				return new DivisionBendsBackward(color1, color2);
+			case "bends both":
+				return new DivisionX(color1, color2);
+			default:
+				return new DivisionGrid(color1, color2, divisionVal1, divisionVal2);
+		}
+	}
+	
+	private static Overlay ReadOverlay(ArrayList<String> lines, int maximumX, int maximumY, String directory) throws Exception
+	{
+		TempOverlay t = new TempOverlay();
+		t.Type = GetValue(lines, "type", "type=grid");
+		t.Color = ColorExtensions.ParseColor(GetValue(lines, "color", "color=ffffff"));
+		t.StrokeColor = ColorExtensions.ParseColor(GetValue(lines, "stroke", "stroke=ffffff"));
+		t.Path = new File(GetValue(lines, "path", "path= "));
+		t.StrokeColor = ColorExtensions.ParseColor(GetValue(lines, "stroke", "stroke=ffffff"));
+		
+		for (int i = 0; i < 8; i++)
+		{
+			t.Values[i] = GetDoubleFromString(GetValue(lines, String.format("size%d", i + 1), String.format("size%d=1", i + 1)));
+		}
+		
+		return t.ToOverlay(maximumX, maximumY, directory);
+	}
+		
+	private static String GetValue(ArrayList<String> data, String fieldName, String defaultValue)
+	{
+		return data.stream().filter(s -> s.startsWith(fieldName)).findFirst().orElse(defaultValue).split("=")[1];
 	}
 	
 	private static Double GetDoubleFromString(String data)
