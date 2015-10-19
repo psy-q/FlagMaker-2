@@ -1,6 +1,7 @@
 package flagmaker.Overlays;
 
 import flagmaker.ControlExtensions;
+import flagmaker.LocalizationHandler;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import javafx.beans.value.ObservableValue;
@@ -30,9 +31,10 @@ public class AttributeSlider extends HBox
 	{
 		Load();
 		
+		String label = LocalizationHandler.Get(name);
 		_parent = parent;
-		lblName.setText(name);
-		lblName.setTooltip(new Tooltip(name));
+		lblName.setText(label);
+		lblName.setTooltip(new Tooltip(label));
 		_isDiscrete = isDiscrete && (value % 1 == 0);
 		chkDiscrete.setSelected(_isDiscrete);
 		chkDiscrete.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean oldval, Boolean newval) -> CheckChanged());

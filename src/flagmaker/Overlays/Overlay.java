@@ -67,7 +67,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name == name)
+			if (a.Name.equals(name))
 			{
 				a.Value = value;
 				return;
@@ -81,7 +81,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name == name)
+			if (a.Name.equals(name))
 			{
 				return a;
 			}
