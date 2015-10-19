@@ -205,7 +205,7 @@ public class MainWindowController
 				
 		lblOverlays.setText(LocalizationHandler.Get("Overlays"));
 		ttpOverlayAddNew.setText(LocalizationHandler.Get("OverlayAdd"));
-		
+		LoadBasicPresets();
 	}
 	
 	private void AddWorkspace()
@@ -1105,6 +1105,7 @@ public class MainWindowController
 
 	private void LoadBasicPresets()
 	{
+		cmbPresets.getItems().clear();
 		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionBlank"));
 		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionHorizontalHalves"));
 		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionVerticalHalves"));
