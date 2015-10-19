@@ -10,7 +10,7 @@
 	<children>
 		<TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" />
 		<AnchorPane VBox.vgrow="NEVER">
-			<Button onAction="#Cancel" cancelButton="true" text="Cancel" AnchorPane.rightAnchor="0"  />
+			<Button fx:id="btnCancel" onAction="#Cancel" cancelButton="true" AnchorPane.rightAnchor="0"  />
 		</AnchorPane>
 	</children>
 </fx:root>

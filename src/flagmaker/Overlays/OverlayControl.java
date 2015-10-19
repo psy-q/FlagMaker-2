@@ -1,6 +1,7 @@
 package flagmaker.Overlays;
 
 import flagmaker.ControlExtensions;
+import flagmaker.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,7 +34,16 @@ public class OverlayControl extends VBox
 	@FXML private ColorPicker strokePicker;
 	@FXML private ImageView btnVisibility;
 	
+	@FXML private Tooltip ttpChangeType;
+	@FXML private Tooltip ttpVisibility;
+	@FXML private Tooltip ttpRemove;
+	@FXML private Tooltip ttpMoveUp;
+	@FXML private Tooltip ttpMoveDown;
+	@FXML private Tooltip ttpClone;
+	@FXML private Label lblStroke;
+	
 	private Stage _stage;
+	private LocalizationHandler _lh;
 	
 	private Overlay _overlay;
 	private int _defaultMaximumX;
@@ -43,9 +54,11 @@ public class OverlayControl extends VBox
 	public boolean IsLoading;
 	public boolean WasCanceled;
 		
-	public OverlayControl(Stage stage, MainWindowController mainWindow, int defaultMaximumX, int defaultMaximumY, boolean isLoading)
+	public OverlayControl(Stage stage, MainWindowController mainWindow, LocalizationHandler lh, int defaultMaximumX, int defaultMaximumY, boolean isLoading)
 	{
 		Load(stage);
+		_lh = lh;
+		LoadLocalization();
 		
 		IsLoading = isLoading;
 		_mainWindow = mainWindow;
@@ -162,6 +175,17 @@ public class OverlayControl extends VBox
 		}
 	}
 	
+	private void LoadLocalization()
+	{
+		ttpChangeType.setText(_lh.Get("OverlayChangeType"));
+		ttpVisibility.setText(_lh.Get("ToggleVisibility"));
+		ttpRemove.setText(_lh.Get("Remove"));
+		ttpMoveUp.setText(_lh.Get("MoveUp"));
+		ttpMoveDown.setText(_lh.Get("MoveDown"));
+		ttpClone.setText(_lh.Get("Clone"));
+		lblStroke.setText(_lh.Get("Stroke"));
+	}
+	
 	private void OverlayColorChanged()
 	{
 		if (_overlay == null) return;
@@ -182,7 +206,7 @@ public class OverlayControl extends VBox
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		dialog.initOwner(_stage);
-		OverlaySelector control = new OverlaySelector(dialog, _defaultMaximumX, _defaultMaximumY);
+		OverlaySelector control = new OverlaySelector(dialog, _lh, _defaultMaximumX, _defaultMaximumY);
 		Scene dialogScene = new Scene(control, 400, 300);
 		dialog.setScene(dialogScene);
 		dialog.showAndWait();

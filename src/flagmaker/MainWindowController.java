@@ -175,7 +175,7 @@ public class MainWindowController
 	{
 		mnuFile.setText(_lh.Get("File"));
 		mnuNew.setText(_lh.Get("New"));
-		mnuOpen.setText(_lh.Get("Open"));
+		mnuOpen.setText(_lh.Get("OpenMenu"));
 		mnuSave.setText(_lh.Get("SaveMenu"));
 		mnuSaveAs.setText(_lh.Get("SaveAs"));
 		mnuExportPng.setText(_lh.Get("ExportAsPngMenu"));
@@ -499,7 +499,7 @@ public class MainWindowController
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{
 		Ratio gridSize = SelectedGridSize();
-		OverlayControl control = new OverlayControl(_stage, this, gridSize.Width, gridSize.Height, isLoading);
+		OverlayControl control = new OverlayControl(_stage, this, _lh, gridSize.Width, gridSize.Height, isLoading);
 
 		if (control.WasCanceled)
 		{
@@ -1199,7 +1199,7 @@ public class MainWindowController
 	private void GenerateRandomFlag()
 	{
 		if (CheckUnsaved()) return;
-		Flag f = new RandomFlagFactory().GenerateFlag();
+		Flag f = new RandomFlagFactory().GenerateFlag(_lh);
 		LoadFlag(f);
 		_filename = "";
 		SetTitle();

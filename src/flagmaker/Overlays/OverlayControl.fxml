@@ -12,12 +12,12 @@
 	<FlowPane orientation="HORIZONTAL">
 		<Button fx:id="btnOverlay" onAction="#OverlaySelect" prefWidth="32.0" prefHeight="32.0">
 			<tooltip>
-				<Tooltip text="Change type" />
+				<Tooltip fx:id="ttpChangeType" />
 			</tooltip>
 		</Button>
 		<Button onAction="#SetVisibility">
 			<tooltip>
-				<Tooltip text="Toggle visibility" />
+				<Tooltip fx:id="ttpVisibility" />
 			</tooltip>
 			<graphic>
 				<ImageView fx:id="btnVisibility" fitHeight="32.0" fitWidth="32.0">
@@ -29,7 +29,7 @@
 		</Button>
 		<Button onAction="#Remove">
 			<tooltip>
-				<Tooltip text="Remove" />
+				<Tooltip fx:id="ttpRemove" />
 			</tooltip>
 			<graphic>
 				<ImageView fitHeight="32.0" fitWidth="32.0">
@@ -41,7 +41,7 @@
 		</Button>
 		<Button onAction="#MoveUp">
 			<tooltip>
-				<Tooltip text="Move up" />
+				<Tooltip fx:id="ttpMoveUp" />
 			</tooltip>
 			<graphic>
 				<ImageView fitHeight="32.0" fitWidth="32.0">
@@ -53,7 +53,7 @@
 		</Button>
 		<Button onAction="#MoveDown">
 			<tooltip>
-				<Tooltip text="Move down" />
+				<Tooltip fx:id="ttpMoveDown" />
 			</tooltip>
 			<graphic>
 				<ImageView fitHeight="32.0" fitWidth="32.0">
@@ -65,7 +65,7 @@
 		</Button>
 		<Button onAction="#Clone">
 			<tooltip>
-				<Tooltip text="Clone" />
+				<Tooltip fx:id="ttpClone" />
 			</tooltip>
 			<graphic>
 				<ImageView fitHeight="32.0" fitWidth="32.0">
@@ -80,7 +80,7 @@
 	<ColorPicker fx:id="overlayPicker" minHeight="28.0" style="-fx-color-label-visible: false;" />
 	<VBox fx:id="pnlSliders" />
 	<HBox fx:id="strokeBox" alignment="CENTER_LEFT">
-		<Label text="Stroke">
+		<Label fx:id="lblStroke">
 			<padding>
 				<Insets right="10.0" />
 			</padding>

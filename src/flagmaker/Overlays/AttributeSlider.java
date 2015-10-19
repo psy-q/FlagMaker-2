@@ -3,7 +3,6 @@ package flagmaker.Overlays;
 import flagmaker.ControlExtensions;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

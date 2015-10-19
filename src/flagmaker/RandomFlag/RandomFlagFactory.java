@@ -2,6 +2,7 @@ package flagmaker.RandomFlag;
 
 import flagmaker.Divisions.*;
 import flagmaker.Flag;
+import flagmaker.LocalizationHandler;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayFactory;
 import flagmaker.Overlays.OverlayTypes.*;
@@ -24,21 +25,21 @@ public class RandomFlagFactory
 	
 	private final Overlay[] _emblems = OverlayFactory.GetEmblems();
 	
-	public Flag GenerateFlag()
+	public Flag GenerateFlag(LocalizationHandler lh)
 	{
-		return GenerateFlag(new ColorScheme());
+		return GenerateFlag(new ColorScheme(), lh);
 	}
 	
-	public Flag GenerateFlag(ColorScheme colorScheme)
+	public Flag GenerateFlag(ColorScheme colorScheme, LocalizationHandler lh)
 	{
 		_colorScheme = new ColorScheme();
 		_canHaveCanton = true;
 		GetRatio();
 		_overlays = new ArrayList<>();
-		_division = GetDivision();
+		_division = GetDivision(lh);
 		
 		Overlay[] overlays = new Overlay[]{};
-		return new Flag("Random", _ratio, _gridSize, _division, _overlays.toArray(overlays));
+		return new Flag(lh.Get("Random"), _ratio, _gridSize, _division, _overlays.toArray(overlays));
 	}
 	
 	private void GetRatio()
@@ -53,7 +54,7 @@ public class RandomFlagFactory
 		_gridSize = new Ratio(_ratio.Width * 8, _ratio.Height * 8);
 	}
 	
-	private Division GetDivision()
+	private Division GetDivision(LocalizationHandler lh)
 	{
 		// Roughly based on real-life usage
 		// 206 flags surveyed
@@ -82,7 +83,7 @@ public class RandomFlagFactory
 			case Fesses:
 				return GetFesses();
 			case Blank:
-				return GetBlank();
+				return GetBlank(lh);
 			case Horizontal:
 				return GetHorizontal();
 			case Vertical:
@@ -374,7 +375,7 @@ public class RandomFlagFactory
 		return new DivisionGrid(background, background, 1, 1);
 	}
 
-	private DivisionGrid GetBlank()
+	private DivisionGrid GetBlank(LocalizationHandler lh)
 	{
 		Color color = _colorScheme.Color1();
 
@@ -390,7 +391,7 @@ public class RandomFlagFactory
 				// Canton
 				if (Randomizer.ProbabilityOfTrue(0.6))
 				{
-					AddFlag(new RandomFlagFactory().GenerateFlag(_colorScheme.Swapped()));
+					AddFlag(new RandomFlagFactory().GenerateFlag(_colorScheme.Swapped(), lh));
 					AddEmblem(1.0, 3 * _gridSize.Width / 4.0, _gridSize.Height / 2.0, _colorScheme.Metal(), true, _colorScheme.Color2(), false);
 				}
 				else
