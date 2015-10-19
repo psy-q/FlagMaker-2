@@ -155,6 +155,9 @@ public class MainWindowController
 		Locale[] locales = new Locale[]
 		{
 			new Locale("en", "US"),
+			new Locale("es", "MX"),
+			new Locale("fr", "FR"),
+			new Locale("pl", "PL"),
 			new Locale("ru", "RU")
 		};
 		
@@ -163,7 +166,8 @@ public class MainWindowController
 			MenuItem item = new MenuItem(locale.getDisplayName());
 			item.addEventHandler(EventType.ROOT, (Event event) ->
 			{
-				// change language
+				LocalizationHandler.SetLanguage(locale);
+				SetWindowStrings();
 			});
 			mnuLanguages.getItems().add(item);
 		}
@@ -1209,10 +1213,6 @@ public class MainWindowController
 		{
 			event.consume();
 		}
-	}
-
-	private void LanguageChange()
-	{
 	}
 
 	public Flag Flag()

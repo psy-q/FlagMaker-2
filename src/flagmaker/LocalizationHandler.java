@@ -13,15 +13,30 @@ public class LocalizationHandler
 	{
 		_currentLocale = Locale.getDefault();
 		if (_currentLocale == null) _currentLocale = Locale.US;
-		_bundle = ResourceBundle.getBundle("bundles.strings", _currentLocale);
+		SetBundle(_currentLocale);
 		_defaultBundle = ResourceBundle.getBundle("bundles.strings", Locale.US);
+	}
+	
+	public static void SetLanguage(Locale locale)
+	{
+		_currentLocale = locale;
+		SetBundle(locale);
 	}
 	
 	public static String Get(String key)
 	{
-		String s = _bundle.getString(key);
-		return s == null
-			? _defaultBundle.getString(key)
-			: s;
+		try
+		{
+			return _bundle.getString(key);
+		}
+		catch (Exception e)
+		{
+			return _defaultBundle.getString(key);
+		}
+	}
+	
+	private static void SetBundle(Locale locale)
+	{
+		_bundle = ResourceBundle.getBundle("bundles.strings", locale);
 	}
 }
