@@ -25,21 +25,21 @@ public class RandomFlagFactory
 	
 	private final Overlay[] _emblems = OverlayFactory.GetEmblems();
 	
-	public Flag GenerateFlag(LocalizationHandler lh)
+	public Flag GenerateFlag()
 	{
-		return GenerateFlag(new ColorScheme(), lh);
+		return GenerateFlag(new ColorScheme());
 	}
 	
-	public Flag GenerateFlag(ColorScheme colorScheme, LocalizationHandler lh)
+	public Flag GenerateFlag(ColorScheme colorScheme)
 	{
 		_colorScheme = new ColorScheme();
 		_canHaveCanton = true;
 		GetRatio();
 		_overlays = new ArrayList<>();
-		_division = GetDivision(lh);
+		_division = GetDivision();
 		
 		Overlay[] overlays = new Overlay[]{};
-		return new Flag(lh.Get("Random"), _ratio, _gridSize, _division, _overlays.toArray(overlays));
+		return new Flag(LocalizationHandler.Get("Random"), _ratio, _gridSize, _division, _overlays.toArray(overlays));
 	}
 	
 	private void GetRatio()
@@ -54,7 +54,7 @@ public class RandomFlagFactory
 		_gridSize = new Ratio(_ratio.Width * 8, _ratio.Height * 8);
 	}
 	
-	private Division GetDivision(LocalizationHandler lh)
+	private Division GetDivision()
 	{
 		// Roughly based on real-life usage
 		// 206 flags surveyed
@@ -83,7 +83,7 @@ public class RandomFlagFactory
 			case Fesses:
 				return GetFesses();
 			case Blank:
-				return GetBlank(lh);
+				return GetBlank();
 			case Horizontal:
 				return GetHorizontal();
 			case Vertical:
@@ -375,7 +375,7 @@ public class RandomFlagFactory
 		return new DivisionGrid(background, background, 1, 1);
 	}
 
-	private DivisionGrid GetBlank(LocalizationHandler lh)
+	private DivisionGrid GetBlank()
 	{
 		Color color = _colorScheme.Color1();
 
@@ -391,7 +391,7 @@ public class RandomFlagFactory
 				// Canton
 				if (Randomizer.ProbabilityOfTrue(0.6))
 				{
-					AddFlag(new RandomFlagFactory().GenerateFlag(_colorScheme.Swapped(), lh));
+					AddFlag(new RandomFlagFactory().GenerateFlag(_colorScheme.Swapped()));
 					AddEmblem(1.0, 3 * _gridSize.Width / 4.0, _gridSize.Height / 2.0, _colorScheme.Metal(), true, _colorScheme.Color2(), false);
 				}
 				else

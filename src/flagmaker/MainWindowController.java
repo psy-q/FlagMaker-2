@@ -101,8 +101,6 @@ public class MainWindowController
 	@FXML private Tooltip ttpOverlayAddNew;
 	
 	@FXML private Label lblDivisions;
-
-	private LocalizationHandler _lh;
 	
 	private Stage _stage;
 	private SubScene _subScene;
@@ -148,7 +146,7 @@ public class MainWindowController
 	{
 		LoadLanguageMenu();
 		
-		_lh = new LocalizationHandler();
+		LocalizationHandler.Initialize();
 		SetWindowStrings();
 	}
 	
@@ -173,36 +171,36 @@ public class MainWindowController
 
 	private void SetWindowStrings()
 	{
-		mnuFile.setText(_lh.Get("File"));
-		mnuNew.setText(_lh.Get("New"));
-		mnuOpen.setText(_lh.Get("OpenMenu"));
-		mnuSave.setText(_lh.Get("SaveMenu"));
-		mnuSaveAs.setText(_lh.Get("SaveAs"));
-		mnuExportPng.setText(_lh.Get("ExportAsPngMenu"));
-		mnuExportSvg.setText(_lh.Get("ExportAsSvgMenu"));
-		mnuBulkExportPng.setText(_lh.Get("ExportBulkAsPng"));
-		mnuBulkExportSvg.setText(_lh.Get("ExportBulkAsSvg"));
-		mnuPresets.setText(_lh.Get("WorldFlagPresets"));
-		mnuLanguages.setText(_lh.Get("Language"));
+		mnuFile.setText(LocalizationHandler.Get("File"));
+		mnuNew.setText(LocalizationHandler.Get("New"));
+		mnuOpen.setText(LocalizationHandler.Get("OpenMenu"));
+		mnuSave.setText(LocalizationHandler.Get("SaveMenu"));
+		mnuSaveAs.setText(LocalizationHandler.Get("SaveAs"));
+		mnuExportPng.setText(LocalizationHandler.Get("ExportAsPngMenu"));
+		mnuExportSvg.setText(LocalizationHandler.Get("ExportAsSvgMenu"));
+		mnuBulkExportPng.setText(LocalizationHandler.Get("ExportBulkAsPng"));
+		mnuBulkExportSvg.setText(LocalizationHandler.Get("ExportBulkAsSvg"));
+		mnuPresets.setText(LocalizationHandler.Get("WorldFlagPresets"));
+		mnuLanguages.setText(LocalizationHandler.Get("Language"));
 		
-		lblRatio.setText(_lh.Get("Ratio"));
-		lblGridSize.setText(_lh.Get("GridSize"));
-		ttpShowGrid.setText(_lh.Get("ShowGrid"));
-		ttpShuffleColors.setText(_lh.Get("ShuffleColors"));
-		ttpToggleTexture.setText(_lh.Get("ToggleTexture"));
-		ttpRandomFlag.setText(_lh.Get("GenerateRandomFlag"));
+		lblRatio.setText(LocalizationHandler.Get("Ratio"));
+		lblGridSize.setText(LocalizationHandler.Get("GridSize"));
+		ttpShowGrid.setText(LocalizationHandler.Get("ShowGrid"));
+		ttpShuffleColors.setText(LocalizationHandler.Get("ShuffleColors"));
+		ttpToggleTexture.setText(LocalizationHandler.Get("ToggleTexture"));
+		ttpRandomFlag.setText(LocalizationHandler.Get("GenerateRandomFlag"));
 		
-		lblDivisions.setText(_lh.Get("Division"));
-		ttpDivisionGrid.setText(_lh.Get("DivisionGrid"));
-		ttpDivisionFesses.setText(_lh.Get("DivisionFesses"));
-		ttpDivisionPales.setText(_lh.Get("DivisionPales"));
-		ttpDivisionBendsForward.setText(_lh.Get("DivisionBendsForward"));
-		ttpDivisionBendsBackward.setText(_lh.Get("DivisionBendsBackward"));
-		ttpDivisionBendsBoth.setText(_lh.Get("DivisionBendsBoth"));
-		lblPresets.setText(_lh.Get("DivisionPresets"));
+		lblDivisions.setText(LocalizationHandler.Get("Division"));
+		ttpDivisionGrid.setText(LocalizationHandler.Get("DivisionGrid"));
+		ttpDivisionFesses.setText(LocalizationHandler.Get("DivisionFesses"));
+		ttpDivisionPales.setText(LocalizationHandler.Get("DivisionPales"));
+		ttpDivisionBendsForward.setText(LocalizationHandler.Get("DivisionBendsForward"));
+		ttpDivisionBendsBackward.setText(LocalizationHandler.Get("DivisionBendsBackward"));
+		ttpDivisionBendsBoth.setText(LocalizationHandler.Get("DivisionBendsBoth"));
+		lblPresets.setText(LocalizationHandler.Get("DivisionPresets"));
 				
-		lblOverlays.setText(_lh.Get("Overlays"));
-		ttpOverlayAddNew.setText(_lh.Get("OverlayAdd"));
+		lblOverlays.setText(LocalizationHandler.Get("Overlays"));
+		ttpOverlayAddNew.setText(LocalizationHandler.Get("OverlayAdd"));
 		
 	}
 	
@@ -255,7 +253,7 @@ public class MainWindowController
 	{
 		String title = String.format("%s%s%s",
 				StringExtensions.IsNullOrWhitespace(_filename)
-						? _lh.Get("Untitled")
+						? LocalizationHandler.Get("Untitled")
 						: StringExtensions.GetFilenameWithoutExtension(_filename),
 				_isUnsaved ? "*" : "",
 				_headerText);
@@ -499,7 +497,7 @@ public class MainWindowController
 	private void OverlayAdd(int index, Overlay overlay, boolean isLoading)
 	{
 		Ratio gridSize = SelectedGridSize();
-		OverlayControl control = new OverlayControl(_stage, this, _lh, gridSize.Width, gridSize.Height, isLoading);
+		OverlayControl control = new OverlayControl(_stage, this, gridSize.Width, gridSize.Height, isLoading);
 
 		if (control.WasCanceled)
 		{
@@ -739,7 +737,7 @@ public class MainWindowController
 		if (dimensions.X == 0 || dimensions.Y == 0) return;
 		
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle(_lh.Get("ExportAsPng"));
+		fileChooser.setTitle(LocalizationHandler.Get("ExportAsPng"));
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("PNG (*.png)", "*.png"));
 		File file = fileChooser.showSaveDialog(_stage);
 		
@@ -752,9 +750,9 @@ public class MainWindowController
 	private Size GetPngDimensions(boolean constrain)
 	{
 		Dialog<Size> dialog = new Dialog<>();
-		dialog.setTitle(_lh.Get("ExportAsPng"));
+		dialog.setTitle(LocalizationHandler.Get("ExportAsPng"));
 		dialog.setHeaderText("Enter desired PNG size, in pixels"); // TODO
-		ButtonType saveButtonType = new ButtonType(_lh.Get("Save"), ButtonData.OK_DONE);
+		ButtonType saveButtonType = new ButtonType(LocalizationHandler.Get("Save"), ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 		
 		// Create the username and password labels and fields.
@@ -764,13 +762,13 @@ public class MainWindowController
 		grid.setPadding(new Insets(20, 150, 10, 10));
 
 		TextField width = new TextField();
-		width.setPromptText(_lh.Get("Width"));
+		width.setPromptText(LocalizationHandler.Get("Width"));
 		TextField height = new TextField();
-		height.setPromptText(_lh.Get("Height"));
+		height.setPromptText(LocalizationHandler.Get("Height"));
 
-		grid.add(new Label(_lh.Get("Width")), 0, 0);
+		grid.add(new Label(LocalizationHandler.Get("Width")), 0, 0);
 		grid.add(width, 1, 0);
-		grid.add(new Label(_lh.Get("Height")), 0, 1);
+		grid.add(new Label(LocalizationHandler.Get("Height")), 0, 1);
 		grid.add(height, 1, 1);
 
 		// Enable/Disable login button depending on whether a username was entered.
@@ -820,7 +818,7 @@ public class MainWindowController
 	public void MenuExportSvgClick()
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle(_lh.Get("ExportAsSVG"));
+		fileChooser.setTitle(LocalizationHandler.Get("ExportAsSVG"));
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("SVG (*.svg)", "*.svg"));
 		File file = fileChooser.showSaveDialog(_stage);
 		
@@ -886,8 +884,8 @@ public class MainWindowController
 	private List<File> GetFlagFiles()
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle(_lh.Get("SelectFiles"));
-		fileChooser.getExtensionFilters().add(new ExtensionFilter(_lh.Get("FlagFileFilter"), "*.flag"));
+		fileChooser.setTitle(LocalizationHandler.Get("SelectFiles"));
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(LocalizationHandler.Get("FlagFileFilter"), "*.flag"));
 		return fileChooser.showOpenMultipleDialog(_stage);
 	}
 	
@@ -895,7 +893,7 @@ public class MainWindowController
 	{
 		DirectoryChooser dc = new DirectoryChooser();
 		dc.setInitialDirectory(defaultDirectory);
-		dc.setTitle(_lh.Get("SelectDirectory"));
+		dc.setTitle(LocalizationHandler.Get("SelectDirectory"));
 		return dc.showDialog(_stage);
 	}
 
@@ -903,11 +901,11 @@ public class MainWindowController
 	{
 		if (errorOccurred)
 		{
-			new Alert(AlertType.ERROR, _lh.Get("ExportBulkError"), ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, LocalizationHandler.Get("ExportBulkError"), ButtonType.OK).showAndWait();
 		}
 		else
 		{
-			new Alert(AlertType.INFORMATION, _lh.Get("ExportBulkSuccess"), ButtonType.OK).showAndWait();
+			new Alert(AlertType.INFORMATION, LocalizationHandler.Get("ExportBulkSuccess"), ButtonType.OK).showAndWait();
 		}
 	}
 
@@ -923,7 +921,7 @@ public class MainWindowController
 		lstOverlays.getChildren().clear();
 		SetRatio(3, 2);
 		RatioTextboxChanged();
-		txtName.setText(_lh.Get("Untitled"));
+		txtName.setText(LocalizationHandler.Get("Untitled"));
 		_filename = "";
 		_isUnsaved = false;
 		SetTitle();
@@ -961,7 +959,7 @@ public class MainWindowController
 	{
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter(_lh.Get("FlagFileFilter"), "*.flag"));
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(LocalizationHandler.Get("FlagFileFilter"), "*.flag"));
 		File file = fileChooser.showSaveDialog(_stage);
 		
 		if (file != null)
@@ -974,8 +972,8 @@ public class MainWindowController
 	@FXML private void Open()
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle(_lh.Get("Open"));
-		fileChooser.getExtensionFilters().add(new ExtensionFilter(_lh.Get("FlagFileFilter"), "*.flag"));
+		fileChooser.setTitle(LocalizationHandler.Get("Open"));
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(LocalizationHandler.Get("FlagFileFilter"), "*.flag"));
 		File file = fileChooser.showOpenDialog(_stage);
 		LoadFlagFromFile(file);
 	}
@@ -985,12 +983,12 @@ public class MainWindowController
 		if (!_isUnsaved) return false;
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		ButtonType buttonYes = new ButtonType(_lh.Get("Yes"));
-		ButtonType buttonNo = new ButtonType(_lh.Get("No"));
-		ButtonType buttonCancel = new ButtonType(_lh.Get("Cancel"), ButtonData.CANCEL_CLOSE);
+		ButtonType buttonYes = new ButtonType(LocalizationHandler.Get("Yes"));
+		ButtonType buttonNo = new ButtonType(LocalizationHandler.Get("No"));
+		ButtonType buttonCancel = new ButtonType(LocalizationHandler.Get("Cancel"), ButtonData.CANCEL_CLOSE);
 		alert.setTitle(GetNameWithVersion());
-		alert.setHeaderText(_lh.Get("NotSaved"));
-		alert.setContentText(String.format(_lh.Get("SaveChangesPrompt"), txtName.getText()));
+		alert.setHeaderText(LocalizationHandler.Get("NotSaved"));
+		alert.setContentText(String.format(LocalizationHandler.Get("SaveChangesPrompt"), txtName.getText()));
 		alert.getButtonTypes().setAll(buttonYes, buttonNo, buttonCancel);
 
 		Optional<ButtonType> result = alert.showAndWait();
@@ -1013,7 +1011,7 @@ public class MainWindowController
 		}
 		catch (Exception e)
 		{
-			new Alert(AlertType.ERROR, String.format(_lh.Get("CouldNotOpenError"), e.getMessage()), ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, String.format(LocalizationHandler.Get("CouldNotOpenError"), e.getMessage()), ButtonType.OK).showAndWait();
 		}
 	}
 
@@ -1103,11 +1101,11 @@ public class MainWindowController
 
 	private void LoadBasicPresets()
 	{
-		cmbPresets.getItems().add(_lh.Get("DivisionBlank"));
-		cmbPresets.getItems().add(_lh.Get("DivisionHorizontalHalves"));
-		cmbPresets.getItems().add(_lh.Get("DivisionVerticalHalves"));
-		cmbPresets.getItems().add(_lh.Get("DivisionQuartered"));
-		cmbPresets.getItems().add(_lh.Get("DivisionStripes"));
+		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionBlank"));
+		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionHorizontalHalves"));
+		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionVerticalHalves"));
+		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionQuartered"));
+		cmbPresets.getItems().add(LocalizationHandler.Get("DivisionStripes"));
 
 		cmbPresets.valueProperty().addListener(new ChangeListener<String>()
 		{
@@ -1115,11 +1113,11 @@ public class MainWindowController
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
 				if (StringExtensions.IsNullOrWhitespace(newValue)) return;
-				else if (newValue.equals(_lh.Get("DivisionBlank"))) PresetBlank();
-				else if (newValue.equals(_lh.Get("DivisionHorizontalHalves"))) PresetHorizontal();
-				else if (newValue.equals(_lh.Get("DivisionVerticalHalves"))) PresetVertical();
-				else if (newValue.equals(_lh.Get("DivisionQuartered"))) PresetQuad();
-				else if (newValue.equals(_lh.Get("DivisionStripes"))) PresetStripes();
+				else if (newValue.equals(LocalizationHandler.Get("DivisionBlank"))) PresetBlank();
+				else if (newValue.equals(LocalizationHandler.Get("DivisionHorizontalHalves"))) PresetHorizontal();
+				else if (newValue.equals(LocalizationHandler.Get("DivisionVerticalHalves"))) PresetVertical();
+				else if (newValue.equals(LocalizationHandler.Get("DivisionQuartered"))) PresetQuad();
+				else if (newValue.equals(LocalizationHandler.Get("DivisionStripes"))) PresetStripes();
 			}
 		});
 	}
@@ -1199,7 +1197,7 @@ public class MainWindowController
 	private void GenerateRandomFlag()
 	{
 		if (CheckUnsaved()) return;
-		Flag f = new RandomFlagFactory().GenerateFlag(_lh);
+		Flag f = new RandomFlagFactory().GenerateFlag();
 		LoadFlag(f);
 		_filename = "";
 		SetTitle();

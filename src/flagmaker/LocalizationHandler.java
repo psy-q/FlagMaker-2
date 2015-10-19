@@ -2,15 +2,14 @@ package flagmaker;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javafx.scene.Node;
 
 public class LocalizationHandler
 {
-	private Locale _currentLocale;
-	private ResourceBundle _bundle;
-	private ResourceBundle _defaultBundle;
+	private static Locale _currentLocale;
+	private static ResourceBundle _bundle;
+	private static ResourceBundle _defaultBundle;
 	
-	public LocalizationHandler()
+	public static void Initialize()
 	{
 		_currentLocale = Locale.getDefault();
 		if (_currentLocale == null) _currentLocale = Locale.US;
@@ -18,7 +17,7 @@ public class LocalizationHandler
 		_defaultBundle = ResourceBundle.getBundle("bundles.strings", Locale.US);
 	}
 	
-	public String Get(String key)
+	public static String Get(String key)
 	{
 		String s = _bundle.getString(key);
 		return s == null

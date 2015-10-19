@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 public class OverlaySelector extends VBox
 {
 	private Stage _stage;
-	private LocalizationHandler _lh;
 
 	@FXML private TabPane tabs;
 	@FXML private Button btnCancel;
@@ -31,15 +30,14 @@ public class OverlaySelector extends VBox
 	private final int _defaultMaximumY;
 	private Overlay _selectedOverlay;
 	
-	public OverlaySelector(Stage stage, LocalizationHandler lh, int defaultMaximumX, int defaultMaximumY)
+	public OverlaySelector(Stage stage, int defaultMaximumX, int defaultMaximumY)
 	{
 		Load(stage);
-		_lh = lh;
 
 		_defaultMaximumX = defaultMaximumX;
 		_defaultMaximumY = defaultMaximumY;
-		stage.titleProperty().set(_lh.Get("Overlays"));
-		btnCancel.setText(_lh.Get("Cancel"));
+		stage.titleProperty().set(LocalizationHandler.Get("Overlays"));
+		btnCancel.setText(LocalizationHandler.Get("Cancel"));
 		FillOverlays();
 	}
 
@@ -56,10 +54,10 @@ public class OverlaySelector extends VBox
 
 	private void FillOverlays()
 	{
-		AddTab(OverlayFactory.GetShapes(), _lh.Get("Shapes"));
-		AddTab(OverlayFactory.GetEmblems(), _lh.Get("Emblems"));
-		AddTab(OverlayFactory.GetCustom(), _lh.Get("Custom"));
-		AddTab(OverlayFactory.GetSpecial(), _lh.Get("Special"));
+		AddTab(OverlayFactory.GetShapes(), LocalizationHandler.Get("Shapes"));
+		AddTab(OverlayFactory.GetEmblems(), LocalizationHandler.Get("Emblems"));
+		AddTab(OverlayFactory.GetCustom(), LocalizationHandler.Get("Custom"));
+		AddTab(OverlayFactory.GetSpecial(), LocalizationHandler.Get("Special"));
 	}
 
 	private void AddTab(Overlay[] overlays, String tabName)
@@ -103,8 +101,8 @@ public class OverlaySelector extends VBox
 	private void LoadFlag()
 	{
 		FileChooser fileChooserF = new FileChooser();
-		fileChooserF.setTitle(_lh.Get("Open"));
-		fileChooserF.getExtensionFilters().add(new FileChooser.ExtensionFilter(_lh.Get("FlagFileFilter"), "*.flag"));
+		fileChooserF.setTitle(LocalizationHandler.Get("Open"));
+		fileChooserF.getExtensionFilters().add(new FileChooser.ExtensionFilter(LocalizationHandler.Get("FlagFileFilter"), "*.flag"));
 		File flagFile = fileChooserF.showOpenDialog(_stage);
 		if (flagFile != null)
 		{
@@ -123,8 +121,8 @@ public class OverlaySelector extends VBox
 	private void LoadImage()
 	{
 		FileChooser fileChooserI = new FileChooser();
-		fileChooserI.setTitle(_lh.Get("OpenImage"));
-		fileChooserI.getExtensionFilters().add(new FileChooser.ExtensionFilter(_lh.Get("ImageFileFilter"), "*.png;*.jpg"));
+		fileChooserI.setTitle(LocalizationHandler.Get("OpenImage"));
+		fileChooserI.getExtensionFilters().add(new FileChooser.ExtensionFilter(LocalizationHandler.Get("ImageFileFilter"), "*.png;*.jpg"));
 		File imageFile = fileChooserI.showOpenDialog(_stage);
 		if (imageFile != null)
 		{
