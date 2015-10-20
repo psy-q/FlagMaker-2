@@ -222,13 +222,16 @@ public class MainWindowController
 		leftStack.getChildren().add(_gridSubScene);
 
 		// Draw whenever the left side changes size
-		leftStack.widthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> Draw()); // lags
+		leftStack.widthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
+		{
+			if (!oldValue.equals(newValue)) Draw();
+		});
 		cmbRatio.valueProperty().addListener(new ChangeListener<String>()
 		{
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				GridSizeDropdownChanged();
+				if (!oldValue.equals(newValue)) GridSizeDropdownChanged();
 			}
 		});
 
@@ -244,10 +247,7 @@ public class MainWindowController
 	private void HookUpEvents()
 	{
 		txtName.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue.equals(oldValue))
-			{
-				SetAsUnsaved();
-			}
+			if (!newValue.equals(oldValue)) SetAsUnsaved();
 		});
 		
 		_stage.setOnCloseRequest(event -> OnClosing(event));
@@ -528,13 +528,31 @@ public class MainWindowController
 	{
 		SetDefaultColors();
 
-		divisionPicker1.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
-		divisionPicker2.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
-		divisionPicker3.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> DivisionColorChanged());
+		divisionPicker1.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
+		{
+			if (!oldval.equals(newval)) DivisionColorChanged();
+		});
+		divisionPicker2.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
+		{
+			if (!oldval.equals(newval)) DivisionColorChanged();
+		});
+		divisionPicker3.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
+		{
+			if (!oldval.equals(newval)) DivisionColorChanged();
+		});
 
-		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
-		divisionSlider2.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
-		divisionSlider3.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) -> DivisionSliderChanged());
+		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval)) DivisionSliderChanged();
+		});
+		divisionSlider2.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval)) DivisionSliderChanged();
+		});
+		divisionSlider3.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval)) DivisionSliderChanged();
+		});
 	}
 
 	private void SetDefaultColors()
@@ -1117,7 +1135,7 @@ public class MainWindowController
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				if (StringExtensions.IsNullOrWhitespace(newValue)) return;
+				if (oldValue.equals(newValue) || StringExtensions.IsNullOrWhitespace(newValue)) return;
 				else if (newValue.equals(LocalizationHandler.Get("DivisionBlank"))) PresetBlank();
 				else if (newValue.equals(LocalizationHandler.Get("DivisionHorizontalHalves"))) PresetHorizontal();
 				else if (newValue.equals(LocalizationHandler.Get("DivisionVerticalHalves"))) PresetVertical();
