@@ -8,14 +8,73 @@ import flagmaker.Divisions.DivisionGrid;
 import flagmaker.Divisions.DivisionPales;
 import flagmaker.Divisions.DivisionX;
 import flagmaker.Overlays.Overlay;
+import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
 public class FileHandler
 {
+	public static void Save(Flag flag, String path) throws IOException
+	{
+		try (FileWriter writer = new FileWriter(path, false); PrintWriter printLine = new PrintWriter(writer))
+		{
+			printLine.printf("name=%s\n", flag.Name);
+			printLine.printf("ratio=%d:%d\n", flag.Ratio.Height, flag.Ratio.Width);
+			printLine.printf("gridSize=%s\n\n", flag.GridSize.ToString());
+			
+			printLine.printf("division\n");
+			printLine.printf("type=%s\n", flag.Division.Name());
+			
+			for (int i = 0; i < flag.Division.Colors.length; i++)
+			{
+				printLine.printf("color%d=%s\n", i + 1, ColorExtensions.ToHexString(flag.Division.Colors[i], false));
+			}
+			
+			for (int i = 0; i < flag.Division.Values.length; i++)
+			{
+				printLine.printf("size%d=%d\n", i + 1, flag.Division.Values[i]);
+			}
+			
+			for (Overlay overlay : flag.Overlays)
+			{
+				printLine.printf("\noverlay\n");
+				printLine.printf("type=%s\n", overlay.Name);
+				
+				if (overlay.Name.equals("flag"))
+				{
+					printLine.printf("path=%s\n", ((OverlayFlag)overlay).Path);
+				}
+				
+				if (overlay.Name.equals("image"))
+				{
+					printLine.printf("path=%s\n", ((OverlayImage)overlay).GetPath());
+				}
+				else
+				{
+					printLine.printf("color=%s\n", ColorExtensions.ToHexString(overlay.Color, true));
+				}
+
+				for (int i = 0; i < overlay.Attributes.length; i++)
+				{
+					printLine.printf("size%d=%f\n", i + 1, overlay.Attributes[i].Value);
+				}
+
+				if (overlay instanceof OverlayPath)
+				{
+					printLine.printf("stroke=%s\n", ColorExtensions.ToHexString(((OverlayPath)overlay).StrokeColor, true));
+				}
+			}
+		}
+	}
+	
 	public static Flag LoadFromFile(File file) throws Exception
 	{
 		ArrayList<String> lines = ReadAllLines(file);

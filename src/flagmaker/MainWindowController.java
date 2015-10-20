@@ -949,7 +949,7 @@ public class MainWindowController
 	{
 		try
 		{
-			Flag().Save(_filename);
+			FileHandler.Save(Flag(), _filename);
 		}
 		catch (IOException ex)
 		{
