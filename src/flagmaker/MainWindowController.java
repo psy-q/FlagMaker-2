@@ -848,7 +848,7 @@ public class MainWindowController
 		{
 			try
 			{
-				Flag flag = Flag.LoadFromFile(file);
+				Flag flag = FileHandler.LoadFromFile(file);
 				flag.ExportToPng(dimensions, new File(String.format("%s\\%s.png", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
@@ -873,7 +873,7 @@ public class MainWindowController
 		{
 			try
 			{
-				Flag flag = Flag.LoadFromFile(file);
+				Flag flag = FileHandler.LoadFromFile(file);
 				flag.ExportToSvg(new File(String.format("%s\\%s.svg", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
@@ -1010,7 +1010,7 @@ public class MainWindowController
 	{
 		try
 		{
-			LoadFlag(Flag.LoadFromFile(filename));
+			LoadFlag(FileHandler.LoadFromFile(filename));
 			_filename = filename.getPath();
 		}
 		catch (Exception e)
