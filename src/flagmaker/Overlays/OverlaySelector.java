@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -64,6 +65,9 @@ public class OverlaySelector extends VBox
 	{
 		Tab tab = new Tab(tabName);
 		FlowPane panel = new FlowPane(Orientation.HORIZONTAL);
+		ScrollPane scrollPane = new ScrollPane(panel);
+		scrollPane.setFitToWidth(true);
+		
 		panel.setPadding(new Insets(5));
 		panel.hgapProperty().set(5);
 		panel.vgapProperty().set(5);
@@ -94,7 +98,7 @@ public class OverlaySelector extends VBox
 			panel.getChildren().add(b);
 		}
 		
-		tab.setContent(panel);
+		tab.setContent(scrollPane);
 		tabs.getTabs().add(tab);
 	}
 
