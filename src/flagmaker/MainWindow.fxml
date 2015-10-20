@@ -35,9 +35,9 @@
 		<ToolBar prefHeight="40.0">
 			<items>
 				<Label fx:id="lblRatio" />
-				<TextField fx:id="txtRatioHeight" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="2" />
+				<TextField fx:id="txtRatioHeight" prefHeight="39.0" prefWidth="43.0" text="2" />
 				<Label>:</Label>
-				<TextField fx:id="txtRatioWidth" onKeyReleased="#RatioTextboxChanged" prefHeight="39.0" prefWidth="43.0" text="3" />
+				<TextField fx:id="txtRatioWidth" prefHeight="39.0" prefWidth="43.0" text="3" />
 				
 				<Label fx:id="lblGridSize" />
 				<ComboBox fx:id="cmbRatio" prefWidth="150.0" />

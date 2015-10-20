@@ -254,6 +254,13 @@ public class MainWindowController
 	
 	private void HookUpEvents()
 	{
+		txtRatioHeight.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue.equals(oldValue)) RatioTextboxChanged();
+		});
+		txtRatioWidth.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue.equals(oldValue)) RatioTextboxChanged();
+		});
+		
 		txtName.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue.equals(oldValue)) SetAsUnsaved();
 		});
