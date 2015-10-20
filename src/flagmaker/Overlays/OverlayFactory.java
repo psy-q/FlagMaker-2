@@ -1,6 +1,6 @@
 package flagmaker.Overlays;
 
-import flagmaker.Flag;
+import flagmaker.FileHandler;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.*;
@@ -202,7 +202,7 @@ public class OverlayFactory
 	
 	public static Overlay GetFlagInstance(File path, int maximumX, int maximumY) throws Exception
 	{
-		return new OverlayFlag(Flag.LoadFromFile(path), path, maximumX, maximumY);
+		return new OverlayFlag(FileHandler.LoadFromFile(path), path, maximumX, maximumY);
 	}
 	
 	public static Overlay GetImageInstance(File path, int maximumX, int maximumY)

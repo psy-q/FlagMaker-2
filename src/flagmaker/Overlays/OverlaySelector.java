@@ -1,5 +1,6 @@
 package flagmaker.Overlays;
 
+import flagmaker.FileHandler;
 import flagmaker.Flag;
 import flagmaker.LocalizationHandler;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
@@ -113,7 +114,7 @@ public class OverlaySelector extends VBox
 			Flag flag;
 			try
 			{
-				flag = Flag.LoadFromFile(flagFile);
+				flag = FileHandler.LoadFromFile(flagFile);
 				SetSelectedOverlay(new OverlayFlag(flag, flagFile, _defaultMaximumX, _defaultMaximumY));
 			}
 			catch (Exception ex)
