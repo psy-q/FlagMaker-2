@@ -49,6 +49,42 @@ public class OverlayPath extends Overlay
 		StrokeColor = Color.WHITE;
 	}
 	
+	public OverlayPath(String name, String path, Vector pathSize)
+	{
+		super(name, new Attribute[]
+		{
+			new Attribute("X", true, 1, true),
+			new Attribute("Y", true, 1, false),
+			new Attribute("Size", true, 1, true),
+			new Attribute("Rotation", true, 0, true),
+			new Attribute("Stroke", true, 0, true),
+			new Attribute("StrokeCurved", true, 0, true)
+		}, 1, 1);
+		
+		StrokeColor = Color.WHITE;
+		_path = path;
+		_pathSize = pathSize;
+		StrokeColor = Color.WHITE;
+	}
+	
+	public OverlayPath(String name, String path, Vector pathSize, int maximumX, int maximumY)
+	{
+		super(name, new Attribute[]
+		{
+			new Attribute("X", true, 1, true),
+			new Attribute("Y", true, 1, false),
+			new Attribute("Size", true, 1, true),
+			new Attribute("Rotation", true, 0, true),
+			new Attribute("Stroke", true, 0, true),
+			new Attribute("StrokeCurved", true, 0, true)
+		}, maximumX, maximumY);
+		
+		StrokeColor = Color.WHITE;
+		_path = path;
+		_pathSize = pathSize;
+		StrokeColor = Color.WHITE;
+	}
+	
 	protected void Constructor(String path, Vector pathSize)
 	{
 		_path = path;
@@ -142,6 +178,11 @@ public class OverlayPath extends Overlay
 				? String.format("stroke=\"#%s\" stroke-width=\"$.3f\" stroke-linejoin=\"%s\"",
 					ColorExtensions.ToHexString(StrokeColor, false), strokeThickness, strokeCurved ? "round" : "miter")
 				: "");
+	}
+	
+	public OverlayPath Copy()
+	{
+		return new OverlayPath(Name, _path, _pathSize, MaximumX, MaximumY);
 	}
 	
 	private double StrokeThickness(double canvasWidth, double canvasHeight)

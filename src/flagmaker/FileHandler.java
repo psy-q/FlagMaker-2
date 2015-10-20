@@ -75,7 +75,7 @@ public class FileHandler
 		}
 	}
 	
-	public static Flag LoadFromFile(File file) throws Exception
+	public static Flag LoadFlagFromFile(File file) throws Exception
 	{
 		ArrayList<String> lines = ReadAllLines(file);
 		ArrayList<ArrayList<String>> groups = SplitLines(lines);
@@ -94,6 +94,17 @@ public class FileHandler
 
 		Overlay[] finalOverlays = new Overlay[]{};
 		return new Flag(name, ratio, gridRatio, division, overlays.toArray(finalOverlays));
+	}
+	
+	public static OverlayPath LoadOverlayFromFile(File file) throws Exception
+	{
+		ArrayList<String> lines = ReadAllLines(file);
+		String name = GetValue(lines, "name", "name= ");
+		int width = Integer.parseInt(GetValue(lines, "width", "width=1"));
+		int height = Integer.parseInt(GetValue(lines, "height", "height=1"));
+		String path = GetValue(lines, "path", "path= ");
+		
+		return new OverlayPath(name, path, new Vector(width, height));
 	}
 	
 	private static ArrayList<String> ReadAllLines(File file) throws Exception

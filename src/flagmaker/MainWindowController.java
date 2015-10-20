@@ -134,6 +134,7 @@ public class MainWindowController
 		LoadFilePresets();
 		HookUpEvents();
 		OverlayFactory.SetUpTypeMap();
+		OverlayFactory.FillCustomOverlays();
 		New();
 	}
 
@@ -231,7 +232,7 @@ public class MainWindowController
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				if (!oldValue.equals(newValue)) GridSizeDropdownChanged();
+				GridSizeDropdownChanged();
 			}
 		});
 
@@ -866,7 +867,7 @@ public class MainWindowController
 		{
 			try
 			{
-				Flag flag = FileHandler.LoadFromFile(file);
+				Flag flag = FileHandler.LoadFlagFromFile(file);
 				flag.ExportToPng(dimensions, new File(String.format("%s\\%s.png", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
@@ -891,7 +892,7 @@ public class MainWindowController
 		{
 			try
 			{
-				Flag flag = FileHandler.LoadFromFile(file);
+				Flag flag = FileHandler.LoadFlagFromFile(file);
 				flag.ExportToSvg(new File(String.format("%s\\%s.svg", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
@@ -1028,7 +1029,7 @@ public class MainWindowController
 	{
 		try
 		{
-			LoadFlag(FileHandler.LoadFromFile(filename));
+			LoadFlag(FileHandler.LoadFlagFromFile(filename));
 			_filename = filename.getPath();
 		}
 		catch (Exception e)

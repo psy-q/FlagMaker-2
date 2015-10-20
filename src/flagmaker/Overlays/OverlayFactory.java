@@ -1,6 +1,8 @@
 package flagmaker.Overlays;
 
 import flagmaker.FileHandler;
+import flagmaker.LocalizationHandler;
+import flagmaker.MainWindowController;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.*;
@@ -12,6 +14,7 @@ import java.util.HashMap;
 public class OverlayFactory
 {
 	private static HashMap<String, String> _typeMap;
+	private static HashMap<String, OverlayPath> _customTypes;
 	
 	public static void SetUpTypeMap()
 	{
@@ -186,7 +189,8 @@ public class OverlayFactory
 	
 	public static Overlay[] GetCustom()
 	{
-		return new Overlay[]{};
+		Overlay[] returnValue = new Overlay[]{};
+		return _customTypes.values().toArray(returnValue);
 	}
 	
 	public static Overlay[] GetSpecial()
@@ -200,9 +204,37 @@ public class OverlayFactory
 		};
 	}
 	
+	public static void FillCustomOverlays()
+	{
+		_customTypes = new HashMap<>();
+		
+		File directory;
+		try
+		{
+			directory = new File(new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + "\\Custom");
+			File[] files = directory.listFiles();
+			if (files == null) return;
+			
+			for (File file : files)
+			{
+				OverlayPath overlay = FileHandler.LoadOverlayFromFile(file);
+				
+				if (_customTypes.containsKey(overlay.Name) || _typeMap.containsKey(overlay.Name))
+				{
+					throw new Exception(String.format(LocalizationHandler.Get("OverlayNameExists"), overlay.Name));
+				}
+				
+				_customTypes.put(overlay.Name, overlay);
+			}
+		}
+		catch (Exception ex)
+		{
+		}
+	}
+	
 	public static Overlay GetFlagInstance(File path, int maximumX, int maximumY) throws Exception
 	{
-		return new OverlayFlag(FileHandler.LoadFromFile(path), path, maximumX, maximumY);
+		return new OverlayFlag(FileHandler.LoadFlagFromFile(path), path, maximumX, maximumY);
 	}
 	
 	public static Overlay GetImageInstance(File path, int maximumX, int maximumY)
@@ -225,6 +257,13 @@ public class OverlayFactory
 
 	public static Overlay GetInstanceByShortName(String name, int defaultMaximumX, int defaultMaximumY)
 	{
+		if (_customTypes.containsKey(name))
+		{
+			OverlayPath overlayCopy = _customTypes.get(name).Copy();
+			overlayCopy.SetMaximum(defaultMaximumX, defaultMaximumY);
+			return overlayCopy;
+		}
+		
 		try
 		{
 			Class c = Class.forName(_typeMap.get(name));
@@ -233,7 +272,7 @@ public class OverlayFactory
 		catch (Exception e)
 		{
 			return null;
-		}		
+		}
 	}
 	
 	private static Overlay GetInstance(Class c, int defaultMaximumX, int defaultMaximumY)

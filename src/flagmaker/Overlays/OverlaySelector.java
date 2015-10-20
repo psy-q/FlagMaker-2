@@ -114,7 +114,7 @@ public class OverlaySelector extends VBox
 			Flag flag;
 			try
 			{
-				flag = FileHandler.LoadFromFile(flagFile);
+				flag = FileHandler.LoadFlagFromFile(flagFile);
 				SetSelectedOverlay(new OverlayFlag(flag, flagFile, _defaultMaximumX, _defaultMaximumY));
 			}
 			catch (Exception ex)
