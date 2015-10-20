@@ -1,14 +1,14 @@
 package flagmaker.RandomFlag;
 
 import flagmaker.Divisions.*;
-import flagmaker.Flag;
-import flagmaker.LocalizationHandler;
+import flagmaker.Data.Flag;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayFactory;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.*;
-import flagmaker.Ratio;
+import flagmaker.Data.Ratio;
 import java.io.File;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;

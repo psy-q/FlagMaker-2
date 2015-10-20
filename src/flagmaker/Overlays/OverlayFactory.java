@@ -1,7 +1,7 @@
 package flagmaker.Overlays;
 
-import flagmaker.FileHandler;
-import flagmaker.LocalizationHandler;
+import flagmaker.Files.FileHandler;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;

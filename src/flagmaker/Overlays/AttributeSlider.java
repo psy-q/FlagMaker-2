@@ -1,7 +1,7 @@
 package flagmaker.Overlays;
 
-import flagmaker.ControlExtensions;
-import flagmaker.LocalizationHandler;
+import flagmaker.Extensions.ControlExtensions;
+import flagmaker.Files.LocalizationHandler;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import javafx.beans.value.ObservableValue;

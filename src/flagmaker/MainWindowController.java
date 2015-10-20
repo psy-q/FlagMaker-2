@@ -1,5 +1,12 @@
 package flagmaker;
 
+import flagmaker.Files.LocalizationHandler;
+import flagmaker.Extensions.StringExtensions;
+import flagmaker.Extensions.ControlExtensions;
+import flagmaker.Data.Ratio;
+import flagmaker.Data.Size;
+import flagmaker.Data.Flag;
+import flagmaker.Files.FileHandler;
 import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;

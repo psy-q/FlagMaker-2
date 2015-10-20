@@ -1,4 +1,4 @@
-package flagmaker;
+package flagmaker.Data;
 
 public class Vector
 {

@@ -1,6 +1,6 @@
 package flagmaker.Overlays.OverlayTypes.PathTypes;
 
-import flagmaker.Vector;
+import flagmaker.Data.Vector;
 
 public class OverlayLaurel extends OverlayPath
 {

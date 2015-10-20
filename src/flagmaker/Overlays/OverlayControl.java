@@ -1,7 +1,7 @@
 package flagmaker.Overlays;
 
-import flagmaker.ControlExtensions;
-import flagmaker.LocalizationHandler;
+import flagmaker.Extensions.ControlExtensions;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;

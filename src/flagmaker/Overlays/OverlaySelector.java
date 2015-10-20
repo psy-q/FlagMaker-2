@@ -1,8 +1,8 @@
 package flagmaker.Overlays;
 
-import flagmaker.FileHandler;
-import flagmaker.Flag;
-import flagmaker.LocalizationHandler;
+import flagmaker.Files.FileHandler;
+import flagmaker.Data.Flag;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.io.File;

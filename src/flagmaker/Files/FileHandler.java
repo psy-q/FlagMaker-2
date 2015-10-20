@@ -1,5 +1,6 @@
-package flagmaker;
+package flagmaker.Files;
 
+import flagmaker.Extensions.ColorExtensions;
 import flagmaker.Divisions.Division;
 import flagmaker.Divisions.DivisionBendsBackward;
 import flagmaker.Divisions.DivisionBendsForward;
@@ -7,10 +8,14 @@ import flagmaker.Divisions.DivisionFesses;
 import flagmaker.Divisions.DivisionGrid;
 import flagmaker.Divisions.DivisionPales;
 import flagmaker.Divisions.DivisionX;
+import flagmaker.Data.Flag;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
+import flagmaker.Data.Ratio;
+import flagmaker.Extensions.StringExtensions;
+import flagmaker.Data.Vector;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

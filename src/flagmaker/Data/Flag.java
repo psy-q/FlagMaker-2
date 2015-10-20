@@ -1,4 +1,4 @@
-package flagmaker;
+package flagmaker.Data;
 
 import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
@@ -8,7 +8,6 @@ import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
