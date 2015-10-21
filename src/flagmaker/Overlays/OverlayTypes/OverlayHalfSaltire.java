@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.Extensions.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -18,15 +18,17 @@ public class OverlayHalfSaltire extends Overlay
 	{
 		super("half saltire", new Attribute[]
 		{
-			new Attribute("Thickness", true, 1, true)
+			new ColorAttribute("Color", Color.BLACK),
+			new DoubleAttribute("Thickness", 1, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
 	public OverlayHalfSaltire(Color color, double thickness, int maximumX, int maximumY)
 	{
-		super("half saltire", color, new Attribute[]
+		super("half saltire", new Attribute[]
 		{
-			new Attribute("Thickness", true, thickness, true)
+			new ColorAttribute("Color", color),
+			new DoubleAttribute("Thickness", thickness, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -43,8 +45,8 @@ public class OverlayHalfSaltire extends Overlay
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double widthX = canvas.getWidth() * (GetAttribute("Thickness").Value / MaximumX) / 4;
-		double widthY = canvas.getHeight() * (GetAttribute("Thickness").Value / MaximumX) / 4;
+		double widthX = canvas.getWidth() * (GetDoubleAttribute("Thickness") / MaximumX) / 4;
+		double widthY = canvas.getHeight() * (GetDoubleAttribute("Thickness") / MaximumX) / 4;
 
 		double centerX = canvas.getWidth()/2;
 		double centerY = canvas.getHeight()/2;
@@ -85,10 +87,10 @@ public class OverlayHalfSaltire extends Overlay
 			new LineTo(centerX, centerY)
 		});
 		
-		pathTopLeft.setFill(Color);
-		pathTopRight.setFill(Color);
-		pathBottomLeft.setFill(Color);
-		pathBottomRight.setFill(Color);
+		pathTopLeft.setFill(GetColorAttribute("Color"));
+		pathTopRight.setFill(GetColorAttribute("Color"));
+		pathBottomLeft.setFill(GetColorAttribute("Color"));
+		pathBottomRight.setFill(GetColorAttribute("Color"));
 		pathTopLeft.setStrokeWidth(0);
 		pathTopRight.setStrokeWidth(0);
 		pathBottomLeft.setStrokeWidth(0);
@@ -98,21 +100,15 @@ public class OverlayHalfSaltire extends Overlay
 	}
 
 	@Override
-	public void SetValues(double[] values)
-	{
-		SetAttribute("Thickness", values[0]);
-	}
-
-	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double wX = width * (GetAttribute("Thickness").Value / MaximumX) / 4;
-		double wY = height * (GetAttribute("Thickness").Value / MaximumX) / 4;
+		double wX = width * (GetDoubleAttribute("Thickness") / MaximumX) / 4;
+		double wY = height * (GetDoubleAttribute("Thickness") / MaximumX) / 4;
 
 		double centerX = width/2;
 		double centerY = height/2;
 
-		String c = ColorExtensions.ToSvgFillWithOpacity(Color);
+		String c = ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color"));
 
 		StringBuilder sb = new StringBuilder();
 

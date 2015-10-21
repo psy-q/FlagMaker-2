@@ -1,11 +1,11 @@
 package flagmaker.Data;
 
 import flagmaker.Divisions.*;
+import flagmaker.Overlays.Attributes.Attribute;
+import flagmaker.Overlays.Attributes.ColorAttribute;
 import flagmaker.Overlays.Overlay;
-import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -141,17 +141,13 @@ public class Flag
 			{
 				colors.addAll(Arrays.asList(((OverlayFlag)overlay).Flag.ColorsUsed()));
 			}
-			else if (!(overlay instanceof OverlayRepeater || overlay instanceof OverlayImage))
+			else
 			{
-				colors.add(overlay.Color);
-
-				if (overlay instanceof OverlayPath)
+				for (Attribute a : overlay.Attributes)
 				{
-					OverlayPath path = (OverlayPath)overlay;
-					
-					if (path.StrokeColor.getOpacity() > 0 && path.GetAttribute("Stroke").Value > 0)
+					if (a instanceof ColorAttribute)
 					{
-						colors.add(path.StrokeColor);
+						colors.add(((ColorAttribute)a).Value);
 					}
 				}
 			}

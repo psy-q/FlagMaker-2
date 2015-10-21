@@ -11,8 +11,8 @@ import flagmaker.Divisions.DivisionX;
 import flagmaker.Data.Flag;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
 import flagmaker.Data.Ratio;
 import flagmaker.Extensions.StringExtensions;
 import flagmaker.Data.Vector;
@@ -62,19 +62,10 @@ public class FileHandler
 				{
 					printLine.printf("path=%s\n", ((OverlayImage)overlay).GetPath());
 				}
-				else
-				{
-					printLine.printf("color=%s\n", ColorExtensions.ToHexString(overlay.Color, true));
-				}
 
 				for (int i = 0; i < overlay.Attributes.length; i++)
 				{
-					printLine.printf("size%d=%f\n", i + 1, overlay.Attributes[i].Value);
-				}
-
-				if (overlay instanceof OverlayPath)
-				{
-					printLine.printf("stroke=%s\n", ColorExtensions.ToHexString(((OverlayPath)overlay).StrokeColor, true));
+					printLine.printf("%s=%s\n", overlay.Attributes[i].Name, overlay.Attributes[i].ToSaveAsString());
 				}
 			}
 		}
@@ -186,14 +177,13 @@ public class FileHandler
 	{
 		TempOverlay t = new TempOverlay();
 		t.Type = GetValue(lines, "type", "type=grid");
-		t.Color = ColorExtensions.ParseColor(GetValue(lines, "color", "color=ffffff"));
-		t.StrokeColor = ColorExtensions.ParseColor(GetValue(lines, "stroke", "stroke=ffffff"));
 		t.Path = new File(GetValue(lines, "path", "path= "));
-		t.StrokeColor = ColorExtensions.ParseColor(GetValue(lines, "stroke", "stroke=ffffff"));
 		
-		for (int i = 0; i < 8; i++)
+		for (String line : lines)
 		{
-			t.Values[i] = GetDoubleFromString(GetValue(lines, String.format("size%d", i + 1), String.format("size%d=1", i + 1)));
+			String[] data = line.split("=");
+			if (data[0].equals("overlay") || data[0].equals("type") || data[0].equals("path")) continue;
+			t.Values.put(data[0], data[1]);
 		}
 		
 		return t.ToOverlay(maximumX, maximumY, directory);
@@ -202,13 +192,5 @@ public class FileHandler
 	private static String GetValue(ArrayList<String> data, String fieldName, String defaultValue)
 	{
 		return data.stream().filter(s -> s.startsWith(fieldName)).findFirst().orElse(defaultValue).split("=")[1];
-	}
-	
-	private static Double GetDoubleFromString(String data)
-	{
-		// Doubles in files can be written as "123.45" or "123,45".
-		// (Ignore thousands separators - not really applicable for FlagMaker.)
-		// If the user saved a file with commas, replace and parse with invariant culture.
-		return Double.parseDouble(data.replace(',', '.'));
 	}
 }

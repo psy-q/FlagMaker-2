@@ -30,29 +30,29 @@ public class OverlayBox extends OverlayShape
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double width = canvas.getWidth() * (GetAttribute("Width").Value / (double)MaximumX);
-		double height = GetAttribute("Height").Value == 0
+		double width = canvas.getWidth() * (GetDoubleAttribute("Width") / (double)MaximumX);
+		double height = GetDoubleAttribute("Height") == 0
 				? width
-				: canvas.getHeight() * (GetAttribute("Height").Value / MaximumY);
-		double left = canvas.getWidth() * (GetAttribute("X").Value / MaximumX);
-		double top = canvas.getHeight() * (GetAttribute("Y").Value / MaximumY);
+				: canvas.getHeight() * (GetDoubleAttribute("Height") / MaximumY);
+		double left = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX);
+		double top = canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY);
 		Rectangle rect = new Rectangle(left, top, width, height);
-		rect.setFill(Color);
+		rect.setFill(GetColorAttribute("Color"));
 		canvas.getChildren().add(rect);
 	}
 
 	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double w = width * (GetAttribute("Width").Value / (double)MaximumX);
-		double h = GetAttribute("Height").Value == 0
+		double w = width * (GetDoubleAttribute("Width") / (double)MaximumX);
+		double h = GetDoubleAttribute("Height") == 0
 				? w
-				: height * (GetAttribute("Height").Value / MaximumY);
+				: height * (GetDoubleAttribute("Height") / MaximumY);
 		return String.format("<rect width=\"%.3f\" height=\"%.3f\" x=\"%.3f\" y=\"%.3f\" %s />",
 				w,
 				h,
-				width * (GetAttribute("X").Value / MaximumX),
-				height * (GetAttribute("Y").Value / MaximumY),
-				ColorExtensions.ToSvgFillWithOpacity(Color));
+				width * (GetDoubleAttribute("X") / MaximumX),
+				height * (GetDoubleAttribute("Y") / MaximumY),
+				ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

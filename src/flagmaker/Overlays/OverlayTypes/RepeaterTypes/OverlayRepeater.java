@@ -1,6 +1,6 @@
 package flagmaker.Overlays.OverlayTypes.RepeaterTypes;
 
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 
 public abstract class OverlayRepeater extends Overlay

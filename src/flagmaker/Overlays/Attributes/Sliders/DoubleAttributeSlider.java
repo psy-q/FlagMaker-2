@@ -1,7 +1,8 @@
-package flagmaker.Overlays;
+package flagmaker.Overlays.Attributes.Sliders;
 
 import flagmaker.Extensions.ControlExtensions;
 import flagmaker.Files.LocalizationHandler;
+import flagmaker.Overlays.OverlayControl;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import javafx.beans.value.ObservableValue;
@@ -14,9 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 
-public class AttributeSlider extends HBox
+public class DoubleAttributeSlider extends NumericAttributeSlider
 {
 	@FXML private Label lblName;
 	@FXML private Label lblValue;
@@ -25,14 +25,13 @@ public class AttributeSlider extends HBox
 	@FXML private CheckBox chkDiscrete;
 	
 	private boolean _isDiscrete;
-	private final OverlayControl _parent;
 	
-	public AttributeSlider(OverlayControl parent, String name, boolean isDiscrete, double value, int maximum)
+	public DoubleAttributeSlider(OverlayControl parent, String name, boolean isDiscrete, double value, int maximum, boolean useMaxX)
 	{
+		super(parent, name, useMaxX);
 		Load();
 		
 		String label = LocalizationHandler.Get(name);
-		_parent = parent;
 		lblName.setText(label);
 		lblName.setTooltip(new Tooltip(label));
 		_isDiscrete = isDiscrete && (value % 1 == 0);
@@ -60,17 +59,25 @@ public class AttributeSlider extends HBox
 		});
 	}
 	
+	@Override
 	public int GetMaximum()
 	{
 		return (int)slider.getMax();
 	}
 	
+	@Override
 	public void SetMaximum(int value)
 	{
+		double currentValue = slider.getValue();
+		double ratio = currentValue / slider.getMax();
+		double newValue = ratio * value;
+		
 		slider.setMax(value);
+		SetValue(newValue);
 	}
 	
-	public double GetValue()
+	@Override
+	public Double GetValue()
 	{
 		return slider.getValue();
 	}
@@ -78,7 +85,8 @@ public class AttributeSlider extends HBox
 	public void SetValue(double value)
 	{
 		slider.setValue(value);
-		SliderValueChanged();
+		SetDiscrete(value % 1 == 0);
+		SliderValueChanged(); // Hopefully won't cause infinite cascading event triggers
 	}
 	
 	public void SetDiscrete(boolean isDiscrete)
@@ -92,7 +100,7 @@ public class AttributeSlider extends HBox
 		lblValue.setText(_isDiscrete
 				? String.format("%d", (int)slider.getValue())
 				: String.format("%.3f", slider.getValue()));
-		_parent.OverlaySliderChanged();
+		ValueChanged();
 	}
 	
 	private void CheckChanged()
@@ -108,7 +116,7 @@ public class AttributeSlider extends HBox
 
 	private void Load()
 	{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AttributeSlider.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("DoubleAttributeSlider.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
 

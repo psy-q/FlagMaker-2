@@ -8,11 +8,12 @@ import flagmaker.Data.Size;
 import flagmaker.Data.Flag;
 import flagmaker.Files.FileHandler;
 import flagmaker.Divisions.*;
+import flagmaker.Overlays.Attributes.Attribute;
+import flagmaker.Overlays.Attributes.ColorAttribute;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
-import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import flagmaker.RandomFlag.RandomFlagFactory;
 import java.io.BufferedReader;
 import java.io.File;
@@ -406,14 +407,6 @@ public class MainWindowController
 		OverlayAdd(lstOverlays.getChildren().size(), null, false);
 	}
 
-	private void SetOverlayMargins()
-	{
-		for (int i = 0; i < lstOverlays.getChildren().size() - 1; i++)
-		{
-			((OverlayControl) lstOverlays.getChildren().get(i)).setPadding(new Insets(0, 0, 20, 0));
-		}
-	}
-
 	public void Remove(OverlayControl overlayControl)
 	{
 		lstOverlays.getChildren().remove(overlayControl);
@@ -447,7 +440,6 @@ public class MainWindowController
 			lstOverlays.getChildren().add(control);
 		}
 
-		SetOverlayMargins();
 		Draw();
 		SetAsUnsaved();
 	}
@@ -478,7 +470,6 @@ public class MainWindowController
 			lstOverlays.getChildren().add(control);
 		}
 
-		SetOverlayMargins();
 		Draw();
 		SetAsUnsaved();
 	}
@@ -492,17 +483,10 @@ public class MainWindowController
 
 		for (int i = 0; i < original.Attributes.length; i++)
 		{
-			copy.Attributes[i].Value = original.Attributes[i].Value;
-			copy.Attributes[i].IsDiscrete = original.Attributes[i].IsDiscrete;
+			copy.Attributes[i] = original.Attributes[i].Clone();
 		}
 
-		copy.SetColor(original.Color);
-
-		if (type.isAssignableFrom(OverlayPath.class))
-		{
-			((OverlayPath) copy).StrokeColor = ((OverlayPath) original).StrokeColor;
-		}
-		else if (type.isAssignableFrom(OverlayFlag.class))
+		if (type.isAssignableFrom(OverlayFlag.class))
 		{
 			((OverlayFlag) copy).Flag = ((OverlayFlag) original).Flag;
 		}
@@ -532,7 +516,6 @@ public class MainWindowController
 
 		if (!isLoading)
 		{
-			SetOverlayMargins();
 			Draw();
 			SetAsUnsaved();
 		}
@@ -598,7 +581,14 @@ public class MainWindowController
 
 		for (OverlayControl overlay : (List<OverlayControl>) (List<?>) lstOverlays.getChildren())
 		{
-			overlay.SetColor(GetNextColor(overlay.GetColor(), colors));
+			for (Attribute a : overlay.GetOverlay().Attributes)
+			{
+				if (a instanceof ColorAttribute)
+				{
+					ColorAttribute c = (ColorAttribute)a;
+					c.SetValue(GetNextColor(c.Value, colors));
+				}
+			}
 		}
 	}
 

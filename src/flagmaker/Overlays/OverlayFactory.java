@@ -7,6 +7,7 @@ import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.*;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.*;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -38,6 +39,9 @@ public class OverlayFactory
 		_typeMap.put("ring", "flagmaker.Overlays.OverlayTypes.OverlayRing");
 		_typeMap.put("saltire", "flagmaker.Overlays.OverlayTypes.OverlaySaltire");
 		_typeMap.put("triangle", "flagmaker.Overlays.OverlayTypes.OverlayTriangle");
+				
+		_typeMap.put("flag", "flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag");
+		_typeMap.put("image", "flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage");
 		
 		_typeMap.put("repeater lateral", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterLateral");
 		_typeMap.put("repeater radial", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterRadial");

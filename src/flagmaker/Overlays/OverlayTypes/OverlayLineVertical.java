@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.Extensions.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -14,17 +14,19 @@ public class OverlayLineVertical extends Overlay
 	{
 		super("line vertical", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Thickness", true, 0.5, false)
+			new ColorAttribute("Color", Color.BLACK),
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Thickness", 0.5, maximumX, false)
 		}, maximumX, maximumY);
 	}
 
 	public OverlayLineVertical(Color color, double x, double thickness, int maximumX, int maximumY)
 	{
-		super("line vertical", color, new Attribute[]
+		super("line vertical", new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Thickness", true, thickness, false)
+			new ColorAttribute("Color", color),
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Thickness", thickness, maximumX, false)
 		}, maximumX, maximumY);
 	}
 
@@ -40,30 +42,23 @@ public class OverlayLineVertical extends Overlay
 	public void Draw(Pane canvas)
 	{
 		Line line = new Line(
-				canvas.getWidth() * GetAttribute("X").Value / MaximumX,
+				canvas.getWidth() * GetDoubleAttribute("X") / MaximumX,
 				0,
-				canvas.getWidth() * GetAttribute("X").Value / MaximumX,
+				canvas.getWidth() * GetDoubleAttribute("X") / MaximumX,
 				canvas.getHeight());
-		line.setStrokeWidth(canvas.getWidth() * (GetAttribute("Thickness").Value / MaximumX));
-		line.setStroke(Color);
+		line.setStrokeWidth(canvas.getWidth() * (GetDoubleAttribute("Thickness") / MaximumX));
+		line.setStroke(GetColorAttribute("Color"));
 		canvas.getChildren().add(line);
-	}
-
-	@Override
-	public void SetValues(double[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Thickness", values[1]);
 	}
 
 	@Override
 	public String ExportSvg(int width, int height)
 	{
 		return String.format("<line x1=\"%.3f\" y1=\"0\" x2=\"%3f\" y2=\"%d\" stroke=\"#%s\" stroke-width=\"%.3f\" />",
-			width * GetAttribute("X").Value / MaximumX,
-			width * GetAttribute("X").Value / MaximumX,
+			width * GetDoubleAttribute("X") / MaximumX,
+			width * GetDoubleAttribute("X") / MaximumX,
 			height,
-			ColorExtensions.ToHexString(Color, false),
-			width * (GetAttribute("Thickness").Value / MaximumX));
+			ColorExtensions.ToHexString(GetColorAttribute("Color"), false),
+			width * (GetDoubleAttribute("Thickness") / MaximumX));
 	}
 }

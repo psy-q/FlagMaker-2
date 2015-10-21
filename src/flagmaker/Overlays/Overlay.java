@@ -1,5 +1,7 @@
 package flagmaker.Overlays;
 
+import flagmaker.Overlays.Attributes.*;
+import java.util.HashMap;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -8,7 +10,6 @@ public abstract class Overlay
 {
 	public final String Name;
 	public boolean IsEnabled;
-	public Color Color;
 	public Attribute[] Attributes;
 	protected int MaximumX;
 	protected int MaximumY;
@@ -16,36 +17,28 @@ public abstract class Overlay
 	protected abstract Shape[] Thumbnail();
 	
 	public abstract void Draw(Pane canvas);
-	public abstract void SetValues(double[] values);
 	public abstract String ExportSvg(int width, int height);
 	
 	protected Overlay(String name, Attribute[] attributes, int maximumX, int maximumY)
 	{
 		Name = name;
 		IsEnabled = true;
-		Color = Color.BLACK;
 		Attributes = attributes;
 		SetMaximum(maximumX, maximumY);
-	}
-	
-	protected Overlay(String name, Color color, Attribute[] attributes, int maximumX, int maximumY)
-	{
-		Name = name;
-		IsEnabled = true;
-		Color = color;
-		Attributes = attributes;
-		SetMaximum(maximumX, maximumY);
-	}
-	
-	public void SetColor(Color color)
-	{
-		Color = color;
 	}
 	
 	public final void SetMaximum(int maximumX, int maximumY)
 	{
 		MaximumX = maximumX;
 		MaximumY = maximumY;
+		
+		for (Attribute a : Attributes)
+		{
+			if (a instanceof NumericAttribute)
+			{
+				((NumericAttribute)a).Maximum = MaximumX;
+			}
+		}
 	}
 	
 	public Pane PaneThumbnail()
@@ -65,13 +58,44 @@ public abstract class Overlay
 		return p;
 	}
 	
-	public void SetAttribute(String name, double value)
+	public void SetValues(HashMap<String, Object> values)
+	{
+		values.entrySet().stream().forEach((v) ->
+		{
+			String name = v.getKey();
+			Object value = v.getValue();
+			
+			// Will fail for missing sttributes
+			SetAttribute(name, value);
+		});
+	}
+	
+	public void SetValuesFromStrings(HashMap<String, String> values)
+	{
+		values.entrySet().stream().forEach((v) ->
+		{
+			String name = v.getKey();
+			String value = v.getValue();
+			
+			// Will fail for missing sttributes
+			for (Attribute a : Attributes)
+			{
+				if (a.Name.equalsIgnoreCase(name))
+				{
+					a.SetValue(value);
+					return;
+				}
+			}
+		});
+	}
+	
+	public <T> void SetAttribute(String name, T value)
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name))
+			if (a.Name.equalsIgnoreCase(name))
 			{
-				a.Value = value;
+				a.SetValue(value);
 				return;
 			}
 		}
@@ -83,7 +107,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name))
+			if (a.Name.equalsIgnoreCase(name))
 			{
 				return a;
 			}
@@ -91,5 +115,61 @@ public abstract class Overlay
 		
 		// Attribute not found
 		return null;
+	}
+	
+	public double GetDoubleAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name.equalsIgnoreCase(name) && a instanceof DoubleAttribute)
+			{
+				return ((DoubleAttribute)a).Value;
+			}
+		}
+		
+		// Attribute not found
+		return 0;
+	}
+	
+	public int GetIntegerAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name.equalsIgnoreCase(name) && a instanceof IntegerAttribute)
+			{
+				return ((IntegerAttribute)a).Value;
+			}
+		}
+		
+		// Attribute not found
+		return 0;
+	}
+	
+	public boolean GetBooleanAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name.equalsIgnoreCase(name) && a instanceof BooleanAttribute)
+			{
+				return ((BooleanAttribute)a).Value;
+			}
+		}
+		
+		// Attribute not found
+		return false;
+	}
+	
+	public Color GetColorAttribute(String name)
+	{
+		for (Attribute a : Attributes)
+		{
+			if (a.Name.equalsIgnoreCase(name) && a instanceof ColorAttribute)
+			{
+				return ((ColorAttribute)a).Value;
+			}
+		}
+		
+		// Attribute not found
+		return Color.BLACK;
 	}
 }

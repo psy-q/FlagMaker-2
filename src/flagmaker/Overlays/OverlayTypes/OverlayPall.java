@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.Extensions.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,17 +15,19 @@ public class OverlayPall extends Overlay
 	{
 		super("pall", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Width", true, 1, true)
+			new ColorAttribute("Color", Color.BLACK),
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Width", 1, maximumX, true)
 		}, maximumX, maximumY);
 	}
 	
 	public OverlayPall(Color color, double x, double width, int maximumX, int maximumY)
 	{
-		super("pall", color, new Attribute[]
+		super("pall", new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Width", true, width, true)
+			new ColorAttribute("Color", color),
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Width", width, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
@@ -45,8 +47,8 @@ public class OverlayPall extends Overlay
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double theWidth = GetAttribute("Width").Value / MaximumX * canvas.getWidth() / 2;
-		double x = canvas.getWidth() * (GetAttribute("X").Value / MaximumX);
+		double theWidth = GetDoubleAttribute("Width") / MaximumX * canvas.getWidth() / 2;
+		double x = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX);
 		
 		SVGPath p = new SVGPath();
 		p.setContent(String.format("M 0,0 %1$.3f,0 %2$.3f,%3$.3f %4$.3f,%3$.3f %4$.3f,%6$.3f %2$.3f,%6$.3f %1$.3f,%5$.3f 0,%5$.3f 0,%7$.3f %9$.3f,%8$.3f 0,%1$.3f",
@@ -59,23 +61,16 @@ public class OverlayPall extends Overlay
 				canvas.getHeight() - (double)theWidth / 2,
 				canvas.getHeight() / 2,
 				x - (double)theWidth / 3));
-		p.setFill(Color);
+		p.setFill(GetColorAttribute("Color"));
 		
 		canvas.getChildren().add(p);
 	}
 
 	@Override
-	public void SetValues(double[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Width", values[1]);
-	}
-
-	@Override
 	public String ExportSvg(int width, int height)
 	{
-		double theWidth = GetAttribute("Width").Value / MaximumX * width / 2;
-		double x = width * (GetAttribute("X").Value / MaximumX);
+		double theWidth = GetDoubleAttribute("Width") / MaximumX * width / 2;
+		double x = width * (GetDoubleAttribute("X") / MaximumX);
 		
 		return String.format("<path d=\"M 0,0 %1$.3f,0 %2$.3f,%3$.3f %4$d,%3$.3f %4$d,%6$.3f %2$.3f,%6$.3f %1$.3f,%5$d 0,%5$d 0,%7$.3f %9$.3f,%8$.3f 0,%1$.3f\" %10$s />",
 				theWidth / 2,
@@ -87,6 +82,6 @@ public class OverlayPall extends Overlay
 				height - (double)theWidth / 2,
 				height / 2.0,
 				x - (double)theWidth / 3,
-				ColorExtensions.ToSvgFillWithOpacity(Color));
+				ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

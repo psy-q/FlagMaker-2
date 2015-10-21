@@ -1,11 +1,10 @@
 package flagmaker.Overlays.OverlayTypes;
 
 import flagmaker.Extensions.ColorExtensions;
-import flagmaker.Overlays.Attribute;
+import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Data.Vector;
 import java.util.ArrayList;
-import java.util.Comparator;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -17,21 +16,23 @@ public class OverlayRays extends Overlay
 	{
 		super("rays", new Attribute[]
 		{
-			new Attribute("X", true, 1, true),
-			new Attribute("Y", true, 1, false),
-			new Attribute("Count", true, 4, true),
-			new Attribute("Rotation", true, 0, true),
+			new ColorAttribute("Color", Color.BLACK),
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new IntegerAttribute("Count", 4, maximumX, true),
+			new DoubleAttribute("Rotation", 0, maximumX, true),
 		}, maximumX, maximumY);
 	}
 	
-	public OverlayRays(Color color, double x, double y, double count, double rotation, int maximumX, int maximumY)
+	public OverlayRays(Color color, double x, double y, int count, double rotation, int maximumX, int maximumY)
 	{
-		super("rays", color, new Attribute[]
+		super("rays", new Attribute[]
 		{
-			new Attribute("X", true, x, true),
-			new Attribute("Y", true, y, false),
-			new Attribute("Count", true, count, true),
-			new Attribute("Rotation", true, rotation, true),
+			new ColorAttribute("Color", color),
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Y", y, maximumY, false),
+			new IntegerAttribute("Count", count, maximumX, true),
+			new DoubleAttribute("Rotation", rotation, maximumX, true),
 		}, maximumX, maximumY);
 	}
 
@@ -52,18 +53,9 @@ public class OverlayRays extends Overlay
 		{
 			SVGPath p = new SVGPath();
 			p.setContent(path);
-			p.setFill(Color);
+			p.setFill(GetColorAttribute("Color"));
 			canvas.getChildren().add(p);
 		}
-	}
-
-	@Override
-	public void SetValues(double[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Count", values[2]);
-		SetAttribute("Rotation", values[3]);
 	}
 
 	@Override
@@ -74,7 +66,7 @@ public class OverlayRays extends Overlay
 		for (String path : GetPaths(width, height))
 		{
 			sb.append(String.format("<path d=\"%s\" %s />",
-				path, ColorExtensions.ToSvgFillWithOpacity(Color)));
+				path, ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color"))));
 		}
 
 		return sb.toString();
@@ -82,10 +74,10 @@ public class OverlayRays extends Overlay
 	
 	private String[] GetPaths(double width, double height)
 	{
-		double centerX = width * (GetAttribute("X").Value / MaximumX);
-		double centerY = height * (GetAttribute("Y").Value / MaximumY);
-		double count = (int)GetAttribute("Count").Value;
-		double rotation = GetAttribute("Rotation").Value / MaximumX;
+		double centerX = width * (GetDoubleAttribute("X") / MaximumX);
+		double centerY = height * (GetDoubleAttribute("Y") / MaximumY);
+		int count = GetIntegerAttribute("Count");
+		double rotation = GetDoubleAttribute("Rotation") / MaximumX;
 		double rotationOffset = rotation * Math.PI * 2 / count;
 		double angularInterval = Math.PI / count;
 		
@@ -164,15 +156,11 @@ public class OverlayRays extends Overlay
 			possiblePoints.add(new Vector(width, centerY + tY));
 		}
 		
-		possiblePoints.sort(new Comparator<Vector>()
+		possiblePoints.sort((Vector o1, Vector o2) ->
 		{
-			@Override
-			public int compare(Vector o1, Vector o2)
-			{
-				Double l1 = Length(o1, new Vector(centerX, centerY));
-				Double l2 = Length(o2, new Vector(centerX, centerY));
-				return l1.compareTo(l2);
-			}
+			Double l1 = Length(o1, new Vector(centerX, centerY));
+			Double l2 = Length(o2, new Vector(centerX, centerY));
+			return l1.compareTo(l2);
 		});
 
 		return possiblePoints.size() > 0

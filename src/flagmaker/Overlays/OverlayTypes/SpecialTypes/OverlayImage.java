@@ -1,6 +1,7 @@
-package flagmaker.Overlays.OverlayTypes.ShapeTypes;
+package flagmaker.Overlays.OverlayTypes.SpecialTypes;
 
 import flagmaker.Extensions.StringExtensions;
+import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayShape;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -54,7 +55,6 @@ public class OverlayImage extends OverlayShape
 			try
 			{
 				URI uri = _path.toURI();
-				String path = uri.getPath();
 				URL url = uri.toURL();
 				_bitmap = new Image(url.toString());
 			}
@@ -91,8 +91,8 @@ public class OverlayImage extends OverlayShape
 	@Override
 	public void Draw(Pane canvas)
 	{
-		double width = canvas.getWidth() * GetAttribute("Width").Value / MaximumX;
-		double height = canvas.getHeight() * GetAttribute("Height").Value / MaximumY;
+		double width = canvas.getWidth() * GetDoubleAttribute("Width") / MaximumX;
+		double height = canvas.getHeight() * GetDoubleAttribute("Height") / MaximumY;
 		
 		if (height == 0)
 		{
@@ -104,8 +104,8 @@ public class OverlayImage extends OverlayShape
 		GraphicsContext gc = c.getGraphicsContext2D();
 		gc.drawImage(_bitmap, 0, 0, width, height);
 
-		c.setLayoutX((canvas.getWidth() * (GetAttribute("X").Value / MaximumX)) - width / 2);
-		c.setLayoutY((canvas.getHeight() * (GetAttribute("Y").Value / MaximumY)) - height / 2);
+		c.setLayoutX((canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX)) - width / 2);
+		c.setLayoutY((canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY)) - height / 2);
 		canvas.getChildren().add(c);
 	}
 
@@ -114,8 +114,8 @@ public class OverlayImage extends OverlayShape
 	{
 		try
 		{
-			double imageWidth = width * GetAttribute("Width").Value / MaximumX;
-			double imageHeight = height * GetAttribute("Height").Value / MaximumY;
+			double imageWidth = width * GetDoubleAttribute("Width") / MaximumX;
+			double imageHeight = height * GetDoubleAttribute("Height") / MaximumY;
 			if (imageHeight <= 0)
 			{
 				double ratio = _bitmap.getHeight() / _bitmap.getWidth();
@@ -126,8 +126,8 @@ public class OverlayImage extends OverlayShape
 			String base64String = new String(bytes);
 			
 			return String.format("<image x=\"%.3f\" y=\"%.3f\" width=\"%.3f\" height=\"%.3f\" preserveAspectRatio=\"none\" xlink:href=\"data:image/%s;base64,%s\" />",
-					width * (GetAttribute("X").Value / MaximumX) - imageWidth / 2,
-					height * (GetAttribute("Y").Value / MaximumY) - imageHeight / 2,
+					width * (GetDoubleAttribute("X") / MaximumX) - imageWidth / 2,
+					height * (GetDoubleAttribute("Y") / MaximumY) - imageHeight / 2,
 					imageWidth,
 					imageHeight,
 					StringExtensions.GetFilenameExtension(_path.getPath()),
