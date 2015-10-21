@@ -37,7 +37,7 @@ public class OverlayBox extends OverlayShape
 		double left = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX);
 		double top = canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY);
 		Rectangle rect = new Rectangle(left, top, width, height);
-		rect.setFill(Color);
+		rect.setFill(GetColorAttribute("Color"));
 		canvas.getChildren().add(rect);
 	}
 
@@ -53,6 +53,6 @@ public class OverlayBox extends OverlayShape
 				h,
 				width * (GetDoubleAttribute("X") / MaximumX),
 				height * (GetDoubleAttribute("Y") / MaximumY),
-				ColorExtensions.ToSvgFillWithOpacity(Color));
+				ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

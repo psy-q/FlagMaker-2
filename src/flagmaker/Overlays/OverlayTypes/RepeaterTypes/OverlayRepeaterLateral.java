@@ -92,17 +92,6 @@ public class OverlayRepeaterLateral extends OverlayRepeater
 	}
 
 	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Width", values[2]);
-		SetAttribute("Height", values[3]);
-		SetAttribute("CountX", values[4]);
-		SetAttribute("CountY", values[5]);
-	}
-
-	@Override
 	public String ExportSvg(int width, int height)
 	{
 		if (Overlay == null) return "";

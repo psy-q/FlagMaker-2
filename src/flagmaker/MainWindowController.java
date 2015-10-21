@@ -5,7 +5,7 @@ import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import flagmaker.RandomFlag.RandomFlagFactory;
 import java.io.BufferedReader;
 import java.io.File;
@@ -391,14 +391,6 @@ public class MainWindowController
 		OverlayAdd(lstOverlays.getChildren().size(), null, false);
 	}
 
-	private void SetOverlayMargins()
-	{
-		for (int i = 0; i < lstOverlays.getChildren().size() - 1; i++)
-		{
-			((OverlayControl) lstOverlays.getChildren().get(i)).setPadding(new Insets(0, 0, 20, 0));
-		}
-	}
-
 	public void Remove(OverlayControl overlayControl)
 	{
 		lstOverlays.getChildren().remove(overlayControl);
@@ -432,7 +424,6 @@ public class MainWindowController
 			lstOverlays.getChildren().add(control);
 		}
 
-		SetOverlayMargins();
 		Draw();
 		SetAsUnsaved();
 	}
@@ -463,7 +454,6 @@ public class MainWindowController
 			lstOverlays.getChildren().add(control);
 		}
 
-		SetOverlayMargins();
 		Draw();
 		SetAsUnsaved();
 	}
@@ -479,8 +469,6 @@ public class MainWindowController
 		{
 			copy.Attributes[i] = original.Attributes[i].Clone();
 		}
-
-		copy.SetColor(original.Color);
 
 		if (type.isAssignableFrom(OverlayPath.class))
 		{
@@ -516,7 +504,6 @@ public class MainWindowController
 
 		if (!isLoading)
 		{
-			SetOverlayMargins();
 			Draw();
 			SetAsUnsaved();
 		}
@@ -562,10 +549,10 @@ public class MainWindowController
 			divisionPicker3.setValue(GetNextColor(divisionPicker3.getValue(), colors));
 		}
 
-		for (OverlayControl overlay : (List<OverlayControl>) (List<?>) lstOverlays.getChildren())
-		{
-			overlay.SetColor(GetNextColor(overlay.GetColor(), colors));
-		}
+//		for (OverlayControl overlay : (List<OverlayControl>) (List<?>) lstOverlays.getChildren())
+//		{
+//			overlay.SetColor(GetNextColor(overlay.GetColor(), colors));
+//		}
 	}
 
 	private Color GetNextColor(Color c, Color[] colors)

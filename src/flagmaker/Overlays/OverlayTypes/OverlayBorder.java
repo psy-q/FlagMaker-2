@@ -17,14 +17,16 @@ public class OverlayBorder extends Overlay
 	{
 		super("border", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("Thickness", 1, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
 	public OverlayBorder(Color color, double thickness, int maximumX, int maximumY)
 	{
-		super("border", color, new Attribute[]
+		super("border", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("Thickness", thickness, maximumX, true)
 		}, maximumX, maximumY);
 	}
@@ -78,16 +80,10 @@ public class OverlayBorder extends Overlay
 			new LineTo(canvas.getWidth() - thickness, thickness),
 			new LineTo(thickness, thickness)
 		});
-		path.setFill(Color);
+		path.setFill(GetColorAttribute("Color"));
 		path.setStrokeWidth(0);
 
 		canvas.getChildren().add(path);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("Thickness", values[0]);
 	}
 
 	@Override
@@ -110,6 +106,6 @@ public class OverlayBorder extends Overlay
 			thickness,
 			width - thickness,
 			height - thickness,
-			ColorExtensions.ToSvgFillWithOpacity(Color));
+			ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

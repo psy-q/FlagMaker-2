@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root alignment="CENTER_LEFT" prefHeight="32" prefWidth="300.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label fx:id="lblName" prefWidth="100" text="Width" HBox.hgrow="NEVER" />
+		<ColorPicker fx:id="picker" minHeight="28.0" style="-fx-color-label-visible: false;" HBox.hgrow="NEVER" />
+	</children>
+</fx:root>

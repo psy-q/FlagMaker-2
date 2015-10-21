@@ -18,14 +18,16 @@ public class OverlayHalfSaltire extends Overlay
 	{
 		super("half saltire", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("Thickness", 1, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
 	public OverlayHalfSaltire(Color color, double thickness, int maximumX, int maximumY)
 	{
-		super("half saltire", color, new Attribute[]
+		super("half saltire", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("Thickness", thickness, maximumX, true)
 		}, maximumX, maximumY);
 	}
@@ -85,22 +87,16 @@ public class OverlayHalfSaltire extends Overlay
 			new LineTo(centerX, centerY)
 		});
 		
-		pathTopLeft.setFill(Color);
-		pathTopRight.setFill(Color);
-		pathBottomLeft.setFill(Color);
-		pathBottomRight.setFill(Color);
+		pathTopLeft.setFill(GetColorAttribute("Color"));
+		pathTopRight.setFill(GetColorAttribute("Color"));
+		pathBottomLeft.setFill(GetColorAttribute("Color"));
+		pathBottomRight.setFill(GetColorAttribute("Color"));
 		pathTopLeft.setStrokeWidth(0);
 		pathTopRight.setStrokeWidth(0);
 		pathBottomLeft.setStrokeWidth(0);
 		pathBottomRight.setStrokeWidth(0);
 		
 		canvas.getChildren().addAll(pathBottomLeft, pathTopLeft, pathTopRight, pathBottomRight);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("Thickness", values[0]);
 	}
 
 	@Override
@@ -112,7 +108,7 @@ public class OverlayHalfSaltire extends Overlay
 		double centerX = width/2;
 		double centerY = height/2;
 
-		String c = ColorExtensions.ToSvgFillWithOpacity(Color);
+		String c = ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color"));
 
 		StringBuilder sb = new StringBuilder();
 

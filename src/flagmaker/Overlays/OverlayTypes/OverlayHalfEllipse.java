@@ -18,6 +18,7 @@ public class OverlayHalfEllipse extends Overlay
 	{
 		super("half ellipse", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X", 1, maximumX, true),
 			new DoubleAttribute("Y", 1, maximumY, false),
 			new DoubleAttribute("Width", 1, maximumX, true),
@@ -28,8 +29,9 @@ public class OverlayHalfEllipse extends Overlay
 
 	public OverlayHalfEllipse(Color color, double x, double y, double width, double height, double rotation, int maximumX, int maximumY)
 	{
-		super("half ellipse", color, new Attribute[]
+		super("half ellipse", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X", x, maximumX, true),
 			new DoubleAttribute("Y", y, maximumY, false),
 			new DoubleAttribute("Width", width, maximumX, true),
@@ -75,19 +77,9 @@ public class OverlayHalfEllipse extends Overlay
 			new ArcTo(radX, radY, angle * 180 / Math.PI, x2, y2, true, true),
 			new LineTo(x1, y1)
 		});
-		path.setFill(Color);
+		path.setFill(GetColorAttribute("Color"));
 		path.setStrokeWidth(0);
 		canvas.getChildren().add(path);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Width", values[2]);
-		SetAttribute("Height", values[3]);
-		SetAttribute("Rotation", values[4]);
 	}
 
 	@Override
@@ -109,6 +101,6 @@ public class OverlayHalfEllipse extends Overlay
 		
 		return String.format("<path d=\"M %.3f,%.3f A %.3f,%.3f %.3f 1,1 %.3f,%.3f z\" %s />",
 				x1, y1, radX, radY, angle * 180 / Math.PI, x2, y2,
-				ColorExtensions.ToSvgFillWithOpacity(Color));
+				ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

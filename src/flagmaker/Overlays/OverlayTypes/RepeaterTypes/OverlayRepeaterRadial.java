@@ -91,16 +91,6 @@ public class OverlayRepeaterRadial extends OverlayRepeater
 	}
 
 	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Radius", values[2]);
-		SetAttribute("Count", values[3]);
-		SetAttribute("Rotate", values[4]);
-	}
-
-	@Override
 	public String ExportSvg(int width, int height)
 	{
 		if (Overlay == null) return "";

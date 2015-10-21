@@ -14,6 +14,7 @@ public class OverlayLineHorizontal extends Overlay
 	{
 		super("line horizontal", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("Y", 1, maximumY, false),
 			new DoubleAttribute("Thickness", 0.5, maximumY, false)
 		}, maximumX, maximumY);
@@ -21,8 +22,9 @@ public class OverlayLineHorizontal extends Overlay
 
 	public OverlayLineHorizontal(Color color, double y, double thickness, int maximumX, int maximumY)
 	{
-		super("line horizontal", color, new Attribute[]
+		super("line horizontal", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("Y", y, maximumY, false),
 			new DoubleAttribute("Thickness", thickness, maximumY, false)
 		}, maximumX, maximumY);
@@ -45,15 +47,8 @@ public class OverlayLineHorizontal extends Overlay
 				canvas.getWidth(),
 				canvas.getHeight() * GetDoubleAttribute("Y") / MaximumY);
 		line.setStrokeWidth(canvas.getHeight() * (GetDoubleAttribute("Thickness") / MaximumY));
-		line.setStroke(Color);
+		line.setStroke(GetColorAttribute("Color"));
 		canvas.getChildren().add(line);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("Y", values[0]);
-		SetAttribute("Thickness", values[1]);
 	}
 
 	@Override
@@ -63,7 +58,7 @@ public class OverlayLineHorizontal extends Overlay
 			height * GetDoubleAttribute("Y") / MaximumY,
 			width,
 			height * GetDoubleAttribute("Y") / MaximumY,
-			ColorExtensions.ToHexString(Color, false),
+			ColorExtensions.ToHexString(GetColorAttribute("Color"), false),
 			height * (GetDoubleAttribute("Thickness") / MaximumY));
 	}
 }

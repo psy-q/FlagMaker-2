@@ -37,7 +37,7 @@ public class OverlayEllipse extends OverlayShape
 		double left = canvas.getWidth() * (GetDoubleAttribute("X") / MaximumX);
 		double top = canvas.getHeight() * (GetDoubleAttribute("Y") / MaximumY);
 		Ellipse ellipse = new Ellipse(left, top, width / 2, height / 2);
-		ellipse.setFill(Color);
+		ellipse.setFill(GetColorAttribute("Color"));
 		canvas.getChildren().add(ellipse);
 	}
 
@@ -54,6 +54,6 @@ public class OverlayEllipse extends OverlayShape
 		
 		return String.format("<ellipse cx=\"%.3f\" cy=\"%.3f\" rx=\"%.3f\" ry=\"%.3f\" %s />",
 				x, y, w / 2, h / 2,
-				ColorExtensions.ToSvgFillWithOpacity(Color));
+				ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

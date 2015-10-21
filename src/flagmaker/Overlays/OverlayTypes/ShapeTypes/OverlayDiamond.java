@@ -54,7 +54,7 @@ public class OverlayDiamond extends OverlayShape
 			new LineTo(width / 2, height),
 			new LineTo(0, height / 2)
 		});
-		path.setFill(Color);
+		path.setFill(GetColorAttribute("Color"));
 		path.setStrokeWidth(0);
 		path.setLayoutX(left);
 		path.setLayoutY(top);
@@ -74,6 +74,6 @@ public class OverlayDiamond extends OverlayShape
 		
 		return String.format("<polygon points=\"%1$.3f,%2$.3f %3$.3f,%4$.3f %1$.3f,%5$.3f %6$.3f,%4$.3f\" %7$s />",
 				x, y - h / 2, x + w / 2, y, y + h / 2, x - w / 2,
-				ColorExtensions.ToSvgFillWithOpacity(Color));
+				ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

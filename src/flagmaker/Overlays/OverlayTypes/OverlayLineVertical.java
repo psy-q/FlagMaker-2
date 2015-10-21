@@ -14,6 +14,7 @@ public class OverlayLineVertical extends Overlay
 	{
 		super("line vertical", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X", 1, maximumX, true),
 			new DoubleAttribute("Thickness", 0.5, maximumX, false)
 		}, maximumX, maximumY);
@@ -21,8 +22,9 @@ public class OverlayLineVertical extends Overlay
 
 	public OverlayLineVertical(Color color, double x, double thickness, int maximumX, int maximumY)
 	{
-		super("line vertical", color, new Attribute[]
+		super("line vertical", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X", x, maximumX, true),
 			new DoubleAttribute("Thickness", thickness, maximumX, false)
 		}, maximumX, maximumY);
@@ -45,15 +47,8 @@ public class OverlayLineVertical extends Overlay
 				canvas.getWidth() * GetDoubleAttribute("X") / MaximumX,
 				canvas.getHeight());
 		line.setStrokeWidth(canvas.getWidth() * (GetDoubleAttribute("Thickness") / MaximumX));
-		line.setStroke(Color);
+		line.setStroke(GetColorAttribute("Color"));
 		canvas.getChildren().add(line);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Thickness", values[1]);
 	}
 
 	@Override
@@ -63,7 +58,7 @@ public class OverlayLineVertical extends Overlay
 			width * GetDoubleAttribute("X") / MaximumX,
 			width * GetDoubleAttribute("X") / MaximumX,
 			height,
-			ColorExtensions.ToHexString(Color, false),
+			ColorExtensions.ToHexString(GetColorAttribute("Color"), false),
 			width * (GetDoubleAttribute("Thickness") / MaximumX));
 	}
 }

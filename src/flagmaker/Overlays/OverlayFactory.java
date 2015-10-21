@@ -1,5 +1,7 @@
 package flagmaker.Overlays;
 
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import flagmaker.Flag;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;
@@ -35,6 +37,9 @@ public class OverlayFactory
 		_typeMap.put("ring", "flagmaker.Overlays.OverlayTypes.OverlayRing");
 		_typeMap.put("saltire", "flagmaker.Overlays.OverlayTypes.OverlaySaltire");
 		_typeMap.put("triangle", "flagmaker.Overlays.OverlayTypes.OverlayTriangle");
+				
+		_typeMap.put("flag", "flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag");
+		_typeMap.put("image", "flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage");
 		
 		_typeMap.put("repeater lateral", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterLateral");
 		_typeMap.put("repeater radial", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterRadial");

@@ -15,6 +15,7 @@ public class OverlayRing extends Overlay
 	{
 		super("ring", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X", 1, maximumX, true),
 			new DoubleAttribute("Y", 1, maximumY, false),
 			new DoubleAttribute("Width", 1, maximumX, true),
@@ -25,8 +26,9 @@ public class OverlayRing extends Overlay
 
 	public OverlayRing(Color color, double x, double y, double width, double height, double size, int maximumX, int maximumY)
 	{
-		super("ring", color, new Attribute[]
+		super("ring", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X", x, maximumX, true),
 			new DoubleAttribute("Y", y, maximumX, false),
 			new DoubleAttribute("Width", width, maximumX, true),
@@ -61,18 +63,8 @@ public class OverlayRing extends Overlay
 		Ellipse outer = new Ellipse(locX, locY, outerDiamX / 2, outerDiamY / 2);
 		Ellipse inner = new Ellipse(locX, locY, innerDiamX / 2, innerDiamY / 2);
 		Shape ring = Path.subtract(outer, inner);
-		ring.setFill(Color);
+		ring.setFill(GetColorAttribute("Color"));
 		canvas.getChildren().add(ring);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Width", values[2]);
-		SetAttribute("Height", values[3]);
-		SetAttribute("Size", values[4]);
 	}
 
 	@Override
@@ -96,6 +88,6 @@ public class OverlayRing extends Overlay
 			"\" %8$s />",
 			x, y, outerRadX, outerRadY, 2 * outerRadX,
 			innerRadX, innerRadY, 2 * innerRadX,
-			ColorExtensions.ToSvgFillWithOpacity(Color));
+			ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

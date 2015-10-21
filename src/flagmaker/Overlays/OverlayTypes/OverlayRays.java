@@ -16,6 +16,7 @@ public class OverlayRays extends Overlay
 	{
 		super("rays", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X", 1, maximumX, true),
 			new DoubleAttribute("Y", 1, maximumY, false),
 			new IntegerAttribute("Count", 4, maximumX, true),
@@ -25,8 +26,9 @@ public class OverlayRays extends Overlay
 	
 	public OverlayRays(Color color, double x, double y, int count, double rotation, int maximumX, int maximumY)
 	{
-		super("rays", color, new Attribute[]
+		super("rays", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X", x, maximumX, true),
 			new DoubleAttribute("Y", y, maximumY, false),
 			new IntegerAttribute("Count", count, maximumX, true),
@@ -51,18 +53,9 @@ public class OverlayRays extends Overlay
 		{
 			SVGPath p = new SVGPath();
 			p.setContent(path);
-			p.setFill(Color);
+			p.setFill(GetColorAttribute("Color"));
 			canvas.getChildren().add(p);
 		}
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Count", values[2]);
-		SetAttribute("Rotation", values[3]);
 	}
 
 	@Override
@@ -73,7 +66,7 @@ public class OverlayRays extends Overlay
 		for (String path : GetPaths(width, height))
 		{
 			sb.append(String.format("<path d=\"%s\" %s />",
-				path, ColorExtensions.ToSvgFillWithOpacity(Color)));
+				path, ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color"))));
 		}
 
 		return sb.toString();

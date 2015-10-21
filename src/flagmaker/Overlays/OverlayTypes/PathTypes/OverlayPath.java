@@ -21,6 +21,7 @@ public class OverlayPath extends Overlay
 	{
 		super(name, new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X", 1, maximumX, true),
 			new DoubleAttribute("Y", 1, maximumY, false),
 			new DoubleAttribute("Size", 1, maximumX, true),
@@ -32,10 +33,11 @@ public class OverlayPath extends Overlay
 		StrokeColor = Color.WHITE;
 	}
 	
-	public OverlayPath(String name, String path, Vector pathSize, double x, double y, double size, double rotation, double stroke, boolean strokeCurved, int maximumX, int maximumY)
+	public OverlayPath(String name, String path, Vector pathSize, Color color, double x, double y, double size, double rotation, double stroke, boolean strokeCurved, int maximumX, int maximumY)
 	{
 		super(name, new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X", x, maximumX, true),
 			new DoubleAttribute("Y", y, maximumY, false),
 			new DoubleAttribute("Size", size, maximumX, true),
@@ -85,7 +87,7 @@ public class OverlayPath extends Overlay
 			
 			SVGPath path = new SVGPath();
 			path.setContent(_path);
-			path.setFill(Color);
+			path.setFill(GetColorAttribute("Color"));
 			path.setStroke(StrokeColor);
 			path.setStrokeWidth(StrokeThickness(canvas.getWidth(), canvas.getHeight()));
 			path.setStrokeLineJoin(GetBooleanAttribute("StrokeCurved")
@@ -108,17 +110,6 @@ public class OverlayPath extends Overlay
 	}
 
 	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Size", values[2]);
-		SetAttribute("Rotation", values[3]);
-		SetAttribute("Stroke", values[4]);
-		SetAttribute("StrokeCurved", values[5]);
-	}
-
-	@Override
 	public String ExportSvg(int width, int height)
 	{
 		double xGridSize = (double)width / MaximumX;
@@ -137,7 +128,7 @@ public class OverlayPath extends Overlay
 		boolean strokeCurved = GetBooleanAttribute("StrokeCurved");
 
 		return String.format("<g transform=\"translate(%.3f,%.3f) rotate(%.3f) scale(%.3f)\"><path d=\"%s\" %s %s /></g>",
-			finalCenterPoint.X, finalCenterPoint.Y, rotate, scaleFactor, _path, ColorExtensions.ToSvgFillWithOpacity(Color),
+			finalCenterPoint.X, finalCenterPoint.Y, rotate, scaleFactor, _path, ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")),
 			strokeThickness > 0
 				? String.format("stroke=\"#%s\" stroke-width=\"$.3f\" stroke-linejoin=\"%s\"",
 					ColorExtensions.ToHexString(StrokeColor, false), strokeThickness, strokeCurved ? "round" : "miter")

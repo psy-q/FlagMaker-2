@@ -2,8 +2,8 @@ package flagmaker.Overlays;
 
 import flagmaker.Flag;
 import flagmaker.LocalizationHandler;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

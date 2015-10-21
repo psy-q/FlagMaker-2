@@ -4,8 +4,8 @@ import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -66,7 +66,8 @@ public class Flag
 
 			while ((line = sr.readLine()) != null)
 			{
-				switch (line.split("=")[0].toLowerCase())
+				String parameter = line.split("=")[0].toLowerCase();
+				switch (parameter)
 				{
 					case "name":
 						name = line.split("=")[1];
@@ -105,59 +106,15 @@ public class Flag
 					case "color3":
 						divisionColor3 = ColorExtensions.ParseColor(line.split("=")[1]);
 						break;
-					case "color":
-						overlays.get(overlayIndex).Color = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					case "size1":
+					default:
 						if (isDivision)
 						{
 							divisionVal1 = Integer.parseInt(line.split("=")[1]);
 						}
 						else
 						{
-							overlays.get(overlayIndex).Values[0] = GetDoubleFromString(line.split("=")[1]);
+							overlays.get(overlayIndex).Values.put(parameter, line.split("=")[1]);
 						}
-						break;
-					case "size2":
-						if (isDivision)
-						{
-							divisionVal2 = Integer.parseInt(line.split("=")[1]);
-						}
-						else
-						{
-							overlays.get(overlayIndex).Values[1] = GetDoubleFromString(line.split("=")[1]);
-						}
-						break;
-					case "size3":
-						if (isDivision)
-						{
-							divisionVal3 = Integer.parseInt(line.split("=")[1]);
-						}
-						else
-						{
-							overlays.get(overlayIndex).Values[2] = GetDoubleFromString(line.split("=")[1]);
-						}
-						break;
-					case "size4":
-						overlays.get(overlayIndex).Values[3] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size5":
-						overlays.get(overlayIndex).Values[4] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size6":
-						overlays.get(overlayIndex).Values[5] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size7":
-						overlays.get(overlayIndex).Values[6] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "size8":
-						overlays.get(overlayIndex).Values[7] = GetDoubleFromString(line.split("=")[1]);
-						break;
-					case "path":
-						overlays.get(overlayIndex).Path = new File(line.split("=")[1]);
-						break;
-					case "stroke":
-						overlays.get(overlayIndex).StrokeColor = ColorExtensions.ParseColor(line.split("=")[1]);
 						break;
 				}
 			}
@@ -261,14 +218,10 @@ public class Flag
 				{
 					printLine.printf("path=%s\n", ((OverlayImage)overlay).GetPath());
 				}
-				else
-				{
-					printLine.printf("color=%s\n", ColorExtensions.ToHexString(overlay.Color, true));
-				}
 
 				for (int i = 0; i < overlay.Attributes.length; i++)
 				{
-					printLine.printf("size%d=%f\n", i + 1, overlay.Attributes[i].GetValue());
+					printLine.printf("%s=%f\n", overlay.Attributes[i].Name, overlay.Attributes[i].GetValue());
 				}
 
 				if (overlay instanceof OverlayPath)
@@ -360,7 +313,7 @@ public class Flag
 			}
 			else if (!(overlay instanceof OverlayRepeater || overlay instanceof OverlayImage))
 			{
-				colors.add(overlay.Color);
+				//colors.add(overlay.Color);
 
 				if (overlay instanceof OverlayPath)
 				{

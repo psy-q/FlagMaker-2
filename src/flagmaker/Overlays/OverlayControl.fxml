@@ -77,8 +77,11 @@
 		</Button>
 	</FlowPane>
 	
-	<ColorPicker fx:id="overlayPicker" minHeight="28.0" style="-fx-color-label-visible: false;" />
-	<VBox fx:id="pnlSliders" />
+	<VBox fx:id="pnlSliders">
+		<VBox.margin>
+			<Insets top="10.0" />
+		</VBox.margin>
+	</VBox>
 	<HBox fx:id="strokeBox" alignment="CENTER_LEFT">
 		<Label fx:id="lblStroke">
 			<padding>

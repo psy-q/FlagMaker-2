@@ -6,11 +6,9 @@ import flagmaker.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.Attributes.Sliders.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
-import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayFlag;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayImage;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +28,6 @@ import javafx.stage.Stage;
 public class OverlayControl extends VBox
 {
 	@FXML private Button btnOverlay;
-	@FXML private ColorPicker overlayPicker;
 	@FXML private VBox pnlSliders;
 	@FXML private HBox strokeBox;
 	@FXML private ColorPicker strokePicker;
@@ -66,7 +63,6 @@ public class OverlayControl extends VBox
 		_defaultMaximumY = defaultMaximumY;
 		_isFirst = true;
 		
-		overlayPicker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) -> OverlayColorChanged());
 		strokePicker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
 		{
 			((OverlayPath)_overlay).StrokeColor = strokePicker.getValue();
@@ -92,16 +88,11 @@ public class OverlayControl extends VBox
 		
 		if (!_isFirst && !IsLoading)
 		{
-			Object[] sliderValues = GetAttributeSliderValues();
-			if (sliderValues.length > 0)
+			HashMap<String, Object> sliderValues = GetAttributeSliderValues();
+			if (!sliderValues.isEmpty())
 			{
-				for (int i = sliderValues.length; i < _overlay.Attributes.length; i++)
-				{
-					sliderValues = AddElement(sliderValues, 0.0);
-				}
-				
+				sliderValues.clear();
 				_overlay.SetValues(sliderValues);
-				_overlay.SetColor(overlayPicker.getValue());
 				
 				if (_overlay instanceof OverlayPath)
 				{
@@ -114,16 +105,6 @@ public class OverlayControl extends VBox
 			strokePicker.setValue(((OverlayPath)_overlay).StrokeColor);
 		}
 		
-		if (_overlay instanceof OverlayFlag || _overlay instanceof OverlayRepeater || _overlay instanceof OverlayImage)
-		{
-			ControlExtensions.HideControl(overlayPicker);
-		}
-		else
-		{
-			ControlExtensions.ShowControl(overlayPicker);
-		}
-		
-		overlayPicker.setValue(_overlay.Color);
 		SetVisibilityButton();
 		
 		pnlSliders.getChildren().clear();
@@ -143,16 +124,6 @@ public class OverlayControl extends VBox
 		
 		_isFirst = false;
 		IsLoading = false;
-	}
-	
-	public Color GetColor()
-	{
-		return overlayPicker.getValue();
-	}
-	
-	public void SetColor(Color value)
-	{
-		overlayPicker.setValue(value);
 	}
 	
 	public void SetMaximum(int maximumX, int maximumY)
@@ -183,14 +154,6 @@ public class OverlayControl extends VBox
 		ttpMoveDown.setText(LocalizationHandler.Get("MoveDown"));
 		ttpClone.setText(LocalizationHandler.Get("Clone"));
 		lblStroke.setText(LocalizationHandler.Get("Stroke"));
-	}
-	
-	private void OverlayColorChanged()
-	{
-		if (_overlay == null) return;
-		_overlay.SetColor(overlayPicker.getValue());
-		Draw();
-		_mainWindow.SetAsUnsaved();
 	}
 	
 	public void OverlaySliderChanged()
@@ -289,15 +252,15 @@ public class OverlayControl extends VBox
 		return list.toArray(returnValue);
 	}
 	
-	private Object[] GetAttributeSliderValues()
+	private HashMap<String, Object> GetAttributeSliderValues()
 	{
 		int sliderCount = pnlSliders.getChildren().size();
-		Object[] list = new Object[sliderCount];
+		HashMap<String, Object> list = new HashMap<>();
 		
 		for (int i = 0; i < sliderCount; i++)
 		{
 			AttributeSlider slider = (AttributeSlider)pnlSliders.getChildren().get(i);
-			list[i] = slider.GetValue();
+			list.put(slider.Name, slider.GetValue());
 		}
 		
 		return list;

@@ -15,6 +15,7 @@ public class OverlayPall extends Overlay
 	{
 		super("pall", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X", 1, maximumX, true),
 			new DoubleAttribute("Width", 1, maximumX, true)
 		}, maximumX, maximumY);
@@ -22,8 +23,9 @@ public class OverlayPall extends Overlay
 	
 	public OverlayPall(Color color, double x, double width, int maximumX, int maximumY)
 	{
-		super("pall", color, new Attribute[]
+		super("pall", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X", x, maximumX, true),
 			new DoubleAttribute("Width", width, maximumX, true)
 		}, maximumX, maximumY);
@@ -59,16 +61,9 @@ public class OverlayPall extends Overlay
 				canvas.getHeight() - (double)theWidth / 2,
 				canvas.getHeight() / 2,
 				x - (double)theWidth / 3));
-		p.setFill(Color);
+		p.setFill(GetColorAttribute("Color"));
 		
 		canvas.getChildren().add(p);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Width", values[1]);
 	}
 
 	@Override
@@ -87,6 +82,6 @@ public class OverlayPall extends Overlay
 				height - (double)theWidth / 2,
 				height / 2.0,
 				x - (double)theWidth / 3,
-				ColorExtensions.ToSvgFillWithOpacity(Color));
+				ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

@@ -18,14 +18,16 @@ public class OverlayFimbriationBackward extends Overlay
 	{
 		super("fimbriation backward", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("Thickness", 1, maximumX, true)
 		}, maximumX, maximumY);
 	}
 
 	public OverlayFimbriationBackward(Color color, double thickness, int maximumX, int maximumY)
 	{
-		super("fimbriation backward", color, new Attribute[]
+		super("fimbriation backward", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("Thickness", thickness, maximumX, true)
 		}, maximumX, maximumY);
 	}
@@ -54,15 +56,9 @@ public class OverlayFimbriationBackward extends Overlay
 			new LineTo(canvas.getWidth(), canvas.getHeight() - widthY),
 			new LineTo(widthX, 0)
 		});
-		path.setFill(Color);
+		path.setFill(GetColorAttribute("Color"));
 		path.setStrokeWidth(0);
 		canvas.getChildren().add(path);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("Thickness", values[0]);
 	}
 
 	@Override
@@ -73,6 +69,6 @@ public class OverlayFimbriationBackward extends Overlay
 
 		return String.format("<polygon points=\"%1$.3f,0 0,0 0,%6$.3f %2$.3f,%3$d %4$d,%3$d %4$d,%5$.3f %1$.3f,0\" %7$s />",
 			wX, width - wX, height, width, height - wY, wY,
-			ColorExtensions.ToSvgFillWithOpacity(Color));
+			ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

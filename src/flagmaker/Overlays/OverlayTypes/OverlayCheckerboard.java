@@ -15,6 +15,7 @@ public class OverlayCheckerboard extends Overlay
 	{
 		super("checkerboard", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X", 1, maximumX, true),
 			new DoubleAttribute("Y", 1, maximumY, false),
 			new DoubleAttribute("Width", 1, maximumX, true),
@@ -26,8 +27,9 @@ public class OverlayCheckerboard extends Overlay
 
 	public OverlayCheckerboard(Color color, double x, double y, double width, double height, int countX, int countY, int maximumX, int maximumY)
 	{
-		super("checkerboard", color, new Attribute[]
+		super("checkerboard", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X", x, maximumX, true),
 			new DoubleAttribute("Y", y, maximumY, false),
 			new DoubleAttribute("Width", width, maximumX, true),
@@ -82,21 +84,10 @@ public class OverlayCheckerboard extends Overlay
 				if ((x + y) % 2 != 0) continue;
 
 				Rectangle rect = new Rectangle(left + x * blockWidth, top + y * blockHeight, blockWidth, blockHeight);
-				rect.setFill(Color);
+				rect.setFill(GetColorAttribute("Color"));
 				canvas.getChildren().add(rect);
 			}
 		}
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X", values[0]);
-		SetAttribute("Y", values[1]);
-		SetAttribute("Width", values[2]);
-		SetAttribute("Height", values[3]);
-		SetAttribute("CountX", values[4]);
-		SetAttribute("CountY", values[5]);
 	}
 
 	@Override
@@ -125,7 +116,7 @@ public class OverlayCheckerboard extends Overlay
 
 				sb.append(String.format("<rect width=\"%.3f\" height=\"%.3f\" %s x=\"%.3f\" y=\"%.3f\"/>",
 						blockWidth, blockHeight,
-						ColorExtensions.ToSvgFillWithOpacity(Color),
+						ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")),
 						left + x * blockWidth, top + y * blockHeight));
 			}
 		}

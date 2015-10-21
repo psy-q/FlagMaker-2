@@ -14,6 +14,7 @@ public class OverlayTriangle extends Overlay
 	{
 		super("triangle", new Attribute[]
 		{
+			new ColorAttribute("Color", Color.BLACK),
 			new DoubleAttribute("X1", 1, maximumX, true),
 			new DoubleAttribute("Y1", 1, maximumY, false),
 			new DoubleAttribute("X2", 1, maximumX, true),
@@ -26,8 +27,9 @@ public class OverlayTriangle extends Overlay
 	public OverlayTriangle(Color color, double x1, double y1, double x2,
 			double y2, double x3, double y3, int maximumX, int maximumY)
 	{
-		super("triangle", color, new Attribute[]
+		super("triangle", new Attribute[]
 		{
+			new ColorAttribute("Color", color),
 			new DoubleAttribute("X1", x1, maximumX, true),
 			new DoubleAttribute("Y1", y1, maximumY, false),
 			new DoubleAttribute("X2", x2, maximumX, true),
@@ -58,19 +60,8 @@ public class OverlayTriangle extends Overlay
 		SVGPath path = new SVGPath();
 		path.setContent(String.format("M %.3f,%.3f %.3f,%.3f %.3f,%.3f",
 				x1, y1, x2, y2, x3, y3));
-		path.setFill(Color);
+		path.setFill(GetColorAttribute("Color"));
 		canvas.getChildren().add(path);
-	}
-
-	@Override
-	public void SetValues(Object[] values)
-	{
-		SetAttribute("X1", values[0]);
-		SetAttribute("Y1", values[1]);
-		SetAttribute("X2", values[2]);
-		SetAttribute("Y2", values[3]);
-		SetAttribute("X3", values[4]);
-		SetAttribute("Y3", values[5]);
 	}
 
 	@Override
@@ -84,6 +75,6 @@ public class OverlayTriangle extends Overlay
 		double y3 = height * (GetDoubleAttribute("Y3") / MaximumY);
 
 		return String.format("<polygon points=\"%.3f,%.3f %.3f,%.3f %.3f,%.3f\" %s />",
-				x1, y1, x2, y2, x3, y3, ColorExtensions.ToSvgFillWithOpacity(Color));
+				x1, y1, x2, y2, x3, y3, ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")));
 	}
 }

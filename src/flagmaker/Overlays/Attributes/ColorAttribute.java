@@ -1,6 +1,7 @@
 package flagmaker.Overlays.Attributes;
 
 import flagmaker.Overlays.Attributes.Sliders.AttributeSlider;
+import flagmaker.Overlays.Attributes.Sliders.ColorAttributeSlider;
 import flagmaker.Overlays.OverlayControl;
 import javafx.scene.paint.Color;
 
@@ -29,7 +30,7 @@ public class ColorAttribute extends Attribute
 	@Override
 	public AttributeSlider GetSlider(OverlayControl parent)
 	{
-		return null;
+		return new ColorAttributeSlider(parent, Name, Value);
 	}
 
 	@Override

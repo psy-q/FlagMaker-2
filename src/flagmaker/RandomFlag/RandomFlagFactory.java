@@ -1,5 +1,6 @@
 package flagmaker.RandomFlag;
 
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import flagmaker.Divisions.*;
 import flagmaker.Flag;
 import flagmaker.LocalizationHandler;
@@ -767,17 +768,22 @@ public class RandomFlagFactory
 
 		OverlayPath emblem = (OverlayPath)_emblems[Randomizer.Next(_emblems.length)];
 		emblem.SetMaximum(_gridSize.Width, _gridSize.Height);
+		emblem.SetAttribute("X", x);
+		emblem.SetAttribute("Y", y);
+		emblem.SetAttribute("Size", _gridSize.Width / (isBig ? 3.0 : 6.0));
+		emblem.SetAttribute("Rotation", 0.0);
 
 		if (canStroke && Randomizer.ProbabilityOfTrue(0.1))
 		{
-			emblem.SetColor(colorIfStroked);
 			emblem.StrokeColor = color;
-			emblem.SetValues(new Object[] { x, y, _gridSize.Width / (isBig ? 3.0 : 6.0), 0, 2, _gridSize.Width });
+			emblem.SetAttribute("Color", colorIfStroked);
+			emblem.SetAttribute("Stroke", 2.0);
+			emblem.SetAttribute("StrokeCurved", _gridSize.Width);
 		}
 		else
 		{
-			emblem.SetColor(color);
-			emblem.SetValues(new Object[] { x, y, _gridSize.Width / (isBig ? 3.0 : 6.0), 0, 0, 0 });
+			emblem.SetAttribute("Color", color);
+			emblem.SetAttribute("Stroke", 0.0);
 		}
 
 		_overlays.add(emblem);
