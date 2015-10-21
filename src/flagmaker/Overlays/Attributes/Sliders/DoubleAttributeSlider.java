@@ -88,6 +88,12 @@ public class DoubleAttributeSlider extends NumericAttributeSlider
 		SetDiscrete(value % 1 == 0);
 		SliderValueChanged(); // Hopefully won't cause infinite cascading event triggers
 	}
+
+	@Override
+	public void SetValue(Object value)
+	{
+		SetValue((double)value);
+	}
 	
 	public void SetDiscrete(boolean isDiscrete)
 	{

@@ -40,6 +40,12 @@ public class BooleanAttributeSlider extends AttributeSlider
 		chkEnabled.setSelected(value);
 	}
 
+	@Override
+	public void SetValue(Object value)
+	{
+		SetValue((boolean)value);
+	}
+
 	private void Load()
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("BooleanAttributeSlider.fxml"));

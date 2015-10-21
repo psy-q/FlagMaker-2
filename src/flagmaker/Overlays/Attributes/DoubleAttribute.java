@@ -11,6 +11,8 @@ public class DoubleAttribute extends NumericAttribute<Double>
 	public boolean IsDiscrete;
 	public double Value;
 	
+	private DoubleAttributeSlider _slider;
+	
 	public DoubleAttribute(String name, double initialValue, int maximum, boolean useMaxX)
 	{
 		super(name, maximum, useMaxX);
@@ -22,12 +24,16 @@ public class DoubleAttribute extends NumericAttribute<Double>
 	public void SetValue(Object value)
 	{
 		Value = (double)value;
+		if (_slider != null)
+		{
+			_slider.SetValue(Value);
+		}
 	}
 
 	@Override
 	public void SetValue(String value)
 	{
-		Value = Double.parseDouble(value.replace(",", "."));
+		SetValue(Double.parseDouble(value.replace(",", ".")));
 	}
 	
 	@Override
@@ -39,7 +45,8 @@ public class DoubleAttribute extends NumericAttribute<Double>
 	@Override
 	public AttributeSlider GetSlider(OverlayControl parent)
 	{
-		return new DoubleAttributeSlider(parent, Name, IsDiscrete, Value, Maximum, UseMaxX);
+		_slider = new DoubleAttributeSlider(parent, Name, IsDiscrete, Value, Maximum, UseMaxX);
+		return _slider;
 	}
 
 	@Override

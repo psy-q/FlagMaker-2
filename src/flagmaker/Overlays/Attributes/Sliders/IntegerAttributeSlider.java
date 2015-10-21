@@ -72,6 +72,12 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 		slider.setValue(value);
 		SliderValueChanged();
 	}
+
+	@Override
+	public void SetValue(Object value)
+	{
+		SetValue((int)value);
+	}
 	
 	private void SliderValueChanged()
 	{

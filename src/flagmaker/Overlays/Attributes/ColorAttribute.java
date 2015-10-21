@@ -10,6 +10,8 @@ public class ColorAttribute extends Attribute
 {
 	public Color Value;
 	
+	private ColorAttributeSlider _slider;
+	
 	public ColorAttribute(String name, Color initialValue)
 	{
 		super(name);
@@ -20,12 +22,16 @@ public class ColorAttribute extends Attribute
 	public void SetValue(Object value)
 	{
 		Value = (Color)value;
+		if (_slider != null)
+		{
+			_slider.SetValue(Value, false);
+		}
 	}
 
 	@Override
 	public void SetValue(String value)
 	{
-		Value = ColorExtensions.ParseColor(value);
+		SetValue(ColorExtensions.ParseColor(value));
 	}
 	
 	@Override
@@ -37,7 +43,8 @@ public class ColorAttribute extends Attribute
 	@Override
 	public AttributeSlider GetSlider(OverlayControl parent)
 	{
-		return new ColorAttributeSlider(parent, Name, Value);
+		_slider = new ColorAttributeSlider(parent, Name, Value);
+		return _slider;
 	}
 
 	@Override

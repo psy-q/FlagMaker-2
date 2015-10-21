@@ -21,4 +21,5 @@ public abstract class AttributeSlider extends HBox
 	}
 	
 	public abstract Object GetValue();
+	public abstract void SetValue(Object value);
 }
