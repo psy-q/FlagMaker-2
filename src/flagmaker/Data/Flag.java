@@ -4,6 +4,7 @@ import flagmaker.Divisions.*;
 import flagmaker.Overlays.Attributes.Attribute;
 import flagmaker.Overlays.Attributes.ColorAttribute;
 import flagmaker.Overlays.Overlay;
+import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import java.io.File;
@@ -140,6 +141,15 @@ public class Flag
 			if (overlay instanceof OverlayFlag)
 			{
 				colors.addAll(Arrays.asList(((OverlayFlag)overlay).Flag.ColorsUsed()));
+			}
+			else if (overlay instanceof OverlayPath)
+			{
+				OverlayPath p = (OverlayPath)overlay;
+				colors.add(p.GetColorAttribute("Color"));
+				if (p.GetDoubleAttribute("Stroke") > 0)
+				{
+					colors.add(p.GetColorAttribute("StrokeColor"));
+				}
 			}
 			else
 			{

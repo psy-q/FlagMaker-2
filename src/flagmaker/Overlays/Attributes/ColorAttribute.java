@@ -24,7 +24,7 @@ public class ColorAttribute extends Attribute
 		Value = (Color)value;
 		if (_slider != null)
 		{
-			_slider.SetValue(Value, false);
+			_slider.SetValue(Value);
 		}
 	}
 

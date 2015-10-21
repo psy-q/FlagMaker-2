@@ -33,10 +33,8 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 		slider.setValue(value);
 		slider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval))
-			{
-				SliderValueChanged();
-			}
+			if (TriggeredByUser && !oldval.equals(newval)) SliderValueChanged();
+			TriggeredByUser = true;
 		});
 		ControlExtensions.HideControl(txtValue);
 		txtValue.setOnKeyPressed((KeyEvent event) -> TxtValueKeyDown(event));
@@ -69,6 +67,7 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 	
 	public void SetValue(int value)
 	{
+		TriggeredByUser = false;
 		slider.setValue(value);
 		SliderValueChanged();
 	}

@@ -14,8 +14,6 @@ public class ColorAttributeSlider extends AttributeSlider
 {
 	@FXML private Label lblName;
 	@FXML private ColorPicker picker;
-	
-	private boolean _trigger;
 		
 	public ColorAttributeSlider(OverlayControl parent, String name, Color value)
 	{
@@ -28,8 +26,8 @@ public class ColorAttributeSlider extends AttributeSlider
 		picker.setValue(value);
 		picker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
 		{
-			if (_trigger && !newval.equals(oldval)) ValueChanged();
-			_trigger = true;
+			if (TriggeredByUser && !newval.equals(oldval)) ValueChanged();
+			TriggeredByUser = true;
 		});
 	}
 	
@@ -39,16 +37,16 @@ public class ColorAttributeSlider extends AttributeSlider
 		return picker.getValue();
 	}
 	
-	public void SetValue(Color value, boolean trigger)
+	public void SetValue(Color value)
 	{
-		_trigger = false;
+		TriggeredByUser = false;
 		picker.setValue(value);
 	}
 
 	@Override
 	public void SetValue(Object value)
 	{
-		SetValue((Color)value, true);
+		SetValue((Color)value);
 	}
 
 	private void Load()

@@ -121,10 +121,13 @@ public class OverlayControl extends VBox
 		ttpClone.setText(LocalizationHandler.Get("Clone"));
 	}
 	
-	public void OverlaySliderChanged()
+	public void OverlaySliderChanged(boolean triggeredByUser)
 	{
-		_overlay.SetValues(GetAttributeSliderValues());
-		Draw();
+		if (triggeredByUser)
+		{
+			_overlay.SetValues(GetAttributeSliderValues());
+			Draw();
+		}
 		_mainWindow.SetAsUnsaved();
 	}
 
