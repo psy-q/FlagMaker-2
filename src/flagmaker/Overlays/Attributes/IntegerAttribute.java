@@ -43,4 +43,10 @@ public class IntegerAttribute extends NumericAttribute<Integer>
 	{
 		return new IntegerAttribute(Name, Value, Maximum, UseMaxX);
 	}
+
+	@Override
+	public String ToSaveAsString()
+	{
+		return String.format("%d", Value);
+	}
 }

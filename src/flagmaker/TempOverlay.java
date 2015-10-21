@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class TempOverlay
 {
 	public String Type;
-	public final HashMap<String, Object> Values;
+	public final HashMap<String, String> Values;
 	public File Path;
 
 	public TempOverlay()
@@ -33,7 +33,7 @@ public class TempOverlay
 
 		if (overlay == null) return null;
 
-		overlay.SetValues(Values);
+		overlay.SetValuesFromStrings(Values);
 		return overlay;
 	}
 }

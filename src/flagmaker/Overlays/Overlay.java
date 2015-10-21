@@ -70,6 +70,25 @@ public abstract class Overlay
 		});
 	}
 	
+	public void SetValuesFromStrings(HashMap<String, String> values)
+	{
+		values.entrySet().stream().forEach((v) ->
+		{
+			String name = v.getKey();
+			String value = v.getValue();
+			
+			// Will fail for missing sttributes
+			for (Attribute a : Attributes)
+			{
+				if (a.Name.equals(name))
+				{
+					a.SetValue(value);
+					return;
+				}
+			}
+		});
+	}
+	
 	public <T> void SetAttribute(String name, T value)
 	{
 		for (Attribute a : Attributes)

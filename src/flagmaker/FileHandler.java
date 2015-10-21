@@ -60,7 +60,7 @@ public class FileHandler
 
 				for (int i = 0; i < overlay.Attributes.length; i++)
 				{
-					printLine.printf("%s=%f\n", overlay.Attributes[i].Name, overlay.Attributes[i].GetValue());
+					printLine.printf("%s=%s\n", overlay.Attributes[i].Name, overlay.Attributes[i].ToSaveAsString());
 				}
 			}
 		}
@@ -177,7 +177,7 @@ public class FileHandler
 		for (String line : lines)
 		{
 			String[] data = line.split("=");
-			if (data[0].equals("type") || data[0].equals("path")) continue;
+			if (data[0].equals("overlay") || data[0].equals("type") || data[0].equals("path")) continue;
 			t.Values.put(data[0], data[1]);
 		}
 		

@@ -43,4 +43,10 @@ public class BooleanAttribute extends Attribute<Boolean>
 	{
 		return new BooleanAttribute(Name, Value);
 	}
+
+	@Override
+	public String ToSaveAsString()
+	{
+		return Value ? "true" : "false";
+	}
 }

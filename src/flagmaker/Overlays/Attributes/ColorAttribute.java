@@ -45,4 +45,10 @@ public class ColorAttribute extends Attribute
 	{
 		return new ColorAttribute(Name, Value);
 	}
+
+	@Override
+	public String ToSaveAsString()
+	{
+		return ColorExtensions.ToHexString(Value, true);
+	}
 }

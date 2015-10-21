@@ -3,6 +3,8 @@ package flagmaker.Overlays.Attributes;
 import flagmaker.Overlays.Attributes.Sliders.AttributeSlider;
 import flagmaker.Overlays.Attributes.Sliders.DoubleAttributeSlider;
 import flagmaker.Overlays.OverlayControl;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class DoubleAttribute extends NumericAttribute<Double>
 {
@@ -44,5 +46,14 @@ public class DoubleAttribute extends NumericAttribute<Double>
 	public Attribute Clone()
 	{
 		return new DoubleAttribute(Name, Value, Maximum, UseMaxX);
+	}
+
+	@Override
+	public String ToSaveAsString()
+	{
+		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
+		decimalFormatSymbols.setDecimalSeparator('.');
+		DecimalFormat decimalFormat = new DecimalFormat("0.##", decimalFormatSymbols);
+		return decimalFormat.format(Value);
 	}
 }
