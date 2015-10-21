@@ -14,9 +14,7 @@ public class OverlayPath extends Overlay
 {
 	private Vector _pathSize;
 	private String _path;
-	
-	public Color StrokeColor;
-	
+		
 	public OverlayPath(String name, int maximumX, int maximumY)
 	{
 		super(name, new Attribute[]
@@ -27,29 +25,28 @@ public class OverlayPath extends Overlay
 			new DoubleAttribute("Size", 1, maximumX, true),
 			new DoubleAttribute("Rotation", 0, maximumX, true),
 			new DoubleAttribute("Stroke", 0, maximumX, true),
+			new ColorAttribute("StrokeColor", Color.BLACK),
 			new BooleanAttribute("StrokeCurved", false)
 		}, maximumX, maximumY);
-		
-		StrokeColor = Color.WHITE;
 	}
 	
-	public OverlayPath(String name, String path, Vector pathSize, Color color, double x, double y, double size, double rotation, double stroke, boolean strokeCurved, int maximumX, int maximumY)
-	{
-		super(name, new Attribute[]
-		{
-			new ColorAttribute("Color", color),
-			new DoubleAttribute("X", x, maximumX, true),
-			new DoubleAttribute("Y", y, maximumY, false),
-			new DoubleAttribute("Size", size, maximumX, true),
-			new DoubleAttribute("Rotation", rotation, maximumX, true),
-			new DoubleAttribute("Stroke", stroke, maximumX, true),
-			new BooleanAttribute("StrokeCurved", strokeCurved)
-		}, maximumX, maximumY);
-		
-		_path = path;
-		_pathSize = pathSize;
-		StrokeColor = Color.WHITE;
-	}
+//	public OverlayPath(String name, String path, Vector pathSize, Color color, double x, double y, double size, double rotation, double stroke, Color strokeColor, boolean strokeCurved, int maximumX, int maximumY)
+//	{
+//		super(name, new Attribute[]
+//		{
+//			new ColorAttribute("Color", color),
+//			new DoubleAttribute("X", x, maximumX, true),
+//			new DoubleAttribute("Y", y, maximumY, false),
+//			new DoubleAttribute("Size", size, maximumX, true),
+//			new DoubleAttribute("Rotation", rotation, maximumX, true),
+//			new DoubleAttribute("Stroke", stroke, maximumX, true),
+//			new ColorAttribute("StrokeColor", strokeColor),
+//			new BooleanAttribute("StrokeCurved", strokeCurved)
+//		}, maximumX, maximumY);
+//		
+//		_path = path;
+//		_pathSize = pathSize;
+//	}
 	
 	protected void Constructor(String path, Vector pathSize)
 	{
@@ -88,7 +85,7 @@ public class OverlayPath extends Overlay
 			SVGPath path = new SVGPath();
 			path.setContent(_path);
 			path.setFill(GetColorAttribute("Color"));
-			path.setStroke(StrokeColor);
+			path.setStroke(GetColorAttribute("StrokeColor"));
 			path.setStrokeWidth(StrokeThickness(canvas.getWidth(), canvas.getHeight()));
 			path.setStrokeLineJoin(GetBooleanAttribute("StrokeCurved")
 				? StrokeLineJoin.ROUND
@@ -131,7 +128,7 @@ public class OverlayPath extends Overlay
 			finalCenterPoint.X, finalCenterPoint.Y, rotate, scaleFactor, _path, ColorExtensions.ToSvgFillWithOpacity(GetColorAttribute("Color")),
 			strokeThickness > 0
 				? String.format("stroke=\"#%s\" stroke-width=\"$.3f\" stroke-linejoin=\"%s\"",
-					ColorExtensions.ToHexString(StrokeColor, false), strokeThickness, strokeCurved ? "round" : "miter")
+					ColorExtensions.ToHexString(GetColorAttribute("StrokeColor"), false), strokeThickness, strokeCurved ? "round" : "miter")
 				: "");
 	}
 	

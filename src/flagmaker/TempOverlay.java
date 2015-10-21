@@ -2,7 +2,6 @@ package flagmaker;
 
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayFactory;
-import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import java.io.File;
 import java.util.HashMap;
 import javafx.scene.paint.Color;
@@ -38,12 +37,6 @@ public class TempOverlay
 		if (overlay == null) return null;
 
 		overlay.SetValues(Values);
-
-		if (overlay instanceof OverlayPath)
-		{
-			((OverlayPath)overlay).StrokeColor = StrokeColor;
-		}
-
 		return overlay;
 	}
 }

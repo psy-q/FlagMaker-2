@@ -82,12 +82,4 @@
 			<Insets top="10.0" />
 		</VBox.margin>
 	</VBox>
-	<HBox fx:id="strokeBox" alignment="CENTER_LEFT">
-		<Label fx:id="lblStroke">
-			<padding>
-				<Insets right="10.0" />
-			</padding>
-		</Label>
-		<ColorPicker fx:id="strokePicker" minHeight="28.0" style="-fx-color-label-visible: false;" />
-	</HBox>
 </fx:root>

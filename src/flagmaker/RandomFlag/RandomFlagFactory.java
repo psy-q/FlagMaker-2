@@ -775,9 +775,9 @@ public class RandomFlagFactory
 
 		if (canStroke && Randomizer.ProbabilityOfTrue(0.1))
 		{
-			emblem.StrokeColor = color;
 			emblem.SetAttribute("Color", colorIfStroked);
 			emblem.SetAttribute("Stroke", 2.0);
+			emblem.SetAttribute("StrokeColor", color);
 			emblem.SetAttribute("StrokeCurved", _gridSize.Width);
 		}
 		else

@@ -1,27 +1,21 @@
 package flagmaker.Overlays;
 
 import flagmaker.Overlays.Attributes.Attribute;
-import flagmaker.ControlExtensions;
 import flagmaker.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.Attributes.Sliders.*;
-import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -29,8 +23,6 @@ public class OverlayControl extends VBox
 {
 	@FXML private Button btnOverlay;
 	@FXML private VBox pnlSliders;
-	@FXML private HBox strokeBox;
-	@FXML private ColorPicker strokePicker;
 	@FXML private ImageView btnVisibility;
 	
 	@FXML private Tooltip ttpChangeType;
@@ -39,7 +31,6 @@ public class OverlayControl extends VBox
 	@FXML private Tooltip ttpMoveUp;
 	@FXML private Tooltip ttpMoveDown;
 	@FXML private Tooltip ttpClone;
-	@FXML private Label lblStroke;
 	
 	private Stage _stage;
 	
@@ -62,12 +53,6 @@ public class OverlayControl extends VBox
 		_defaultMaximumX = defaultMaximumX;
 		_defaultMaximumY = defaultMaximumY;
 		_isFirst = true;
-		
-		strokePicker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
-		{
-			((OverlayPath)_overlay).StrokeColor = strokePicker.getValue();
-			Draw();
-		});
 		
 		if (!IsLoading)
 		{
@@ -93,16 +78,7 @@ public class OverlayControl extends VBox
 			{
 				sliderValues.clear();
 				_overlay.SetValues(sliderValues);
-				
-				if (_overlay instanceof OverlayPath)
-				{
-					((OverlayPath)_overlay).StrokeColor = strokePicker.getValue();
-				}
 			}
-		}
-		else if (_overlay instanceof OverlayPath)
-		{
-			strokePicker.setValue(((OverlayPath)_overlay).StrokeColor);
 		}
 		
 		SetVisibilityButton();
@@ -111,15 +87,6 @@ public class OverlayControl extends VBox
 		for (Attribute a : _overlay.Attributes)
 		{
 			pnlSliders.getChildren().add(a.GetSlider(this));
-		}
-		
-		if (_overlay instanceof OverlayPath)
-		{
-			ControlExtensions.ShowControl(strokeBox);
-		}
-		else
-		{
-			ControlExtensions.HideControl(strokeBox);
 		}
 		
 		_isFirst = false;
@@ -153,7 +120,6 @@ public class OverlayControl extends VBox
 		ttpMoveUp.setText(LocalizationHandler.Get("MoveUp"));
 		ttpMoveDown.setText(LocalizationHandler.Get("MoveDown"));
 		ttpClone.setText(LocalizationHandler.Get("Clone"));
-		lblStroke.setText(LocalizationHandler.Get("Stroke"));
 	}
 	
 	public void OverlaySliderChanged()

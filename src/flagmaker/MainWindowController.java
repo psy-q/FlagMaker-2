@@ -4,7 +4,6 @@ import flagmaker.Divisions.*;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
-import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import flagmaker.RandomFlag.RandomFlagFactory;
 import java.io.BufferedReader;
@@ -470,11 +469,7 @@ public class MainWindowController
 			copy.Attributes[i] = original.Attributes[i].Clone();
 		}
 
-		if (type.isAssignableFrom(OverlayPath.class))
-		{
-			((OverlayPath) copy).StrokeColor = ((OverlayPath) original).StrokeColor;
-		}
-		else if (type.isAssignableFrom(OverlayFlag.class))
+		if (type.isAssignableFrom(OverlayFlag.class))
 		{
 			((OverlayFlag) copy).Flag = ((OverlayFlag) original).Flag;
 		}
