@@ -188,12 +188,4 @@ public class FileHandler
 	{
 		return data.stream().filter(s -> s.startsWith(fieldName)).findFirst().orElse(defaultValue).split("=")[1];
 	}
-	
-	private static Double GetDoubleFromString(String data)
-	{
-		// Doubles in files can be written as "123.45" or "123,45".
-		// (Ignore thousands separators - not really applicable for FlagMaker.)
-		// If the user saved a file with commas, replace and parse with invariant culture.
-		return Double.parseDouble(data.replace(',', '.'));
-	}
 }

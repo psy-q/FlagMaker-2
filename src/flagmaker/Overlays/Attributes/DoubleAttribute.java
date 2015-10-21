@@ -27,7 +27,7 @@ public class DoubleAttribute extends NumericAttribute<Double>
 	@Override
 	public void SetValue(String value)
 	{
-		Value = Double.parseDouble(value);
+		Value = Double.parseDouble(value.replace(",", "."));
 	}
 	
 	@Override

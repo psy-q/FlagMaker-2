@@ -80,7 +80,7 @@ public abstract class Overlay
 			// Will fail for missing sttributes
 			for (Attribute a : Attributes)
 			{
-				if (a.Name.equals(name))
+				if (a.Name.equalsIgnoreCase(name))
 				{
 					a.SetValue(value);
 					return;
@@ -93,7 +93,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name))
+			if (a.Name.equalsIgnoreCase(name))
 			{
 				a.SetValue(value);
 				return;
@@ -107,7 +107,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name))
+			if (a.Name.equalsIgnoreCase(name))
 			{
 				return a;
 			}
@@ -121,7 +121,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name) && a instanceof DoubleAttribute)
+			if (a.Name.equalsIgnoreCase(name) && a instanceof DoubleAttribute)
 			{
 				return ((DoubleAttribute)a).Value;
 			}
@@ -135,7 +135,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name) && a instanceof IntegerAttribute)
+			if (a.Name.equalsIgnoreCase(name) && a instanceof IntegerAttribute)
 			{
 				return ((IntegerAttribute)a).Value;
 			}
@@ -149,7 +149,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name) && a instanceof BooleanAttribute)
+			if (a.Name.equalsIgnoreCase(name) && a instanceof BooleanAttribute)
 			{
 				return ((BooleanAttribute)a).Value;
 			}
@@ -163,7 +163,7 @@ public abstract class Overlay
 	{
 		for (Attribute a : Attributes)
 		{
-			if (a.Name.equals(name) && a instanceof ColorAttribute)
+			if (a.Name.equalsIgnoreCase(name) && a instanceof ColorAttribute)
 			{
 				return ((ColorAttribute)a).Value;
 			}
