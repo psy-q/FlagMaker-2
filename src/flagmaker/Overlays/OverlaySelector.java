@@ -1,5 +1,6 @@
 package flagmaker.Overlays;
 
+import flagmaker.FileHandler;
 import flagmaker.Flag;
 import flagmaker.LocalizationHandler;
 import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -64,6 +66,9 @@ public class OverlaySelector extends VBox
 	{
 		Tab tab = new Tab(tabName);
 		FlowPane panel = new FlowPane(Orientation.HORIZONTAL);
+		ScrollPane scrollPane = new ScrollPane(panel);
+		scrollPane.setFitToWidth(true);
+		
 		panel.setPadding(new Insets(5));
 		panel.hgapProperty().set(5);
 		panel.vgapProperty().set(5);
@@ -94,7 +99,7 @@ public class OverlaySelector extends VBox
 			panel.getChildren().add(b);
 		}
 		
-		tab.setContent(panel);
+		tab.setContent(scrollPane);
 		tabs.getTabs().add(tab);
 	}
 
@@ -109,7 +114,7 @@ public class OverlaySelector extends VBox
 			Flag flag;
 			try
 			{
-				flag = Flag.LoadFromFile(flagFile);
+				flag = FileHandler.LoadFlagFromFile(flagFile);
 				SetSelectedOverlay(new OverlayFlag(flag, flagFile, _defaultMaximumX, _defaultMaximumY));
 			}
 			catch (Exception ex)

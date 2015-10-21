@@ -936,6 +936,9 @@ is divided into following sections:
         <copy todir="${dist.dir}/Presets">
             <fileset dir="${src.dir}/flagmaker/Presets/" />
         </copy>
+        <copy todir="${dist.dir}/Custom">
+            <fileset dir="${src.dir}/flagmaker/Custom/" />
+        </copy>
     </target>
     <target depends="init,deps-jar,-verify-automatic-build,-pre-pre-compile,-pre-compile,-do-compile,-post-compile" description="Compile project." name="compile"/>
     <target name="-pre-compile-single">

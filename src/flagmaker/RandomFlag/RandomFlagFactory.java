@@ -778,7 +778,7 @@ public class RandomFlagFactory
 			emblem.SetAttribute("Color", colorIfStroked);
 			emblem.SetAttribute("Stroke", 2.0);
 			emblem.SetAttribute("StrokeColor", color);
-			emblem.SetAttribute("StrokeCurved", _gridSize.Width);
+			emblem.SetAttribute("StrokeCurved", true);
 		}
 		else
 		{

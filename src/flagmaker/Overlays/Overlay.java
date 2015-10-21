@@ -31,6 +31,14 @@ public abstract class Overlay
 	{
 		MaximumX = maximumX;
 		MaximumY = maximumY;
+		
+		for (Attribute a : Attributes)
+		{
+			if (a instanceof NumericAttribute)
+			{
+				((NumericAttribute)a).Maximum = MaximumX;
+			}
+		}
 	}
 	
 	public Pane PaneThumbnail()

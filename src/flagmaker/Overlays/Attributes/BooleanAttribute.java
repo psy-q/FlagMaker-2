@@ -19,6 +19,12 @@ public class BooleanAttribute extends Attribute<Boolean>
 	{
 		Value = (boolean)value;
 	}
+
+	@Override
+	public void SetValue(String value)
+	{
+		Value = Boolean.parseBoolean(value);
+	}
 	
 	@Override
 	public Boolean GetValue()

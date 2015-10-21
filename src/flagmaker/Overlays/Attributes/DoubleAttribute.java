@@ -21,6 +21,12 @@ public class DoubleAttribute extends NumericAttribute<Double>
 	{
 		Value = (double)value;
 	}
+
+	@Override
+	public void SetValue(String value)
+	{
+		Value = Double.parseDouble(value);
+	}
 	
 	@Override
 	public Double GetValue()

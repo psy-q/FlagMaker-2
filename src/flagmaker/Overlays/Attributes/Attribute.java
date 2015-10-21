@@ -13,6 +13,7 @@ public abstract class Attribute<T>
 	}
 	
 	public abstract <T> void SetValue(T value);
+	public abstract <T> void SetValue(String value);
 	public abstract <T> T GetValue();
 	public abstract AttributeSlider GetSlider(OverlayControl parent);
 	public abstract Attribute Clone();

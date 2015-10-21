@@ -6,9 +6,7 @@ import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
 import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,124 +40,6 @@ public class Flag
 		Overlays = overlays;
 	}
 	
-	public static Flag LoadFromFile(File file) throws Exception
-	{
-		String name = "";
-		Ratio ratio = new Ratio(3, 2);
-		Ratio gridRatio = new Ratio(3, 2);
-		
-		String divisionType = "grid";
-		Color divisionColor1 = Color.WHITE;
-		Color divisionColor2 = Color.WHITE;
-		Color divisionColor3 = Color.WHITE;
-		int divisionVal1 = 1;
-		int divisionVal2 = 1;
-		int divisionVal3 = 1;
-
-		ArrayList<TempOverlay> overlays = new ArrayList<>();
-
-		String line = "";
-		try (FileReader fr = new FileReader(file); BufferedReader sr = new BufferedReader(fr))
-		{
-			boolean isDivision = false;
-			int overlayIndex = -1;
-
-			while ((line = sr.readLine()) != null)
-			{
-				String parameter = line.split("=")[0].toLowerCase();
-				switch (parameter)
-				{
-					case "name":
-						name = line.split("=")[1];
-						break;
-					case "ratio":
-						ratio = new Ratio(line.split("=")[1]);
-						break;
-					case "gridsize":
-						gridRatio = new Ratio(line.split("=")[1]);
-						break;
-					case "division":
-						isDivision = true;
-						break;
-					case "overlay":
-						isDivision = false;
-						overlayIndex++;
-						TempOverlay to = new TempOverlay();
-						overlays.add(to);
-						break;
-					case "type":
-						if (isDivision)
-						{
-							divisionType = line.split("=")[1];
-						}
-						else
-						{
-							overlays.get(overlayIndex).Type = line.split("=")[1];
-						}
-						break;
-					case "color1":
-						divisionColor1 = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					case "color2":
-						divisionColor2 = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					case "color3":
-						divisionColor3 = ColorExtensions.ParseColor(line.split("=")[1]);
-						break;
-					default:
-						if (isDivision)
-						{
-							divisionVal1 = Integer.parseInt(line.split("=")[1]);
-						}
-						else
-						{
-							overlays.get(overlayIndex).Values.put(parameter, line.split("=")[1]);
-						}
-						break;
-				}
-			}
-
-			Division division;
-			switch (divisionType)
-			{
-				case "fesses":
-					division = new DivisionFesses(divisionColor1, divisionColor2, divisionColor3, divisionVal1, divisionVal2,
-						divisionVal3);
-					break;
-				case "pales":
-					division = new DivisionPales(divisionColor1, divisionColor2, divisionColor3, divisionVal1, divisionVal2,
-						divisionVal3);
-					break;
-				case "bends forward":
-					division = new DivisionBendsForward(divisionColor1, divisionColor2);
-					break;
-				case "bends backward":
-					division = new DivisionBendsBackward(divisionColor1, divisionColor2);
-					break;
-				case "bends both":
-					division = new DivisionX(divisionColor1, divisionColor2);
-					break;
-				default:
-					division = new DivisionGrid(divisionColor1, divisionColor2, divisionVal1, divisionVal2);
-					break;
-			}
-			
-			Overlay[] finalOverlays = new Overlay[overlays.size()];
-			
-			for (int i = 0; i < overlays.size(); i++)
-			{
-				Overlay o = overlays.get(i).ToOverlay(gridRatio.Width, gridRatio.Height, file.getParent());
-				finalOverlays[i] = o;
-			}
-
-			return new Flag(name, ratio, gridRatio, division, finalOverlays);
-		}
-		catch (Exception ex)
-		{
-			throw new Exception(line, ex);
-		}
-	}
-	
 	public static String GetFlagPath()
 	{
 		return null;
@@ -180,50 +60,6 @@ public class Flag
 			if (!Overlays[i].IsEnabled) continue;
 
 			Overlays[i].Draw(canvas);
-		}
-	}
-	
-	public void Save(String path) throws IOException
-	{
-		try (FileWriter writer = new FileWriter(path, false); PrintWriter printLine = new PrintWriter(writer))
-		{
-			printLine.printf("name=%s\n", Name);
-			printLine.printf("ratio=%d:%d\n", Ratio.Height, Ratio.Width);
-			printLine.printf("gridSize=%s\n\n", GridSize.ToString());
-			
-			printLine.printf("division\n");
-			printLine.printf("type=%s\n", Division.Name());
-			
-			for (int i = 0; i < Division.Colors.length; i++)
-			{
-				printLine.printf("color%d=%s\n", i + 1, ColorExtensions.ToHexString(Division.Colors[i], false));
-			}
-			
-			for (int i = 0; i < Division.Values.length; i++)
-			{
-				printLine.printf("size%d=%d\n", i + 1, Division.Values[i]);
-			}
-			
-			for (Overlay overlay : Overlays)
-			{
-				printLine.printf("\noverlay\n");
-				printLine.printf("type=%s\n", overlay.Name);
-				
-				if (overlay.Name.equals("flag"))
-				{
-					printLine.printf("path=%s\n", ((OverlayFlag)overlay).Path);
-				}
-				
-				if (overlay.Name.equals("image"))
-				{
-					printLine.printf("path=%s\n", ((OverlayImage)overlay).GetPath());
-				}
-
-				for (int i = 0; i < overlay.Attributes.length; i++)
-				{
-					printLine.printf("%s=%f\n", overlay.Attributes[i].Name, overlay.Attributes[i].GetValue());
-				}
-			}
 		}
 	}
 	

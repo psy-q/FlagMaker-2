@@ -1,5 +1,6 @@
 package flagmaker.Overlays.Attributes;
 
+import flagmaker.ColorExtensions;
 import flagmaker.Overlays.Attributes.Sliders.AttributeSlider;
 import flagmaker.Overlays.Attributes.Sliders.ColorAttributeSlider;
 import flagmaker.Overlays.OverlayControl;
@@ -19,6 +20,12 @@ public class ColorAttribute extends Attribute
 	public void SetValue(Object value)
 	{
 		Value = (Color)value;
+	}
+
+	@Override
+	public void SetValue(String value)
+	{
+		Value = ColorExtensions.ParseColor(value);
 	}
 	
 	@Override

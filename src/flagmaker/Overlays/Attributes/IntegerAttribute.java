@@ -27,6 +27,12 @@ public class IntegerAttribute extends NumericAttribute<Integer>
 	}
 
 	@Override
+	public void SetValue(String value)
+	{
+		Value = Integer.parseInt(value);
+	}
+
+	@Override
 	public AttributeSlider GetSlider(OverlayControl parent)
 	{
 		return new IntegerAttributeSlider(parent, Name, Value, Maximum, UseMaxX);
