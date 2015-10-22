@@ -77,13 +77,22 @@ public abstract class Overlay
 			String name = v.getKey();
 			String value = v.getValue();
 			
-			// Will fail for missing sttributes
-			for (Attribute a : Attributes)
+			if (name.matches("size\\d"))
 			{
-				if (a.Name.equalsIgnoreCase(name))
+				// Backwards-compatibility for 1.x file format
+				int attributeIndex = Integer.parseInt(name.substring(4, 5));
+				Attributes[attributeIndex].SetValue(value);
+			}
+			else
+			{
+				// Will fail for missing sttributes
+				for (Attribute a : Attributes)
 				{
-					a.SetValue(value);
-					return;
+					if (a.Name.equalsIgnoreCase(name))
+					{
+						a.SetValue(value);
+						return;
+					}
 				}
 			}
 		});

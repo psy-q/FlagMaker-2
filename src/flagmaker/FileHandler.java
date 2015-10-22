@@ -29,8 +29,6 @@ public class FileHandler
 			printLine.printf("name=%s\n", flag.Name);
 			printLine.printf("ratio=%d:%d\n", flag.Ratio.Height, flag.Ratio.Width);
 			printLine.printf("gridSize=%s\n\n", flag.GridSize.ToString());
-			
-			printLine.printf("division\n");
 			printLine.printf("type=%s\n", flag.Division.Name());
 			
 			for (int i = 0; i < flag.Division.Colors.length; i++)
@@ -45,8 +43,7 @@ public class FileHandler
 			
 			for (Overlay overlay : flag.Overlays)
 			{
-				printLine.printf("\noverlay\n");
-				printLine.printf("type=%s\n", overlay.Name);
+				printLine.printf("\ntype=%s\n", overlay.Name);
 				
 				if (overlay.Name.equals("flag"))
 				{
