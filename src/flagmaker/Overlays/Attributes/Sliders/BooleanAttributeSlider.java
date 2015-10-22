@@ -1,6 +1,6 @@
 package flagmaker.Overlays.Attributes.Sliders;
 
-import flagmaker.LocalizationHandler;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.OverlayControl;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -25,7 +25,8 @@ public class BooleanAttributeSlider extends AttributeSlider
 		chkEnabled.setSelected(value);
 		chkEnabled.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean oldval, Boolean newval) ->
 		{
-			if (!newval.equals(oldval)) ValueChanged();
+			if (TriggeredByUser && !newval.equals(oldval)) ValueChanged();
+			TriggeredByUser = true;
 		});
 	}
 	
@@ -37,7 +38,14 @@ public class BooleanAttributeSlider extends AttributeSlider
 	
 	public void SetValue(boolean value)
 	{
+		TriggeredByUser = false;
 		chkEnabled.setSelected(value);
+	}
+
+	@Override
+	public void SetValue(Object value)
+	{
+		SetValue((boolean)value);
 	}
 
 	private void Load()

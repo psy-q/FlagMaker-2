@@ -1,7 +1,7 @@
 package flagmaker.Overlays.Attributes.Sliders;
 
-import flagmaker.ControlExtensions;
-import flagmaker.LocalizationHandler;
+import flagmaker.Extensions.ControlExtensions;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.OverlayControl;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -33,10 +33,8 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 		slider.setValue(value);
 		slider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval))
-			{
-				SliderValueChanged();
-			}
+			if (TriggeredByUser && !oldval.equals(newval)) SliderValueChanged();
+			TriggeredByUser = true;
 		});
 		ControlExtensions.HideControl(txtValue);
 		txtValue.setOnKeyPressed((KeyEvent event) -> TxtValueKeyDown(event));
@@ -69,8 +67,15 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 	
 	public void SetValue(int value)
 	{
+		TriggeredByUser = false;
 		slider.setValue(value);
 		SliderValueChanged();
+	}
+
+	@Override
+	public void SetValue(Object value)
+	{
+		SetValue((int)value);
 	}
 	
 	private void SliderValueChanged()

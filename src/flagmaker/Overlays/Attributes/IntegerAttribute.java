@@ -8,6 +8,8 @@ public class IntegerAttribute extends NumericAttribute<Integer>
 {
 	public int Value;
 	
+	private IntegerAttributeSlider _slider;
+	
 	public IntegerAttribute(String name, int initialValue, int maximum, boolean useMaxX)
 	{
 		super(name, maximum, useMaxX);
@@ -18,6 +20,16 @@ public class IntegerAttribute extends NumericAttribute<Integer>
 	public void SetValue(Object value)
 	{
 		Value = (int)value;
+		if (_slider != null)
+		{
+			_slider.SetValue(Value);
+		}
+	}
+
+	@Override
+	public void SetValue(String value)
+	{
+		SetValue(Integer.parseInt(value));
 	}
 	
 	@Override
@@ -27,15 +39,10 @@ public class IntegerAttribute extends NumericAttribute<Integer>
 	}
 
 	@Override
-	public void SetValue(String value)
-	{
-		Value = Integer.parseInt(value);
-	}
-
-	@Override
 	public AttributeSlider GetSlider(OverlayControl parent)
 	{
-		return new IntegerAttributeSlider(parent, Name, Value, Maximum, UseMaxX);
+		_slider = new IntegerAttributeSlider(parent, Name, Value, Maximum, UseMaxX);
+		return _slider;
 	}
 
 	@Override

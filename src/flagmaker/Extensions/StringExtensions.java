@@ -1,4 +1,4 @@
-package flagmaker;
+package flagmaker.Extensions;
 
 public class StringExtensions
 {

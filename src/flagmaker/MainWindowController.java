@@ -1,6 +1,15 @@
 package flagmaker;
 
+import flagmaker.Files.LocalizationHandler;
+import flagmaker.Extensions.StringExtensions;
+import flagmaker.Extensions.ControlExtensions;
+import flagmaker.Data.Ratio;
+import flagmaker.Data.Size;
+import flagmaker.Data.Flag;
+import flagmaker.Files.FileHandler;
 import flagmaker.Divisions.*;
+import flagmaker.Overlays.Attributes.Attribute;
+import flagmaker.Overlays.Attributes.ColorAttribute;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
@@ -246,6 +255,13 @@ public class MainWindowController
 	
 	private void HookUpEvents()
 	{
+		txtRatioHeight.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue.equals(oldValue)) RatioTextboxChanged();
+		});
+		txtRatioWidth.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue.equals(oldValue)) RatioTextboxChanged();
+		});
+		
 		txtName.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue.equals(oldValue)) SetAsUnsaved();
 		});
@@ -563,10 +579,17 @@ public class MainWindowController
 			divisionPicker3.setValue(GetNextColor(divisionPicker3.getValue(), colors));
 		}
 
-//		for (OverlayControl overlay : (List<OverlayControl>) (List<?>) lstOverlays.getChildren())
-//		{
-//			overlay.SetColor(GetNextColor(overlay.GetColor(), colors));
-//		}
+		for (OverlayControl overlay : (List<OverlayControl>) (List<?>) lstOverlays.getChildren())
+		{
+			for (Attribute a : overlay.GetOverlay().Attributes)
+			{
+				if (a instanceof ColorAttribute)
+				{
+					ColorAttribute c = (ColorAttribute)a;
+					c.SetValue(GetNextColor(c.Value, colors));
+				}
+			}
+		}
 	}
 
 	private Color GetNextColor(Color c, Color[] colors)

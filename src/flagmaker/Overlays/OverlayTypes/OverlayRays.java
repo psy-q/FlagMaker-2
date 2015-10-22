@@ -1,9 +1,9 @@
 package flagmaker.Overlays.OverlayTypes;
 
-import flagmaker.ColorExtensions;
+import flagmaker.Extensions.ColorExtensions;
 import flagmaker.Overlays.Attributes.*;
 import flagmaker.Overlays.Overlay;
-import flagmaker.Vector;
+import flagmaker.Data.Vector;
 import java.util.ArrayList;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

@@ -1,6 +1,6 @@
 package flagmaker.Overlays.Attributes;
 
-import flagmaker.ColorExtensions;
+import flagmaker.Extensions.ColorExtensions;
 import flagmaker.Overlays.Attributes.Sliders.AttributeSlider;
 import flagmaker.Overlays.Attributes.Sliders.ColorAttributeSlider;
 import flagmaker.Overlays.OverlayControl;
@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
 public class ColorAttribute extends Attribute
 {
 	public Color Value;
+	
+	private ColorAttributeSlider _slider;
 	
 	public ColorAttribute(String name, Color initialValue)
 	{
@@ -20,12 +22,16 @@ public class ColorAttribute extends Attribute
 	public void SetValue(Object value)
 	{
 		Value = (Color)value;
+		if (_slider != null)
+		{
+			_slider.SetValue(Value);
+		}
 	}
 
 	@Override
 	public void SetValue(String value)
 	{
-		Value = ColorExtensions.ParseColor(value);
+		SetValue(ColorExtensions.ParseColor(value));
 	}
 	
 	@Override
@@ -37,7 +43,8 @@ public class ColorAttribute extends Attribute
 	@Override
 	public AttributeSlider GetSlider(OverlayControl parent)
 	{
-		return new ColorAttributeSlider(parent, Name, Value);
+		_slider = new ColorAttributeSlider(parent, Name, Value);
+		return _slider;
 	}
 
 	@Override

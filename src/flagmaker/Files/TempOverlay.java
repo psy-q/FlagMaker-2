@@ -1,4 +1,4 @@
-package flagmaker;
+package flagmaker.Files;
 
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayFactory;

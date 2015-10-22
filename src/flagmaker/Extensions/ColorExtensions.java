@@ -1,4 +1,4 @@
-package flagmaker;
+package flagmaker.Extensions;
 
 import javafx.scene.paint.Color;
 

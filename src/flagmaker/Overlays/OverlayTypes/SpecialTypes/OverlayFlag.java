@@ -1,11 +1,11 @@
 package flagmaker.Overlays.OverlayTypes.SpecialTypes;
 
 import flagmaker.Divisions.DivisionGrid;
-import flagmaker.Flag;
+import flagmaker.Data.Flag;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayShape;
-import flagmaker.Ratio;
+import flagmaker.Data.Ratio;
 import java.io.File;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

@@ -1,8 +1,8 @@
 package flagmaker.Overlays;
 
-import flagmaker.Overlays.Attributes.Attribute;
-import flagmaker.LocalizationHandler;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.MainWindowController;
+import flagmaker.Overlays.Attributes.Attribute;
 import flagmaker.Overlays.Attributes.Sliders.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -122,10 +121,13 @@ public class OverlayControl extends VBox
 		ttpClone.setText(LocalizationHandler.Get("Clone"));
 	}
 	
-	public void OverlaySliderChanged()
+	public void OverlaySliderChanged(boolean triggeredByUser)
 	{
-		_overlay.SetValues(GetAttributeSliderValues());
-		Draw();
+		if (triggeredByUser)
+		{
+			_overlay.SetValues(GetAttributeSliderValues());
+			Draw();
+		}
 		_mainWindow.SetAsUnsaved();
 	}
 

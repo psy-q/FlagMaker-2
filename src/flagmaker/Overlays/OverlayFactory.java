@@ -1,14 +1,13 @@
 package flagmaker.Overlays;
 
-import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
-import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
-import flagmaker.FileHandler;
-import flagmaker.LocalizationHandler;
+import flagmaker.Files.FileHandler;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.*;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.*;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.*;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;

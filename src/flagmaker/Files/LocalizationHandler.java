@@ -1,4 +1,4 @@
-package flagmaker;
+package flagmaker.Files;
 
 import java.io.BufferedReader;
 import java.io.File;

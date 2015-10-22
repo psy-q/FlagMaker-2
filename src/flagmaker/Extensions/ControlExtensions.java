@@ -1,4 +1,4 @@
-package flagmaker;
+package flagmaker.Extensions;
 
 import javafx.scene.Node;
 import javafx.scene.control.Control;

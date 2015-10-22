@@ -1,7 +1,7 @@
 package flagmaker.Overlays.OverlayTypes.SpecialTypes;
 
+import flagmaker.Extensions.StringExtensions;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayShape;
-import flagmaker.StringExtensions;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;

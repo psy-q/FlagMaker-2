@@ -1,6 +1,6 @@
 package flagmaker.Overlays.Attributes.Sliders;
 
-import flagmaker.LocalizationHandler;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.OverlayControl;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -26,7 +26,8 @@ public class ColorAttributeSlider extends AttributeSlider
 		picker.setValue(value);
 		picker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
 		{
-			if (!newval.equals(oldval)) ValueChanged();
+			if (TriggeredByUser && !newval.equals(oldval)) ValueChanged();
+			TriggeredByUser = true;
 		});
 	}
 	
@@ -38,7 +39,14 @@ public class ColorAttributeSlider extends AttributeSlider
 	
 	public void SetValue(Color value)
 	{
+		TriggeredByUser = false;
 		picker.setValue(value);
+	}
+
+	@Override
+	public void SetValue(Object value)
+	{
+		SetValue((Color)value);
 	}
 
 	private void Load()

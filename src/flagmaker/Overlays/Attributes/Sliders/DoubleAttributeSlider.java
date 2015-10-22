@@ -1,7 +1,7 @@
 package flagmaker.Overlays.Attributes.Sliders;
 
-import flagmaker.ControlExtensions;
-import flagmaker.LocalizationHandler;
+import flagmaker.Extensions.ControlExtensions;
+import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.OverlayControl;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -43,10 +43,8 @@ public class DoubleAttributeSlider extends NumericAttributeSlider
 		slider.setValue(value);
 		slider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval))
-			{
-				SliderValueChanged();
-			}
+			if (TriggeredByUser && !oldval.equals(newval)) SliderValueChanged();
+			TriggeredByUser = true;
 		});
 		ControlExtensions.HideControl(txtValue);
 		txtValue.setOnKeyPressed((KeyEvent event) -> TxtValueKeyDown(event));
@@ -84,9 +82,15 @@ public class DoubleAttributeSlider extends NumericAttributeSlider
 	
 	public void SetValue(double value)
 	{
+		TriggeredByUser = false;
 		slider.setValue(value);
-		SetDiscrete(value % 1 == 0);
-		SliderValueChanged(); // Hopefully won't cause infinite cascading event triggers
+		SliderValueChanged();
+	}
+
+	@Override
+	public void SetValue(Object value)
+	{
+		SetValue((double)value);
 	}
 	
 	public void SetDiscrete(boolean isDiscrete)

@@ -8,6 +8,8 @@ public class BooleanAttribute extends Attribute<Boolean>
 {
 	public boolean Value;
 	
+	private BooleanAttributeSlider _slider;
+	
 	public BooleanAttribute(String name, boolean initialValue)
 	{
 		super(name);
@@ -18,12 +20,16 @@ public class BooleanAttribute extends Attribute<Boolean>
 	public void SetValue(Object value)
 	{
 		Value = (boolean)value;
+		if (_slider != null)
+		{
+			_slider.SetValue(Value);
+		}
 	}
 
 	@Override
 	public void SetValue(String value)
 	{
-		Value = Boolean.parseBoolean(value);
+		SetValue(Boolean.parseBoolean(value));
 	}
 	
 	@Override
@@ -35,7 +41,8 @@ public class BooleanAttribute extends Attribute<Boolean>
 	@Override
 	public AttributeSlider GetSlider(OverlayControl parent)
 	{
-		return new BooleanAttributeSlider(parent, Name, Value);
+		_slider = new BooleanAttributeSlider(parent, Name, Value);
+		return _slider;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package flagmaker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -31,7 +32,7 @@ public class UI extends Application
 
 		VBox root = loader.load();
 		Scene scene = new Scene(root);
-		//stage.getIcons().add(new Image("/images/icon.png"));
+		stage.getIcons().add(new Image("flagmaker/Images/icon.png"));
 		stage.setScene(scene);
 		stage.show();
 	}
