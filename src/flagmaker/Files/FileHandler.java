@@ -11,8 +11,6 @@ import flagmaker.Divisions.DivisionX;
 import flagmaker.Data.Flag;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
-import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
-import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
 import flagmaker.Data.Ratio;
 import flagmaker.Extensions.StringExtensions;
 import flagmaker.Data.Vector;
@@ -31,40 +29,7 @@ public class FileHandler
 	{
 		try (FileWriter writer = new FileWriter(path, false); PrintWriter printLine = new PrintWriter(writer))
 		{
-			printLine.printf("name=%s\n", flag.Name);
-			printLine.printf("ratio=%d:%d\n", flag.Ratio.Height, flag.Ratio.Width);
-			printLine.printf("gridSize=%s\n\n", flag.GridSize.ToString());
-			printLine.printf("type=%s\n", flag.Division.Name());
-			
-			for (int i = 0; i < flag.Division.Colors.length; i++)
-			{
-				printLine.printf("color%d=%s\n", i + 1, ColorExtensions.ToHexString(flag.Division.Colors[i], false));
-			}
-			
-			for (int i = 0; i < flag.Division.Values.length; i++)
-			{
-				printLine.printf("size%d=%d\n", i + 1, flag.Division.Values[i]);
-			}
-			
-			for (Overlay overlay : flag.Overlays)
-			{
-				printLine.printf("\ntype=%s\n", overlay.Name);
-				
-				if (overlay.Name.equals("flag"))
-				{
-					printLine.printf("path=%s\n", ((OverlayFlag)overlay).Path);
-				}
-				
-				if (overlay.Name.equals("image"))
-				{
-					printLine.printf("path=%s\n", ((OverlayImage)overlay).GetPath());
-				}
-
-				for (int i = 0; i < overlay.Attributes.length; i++)
-				{
-					printLine.printf("%s=%s\n", overlay.Attributes[i].Name, overlay.Attributes[i].ToSaveAsString());
-				}
-			}
+			printLine.printf(flag.ExportToString());
 		}
 	}
 	
@@ -98,6 +63,16 @@ public class FileHandler
 		String path = GetValue(lines, "path", "path= ");
 		
 		return new OverlayPath(name, path, new Vector(width, height));
+	}
+	
+	public static File GetFilePossiblyRelative(File file, String directory)
+	{
+		if (file.exists()) return file;
+		
+		File absolute = new File(directory + "\\" + file.getPath());
+		if (absolute.exists()) return absolute;
+		
+		return null;
 	}
 	
 	private static ArrayList<String> ReadAllLines(File file) throws Exception
@@ -174,12 +149,11 @@ public class FileHandler
 	{
 		TempOverlay t = new TempOverlay();
 		t.Type = GetValue(lines, "type", "type=grid");
-		t.Path = new File(GetValue(lines, "path", "path= "));
 		
 		for (String line : lines)
 		{
 			String[] data = line.split("=");
-			if (data[0].equals("overlay") || data[0].equals("type") || data[0].equals("path")) continue;
+			if (data[0].equals("overlay") || data[0].equals("type")) continue;
 			t.Values.put(data[0], data[1]);
 		}
 		

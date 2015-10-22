@@ -1,6 +1,8 @@
 package flagmaker.Overlays;
 
 import flagmaker.Overlays.Attributes.*;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
 import java.util.HashMap;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -180,5 +182,28 @@ public abstract class Overlay
 		
 		// Attribute not found
 		return Color.BLACK;
+	}
+	
+	public String ExportToString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("\ntype=%s\n", Name));
+				
+		if (Name.equals("flag"))
+		{
+			sb.append(String.format("path=%s\n", ((OverlayFlag)this).Path));
+		}
+
+		if (Name.equals("image"))
+		{
+			sb.append(String.format("path=%s\n", ((OverlayImage)this).GetPath()));
+		}
+
+		for (Attribute Attribute : Attributes)
+		{
+			sb.append(String.format("%s=%s\n", Attribute.Name, Attribute.ExportAsString()));
+		}
+		
+		return sb.toString();
 	}
 }

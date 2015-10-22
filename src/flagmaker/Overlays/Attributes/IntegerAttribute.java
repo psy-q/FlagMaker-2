@@ -52,7 +52,7 @@ public class IntegerAttribute extends NumericAttribute<Integer>
 	}
 
 	@Override
-	public String ToSaveAsString()
+	public String ExportAsString()
 	{
 		return String.format("%d", Value);
 	}

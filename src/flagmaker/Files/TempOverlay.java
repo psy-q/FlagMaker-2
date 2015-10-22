@@ -9,7 +9,6 @@ public class TempOverlay
 {
 	public String Type;
 	public final HashMap<String, String> Values;
-	public File Path;
 
 	public TempOverlay()
 	{
@@ -18,13 +17,17 @@ public class TempOverlay
 
 	public Overlay ToOverlay(int maximumX, int maximumY, String directory) throws Exception
 	{
-		Overlay overlay;
+		Overlay overlay = null;
 
-		if (Path != null && Path.exists())
+		if (Values.containsKey("path"))
 		{
-			overlay = Type.equals("flag")
-				? OverlayFactory.GetFlagInstance(Path, maximumX, maximumY)
-				: OverlayFactory.GetImageInstance(Path, maximumX, maximumY);
+			File path = FileHandler.GetFilePossiblyRelative(new File(Values.get("path")), directory);
+			if (path != null)
+			{
+				overlay = Type.equals("flag")
+					? OverlayFactory.GetFlagInstance(path, maximumX, maximumY)
+					: OverlayFactory.GetImageInstance(path, maximumX, maximumY);
+			}
 		}
 		else
 		{

@@ -52,7 +52,7 @@ public class BooleanAttribute extends Attribute<Boolean>
 	}
 
 	@Override
-	public String ToSaveAsString()
+	public String ExportAsString()
 	{
 		return Value ? "true" : "false";
 	}

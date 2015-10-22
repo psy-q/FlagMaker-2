@@ -56,7 +56,7 @@ public class DoubleAttribute extends NumericAttribute<Double>
 	}
 
 	@Override
-	public String ToSaveAsString()
+	public String ExportAsString()
 	{
 		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
 		decimalFormatSymbols.setDecimalSeparator('.');

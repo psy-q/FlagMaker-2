@@ -17,5 +17,5 @@ public abstract class Attribute<T>
 	public abstract <T> T GetValue();
 	public abstract AttributeSlider GetSlider(OverlayControl parent);
 	public abstract Attribute Clone();
-	public abstract String ToSaveAsString();
+	public abstract String ExportAsString();
 }

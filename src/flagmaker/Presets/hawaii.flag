@@ -53,7 +53,7 @@ size4=1.25
 
 overlay
 type=flag
-path=Presets\uk.flag
+path=uk.flag
 size1=0
 size2=0
 size3=10

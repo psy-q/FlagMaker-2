@@ -845,7 +845,7 @@ public class MainWindowController
 	public void MenuExportSvgClick()
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle(LocalizationHandler.Get("ExportAsSVG"));
+		fileChooser.setTitle(LocalizationHandler.Get("ExportAsSvg"));
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("SVG (*.svg)", "*.svg"));
 		File file = fileChooser.showSaveDialog(_stage);
 		
