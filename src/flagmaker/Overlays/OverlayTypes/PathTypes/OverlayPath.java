@@ -95,13 +95,23 @@ public class OverlayPath extends Overlay
 	protected Shape[] Thumbnail()
 	{
 		final double thumbSize = 30.0;
-		double scale = thumbSize / Math.max(_pathSize.X, _pathSize.Y);
+		double scaleFactor = thumbSize / Math.max(_pathSize.X, _pathSize.Y);
 		SVGPath path = new SVGPath();
 		path.setContent(_path);
-		path.setScaleX(scale);
-		path.setScaleY(scale);
-		path.setLayoutX(thumbSize / 2);
-		path.setLayoutY(thumbSize / 2);
+		
+		Translate translate = new Translate();
+		translate.setX(thumbSize/2);
+		translate.setY(thumbSize/2);
+
+		Scale scale = new Scale();
+		scale.setX(scaleFactor);
+		scale.setY(scaleFactor);
+		scale.setPivotX(0);
+		scale.setPivotY(0);
+
+		path.getTransforms().add(translate);
+		path.getTransforms().add(scale);
+		
 		return new Shape[] { path };
 	}
 
