@@ -54,7 +54,7 @@ public class ColorAttribute extends Attribute
 	}
 
 	@Override
-	public String ToSaveAsString()
+	public String ExportAsString()
 	{
 		return ColorExtensions.ToHexString(Value, true);
 	}

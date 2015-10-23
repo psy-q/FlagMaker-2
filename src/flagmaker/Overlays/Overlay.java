@@ -1,6 +1,8 @@
 package flagmaker.Overlays;
 
 import flagmaker.Overlays.Attributes.*;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
+import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayImage;
 import java.util.HashMap;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -78,13 +80,22 @@ public abstract class Overlay
 			String name = v.getKey();
 			String value = v.getValue();
 			
-			// Will fail for missing sttributes
-			for (Attribute a : Attributes)
+			if (name.matches("size\\d"))
 			{
-				if (a.Name.equalsIgnoreCase(name))
+				// Backwards-compatibility for 1.x file format
+				int attributeIndex = Integer.parseInt(name.substring(4, 5));
+				Attributes[attributeIndex].SetValue(value);
+			}
+			else
+			{
+				// Will fail for missing sttributes
+				for (Attribute a : Attributes)
 				{
-					a.SetValue(value);
-					return;
+					if (a.Name.equalsIgnoreCase(name))
+					{
+						a.SetValue(value);
+						return;
+					}
 				}
 			}
 		});
@@ -172,5 +183,28 @@ public abstract class Overlay
 		
 		// Attribute not found
 		return Color.BLACK;
+	}
+	
+	public String ExportToString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("\ntype=%s\n", Name));
+				
+		if (Name.equals("flag"))
+		{
+			sb.append(String.format("path=%s\n", ((OverlayFlag)this).Path));
+		}
+
+		if (Name.equals("image"))
+		{
+			sb.append(String.format("path=%s\n", ((OverlayImage)this).GetPath()));
+		}
+
+		for (Attribute Attribute : Attributes)
+		{
+			sb.append(String.format("%s=%s\n", Attribute.Name, Attribute.ExportAsString()));
+		}
+		
+		return sb.toString();
 	}
 }

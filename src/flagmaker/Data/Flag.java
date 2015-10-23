@@ -1,6 +1,7 @@
 package flagmaker.Data;
 
 import flagmaker.Divisions.*;
+import flagmaker.Extensions.ColorExtensions;
 import flagmaker.Overlays.Attributes.Attribute;
 import flagmaker.Overlays.Attributes.ColorAttribute;
 import flagmaker.Overlays.Overlay;
@@ -121,6 +122,33 @@ public class Flag
 		catch(Exception e)
 		{
 		}
+	}
+	
+	public String ExportToString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(String.format("name=%s\n", Name));
+		sb.append(String.format("ratio=%d:%d\n", Ratio.Height, Ratio.Width));
+		sb.append(String.format("gridSize=%s\n\n", GridSize.ToString()));
+		sb.append(String.format("type=%s\n", Division.Name()));
+		
+		for (int i = 0; i < Division.Colors.length; i++)
+		{
+			sb.append(String.format("color%d=%s\n", i + 1, ColorExtensions.ToHexString(Division.Colors[i], false)));
+		}
+
+		for (int i = 0; i < Division.Values.length; i++)
+		{
+			sb.append(String.format("size%d=%d\n", i + 1, Division.Values[i]));
+		}
+		
+		for (Overlay overlay : Overlays)
+		{
+			sb.append(overlay.ExportToString());
+		}
+		
+		return sb.toString();
 	}
 	
 	public Color[] ColorsUsed()

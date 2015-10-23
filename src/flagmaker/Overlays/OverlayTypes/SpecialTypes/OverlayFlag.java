@@ -1,11 +1,9 @@
 package flagmaker.Overlays.OverlayTypes.SpecialTypes;
 
-import flagmaker.Divisions.DivisionGrid;
 import flagmaker.Data.Flag;
-import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayShape;
-import flagmaker.Data.Ratio;
+import flagmaker.Files.FileHandler;
 import java.io.File;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -23,7 +21,6 @@ public class OverlayFlag extends OverlayShape
 	public OverlayFlag(int maximumX, int maximumY)
 	{
 		super("flag", maximumX, maximumY);
-		Flag = new Flag("flag", new Ratio(2, 3), new Ratio(2, 3), new DivisionGrid(Color.WHITE, Color.BLACK, 2, 2), new Overlay[]{});
 	}
 	
 	public OverlayFlag(Flag flag, File path, int maximumX, int maximumY)
@@ -58,7 +55,23 @@ public class OverlayFlag extends OverlayShape
 
 	@Override
 	public void Draw(Pane canvas)
-	{		
+	{
+		if (Flag == null && Path == null)
+		{
+			return;
+		}
+		else if (Flag == null && Path != null)
+		{
+			try
+			{
+				Flag = FileHandler.LoadFlagFromFile(Path);
+			}
+			catch (Exception ex)
+			{
+				return;
+			}
+		}
+		
 		double canvasWidth = canvas.getWidth() * GetDoubleAttribute("Width") / MaximumX;
 		double canvasHeight = canvas.getHeight() * GetDoubleAttribute("Height") / MaximumY;
 		
