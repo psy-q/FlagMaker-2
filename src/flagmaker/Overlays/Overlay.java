@@ -36,7 +36,8 @@ public abstract class Overlay
 		{
 			if (a instanceof NumericAttribute)
 			{
-				((NumericAttribute)a).Maximum = MaximumX;
+				NumericAttribute n = (NumericAttribute)a;
+				n.Maximum = n.UseMaxX ? MaximumX : MaximumY;
 			}
 		}
 	}
