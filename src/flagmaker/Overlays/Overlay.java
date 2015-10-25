@@ -84,7 +84,10 @@ public abstract class Overlay
 			{
 				// Backwards-compatibility for 1.x file format
 				int attributeIndex = Integer.parseInt(name.substring(4, 5));
-				Attributes[attributeIndex].SetValue(value);
+                                if (attributeIndex < Attributes.length)
+				{
+				    Attributes[attributeIndex].SetValue(value);
+				}
 			}
 			else
 			{

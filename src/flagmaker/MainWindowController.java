@@ -144,6 +144,8 @@ public class MainWindowController
 		OverlayFactory.SetUpTypeMap();
 		OverlayFactory.FillCustomOverlays();
 		New();
+                
+                LoadFlagFromFile(new File("/home/andrew/Documents/Coding/FlagMaker-2/src/flagmaker/Presets/comoros.flag"));
 	}
 
 	public void SetPrimaryStage(Stage stage)
@@ -1156,7 +1158,7 @@ public class MainWindowController
 		
 		try
 		{
-			File directory = new File(new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + "\\Presets");
+			File directory = new File(new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + "/Presets");
 			File[] files = directory.listFiles();
 			if (files == null) return;
 						
