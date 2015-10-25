@@ -144,8 +144,6 @@ public class MainWindowController
 		OverlayFactory.SetUpTypeMap();
 		OverlayFactory.FillCustomOverlays();
 		New();
-                
-                LoadFlagFromFile(new File("/home/andrew/Documents/Coding/FlagMaker-2/src/flagmaker/Presets/comoros.flag"));
 	}
 
 	public void SetPrimaryStage(Stage stage)
