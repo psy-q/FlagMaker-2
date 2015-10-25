@@ -45,6 +45,7 @@ public class OverlayFactory
 		
 		_typeMap.put("repeater lateral", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterLateral");
 		_typeMap.put("repeater radial", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterRadial");
+		_typeMap.put("transformer", "flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayTransformer");
 		
 		_typeMap.put("anchor", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAnchor");
 		_typeMap.put("angola", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAngola");
@@ -204,7 +205,8 @@ public class OverlayFactory
 			new OverlayFlag(0, 0),
 			new OverlayImage(0, 0),
 			new OverlayRepeaterLateral(0, 0),
-			new OverlayRepeaterRadial(0, 0)
+			new OverlayRepeaterRadial(0, 0),
+			new OverlayTransformer(0, 0)
 		};
 	}
 	
