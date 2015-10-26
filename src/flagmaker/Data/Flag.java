@@ -64,66 +64,6 @@ public class Flag
 		}
 	}
 	
-	public void ExportToPng(Size size, File path)
-	{
-		AnchorPane a = new AnchorPane();
-		Scene s = new Scene(a, size.X, size.Y);
-		Rectangle clip = new Rectangle(size.X, size.Y);
-		Pane p = new Pane();
-		p.setClip(clip);
-		s.setRoot(p);
-		
-		Draw(p);
-		
-		WritableImage snapshot = p.snapshot(new SnapshotParameters(), null);
-
-		try
-		{
-			ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", path);
-		}
-		catch (Exception ex)
-		{
-		}
-	}
-	
-	public void ExportToSvg(File file)
-	{
-		final int width = 600;
-		int height = (int)(((double)Ratio.Height / Ratio.Width) * width);
-		
-		try (FileWriter writer = new FileWriter(file, false); PrintWriter printLine = new PrintWriter(writer))
-		{
-			printLine.printf("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n");
-			printLine.printf("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
-			printLine.printf("<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" width=\"%s\" height=\"%s\">\n", width, height);
-			
-			printLine.printf("%s\n", Division.ExportSvg(width, height));
-			
-			SetRepeaterOverlays();
-			
-			for (int i = 0; i < Overlays.length; i++)
-			{
-				if (i > 0 && Overlays[i - 1] instanceof OverlayRepeater) continue;
-				
-				Overlay overlay = Overlays[i];
-				if (!overlay.IsEnabled) continue;
-				
-				try
-				{
-					printLine.printf(overlay.ExportSvg(width, height));
-				}
-				catch (UnsupportedOperationException e)
-				{
-				}
-			}
-			
-			printLine.printf("</svg>\n");
-		}
-		catch(Exception e)
-		{
-		}
-	}
-	
 	public String ExportToString()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -197,7 +137,7 @@ public class Flag
 		return hs.toArray(returnValue);
 	}
 	
-	private void SetRepeaterOverlays()
+	public void SetRepeaterOverlays()
 	{
 		// Clear last repeater in list
 		if (Overlays.length > 0 && Overlays[Overlays.length - 1] instanceof OverlayRepeater)
