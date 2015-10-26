@@ -770,7 +770,7 @@ public class MainWindowController
 		
 		if (file != null)
 		{
-			Flag().ExportToPng(dimensions, file);
+			FileHandler.ExportFlagToPng(Flag(), dimensions, file);
 		}
 	}
 
@@ -851,7 +851,7 @@ public class MainWindowController
 		
 		if (file != null)
 		{
-			Flag().ExportToSvg(file);
+			FileHandler.ExportFlagToSvg(Flag(), file);
 		}
 	}
 
@@ -872,7 +872,7 @@ public class MainWindowController
 			try
 			{
 				Flag flag = FileHandler.LoadFlagFromFile(file);
-				flag.ExportToPng(dimensions, new File(String.format("%s%s%s.png", directory, FileHandler.GetPathSeparator(), StringExtensions.GetFilenameWithoutExtension(file.getName()))));
+				FileHandler.ExportFlagToPng(flag, dimensions, new File(String.format("%s%s%s.png", directory, FileHandler.GetPathSeparator(), StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
 			{
@@ -897,7 +897,7 @@ public class MainWindowController
 			try
 			{
 				Flag flag = FileHandler.LoadFlagFromFile(file);
-				flag.ExportToSvg(new File(String.format("%s%s%s.svg", directory, FileHandler.GetPathSeparator(), StringExtensions.GetFilenameWithoutExtension(file.getName()))));
+				FileHandler.ExportFlagToSvg(flag, new File(String.format("%s%s%s.svg", directory, FileHandler.GetPathSeparator(), StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
 			{
@@ -972,7 +972,7 @@ public class MainWindowController
 	{
 		try
 		{
-			FileHandler.Save(Flag(), _filename);
+			FileHandler.SaveFlagToFile(Flag(), _filename);
 		}
 		catch (IOException ex)
 		{
