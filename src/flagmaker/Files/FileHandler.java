@@ -69,10 +69,18 @@ public class FileHandler
 	{
 		if (file.exists()) return file;
 		
-		File absolute = new File(directory + "\\" + file.getPath());
+		File absolute = new File(String.format("%s%s%s", directory, GetPathSeparator(), file.getPath()));
 		if (absolute.exists()) return absolute;
 		
 		return null;
+	}
+	
+	public static String GetPathSeparator()
+	{
+		String os = System.getProperty("os.name");
+		return os.toLowerCase().contains("windows")
+			? "\\"
+			: "/";
 	}
 	
 	private static ArrayList<String> ReadAllLines(File file) throws Exception

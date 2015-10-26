@@ -217,7 +217,7 @@ public class OverlayFactory
 		File directory;
 		try
 		{
-			directory = new File(new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + "\\Custom");
+			directory = new File(String.format("%s%sCustom", new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent(), FileHandler.GetPathSeparator()));
 			File[] files = directory.listFiles();
 			if (files == null) return;
 			
