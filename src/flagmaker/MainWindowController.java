@@ -1002,7 +1002,10 @@ public class MainWindowController
 		fileChooser.setTitle(LocalizationHandler.Get("Open"));
 		fileChooser.getExtensionFilters().add(new ExtensionFilter(LocalizationHandler.Get("FlagFileFilter"), "*.flag"));
 		File file = fileChooser.showOpenDialog(_stage);
-		LoadFlagFromFile(file);
+		if (file != null)
+		{
+			LoadFlagFromFile(file);
+		}
 	}
 
 	private boolean CheckUnsaved()
