@@ -1140,7 +1140,7 @@ public class MainWindowController
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				if (oldValue.equals(newValue) || StringExtensions.IsNullOrWhitespace(newValue)) return;
+				if ((oldValue != null && oldValue.equals(newValue)) || StringExtensions.IsNullOrWhitespace(newValue)) return;
 				else if (newValue.equals(LocalizationHandler.Get("DivisionBlank"))) PresetBlank();
 				else if (newValue.equals(LocalizationHandler.Get("DivisionHorizontalHalves"))) PresetHorizontal();
 				else if (newValue.equals(LocalizationHandler.Get("DivisionVerticalHalves"))) PresetVertical();
