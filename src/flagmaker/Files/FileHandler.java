@@ -43,7 +43,7 @@ public class FileHandler
 		}
 	}
 	
-	public static void ExportFlagToSvg(Flag flag, File file)
+	public static void ExportFlagToSvg(Flag flag, File file) throws IOException
 	{
 		final int width = 600;
 		int height = (int)(((double)flag.Ratio.Height / flag.Ratio.Width) * width);
@@ -64,24 +64,14 @@ public class FileHandler
 				
 				Overlay overlay = flag.Overlays[i];
 				if (!overlay.IsEnabled) continue;
-				
-				try
-				{
-					printLine.printf(overlay.ExportSvg(width, height));
-				}
-				catch (UnsupportedOperationException e)
-				{
-				}
+				printLine.printf(overlay.ExportSvg(width, height));
 			}
 			
 			printLine.printf("</svg>\n");
 		}
-		catch(Exception e)
-		{
-		}
 	}
 	
-	public static void ExportFlagToPng(Flag flag, Size size, File path)
+	public static void ExportFlagToPng(Flag flag, Size size, File path) throws IOException
 	{
 		AnchorPane a = new AnchorPane();
 		Scene s = new Scene(a, size.X, size.Y);
@@ -93,14 +83,7 @@ public class FileHandler
 		flag.Draw(p);
 		
 		WritableImage snapshot = p.snapshot(new SnapshotParameters(), null);
-
-		try
-		{
-			ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", path);
-		}
-		catch (Exception ex)
-		{
-		}
+		ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", path);
 	}
 	
 	public static Flag LoadFlagFromFile(File file) throws Exception

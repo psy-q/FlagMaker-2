@@ -770,7 +770,14 @@ public class MainWindowController
 		
 		if (file != null)
 		{
-			FileHandler.ExportFlagToPng(Flag(), dimensions, file);
+			try
+			{
+				FileHandler.ExportFlagToPng(Flag(), dimensions, file);
+			}
+			catch (IOException ex)
+			{
+				new Alert(AlertType.ERROR, String.format(LocalizationHandler.Get("CouldNotSaveError"), ex.getMessage()), ButtonType.OK).showAndWait();
+			}
 		}
 	}
 
@@ -851,7 +858,14 @@ public class MainWindowController
 		
 		if (file != null)
 		{
-			FileHandler.ExportFlagToSvg(Flag(), file);
+			try
+			{
+				FileHandler.ExportFlagToSvg(Flag(), file);
+			}
+			catch (IOException ex)
+			{
+				new Alert(AlertType.ERROR, String.format(LocalizationHandler.Get("CouldNotSaveError"), ex.getMessage()), ButtonType.OK).showAndWait();
+			}
 		}
 	}
 
@@ -976,6 +990,7 @@ public class MainWindowController
 		}
 		catch (IOException ex)
 		{
+			new Alert(AlertType.ERROR, String.format(LocalizationHandler.Get("CouldNotSaveError"), ex.getMessage()), ButtonType.OK).showAndWait();
 		}
 		
 		_isUnsaved = false;
@@ -1166,9 +1181,7 @@ public class MainWindowController
 			{
 				if (fileEntry.getName().endsWith(".flag"))
 				{
-					String name = GetPresetFlagName(fileEntry);
-					
-					presets.put(name, fileEntry);
+					presets.put(GetPresetFlagName(fileEntry), fileEntry);
 				}
 			}
 			
