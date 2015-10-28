@@ -57,3 +57,6 @@ nbproject/private/*
 ${build.dir}/*
 ${build.classes.dir}/*
 ${dist.jar}
+/FlagMaker-Tests/build/
+/FlagMaker-Tests/nbproject/private/
+/FlagMaker/nbproject/private/
