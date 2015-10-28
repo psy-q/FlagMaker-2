@@ -8,21 +8,12 @@ import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import flagmaker.Overlays.OverlayTypes.SpecialTypes.OverlayFlag;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javax.imageio.ImageIO;
 
 public class Flag
 {
@@ -91,7 +82,59 @@ public class Flag
 		return sb.toString();
 	}
 	
-	public Color[] ColorsUsed()
+	public void ShuffleColors()
+	{
+		RotateColors(ColorsUsed());
+	}
+	
+	public void RotateColors(Color[] colorsUsed)
+	{
+		boolean skip2 = Division instanceof DivisionGrid &&
+				Division.Values[0] == 1 &&
+				Division.Values[0] == 1;
+		Division.Colors[0] = GetNextColor(Division.Colors[0], colorsUsed);
+
+		if (!skip2)
+		{
+			Division.Colors[1] = GetNextColor(Division.Colors[1], colorsUsed);
+		}
+
+		if (Division instanceof DivisionPales || Division instanceof DivisionFesses)
+		{
+			Division.Colors[2] = GetNextColor(Division.Colors[2], colorsUsed);
+		}
+
+		for (Overlay overlay : Overlays)
+		{
+			for (Attribute a : overlay.Attributes)
+			{
+				if (a instanceof ColorAttribute)
+				{
+					ColorAttribute c = (ColorAttribute)a;
+					
+					if (a.Name.equalsIgnoreCase("StrokeColor"))
+					{
+						double strokeWidth = overlay.GetDoubleAttribute("Stroke");
+						if (strokeWidth > 0)
+						{
+							c.SetValue(GetNextColor(c.Value, colorsUsed));
+						}
+					}
+					else
+					{
+						c.SetValue(GetNextColor(c.Value, colorsUsed));
+					}
+				}
+			}
+			
+			if (overlay instanceof OverlayFlag)
+			{
+				((OverlayFlag)overlay).Flag.RotateColors(colorsUsed);
+			}
+		}
+	}
+	
+	private Color[] ColorsUsed()
 	{
 		ArrayList<Color> colors = new ArrayList<>();
 		
@@ -135,6 +178,12 @@ public class Flag
 		hs.addAll(colors);
 		Color[] returnValue = new Color[]{};
 		return hs.toArray(returnValue);
+	}
+
+	private Color GetNextColor(Color c, Color[] colors)
+	{
+		int index = Arrays.asList(colors).indexOf(c);
+		return colors[(index + 1) % colors.length];
 	}
 	
 	public void SetRepeaterOverlays()
