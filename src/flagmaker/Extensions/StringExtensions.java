@@ -5,7 +5,7 @@ public class StringExtensions
 	public static String GetFilenameWithoutExtension(String fname)
 	{
 		int period = fname.lastIndexOf(".");
-		int slash = fname.lastIndexOf("/");
+		int slash = Math.max(fname.lastIndexOf("/"), fname.lastIndexOf("\\"));
 		if (period > 0)
 		{
 			fname = fname.substring(0, period);

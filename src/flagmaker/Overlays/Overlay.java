@@ -86,7 +86,7 @@ public abstract class Overlay
 				int attributeIndex = Integer.parseInt(name.substring(4, 5));
 				if (attributeIndex < Attributes.length)
 				{
-				    Attributes[attributeIndex].SetValue(value);
+					Attributes[attributeIndex].SetValue(value);
 				}
 			}
 			else

@@ -770,7 +770,14 @@ public class MainWindowController
 		
 		if (file != null)
 		{
-			Flag().ExportToPng(dimensions, file);
+			try
+			{
+				FileHandler.ExportFlagToPng(Flag(), dimensions, file);
+			}
+			catch (IOException ex)
+			{
+				new Alert(AlertType.ERROR, String.format(LocalizationHandler.Get("CouldNotSaveError"), ex.getMessage()), ButtonType.OK).showAndWait();
+			}
 		}
 	}
 
@@ -851,7 +858,14 @@ public class MainWindowController
 		
 		if (file != null)
 		{
-			Flag().ExportToSvg(file);
+			try
+			{
+				FileHandler.ExportFlagToSvg(Flag(), file);
+			}
+			catch (IOException ex)
+			{
+				new Alert(AlertType.ERROR, String.format(LocalizationHandler.Get("CouldNotSaveError"), ex.getMessage()), ButtonType.OK).showAndWait();
+			}
 		}
 	}
 
@@ -872,7 +886,7 @@ public class MainWindowController
 			try
 			{
 				Flag flag = FileHandler.LoadFlagFromFile(file);
-				flag.ExportToPng(dimensions, new File(String.format("%s\\%s.png", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
+				FileHandler.ExportFlagToPng(flag, dimensions, new File(String.format("%s%s%s.png", directory, FileHandler.GetPathSeparator(), StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
 			{
@@ -897,7 +911,7 @@ public class MainWindowController
 			try
 			{
 				Flag flag = FileHandler.LoadFlagFromFile(file);
-				flag.ExportToSvg(new File(String.format("%s\\%s.svg", directory, StringExtensions.GetFilenameWithoutExtension(file.getName()))));
+				FileHandler.ExportFlagToSvg(flag, new File(String.format("%s%s%s.svg", directory, FileHandler.GetPathSeparator(), StringExtensions.GetFilenameWithoutExtension(file.getName()))));
 			}
 			catch (Exception ex)
 			{
@@ -972,10 +986,11 @@ public class MainWindowController
 	{
 		try
 		{
-			FileHandler.Save(Flag(), _filename);
+			FileHandler.SaveFlagToFile(Flag(), _filename);
 		}
 		catch (IOException ex)
 		{
+			new Alert(AlertType.ERROR, String.format(LocalizationHandler.Get("CouldNotSaveError"), ex.getMessage()), ButtonType.OK).showAndWait();
 		}
 		
 		_isUnsaved = false;
@@ -1159,7 +1174,7 @@ public class MainWindowController
 		
 		try
 		{
-			File directory = new File(new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + "/Presets");
+			File directory = new File(String.format("%s%sPresets", new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent(), FileHandler.GetPathSeparator()));
 			File[] files = directory.listFiles();
 			if (files == null) return;
 						
@@ -1169,9 +1184,7 @@ public class MainWindowController
 			{
 				if (fileEntry.getName().endsWith(".flag"))
 				{
-					String name = GetPresetFlagName(fileEntry);
-					
-					presets.put(name, fileEntry);
+					presets.put(GetPresetFlagName(fileEntry), fileEntry);
 				}
 			}
 			

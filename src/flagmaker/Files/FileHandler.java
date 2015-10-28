@@ -12,8 +12,10 @@ import flagmaker.Data.Flag;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Data.Ratio;
+import flagmaker.Data.Size;
 import flagmaker.Extensions.StringExtensions;
 import flagmaker.Data.Vector;
+import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,16 +23,67 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javax.imageio.ImageIO;
 
 public class FileHandler
 {
-	public static void Save(Flag flag, String path) throws IOException
+	public static void SaveFlagToFile(Flag flag, String path) throws IOException
 	{
 		try (FileWriter writer = new FileWriter(path, false); PrintWriter printLine = new PrintWriter(writer))
 		{
 			printLine.printf(flag.ExportToString());
 		}
+	}
+	
+	public static void ExportFlagToSvg(Flag flag, File file) throws IOException
+	{
+		final int width = 600;
+		int height = (int)(((double)flag.Ratio.Height / flag.Ratio.Width) * width);
+		
+		try (FileWriter writer = new FileWriter(file, false); PrintWriter printLine = new PrintWriter(writer))
+		{
+			printLine.printf("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n");
+			printLine.printf("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
+			printLine.printf("<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" width=\"%s\" height=\"%s\">\n", width, height);
+			
+			printLine.printf("%s\n", flag.Division.ExportSvg(width, height));
+			
+			flag.SetRepeaterOverlays();
+			
+			for (int i = 0; i < flag.Overlays.length; i++)
+			{
+				if (i > 0 && flag.Overlays[i - 1] instanceof OverlayRepeater) continue;
+				
+				Overlay overlay = flag.Overlays[i];
+				if (!overlay.IsEnabled) continue;
+				printLine.printf(overlay.ExportSvg(width, height));
+			}
+			
+			printLine.printf("</svg>\n");
+		}
+	}
+	
+	public static void ExportFlagToPng(Flag flag, Size size, File path) throws IOException
+	{
+		AnchorPane a = new AnchorPane();
+		Scene s = new Scene(a, size.X, size.Y);
+		Rectangle clip = new Rectangle(size.X, size.Y);
+		Pane p = new Pane();
+		p.setClip(clip);
+		s.setRoot(p);
+		
+		flag.Draw(p);
+		
+		WritableImage snapshot = p.snapshot(new SnapshotParameters(), null);
+		ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", path);
 	}
 	
 	public static Flag LoadFlagFromFile(File file) throws Exception
@@ -69,10 +122,18 @@ public class FileHandler
 	{
 		if (file.exists()) return file;
 		
-		File absolute = new File(directory + "\\" + file.getPath());
+		File absolute = new File(String.format("%s%s%s", directory, GetPathSeparator(), file.getPath()));
 		if (absolute.exists()) return absolute;
 		
 		return null;
+	}
+	
+	public static String GetPathSeparator()
+	{
+		String os = System.getProperty("os.name");
+		return os.toLowerCase().contains("windows")
+			? "\\"
+			: "/";
 	}
 	
 	private static ArrayList<String> ReadAllLines(File file) throws Exception
