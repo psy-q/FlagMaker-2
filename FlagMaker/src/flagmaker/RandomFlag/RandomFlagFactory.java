@@ -266,8 +266,8 @@ public class RandomFlagFactory
 
 					if (hasFimbriations)
 					{
-						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Width / 20.0, _gridSize.Width / 3.0, _gridSize.Width, _gridSize.Width));
-						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Width / 20.0, 2 * _gridSize.Width / 3.0, _gridSize.Width, _gridSize.Width));
+						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / 3.0, _gridSize.Height / 20.0, _gridSize.Width, _gridSize.Height));
+						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), 2 * _gridSize.Height / 3.0, _gridSize.Height / 20.0, _gridSize.Width, _gridSize.Height));
 					}
 				}
 				else
