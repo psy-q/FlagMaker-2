@@ -560,42 +560,13 @@ public class MainWindowController
 		divisionPicker3.setValue(Color.rgb(0, 38, 100));
 	}
 
-	@FXML private void ShuffleColors()
+	@FXML
+	private void ShuffleColors()
 	{
-		boolean skip2 = _division instanceof DivisionGrid &&
-				divisionSlider1.getValue() == 1 &&
-				divisionSlider2.getValue() == 1;
-		Color[] colors = Flag().ColorsUsed();
-
-		divisionPicker1.setValue(GetNextColor(divisionPicker1.getValue(), colors));
-
-		if (!skip2)
-		{
-			divisionPicker2.setValue(GetNextColor(divisionPicker2.getValue(), colors));
-		}
-
-		if (divisionPicker3.visibleProperty().get())
-		{
-			divisionPicker3.setValue(GetNextColor(divisionPicker3.getValue(), colors));
-		}
-
-		for (OverlayControl overlay : (List<OverlayControl>) (List<?>) lstOverlays.getChildren())
-		{
-			for (Attribute a : overlay.GetOverlay().Attributes)
-			{
-				if (a instanceof ColorAttribute)
-				{
-					ColorAttribute c = (ColorAttribute)a;
-					c.SetValue(GetNextColor(c.Value, colors));
-				}
-			}
-		}
-	}
-
-	private Color GetNextColor(Color c, Color[] colors)
-	{
-		int index = Arrays.asList(colors).indexOf(c);
-		return colors[(index + 1) % colors.length];
+		Flag f = Flag();
+		f.ShuffleColors();
+		LoadFlag(f);
+		SetAsUnsaved();
 	}
 
 	// Grid

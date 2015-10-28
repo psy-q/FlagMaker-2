@@ -60,3 +60,5 @@ ${dist.jar}
 /FlagMaker-Tests/build/
 /FlagMaker-Tests/nbproject/private/
 /FlagMaker/nbproject/private/
+/FlagMaker/build/
+/FlagMaker/dist/
