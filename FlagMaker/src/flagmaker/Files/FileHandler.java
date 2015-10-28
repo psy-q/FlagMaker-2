@@ -223,6 +223,6 @@ public class FileHandler
 		
 	private static String GetValue(ArrayList<String> data, String fieldName, String defaultValue)
 	{
-		return data.stream().filter(s -> s.startsWith(fieldName)).findFirst().orElse(defaultValue).split("=")[1];
+		return data.stream().filter(s -> s.toLowerCase().startsWith(fieldName.toLowerCase())).findFirst().orElse(defaultValue).split("=")[1];
 	}
 }
