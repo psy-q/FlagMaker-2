@@ -8,8 +8,6 @@ import flagmaker.Data.Size;
 import flagmaker.Data.Flag;
 import flagmaker.Files.FileHandler;
 import flagmaker.Divisions.*;
-import flagmaker.Overlays.Attributes.Attribute;
-import flagmaker.Overlays.Attributes.ColorAttribute;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
@@ -23,7 +21,6 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -233,14 +230,14 @@ public class MainWindowController
 		// Draw whenever the left side changes size
 		leftStack.widthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
 		{
-			if (!oldValue.equals(newValue)) Draw();
+			if (!_isLoading && !oldValue.equals(newValue)) Draw();
 		});
 		cmbRatio.valueProperty().addListener(new ChangeListener<String>()
 		{
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				GridSizeDropdownChanged();
+				if (!_isLoading) GridSizeDropdownChanged();
 			}
 		});
 
@@ -256,14 +253,14 @@ public class MainWindowController
 	private void HookUpEvents()
 	{
 		txtRatioHeight.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue.equals(oldValue)) RatioTextboxChanged();
+			if (!_isLoading && !newValue.equals(oldValue)) RatioTextboxChanged();
 		});
 		txtRatioWidth.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue.equals(oldValue)) RatioTextboxChanged();
+			if (!_isLoading && !newValue.equals(oldValue)) RatioTextboxChanged();
 		});
 		
 		txtName.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue.equals(oldValue)) SetAsUnsaved();
+			if (!_isLoading && !newValue.equals(oldValue)) SetAsUnsaved();
 		});
 		
 		_stage.setOnCloseRequest(event -> OnClosing(event));
@@ -683,11 +680,8 @@ public class MainWindowController
 			((OverlayControl)overlay).SetMaximum(gridSize.Width, gridSize.Height);
 		}
 
-		if (!_isLoading)
-		{
-			Draw();
-			SetAsUnsaved();
-		}
+		Draw();
+		SetAsUnsaved();
 	}
 
 	// Other
