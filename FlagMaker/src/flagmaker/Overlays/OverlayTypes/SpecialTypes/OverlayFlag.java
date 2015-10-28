@@ -2,7 +2,6 @@ package flagmaker.Overlays.OverlayTypes.SpecialTypes;
 
 import flagmaker.Data.Flag;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
-import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayShape;
 import flagmaker.Files.FileHandler;
 import java.io.File;
 import javafx.scene.Scene;
@@ -13,7 +12,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class OverlayFlag extends OverlayShape
+public class OverlayFlag extends OverlaySpecial
 {
 	public Flag Flag;
 	public File Path;
