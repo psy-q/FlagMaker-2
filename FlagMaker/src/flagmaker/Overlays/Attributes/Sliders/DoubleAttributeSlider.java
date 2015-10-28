@@ -26,6 +26,9 @@ public class DoubleAttributeSlider extends NumericAttributeSlider
 	
 	private boolean _isDiscrete;
 	
+	private double _oldValue;
+	private boolean _wasDiscrete;
+	
 	public DoubleAttributeSlider(OverlayControl parent, String name, boolean isDiscrete, double value, int maximum, boolean useMaxX)
 	{
 		super(parent, name, useMaxX);
@@ -139,7 +142,9 @@ public class DoubleAttributeSlider extends NumericAttributeSlider
 	{
 		ControlExtensions.HideControl(lblValue);
 		ControlExtensions.ShowControl(txtValue);
-		txtValue.setText(Double.toString(slider.getValue()));
+		_oldValue = slider.getValue();
+		_wasDiscrete = _isDiscrete;
+		txtValue.setText(Double.toString(_oldValue));
 		txtValue.selectAll();
 		txtValue.requestFocus();
 	}
@@ -201,6 +206,8 @@ public class DoubleAttributeSlider extends NumericAttributeSlider
 				}
 				break;
 			case ESCAPE:
+				chkDiscrete.setSelected(_wasDiscrete);
+				slider.setValue(_oldValue);
 				HideTxtValue();
 				break;
 			case DOWN:

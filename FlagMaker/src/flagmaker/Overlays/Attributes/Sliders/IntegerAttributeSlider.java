@@ -19,6 +19,8 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 	@FXML private Label lblValue;
 	@FXML private TextField txtValue;
 	@FXML private Slider slider;
+	
+	private int _oldValue;
 		
 	public IntegerAttributeSlider(OverlayControl parent, String name, int value, int maximum, boolean useMaxX)
 	{
@@ -105,6 +107,7 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 	{
 		ControlExtensions.HideControl(lblValue);
 		ControlExtensions.ShowControl(txtValue);
+		_oldValue = (int)slider.getValue();
 		txtValue.setText(Integer.toString((int)slider.getValue()));
 		txtValue.selectAll();
 		txtValue.requestFocus();
@@ -127,6 +130,7 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 				}
 				break;
 			case ESCAPE:
+				slider.setValue(_oldValue);
 				HideTxtValue();
 				break;
 			case DOWN:
