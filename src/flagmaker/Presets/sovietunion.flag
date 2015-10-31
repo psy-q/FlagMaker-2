@@ -2,32 +2,28 @@ name=Soviet Union
 ratio=1:2
 gridSize=6:12
 
-division
 type=grid
 color1=cc0000
+color2=ffffff
 size1=1
 size2=1
 
-overlay
 type=hammer and sickle
-color=ffd700
-size1=2
-size2=1.91
-size3=2
-size4=0
+Color=ffd700
+X=2
+Y=1.91
+Size=2
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false
 
-overlay
 type=star
-color=ffd700
-size1=2
-size2=0.75
-size3=0.75
-size4=0
-
-overlay
-type=star
-color=cc0000
-size1=2
-size2=0.75
-size3=0.5
-size4=0
+Color=00000000
+X=2
+Y=0.75
+Size=0.75
+Rotation=0
+Stroke=2
+StrokeColor=ffd700
+StrokeCurved=false

@@ -19,13 +19,12 @@ size4=5.385
 
 overlay
 type=repeater lateral
-color=0065bd
-size1=3.64
-size2=2.695
-size3=6.7
-size4=4.5
-size5=6
-size6=5
+x=3.64
+y=2.695
+width=6.7
+height=4.5
+countx=6
+county=5
 
 overlay
 type=star
@@ -37,13 +36,12 @@ size4=0
 
 overlay
 type=repeater lateral
-color=0065bd
-size1=3.67
-size2=2.535
-size3=5.43
-size4=3.4
-size5=5
-size6=4
+x=3.67
+y=2.535
+width=5.43
+height=3.4
+countx=5
+county=4
 
 overlay
 type=star

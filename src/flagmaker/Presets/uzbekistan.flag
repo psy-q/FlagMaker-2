@@ -41,13 +41,12 @@ size2=0.06
 
 overlay
 type=repeater lateral
-color=0065bd
-size1=1.8
-size2=0.5
-size3=0.5
-size4=0.6
-size5=3
-size6=3
+x=1.8
+y=0.5
+width=0.5
+height=0.6
+countx=3
+county=3
 
 overlay
 type=star

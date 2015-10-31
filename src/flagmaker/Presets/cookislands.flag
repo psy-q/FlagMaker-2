@@ -21,12 +21,11 @@ size4=4
 
 overlay
 type=repeater radial
-color=0065bd
-size1=12
-size2=4
-size3=2.8
-size4=15
-size5=16
+x=12
+y=4
+radius=2.8
+count=15
+rotate=true
 
 overlay
 type=star

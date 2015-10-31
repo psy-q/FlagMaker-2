@@ -23,32 +23,32 @@ size4=0
 overlay
 type=star six
 color=ce1126
-size1=10
-size2=4.2
-size3=1.1
-size4=0
-size5=3
-size6=0
-stroke=1eb53a
+x=10
+y=4.2
+size=1.1
+rotation=0
+stroke=3
+StrokeCurved=false
+strokeColor=1eb53a
 
 overlay
 type=star six
 color=ce1126
-size1=11.5
-size2=6.8
-size3=1.1
-size4=0
-size5=3
-size6=0
-stroke=1eb53a
+x=11.5
+y=6.8
+size=1.1
+rotation=0
+stroke=3
+StrokeCurved=false
+strokeColor=1eb53a
 
 overlay
 type=star six
 color=ce1126
-size1=8.5
-size2=6.8
-size3=1.1
-size4=0
-size5=3
-size6=0
-stroke=1eb53a
+x=8.5
+y=6.8
+size=1.1
+rotation=0
+stroke=3
+StrokeCurved=false
+strokeColor=1eb53a

@@ -13,23 +13,21 @@ size3=1
 
 overlay
 type=repeater radial
-color=0065bd
-size1=19.7
-size2=4.17
-size3=2.4
-size4=24
-size5=24
+x=19.7
+y=4.17
+radius=2.4
+count=24
+rotate=true
 
 overlay
 type=transformer
-color=0065bd
-size1=1.2
-size2=1
-size3=12
-size4=8
-size5=2
-size6=1
-size7=0
+x=1.2
+y=1
+skewx=12
+skewy=8
+width=2
+height=1
+rotation=0
 
 overlay
 type=triangle

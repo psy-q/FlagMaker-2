@@ -66,7 +66,7 @@ public class OverlayFactory
 		_typeMap.put("flash", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayFlash");
 		_typeMap.put("fleur de lis", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayFleurDeLis");
 		_typeMap.put("forth international", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayForthInternational");
-		_typeMap.put("hammer sickle", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHammerSickle");
+		_typeMap.put("hammer and sickle", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHammerSickle");
 		_typeMap.put("hand", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHand");
 		_typeMap.put("harp", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHarp");
 		_typeMap.put("iran", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayIran");

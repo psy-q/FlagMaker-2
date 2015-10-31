@@ -69,7 +69,7 @@ public class FileHandler
 	{
 		if (file.exists()) return file;
 		
-		File absolute = new File(directory + "\\" + file.getPath());
+		File absolute = new File(directory + "/" + file.getPath());
 		if (absolute.exists()) return absolute;
 		
 		return null;
@@ -162,6 +162,6 @@ public class FileHandler
 		
 	private static String GetValue(ArrayList<String> data, String fieldName, String defaultValue)
 	{
-		return data.stream().filter(s -> s.startsWith(fieldName)).findFirst().orElse(defaultValue).split("=")[1];
+		return data.stream().filter(s -> s.toLowerCase().startsWith(fieldName.toLowerCase())).findFirst().orElse(defaultValue).split("=")[1];
 	}
 }

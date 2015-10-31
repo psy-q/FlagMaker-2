@@ -12,7 +12,7 @@ public class StringExtensions
 		}
 		if (slash > 0)
 		{
-			fname = fname.substring(slash + 1, fname.length() - 1);
+			fname = fname.substring(slash + 1, fname.length());
 		}
 		return fname;
 	}

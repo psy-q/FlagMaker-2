@@ -2,7 +2,6 @@ name=Bahrain
 ratio=3:5
 gridSize=6:10
 
-division
 type=pales
 color1=ffffff
 color2=ce1126
@@ -11,20 +10,17 @@ size1=2
 size2=2
 size3=1
 
-overlay
 type=repeater lateral
-color=0065bd
-size1=6.6
-size2=3
-size3=5
-size4=6
-size5=1
-size6=6
+X=6.6
+Y=3
+Width=5
+Height=6
+CountX=6
+CountY=6
 
-overlay
 type=diamond
-color=ce1126
-size1=0
-size2=0
-size3=6.5
-size4=1.36
+Color=ce1126
+X=0
+Y=0
+Width=6.5
+Height=1.36

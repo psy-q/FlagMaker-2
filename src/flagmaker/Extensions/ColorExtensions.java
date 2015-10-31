@@ -7,7 +7,7 @@ public class ColorExtensions
 	public static String ToHexString(Color c, boolean includeOpacity)
 	{
 		return String.format("%s%s%s%s",
-				includeOpacity && c.getOpacity() < 1.0 ? Integer.toHexString((int) (c.getOpacity() * 255)) : "",
+				includeOpacity && c.getOpacity() < 1.0 ? IntToHex((int) (c.getOpacity() * 255)) : "",
 				IntToHex((int) (c.getRed() * 255)),
 				IntToHex((int) (c.getGreen() * 255)),
 				IntToHex((int) (c.getBlue() * 255)));
@@ -48,7 +48,7 @@ public class ColorExtensions
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(Integer.toHexString(value));
-		if (sb.length() < 2)
+		while (sb.length() < 2)
 		{
 			sb.insert(0, '0');
 		}
