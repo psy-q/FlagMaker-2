@@ -34,6 +34,7 @@ public class UI extends Application
 		Scene scene = new Scene(root);
 		stage.getIcons().add(new Image("flagmaker/Images/icon.png"));
 		stage.setScene(scene);
+		scene.getStylesheets().add(UI.class.getResource("Style.css").toExternalForm());
 		stage.show();
 	}
 

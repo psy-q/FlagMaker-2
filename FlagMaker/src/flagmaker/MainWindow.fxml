@@ -42,7 +42,7 @@
 				<Label fx:id="lblGridSize" />
 				<ComboBox fx:id="cmbRatio" prefWidth="150.0" />
 				
-				<ToggleButton onAction="#GridOnChanged">
+				<ToggleButton onAction="#GridOnChanged" styleClass="button">
 					<tooltip>
 						<Tooltip fx:id="ttpShowGrid" />
 					</tooltip>
@@ -103,16 +103,16 @@
 				</Button>
 			</items>
 		</ToolBar>
-		<SplitPane fx:id="splitPane" dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+		<SplitPane fx:id="splitPane" dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" styleClass="window" VBox.vgrow="ALWAYS">
 			<items>
-				<AnchorPane fx:id="leftAnchor" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
+				<AnchorPane fx:id="leftAnchor" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0" styleClass="transparent">
 					<children>
 						<StackPane fx:id="leftStack" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
 					</children>
 				</AnchorPane>
 				<VBox fillWidth="true" SplitPane.resizableWithParent="false">
 					<children>
-						<Label fx:id="lblDivisions" style="-fx-font-weight: bold; -fx-font-size: 24;" />
+						<Label fx:id="lblDivisions" styleClass="header" />
 						<FlowPane alignment="TOP_LEFT" hgap="4" orientation="HORIZONTAL" vgap="4">
 							<children>
 								<Button onAction="#DivisionGridClick">
@@ -281,9 +281,9 @@
 						
 						<HBox spacing="5.0">
 							<children>
-								<ColorPicker fx:id="divisionPicker1" minHeight="28.0" style="-fx-color-label-visible: false;" />
-								<ColorPicker fx:id="divisionPicker2" minHeight="28.0" style="-fx-color-label-visible: false;" />
-								<ColorPicker fx:id="divisionPicker3" minHeight="28.0" style="-fx-color-label-visible: false;" />
+								<ColorPicker fx:id="divisionPicker1" minHeight="28.0" styleClass="colorPicker" />
+								<ColorPicker fx:id="divisionPicker2" minHeight="28.0" styleClass="colorPicker" />
+								<ColorPicker fx:id="divisionPicker3" minHeight="28.0" styleClass="colorPicker" />
 							</children>
 							<padding>
 								<Insets bottom="5.0" top="5.0" />
@@ -310,7 +310,7 @@
 						</HBox>
 						<HBox alignment="CENTER_LEFT">
 							<children>
-								<Label fx:id="lblOverlays" style="-fx-font-weight: bold; -fx-font-size: 24;" />
+								<Label fx:id="lblOverlays" styleClass="header" />
 								<Button onAction="#OverlayAdd">
 									<HBox.margin>
 										<Insets left="10.0" />
@@ -328,7 +328,7 @@
 								</Button>
 							</children>
 						</HBox>
-						<ScrollPane fitToWidth="true" style="-fx-background-color:transparent;">
+						<ScrollPane fitToWidth="true">
 							<content>
 								<VBox fx:id="lstOverlays" />
 							</content>
