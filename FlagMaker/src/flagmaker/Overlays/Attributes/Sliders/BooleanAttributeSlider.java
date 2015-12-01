@@ -40,6 +40,7 @@ public class BooleanAttributeSlider extends AttributeSlider
 	{
 		TriggeredByUser = false;
 		chkEnabled.setSelected(value);
+		TriggeredByUser = true;
 	}
 
 	@Override

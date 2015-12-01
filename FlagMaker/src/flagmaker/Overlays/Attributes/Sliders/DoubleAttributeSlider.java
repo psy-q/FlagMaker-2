@@ -88,6 +88,7 @@ public class DoubleAttributeSlider extends NumericAttributeSlider
 		TriggeredByUser = false;
 		slider.setValue(value);
 		SliderValueChanged();
+		TriggeredByUser = true;
 	}
 
 	@Override

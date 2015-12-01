@@ -41,6 +41,7 @@ public class ColorAttributeSlider extends AttributeSlider
 	{
 		TriggeredByUser = false;
 		picker.setValue(value);
+		TriggeredByUser = true;
 	}
 
 	@Override

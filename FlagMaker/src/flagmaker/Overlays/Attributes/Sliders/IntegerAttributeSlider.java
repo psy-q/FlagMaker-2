@@ -72,6 +72,7 @@ public class IntegerAttributeSlider extends NumericAttributeSlider
 		TriggeredByUser = false;
 		slider.setValue(value);
 		SliderValueChanged();
+		TriggeredByUser = true;
 	}
 
 	@Override

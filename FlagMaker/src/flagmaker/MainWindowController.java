@@ -570,13 +570,9 @@ public class MainWindowController
 	private Ratio SelectedGridSize()
 	{
 		String value = (String) cmbRatio.getValue();
-
-		if (value == null)
-		{
-			return new Ratio(2, 3);
-		}
-
-		return new Ratio(value);
+		return value == null
+			? new Ratio(2, 3)
+			: new Ratio(value);
 	}
 
 	private void SetRatio(int width, int height)
