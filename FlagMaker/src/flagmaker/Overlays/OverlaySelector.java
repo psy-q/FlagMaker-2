@@ -16,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -39,6 +40,7 @@ public class OverlaySelector extends VBox
 		_defaultMaximumX = defaultMaximumX;
 		_defaultMaximumY = defaultMaximumY;
 		stage.titleProperty().set(LocalizationHandler.Get("Overlays"));
+		stage.getIcons().add(new Image("flagmaker/Images/icon.png"));
 		btnCancel.setText(LocalizationHandler.Get("Cancel"));
 		FillOverlays();
 	}
