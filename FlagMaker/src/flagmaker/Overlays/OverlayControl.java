@@ -4,6 +4,7 @@ import flagmaker.Files.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.Attributes.Attribute;
 import flagmaker.Overlays.Attributes.Sliders.*;
+import flagmaker.UI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -138,6 +139,7 @@ public class OverlayControl extends VBox
 		dialog.initOwner(_stage);
 		OverlaySelector control = new OverlaySelector(dialog, _defaultMaximumX, _defaultMaximumY);
 		Scene dialogScene = new Scene(control, 400, 300);
+		dialogScene.getStylesheets().add(UI.class.getResource("Style.css").toExternalForm());
 		dialog.setScene(dialogScene);
 		dialog.showAndWait();
 		
