@@ -14,22 +14,25 @@
 	<children>
 		<MenuBar VBox.vgrow="NEVER">
 			<menus>
-				<Menu fx:id="mnuFile" mnemonicParsing="true">
+				<Menu fx:id="mnuFile">
 					<items>
-						<MenuItem fx:id="mnuNew" accelerator="Ctrl+N" mnemonicParsing="true" onAction="#New" />
-						<MenuItem fx:id="mnuOpen" accelerator="Ctrl+O" mnemonicParsing="true" onAction="#Open" />
-						<MenuItem fx:id="mnuSave" accelerator="Ctrl+S" mnemonicParsing="true" onAction="#Save" />
-						<MenuItem fx:id="mnuSaveAs" accelerator="Ctrl+Shift+S" mnemonicParsing="true" onAction="#SaveAs" />
+						<MenuItem fx:id="mnuNew" accelerator="Ctrl+N" onAction="#New" />
+						<MenuItem fx:id="mnuOpen" accelerator="Ctrl+O" onAction="#Open" />
+						<MenuItem fx:id="mnuSave" accelerator="Ctrl+S" onAction="#Save" />
+						<MenuItem fx:id="mnuSaveAs" accelerator="Ctrl+Shift+S" onAction="#SaveAs" />
 						<SeparatorMenuItem />
-						<MenuItem fx:id="mnuExportPng" mnemonicParsing="true" onAction="#MenuExportPngClick" />
-						<MenuItem fx:id="mnuExportSvg" mnemonicParsing="true" onAction="#MenuExportSvgClick" />
+						<MenuItem fx:id="mnuExportPng" onAction="#MenuExportPngClick" />
+						<MenuItem fx:id="mnuExportSvg" onAction="#MenuExportSvgClick" />
 						<SeparatorMenuItem />
-						<MenuItem fx:id="mnuBulkExportPng" mnemonicParsing="true" onAction="#MenuExportBulkPngClick" />
-						<MenuItem fx:id="mnuBulkExportSvg" mnemonicParsing="true" onAction="#MenuExportBulkSvgClick" />
+						<MenuItem fx:id="mnuBulkExportPng" onAction="#MenuExportBulkPngClick" />
+						<MenuItem fx:id="mnuBulkExportSvg" onAction="#MenuExportBulkSvgClick" />
 					</items>
 				</Menu>
-				<Menu fx:id="mnuPresets" mnemonicParsing="true" />
-				<Menu fx:id="mnuLanguages" mnemonicParsing="true" />
+				<Menu fx:id="mnuPresets" />
+				<Menu fx:id="mnuLanguages" />
+				<Menu fx:id="mnuHelp">
+					<MenuItem fx:id="mnuAbout" onAction="#MenuAbout" accelerator="F1"  />
+				</Menu>
 			</menus>
 		</MenuBar>
 		<ToolBar prefHeight="40.0">

@@ -1,5 +1,6 @@
 package flagmaker;
 
+import flagmaker.About.AboutController;
 import flagmaker.Files.LocalizationHandler;
 import flagmaker.Extensions.StringExtensions;
 import flagmaker.Extensions.ControlExtensions;
@@ -37,6 +38,7 @@ import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -50,6 +52,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -66,6 +69,8 @@ public class MainWindowController
 	@FXML private MenuItem mnuBulkExportSvg;
 	@FXML private Menu mnuPresets;
 	@FXML private Menu mnuLanguages;
+	@FXML private Menu mnuHelp;
+	@FXML private MenuItem mnuAbout;
 	
 	@FXML private Label lblRatio;
 	@FXML private Label lblGridSize;
@@ -192,6 +197,8 @@ public class MainWindowController
 		mnuBulkExportSvg.setText(LocalizationHandler.Get("ExportBulkAsSvg"));
 		mnuPresets.setText(LocalizationHandler.Get("WorldFlagPresets"));
 		mnuLanguages.setText(LocalizationHandler.Get("Language"));
+		mnuHelp.setText(LocalizationHandler.Get("Help"));
+		mnuAbout.setText(LocalizationHandler.Get("About"));
 		
 		lblRatio.setText(LocalizationHandler.Get("Ratio"));
 		lblGridSize.setText(LocalizationHandler.Get("GridSize"));
@@ -703,7 +710,7 @@ public class MainWindowController
 		
 		double width = canvas.getWidth();
 		double height = canvas.getHeight();
-		InputStream is = MainWindowController.class.getResourceAsStream(String.format("Images/Texture/%d.png", _texture));
+		InputStream is = getClass().getResourceAsStream(String.format("Images/Texture/%d.png", _texture));
 		Image i = new Image(is, width, height, false, true);
 		Canvas c = new Canvas(width, height);
 		GraphicsContext gc = c.getGraphicsContext2D();
@@ -1135,7 +1142,7 @@ public class MainWindowController
 		
 		try
 		{
-			File directory = new File(String.format("%s%sPresets", new File(MainWindowController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent(), FileHandler.GetPathSeparator()));
+			File directory = new File(String.format("%s%sPresets", new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent(), FileHandler.GetPathSeparator()));
 			File[] files = directory.listFiles();
 			if (files == null) return;
 						
@@ -1253,8 +1260,22 @@ public class MainWindowController
 		return list.toArray(returnValue);
 	}
 	
+	// About
 	private String GetNameWithVersion()
 	{
 		return String.format("FlagMaker %s", getClass().getPackage().getImplementationVersion());
+	}
+	
+	@FXML private void MenuAbout()
+	{
+		Stage dialog = new Stage();
+		dialog.initModality(Modality.APPLICATION_MODAL);
+		dialog.initOwner(_stage);
+		dialog.setResizable(false);
+		AboutController control = new AboutController(dialog);
+		Scene dialogScene = new Scene(control, 400, 300);
+		dialogScene.getStylesheets().add(UI.class.getResource("Style.css").toExternalForm());
+		dialog.setScene(dialogScene);
+		dialog.showAndWait();
 	}
 }
