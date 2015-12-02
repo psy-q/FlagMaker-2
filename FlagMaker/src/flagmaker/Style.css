@@ -23,3 +23,7 @@
 	-fx-background-color: linear-gradient(#FFD449, #FFA03F);
 	-fx-cursor: hand;
 }
+
+.padding {
+	-fx-padding: 10;
+}
