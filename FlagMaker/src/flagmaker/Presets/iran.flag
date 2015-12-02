@@ -1,8 +1,7 @@
-name=Iran (approx.)
+name=Iran
 ratio=4:7
-gridSize=4:7
+gridSize=16:28
 
-division
 type=fesses
 color1=239f40
 color2=ffffff
@@ -11,10 +10,45 @@ size1=1
 size2=1
 size3=1
 
-overlay
 type=iran
-color=da0000
-size1=3.5
-size2=2
-size3=1.25
-size4=0
+Color=da0000
+X=14
+Y=8
+Size=4.71
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false
+
+type=repeater lateral
+X=14
+Y=8
+Width=24.88
+Height=6.48
+CountX=11
+CountY=2
+
+type=allahu
+Color=ffffff
+X=0
+Y=0
+Size=2.66
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false
+
+type=repeater lateral
+X=13.43
+Y=7.83
+Width=26.12
+Height=5.26
+CountX=22
+CountY=2
+
+type=box
+Color=ffffff
+X=0
+Y=0
+Width=1.21
+Height=1

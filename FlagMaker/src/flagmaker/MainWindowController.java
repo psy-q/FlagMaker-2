@@ -946,8 +946,6 @@ public class MainWindowController
 		{
 			SaveFlag();
 		}
-		
-		SetTitle();
 	}
 	
 	private void SaveFlag()
@@ -962,6 +960,7 @@ public class MainWindowController
 		}
 		
 		_isUnsaved = false;
+		SetTitle();
 		LoadFilePresets();
 	}
 	

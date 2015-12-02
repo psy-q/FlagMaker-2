@@ -1,0 +1,19 @@
+name=Belgium - Wallonia
+ratio=2:3
+gridSize=2:3
+
+type=grid
+color1=ffff00
+color2=fdc82f
+size1=1
+size2=1
+
+type=rooster
+Color=ff0000
+X=1.5
+Y=1
+Size=1.6
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false

@@ -1,0 +1,29 @@
+name=Kazakhstan
+ratio=1:2
+gridSize=6:12
+
+type=grid
+color1=00afca
+color2=fdc82f
+size1=1
+size2=1
+
+type=kazakh banner
+Color=fec50c
+X=0.7
+Y=3
+Size=5.3
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false
+
+type=kazakh center
+Color=fec50c
+X=7
+Y=3
+Size=4
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false
