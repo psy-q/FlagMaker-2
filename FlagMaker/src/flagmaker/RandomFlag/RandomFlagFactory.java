@@ -431,7 +431,7 @@ public class RandomFlagFactory
 			case 4:
 				// Rays
 				_overlays.add(new OverlayRays(_colorScheme.Metal(), _gridSize.Width / 2.0, _gridSize.Height / 2.0,
-						Randomizer.Clamp(Randomizer.NextNormalized(_gridSize.Width * 3 / 4.0, _gridSize.Width / 10.0), 4, 20, false), 0, _gridSize.Width, _gridSize.Height));
+						Randomizer.Clamp(Randomizer.NextNormalized(_gridSize.Width * 3 / 4.0, _gridSize.Width / 10.0), 4, 20, false), _gridSize.Width / 4.0, _gridSize.Width, _gridSize.Height));
 				AddCircleEmblem(1.0, _gridSize.Width / 2.0, _gridSize.Height / 2.0, _colorScheme.Metal(), _colorScheme.Color1(), _colorScheme.Metal());
 				break;
 		}
@@ -712,7 +712,7 @@ public class RandomFlagFactory
 
 	private DivisionGrid GetRay()
 	{
-		_overlays.add(new OverlayRays(_colorScheme.Color1(), _gridSize.Width / 2.0, _gridSize.Height / 2.0, 20, 0, _gridSize.Width, _gridSize.Height));
+		_overlays.add(new OverlayRays(_colorScheme.Color1(), _gridSize.Width / 2.0, _gridSize.Height / 2.0, 20, _gridSize.Width / 4.0, _gridSize.Width, _gridSize.Height));
 		AddCircleEmblem(1.0, _gridSize.Width / 2.0, _gridSize.Height / 2.0, _colorScheme.Metal(), _colorScheme.Color1(), _colorScheme.Metal());
 		return new DivisionGrid(_colorScheme.Metal(), _colorScheme.Metal(), 1, 1);
 	}
