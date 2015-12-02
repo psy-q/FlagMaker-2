@@ -46,6 +46,7 @@ public class AboutController extends VBox
 			AddCredit(new URI("http://www.crwflags.com/fotw/flags/index.html"), "Flags of the World", "Flag construction specifications and colors");
 			AddCredit(new URI("http://en.wikipedia.org/"), "Wikipedia", "Flag construction specifications and colors");
 			AddCredit(new URI("https://flag-designer.appspot.com/"), "Lars Ruoff", "Inspiration; eagle, sun, and tree patterns");
+			AddUnlinkedCredit("Various emblems created by: PepePateaTraseros, OakBlood3");
 		}
 		catch (URISyntaxException ex)
 		{
@@ -70,6 +71,15 @@ public class AboutController extends VBox
 		HBox b = new HBox();
 		b.setAlignment(Pos.CENTER_LEFT);
 		b.getChildren().addAll(h, l);
+		CreditBox.getChildren().add(b);
+	}
+	
+	private void AddUnlinkedCredit(String text)
+	{
+		Label l = new Label(text);
+		HBox b = new HBox();
+		b.setAlignment(Pos.CENTER_LEFT);
+		b.getChildren().addAll(l);
 		CreditBox.getChildren().add(b);
 	}
 
