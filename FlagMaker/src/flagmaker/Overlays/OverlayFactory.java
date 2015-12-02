@@ -53,6 +53,7 @@ public class OverlayFactory
 		_typeMap.put("branches", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBranches");
 		_typeMap.put("cedar", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCedar");
 		_typeMap.put("chakra", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayChakra");
+		_typeMap.put("chicago", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayChicago");
 		_typeMap.put("coronet", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCoronet");
 		_typeMap.put("cpusa", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCpusa");
 		_typeMap.put("crescent", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrescent");
@@ -140,6 +141,7 @@ public class OverlayFactory
 			new OverlayBranches(0, 0),
 			new OverlayCedar(0, 0),
 			new OverlayChakra(0, 0),
+			new OverlayChicago(0, 0),
 			new OverlayCoronet(0, 0),
 			new OverlayCpusa(0, 0),
 			new OverlayCrescent(0, 0),

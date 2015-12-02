@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.Base64;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -60,7 +59,6 @@ public class OverlayImage extends OverlayShape
 			}
 			catch (Exception e)
 			{
-				String s = e.getMessage();
 			}
 		}
 	}
