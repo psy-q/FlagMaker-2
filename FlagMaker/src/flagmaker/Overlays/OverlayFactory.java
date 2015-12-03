@@ -145,6 +145,7 @@ public class OverlayFactory
 		_typeMap.put("star marshall", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarMarshall");
 		_typeMap.put("star of david", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarOfDavid");
 		_typeMap.put("star seven", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarSeven");
+		_typeMap.put("star shadow", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarShadow");
 		_typeMap.put("star six", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarSix");
 		_typeMap.put("sun", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySun");
 		_typeMap.put("swastika", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySwastika");
@@ -159,6 +160,7 @@ public class OverlayFactory
 		_typeMap.put("vanuatu", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayVanuatu");
 		_typeMap.put("wales", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayWales");
 		_typeMap.put("wave", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayWave");
+		_typeMap.put("wheat", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayWheat");
 		_typeMap.put("yang", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayYang");
 		_typeMap.put("yin", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayYin");
 	}
@@ -291,6 +293,7 @@ public class OverlayFactory
 			new OverlayStarMarshall(0, 0),
 			new OverlayStarOfDavid(0, 0),
 			new OverlayStarSeven(0, 0),
+			new OverlayStarShadow(0, 0),
 			new OverlayStarSix(0, 0),
 			new OverlaySun(0, 0),
 			new OverlaySwastika(0, 0),
@@ -305,6 +308,7 @@ public class OverlayFactory
 			new OverlayVanuatu(0, 0),
 			new OverlayWales(0, 0),
 			new OverlayWave(0, 0),
+			new OverlayWheat(0, 0),
 			new OverlayYang(0, 0),
 			new OverlayYin(0, 0)
 		};

@@ -98,7 +98,7 @@ public class AboutController extends VBox
 				"condor, Cyprus, eagle (Iowa), Eritrea, Ethiopia, fasces, fern, Greenland, Khazak banner and emblem, keystone, Kosovo, " +
 				"Kyrgyzstan, laurel, Lesotho, lion, Malawi, maple triple, mjolnir, Nunavut, oak, Ontario, pine, rooster, rose, " +
 				"sagebrush (2 versions), Saskatchewan, Scotland lion, shamrock (2 versions), shield (6 versions), star (Chicago), " +
-				"star (Marshall Islands), Tajikistan, torch, UN, Vanuatu, dragon (Wales)");
+				"star (Marshall Islands), star shadow, Tajikistan, torch, UN, Vanuatu, dragon (Wales), wheat");
 		AddFeature("Attribute handling overhaul");
 		AddFeature("Minor bug fixes");
 
