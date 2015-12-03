@@ -67,6 +67,7 @@ public class OverlayFactory
 		_typeMap.put("chicago", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayChicago");
 		_typeMap.put("coronet", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCoronet");
 		_typeMap.put("compass", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCompass");
+		_typeMap.put("condor", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCondor");
 		_typeMap.put("cpusa", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCpusa");
 		_typeMap.put("crescent", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrescent");
 		_typeMap.put("crown", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrown");
@@ -86,6 +87,7 @@ public class OverlayFactory
 		_typeMap.put("flash", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayFlash");
 		_typeMap.put("fleur de lis", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayFleurDeLis");
 		_typeMap.put("forth international", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayForthInternational");
+		_typeMap.put("greenland", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayGreenland");
 		_typeMap.put("hammer and sickle", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHammerSickle");
 		_typeMap.put("hand", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHand");
 		_typeMap.put("harp", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHarp");
@@ -204,6 +206,7 @@ public class OverlayFactory
 			new OverlayChakra(0, 0),
 			new OverlayChicago(0, 0),
 			new OverlayCompass(0, 0),
+			new OverlayCondor(0, 0),
 			new OverlayCoronet(0, 0),
 			new OverlayCpusa(0, 0),
 			new OverlayCrescent(0, 0),
@@ -224,6 +227,7 @@ public class OverlayFactory
 			new OverlayFlash(0, 0),
 			new OverlayFleurDeLis(0, 0),
 			new OverlayForthInternational(0, 0),
+			new OverlayGreenland(0, 0),
 			new OverlayHammerSickle(0, 0),
 			new OverlayHand(0, 0),
 			new OverlayHarp(0, 0),

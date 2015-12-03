@@ -95,10 +95,10 @@ public class AboutController extends VBox
 		AddFeature("Polish translation");
 		AddFeature("Can rotate rays overlay");
 		AddFeature("New emblems: Albania, albatross, allahu, arrowhead, banner (2 versions), bear, beaver, bee, Bhutan, bison, compass, " +
-				"Cyprus, eagle (Iowa), Eritrea, Ethiopia, fasces, fern, Khazak banner and emblem, keystone, Kosovo, Kyrgyzstan, laurel, " +
-				"Lesotho, lion, Malawi, maple triple, mjolnir, Nunavut, oak, Ontario, pine, rooster, rose, sagebrush (2 versions), " +
-				"Saskatchewan, Scotland lion, shamrock (2 versions), star (Chicago), star (Marshall Islands), Tajikistan, torch, UN, " +
-				"Vanuatu, dragon (Wales)");
+				"condor, Cyprus, eagle (Iowa), Eritrea, Ethiopia, fasces, fern, Greenland, Khazak banner and emblem, keystone, Kosovo, " +
+				"Kyrgyzstan, laurel, Lesotho, lion, Malawi, maple triple, mjolnir, Nunavut, oak, Ontario, pine, rooster, rose, " +
+				"sagebrush (2 versions), Saskatchewan, Scotland lion, shamrock (2 versions), star (Chicago), star (Marshall Islands), " +
+				"Tajikistan, torch, UN, Vanuatu, dragon (Wales)");
 		AddFeature("Attribute handling overhaul");
 		AddFeature("Minor bug fixes");
 
