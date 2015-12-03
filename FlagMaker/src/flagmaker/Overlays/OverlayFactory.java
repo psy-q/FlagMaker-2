@@ -130,6 +130,12 @@ public class OverlayFactory
 		_typeMap.put("shamrock 3", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShamrock3");
 		_typeMap.put("shamrock 4", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShamrock4");
 		_typeMap.put("shield", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield");
+		_typeMap.put("shield 2", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield2");
+		_typeMap.put("shield 3", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield3");
+		_typeMap.put("shield 4", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield4");
+		_typeMap.put("shield 5", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield5");
+		_typeMap.put("shield 6", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield6");
+		_typeMap.put("shield 7", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield7");
 		_typeMap.put("sikh", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySikh");
 		_typeMap.put("snake", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySnake");
 		_typeMap.put("springbok", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySpringbok");
@@ -270,6 +276,12 @@ public class OverlayFactory
 			new OverlayShamrock3(0, 0),
 			new OverlayShamrock4(0, 0),
 			new OverlayShield(0, 0),
+			new OverlayShield2(0, 0),
+			new OverlayShield3(0, 0),
+			new OverlayShield4(0, 0),
+			new OverlayShield5(0, 0),
+			new OverlayShield6(0, 0),
+			new OverlayShield7(0, 0),
 			new OverlaySikh(0, 0),
 			new OverlaySnake(0, 0),
 			new OverlaySpringbok(0, 0),
