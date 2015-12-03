@@ -112,6 +112,7 @@ public class OverlayFactory
 		_typeMap.put("nunavut", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayNunavut");
 		_typeMap.put("oak", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayOak");
 		_typeMap.put("ontario", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayOntario");
+		_typeMap.put("palm", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPalm");
 		_typeMap.put("papua new guinea", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPapuaNewGuinea");
 		_typeMap.put("parteiadler", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayParteiadler");
 		_typeMap.put("pentagram", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPentagram");
@@ -249,6 +250,7 @@ public class OverlayFactory
 			new OverlayNunavut(0, 0),
 			new OverlayOak(0, 0),
 			new OverlayOntario(0, 0),
+			new OverlayPalm(0, 0),
 			new OverlayPapuaNewGuinea(0, 0),
 			new OverlayParteiadler(0, 0),
 			new OverlayPentagram(0, 0),

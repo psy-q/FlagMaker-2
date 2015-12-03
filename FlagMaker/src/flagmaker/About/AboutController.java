@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -40,9 +41,9 @@ public class AboutController extends VBox
 		try
 		{
 			AddCredit(new URI("https://github.com/andrewsarnold"), "Andrew Arnold", "Development");
-			AddCredit(new URI("http://www.reddit.com/user/Hellerick"), "Hellerick Ferlibay", "Russian translation");
-			AddCredit(new URI("http://www.reddit.com/user/Tikchbila"), "Tikchbila", "French translation");
-			AddCredit(new URI("https://github.com/cubenity"), "Cubenity", "Polish translation");
+			AddUnlinkedCredit("Hellerick Ferlibay — Russian translation");
+			AddUnlinkedCredit("Tikchbila — French translation");
+			AddUnlinkedCredit("Cubenity — Polish translation");
 			AddCredit(new URI("http://www.crwflags.com/fotw/flags/index.html"), "Flags of the World", "Flag construction specifications and colors");
 			AddCredit(new URI("http://en.wikipedia.org/"), "Wikipedia", "Flag construction specifications and colors");
 			AddCredit(new URI("https://flag-designer.appspot.com/"), "Lars Ruoff", "Inspiration; eagle, sun, and tree patterns");
@@ -77,9 +78,10 @@ public class AboutController extends VBox
 	private void AddUnlinkedCredit(String text)
 	{
 		Label l = new Label(text);
+		l.setPadding(new Insets(4));
 		HBox b = new HBox();
 		b.setAlignment(Pos.CENTER_LEFT);
-		b.getChildren().addAll(l);
+		b.getChildren().add(l);
 		CreditBox.getChildren().add(b);
 	}
 
@@ -92,7 +94,11 @@ public class AboutController extends VBox
 		AddFeature("Brand-new random flag generation engine");
 		AddFeature("Polish translation");
 		AddFeature("Can rotate rays overlay");
-		AddFeature("New emblem: Chicago star");
+		AddFeature("New emblems: Albania, albatross, allahu, arrowhead, banner (2 versions), bear, beaver, bee, Bhutan, bison, compass, " +
+				"Cyprus, eagle (Iowa), Eritrea, Ethiopia, fasces, fern, Khazak banner and emblem, keystone, Kosovo, Kyrgyzstan, laurel, " +
+				"Lesotho, lion, Malawi, maple triple, mjolnir, Nunavut, oak, Ontario, pine, rooster, rose, sagebrush (2 versions), " +
+				"Saskatchewan, Scotland lion, shamrock (2 versions), star (Chicago), star (Marshall Islands), Tajikistan, torch, UN, " +
+				"Vanuatu, dragon (Wales)");
 		AddFeature("Attribute handling overhaul");
 		AddFeature("Minor bug fixes");
 

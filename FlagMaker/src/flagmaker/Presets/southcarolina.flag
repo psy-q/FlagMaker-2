@@ -1,29 +1,29 @@
-name=United Nations
+name=United States - South Carolina
 ratio=2:3
 gridSize=2:3
 
 type=grid
-color1=4b92db
+color1=003366
 color2=fdc82f
 size1=1
 size2=1
 
-type=un
+type=palm
 Color=ffffff
-X=1.5
-Y=0.91
-Size=0.92
+X=1.53
+Y=1.05
+Size=1.02
 Rotation=0
 Stroke=0
 StrokeColor=000000
 StrokeCurved=false
 
-type=laurel
+type=crescent
 Color=ffffff
-X=1.5
-Y=0.94
-Size=1.18
-Rotation=0
+X=0.43
+Y=0.45
+Size=0.61
+Rotation=1.86
 Stroke=0
 StrokeColor=000000
 StrokeCurved=false

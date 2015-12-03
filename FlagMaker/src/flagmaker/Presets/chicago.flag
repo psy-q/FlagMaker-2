@@ -1,0 +1,37 @@
+name=United States - Illinois - Chicago
+ratio=2:3
+gridSize=24:36
+
+type=grid
+color1=ffffff
+color2=fdc82f
+size1=1
+size2=1
+
+type=line horizontal
+Color=b3ddf2
+Y=6
+Thickness=4
+
+type=line horizontal
+Color=b3ddf2
+Y=18
+Thickness=4
+
+type=repeater lateral
+X=18
+Y=12
+Width=21
+Height=0
+CountX=4
+CountY=1
+
+type=chicago
+Color=ff0000
+X=0
+Y=0
+Size=10
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false
