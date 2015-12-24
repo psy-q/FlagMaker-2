@@ -138,7 +138,7 @@ public class MainWindowController
 		LoadLocalization();
 		AddWorkspace();
 
-		_headerText = String.format(" - %s", CommonExtensions.Version(getClass()));
+		_headerText = String.format(" - %s", CommonExtensions.TitleAndVersionString(getClass()));
 
 		SetColorsAndSliders();
 		LoadBasicPresets();
@@ -999,7 +999,7 @@ public class MainWindowController
 		ButtonType buttonYes = new ButtonType(LocalizationHandler.Get("Yes"));
 		ButtonType buttonNo = new ButtonType(LocalizationHandler.Get("No"));
 		ButtonType buttonCancel = new ButtonType(LocalizationHandler.Get("Cancel"), ButtonData.CANCEL_CLOSE);
-		alert.setTitle(CommonExtensions.Version(getClass()));
+		alert.setTitle(CommonExtensions.TitleAndVersionString(getClass()));
 		alert.setHeaderText(LocalizationHandler.Get("NotSaved"));
 		alert.setContentText(String.format(LocalizationHandler.Get("SaveChangesPrompt"), txtName.getText()));
 		alert.getButtonTypes().setAll(buttonYes, buttonNo, buttonCancel);

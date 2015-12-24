@@ -17,7 +17,7 @@
 							<content>
 								<VBox fx:id="CreditBox" styleClass="padding">
 									<children>
-										<Label styleClass="header" id="lblVersion" />
+										<Label styleClass="header" fx:id="lblVersion" />
 									</children>
 								</VBox>
 							</content>

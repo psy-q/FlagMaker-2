@@ -31,7 +31,7 @@
 				<Menu fx:id="mnuPresets" />
 				<Menu fx:id="mnuLanguages" />
 				<Menu fx:id="mnuHelp">
-					<MenuItem fx:id="mnuAbout" onAction="#MenuAbout" accelerator="Ctrl+H" />
+					<MenuItem fx:id="mnuAbout" onAction="#MenuAbout" accelerator="Ctrl+A" />
 				</Menu>
 			</menus>
 		</MenuBar>

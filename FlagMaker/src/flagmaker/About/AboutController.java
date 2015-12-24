@@ -33,7 +33,7 @@ public class AboutController extends VBox
 
 		tabCredits.setText(LocalizationHandler.Get("Credits"));
 		tabHistory.setText(LocalizationHandler.Get("History"));
-		lblVersion.setText("FlagMaker " + CommonExtensions.Version(getClass()));
+		lblVersion.setText(CommonExtensions.TitleAndVersionString(getClass()));
 		
 		AddCredits();
 		AddHistory();
