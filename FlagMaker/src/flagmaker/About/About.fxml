@@ -17,7 +17,7 @@
 							<content>
 								<VBox fx:id="CreditBox" styleClass="padding">
 									<children>
-										<Label styleClass="header" text="FlagMaker 2.0" />
+										<Label styleClass="header" id="lblVersion" />
 									</children>
 								</VBox>
 							</content>

@@ -23,6 +23,7 @@ public class AboutController extends VBox
 {
 	@FXML private Tab tabCredits;
 	@FXML private Tab tabHistory;
+	@FXML private Label lblVersion;
 	@FXML private VBox CreditBox;
 	@FXML private VBox HistoryBox;
 
@@ -32,6 +33,7 @@ public class AboutController extends VBox
 
 		tabCredits.setText(LocalizationHandler.Get("Credits"));
 		tabHistory.setText(LocalizationHandler.Get("History"));
+		lblVersion.setText("FlagMaker " + CommonExtensions.Version(getClass()));
 		
 		AddCredits();
 		AddHistory();

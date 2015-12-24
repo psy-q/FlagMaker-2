@@ -20,4 +20,9 @@ public class CommonExtensions
 	{
 		return _os.contains("nix") || _os.contains("nux");
 	}
+	
+	public static String Version(Class c)
+	{
+		return String.format("FlagMaker %s", c.getPackage().getImplementationVersion());
+	}
 }
