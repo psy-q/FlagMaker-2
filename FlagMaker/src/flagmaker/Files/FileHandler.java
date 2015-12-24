@@ -15,6 +15,7 @@ import flagmaker.Data.Ratio;
 import flagmaker.Data.Size;
 import flagmaker.Extensions.StringExtensions;
 import flagmaker.Data.Vector;
+import flagmaker.Extensions.CommonExtensions;
 import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeater;
 import java.io.BufferedReader;
 import java.io.File;
@@ -130,8 +131,7 @@ public class FileHandler
 	
 	public static String GetPathSeparator()
 	{
-		String os = System.getProperty("os.name");
-		return os.toLowerCase().contains("windows")
+		return CommonExtensions.IsWindows()
 			? "\\"
 			: "/";
 	}

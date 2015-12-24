@@ -1,5 +1,6 @@
 package flagmaker.About;
 
+import flagmaker.Extensions.CommonExtensions;
 import flagmaker.Files.LocalizationHandler;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -61,7 +62,18 @@ public class AboutController extends VBox
 		{
 			try
 			{
-				Desktop.getDesktop().browse(link);
+				if (CommonExtensions.IsWindows())
+				{
+					Desktop.getDesktop().browse(link);
+				}
+				else if (CommonExtensions.IsMac())
+				{
+					CommonExtensions.RunTime.exec( "open " + link);
+				}
+				else
+				{
+					CommonExtensions.RunTime.exec("xdg-open " + link);
+				}
 			}
 			catch (IOException ex)
 			{
