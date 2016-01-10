@@ -773,39 +773,44 @@ public class MainWindowController
 		grid.add(new Label(LocalizationHandler.Get("Height")), 0, 1);
 		grid.add(height, 1, 1);
 
-		// Enable/Disable login button depending on whether a username was entered.
 		Node saveButton = dialog.getDialogPane().lookupButton(saveButtonType);
 		saveButton.setDisable(true);
 
-		// Do some validation (using the Java 8 lambda syntax).
-		width.textProperty().addListener((observable, oldValue, newValue) -> {
-			saveButton.setDisable(newValue.trim().isEmpty() || height.getText().isEmpty() || !CanParseInt(newValue));
-			
-			if (CanParseInt(newValue) && constrain)
+		// If the ratio should be constrained, set the other value on blur
+		width.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue == false)
 			{
-				Integer w = Integer.parseInt(newValue);
-				Ratio r = SelectedGridSize();
-				height.setText(Integer.toString((int)(r.Height / (double)r.Width * w)));
+				String value = width.getText().trim();
+				
+				if (CanParseInt(value) && constrain)
+				{
+					Integer w = Integer.parseInt(value);
+					Ratio r = SelectedGridSize();
+					height.setText(Integer.toString((int)(r.Height / (double)r.Width * w)));
+					saveButton.setDisable(value.isEmpty() || height.getText().isEmpty() || !CanParseInt(value));
+				}
 			}
 		});
 		
-		height.textProperty().addListener((observable, oldValue, newValue) -> {
-			saveButton.setDisable(newValue.trim().isEmpty() || width.getText().isEmpty() || !CanParseInt(newValue));
-			
-			if (CanParseInt(newValue) && constrain)
+		height.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue == false)
 			{
-				Integer h = Integer.parseInt(newValue);
-				Ratio r = SelectedGridSize();
-				width.setText(Integer.toString((int)(r.Width / (double)r.Height * h)));
+				String value = height.getText().trim();
+				
+				if (CanParseInt(value) && constrain)
+				{
+					Integer h = Integer.parseInt(value);
+					Ratio r = SelectedGridSize();
+					width.setText(Integer.toString((int)(r.Width / (double)r.Height * h)));
+					saveButton.setDisable(value.isEmpty() || width.getText().isEmpty() || !CanParseInt(value));
+				}	
 			}
 		});
 
 		dialog.getDialogPane().setContent(grid);
 
-		// Request focus on the username field by default.
 		Platform.runLater(() -> width.requestFocus());
 
-		// Convert the result to a username-password-pair when the login button is clicked.
 		dialog.setResultConverter(dialogButton -> {
 			if (dialogButton == saveButtonType) {
 				return new Size(Integer.parseInt(width.getText()), Integer.parseInt(height.getText()));
