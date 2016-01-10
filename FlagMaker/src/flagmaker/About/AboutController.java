@@ -17,12 +17,15 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class AboutController extends VBox
 {
 	@FXML private Tab tabCredits;
 	@FXML private Tab tabHistory;
+	@FXML private Label lblVersion;
 	@FXML private VBox CreditBox;
 	@FXML private VBox HistoryBox;
 
@@ -32,6 +35,7 @@ public class AboutController extends VBox
 
 		tabCredits.setText(LocalizationHandler.Get("Credits"));
 		tabHistory.setText(LocalizationHandler.Get("History"));
+		lblVersion.setText(CommonExtensions.TitleAndVersionString(getClass()));
 		
 		AddCredits();
 		AddHistory();
@@ -68,7 +72,7 @@ public class AboutController extends VBox
 				}
 				else if (CommonExtensions.IsMac())
 				{
-					CommonExtensions.RunTime.exec( "open " + link);
+					CommonExtensions.RunTime.exec("open " + link);
 				}
 				else
 				{
@@ -81,8 +85,9 @@ public class AboutController extends VBox
 		});
 		h.setTooltip(new Tooltip(link.toString()));
 		Label l = new Label("— " + role);
-		HBox b = new HBox();
-		b.setAlignment(Pos.CENTER_LEFT);
+		l.setWrapText(true);
+		TextFlow b = new TextFlow();
+		b.setTextAlignment(TextAlignment.LEFT);
 		b.getChildren().addAll(h, l);
 		CreditBox.getChildren().add(b);
 	}
@@ -91,6 +96,7 @@ public class AboutController extends VBox
 	{
 		Label l = new Label(text);
 		l.setPadding(new Insets(4));
+		l.setWrapText(true);
 		HBox b = new HBox();
 		b.setAlignment(Pos.CENTER_LEFT);
 		b.getChildren().add(l);

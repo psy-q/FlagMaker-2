@@ -9,6 +9,7 @@ import flagmaker.Data.Size;
 import flagmaker.Data.Flag;
 import flagmaker.Files.FileHandler;
 import flagmaker.Divisions.*;
+import flagmaker.Extensions.CommonExtensions;
 import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayControl;
 import flagmaker.Overlays.OverlayFactory;
@@ -137,7 +138,7 @@ public class MainWindowController
 		LoadLocalization();
 		AddWorkspace();
 
-		_headerText = String.format(" - %s", GetNameWithVersion());
+		_headerText = String.format(" - %s", CommonExtensions.TitleAndVersionString(getClass()));
 
 		SetColorsAndSliders();
 		LoadBasicPresets();
@@ -1003,7 +1004,7 @@ public class MainWindowController
 		ButtonType buttonYes = new ButtonType(LocalizationHandler.Get("Yes"));
 		ButtonType buttonNo = new ButtonType(LocalizationHandler.Get("No"));
 		ButtonType buttonCancel = new ButtonType(LocalizationHandler.Get("Cancel"), ButtonData.CANCEL_CLOSE);
-		alert.setTitle(GetNameWithVersion());
+		alert.setTitle(CommonExtensions.TitleAndVersionString(getClass()));
 		alert.setHeaderText(LocalizationHandler.Get("NotSaved"));
 		alert.setContentText(String.format(LocalizationHandler.Get("SaveChangesPrompt"), txtName.getText()));
 		alert.getButtonTypes().setAll(buttonYes, buttonNo, buttonCancel);
@@ -1264,12 +1265,7 @@ public class MainWindowController
 		return list.toArray(returnValue);
 	}
 	
-	// About
-	private String GetNameWithVersion()
-	{
-		return String.format("FlagMaker %s", getClass().getPackage().getImplementationVersion());
-	}
-	
+	// About	
 	@FXML private void MenuAbout()
 	{
 		Stage dialog = new Stage();
