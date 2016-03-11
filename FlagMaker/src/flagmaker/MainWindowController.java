@@ -1,6 +1,7 @@
 package flagmaker;
 
 import flagmaker.About.AboutController;
+import flagmaker.Color.ColorButton;
 import flagmaker.Files.LocalizationHandler;
 import flagmaker.Extensions.StringExtensions;
 import flagmaker.Extensions.ControlExtensions;
@@ -103,6 +104,7 @@ public class MainWindowController
 	@FXML private Label divisionLabel1;
 	@FXML private Label divisionLabel2;
 	@FXML private Label divisionLabel3;
+	@FXML private ColorButton colorButton;
 	@FXML private ColorPicker divisionPicker1;
 	@FXML private ColorPicker divisionPicker2;
 	@FXML private ColorPicker divisionPicker3;
