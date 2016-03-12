@@ -2,6 +2,7 @@ package flagmaker;
 
 import flagmaker.About.AboutController;
 import flagmaker.Color.ColorButton;
+import flagmaker.Color.ColorButtonListener;
 import flagmaker.Files.LocalizationHandler;
 import flagmaker.Extensions.StringExtensions;
 import flagmaker.Extensions.ControlExtensions;
@@ -58,7 +59,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class MainWindowController
+public class MainWindowController implements ColorButtonListener
 {
 	@FXML private Menu mnuFile;
 	@FXML private MenuItem mnuNew;
@@ -287,7 +288,16 @@ public class MainWindowController
 	}
 
 	// Division
-	public void DivisionColorChanged()
+	@Override
+	public void ColorChanged(Color oldval, Color newval)
+	{
+		if (!oldval.equals(newval))
+		{
+			DivisionColorChanged();
+		}
+	}
+	
+	private void DivisionColorChanged()
 	{
 		if (_isLoading) return;
 
@@ -532,9 +542,9 @@ public class MainWindowController
 	{
 		SetDefaultColors();
 		
-		divisionPicker1.SetMainWindow(this);
-		divisionPicker2.SetMainWindow(this);
-		divisionPicker3.SetMainWindow(this);
+		divisionPicker1.SetListener(this);
+		divisionPicker2.SetListener(this);
+		divisionPicker3.SetListener(this);
 
 		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{

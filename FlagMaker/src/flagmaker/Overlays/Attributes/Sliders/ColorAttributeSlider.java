@@ -1,46 +1,43 @@
 package flagmaker.Overlays.Attributes.Sliders;
 
+import flagmaker.Color.ColorButton;
+import flagmaker.Color.ColorButtonListener;
 import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.OverlayControl;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 
-public class ColorAttributeSlider extends AttributeSlider
+public class ColorAttributeSlider extends AttributeSlider implements ColorButtonListener
 {
 	@FXML private Label lblName;
-	@FXML private ColorPicker picker;
+	@FXML private ColorButton picker;
 		
 	public ColorAttributeSlider(OverlayControl parent, String name, Color value)
 	{
 		super(parent, name);
 		Load();
+		picker.SetListener(this);
 		
 		String label = LocalizationHandler.Get(name);
 		lblName.setText(label);
 		lblName.setTooltip(new Tooltip(label));
-		picker.setValue(value);
-		picker.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
-		{
-			if (TriggeredByUser && !newval.equals(oldval)) ValueChanged();
-			TriggeredByUser = true;
-		});
+		picker.SetValue(value);
 	}
 	
 	@Override
 	public Color GetValue()
 	{
-		return picker.getValue();
+		return picker.GetValue();
 	}
 	
 	public void SetValue(Color value)
 	{
 		TriggeredByUser = false;
-		picker.setValue(value);
+		picker.SetValue(value);
 		TriggeredByUser = true;
 	}
 
@@ -64,5 +61,12 @@ public class ColorAttributeSlider extends AttributeSlider
 		{
 			String s = ex.getMessage();
 		}
+	}
+
+	@Override
+	public void ColorChanged(Color oldval, Color newval)
+	{
+			if (TriggeredByUser && !newval.equals(oldval)) ValueChanged();
+			TriggeredByUser = true;
 	}
 }

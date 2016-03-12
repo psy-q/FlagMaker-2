@@ -11,7 +11,7 @@
     <Button onAction="#OnClicked">
 		<graphic>
 			<Pane>
-				<Rectangle fx:id="rect" fill="RED" height="20" width="20" stroke="SILVER" strokeWidth="1" />
+				<Rectangle fx:id="rect" fill="RED" height="16" width="20" stroke="SILVER" strokeWidth="1" />
 			</Pane>
 		</graphic>
 	</Button>
