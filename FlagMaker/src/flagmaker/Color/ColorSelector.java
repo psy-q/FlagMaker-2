@@ -2,10 +2,12 @@ package flagmaker.Color;
 
 import flagmaker.Files.LocalizationHandler;
 import java.util.ArrayList;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -34,11 +36,20 @@ public class ColorSelector extends VBox
 	@FXML private FlowPane paneUsed;
 	
 	@FXML private Tab tabAdvanced;
+	@FXML private Slider sldR;
+	@FXML private Label lblR;
+	@FXML private Slider sldG;
+	@FXML private Label lblG;
+	@FXML private Slider sldB;
+	@FXML private Label lblB;
+	@FXML private Slider sldA;
+	@FXML private Label lblA;
+	@FXML private Button btnSaveAdvanced;
 	
 	@FXML private Button btnCancel;
 	private Color _color;
 	
-	public ColorSelector(Stage stage, ArrayList<Color> usedColors, ArrayList<Color> recentColors)
+	public ColorSelector(Stage stage, Color currentColor, ArrayList<Color> usedColors, ArrayList<Color> recentColors)
 	{
 		Load(stage);
 		SetWindowStrings();
@@ -46,6 +57,8 @@ public class ColorSelector extends VBox
 		FillNamedColorList(paneFoan, ColorList.FlagsOfAllNations());
 		FillColorList(paneUsed, usedColors);
 		FillColorList(paneRecent, new ArrayList(new ArrayList(recentColors).subList(0, Math.min(recentColors.size(), 10))));
+		
+		SetAdvanced(currentColor);
 		
 		stage.titleProperty().set(LocalizationHandler.Get("Color"));
 		stage.getIcons().add(new Image("flagmaker/Images/icon.png"));
@@ -60,6 +73,7 @@ public class ColorSelector extends VBox
 		labelFoan.setText(LocalizationHandler.Get("SmallPaletteName"));
 		labelRecent.setText(LocalizationHandler.Get("RecentPaletteName"));
 		labelUsed.setText(LocalizationHandler.Get("UsedPaletteName"));
+		btnSaveAdvanced.setText(LocalizationHandler.Get("Save"));
 	}
 	
 	private void Load(Stage stage)
@@ -111,10 +125,51 @@ public class ColorSelector extends VBox
 			b.setOnAction(o -> { _color = c; _stage.close(); });
 		}
 	}
+
+	private void SetAdvanced(Color currentColor)
+	{
+		lblR.setText(Integer.toString((int)(currentColor.getRed() * 255)));
+		lblG.setText(Integer.toString((int)(currentColor.getGreen() * 255)));
+		lblB.setText(Integer.toString((int)(currentColor.getBlue() * 255)));
+		lblA.setText(Integer.toString((int)(currentColor.getOpacity() * 255)));
+		
+		sldR.setValue(currentColor.getRed() * 255);
+		sldG.setValue(currentColor.getGreen() * 255);
+		sldB.setValue(currentColor.getBlue() * 255);
+		sldA.setValue(currentColor.getOpacity() * 255);
+		
+		sldR.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval)) SetNumberLabel(sldR, lblR);
+		});
+		sldG.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval)) SetNumberLabel(sldG, lblG);
+		});
+		sldB.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval)) SetNumberLabel(sldB, lblB);
+		});
+		sldA.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
+		{
+			if (!oldval.equals(newval)) SetNumberLabel(sldA, lblA);
+		});
+	}
 	
-	Color GetSelectedColor()
+	private void SetNumberLabel(Slider slider, Label label)
+	{
+		label.setText(Integer.toString((int)slider.getValue()));
+	}
+	
+	public Color GetSelectedColor()
 	{
 		return _color;
+	}
+	
+	@FXML
+	private void SaveAdvanced()
+	{
+		
 	}
 	
 	@FXML

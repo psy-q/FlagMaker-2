@@ -21,7 +21,42 @@
 					<FlowPane fx:id="paneUsed" alignment="TOP_LEFT" orientation="HORIZONTAL" />
 				</VBox>
    			</Tab>
-   			<Tab fx:id="tabAdvanced" />
+			<Tab fx:id="tabAdvanced">
+				<VBox fillWidth="true" style="-fx-padding: 5;">
+					<HBox>
+						<children>
+							<Label text="R" prefWidth="30" />
+							<Slider fx:id="sldR" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblR" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+					<HBox>
+						<children>
+							<Label text="G" prefWidth="30" />
+							<Slider fx:id="sldG" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblG" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+					<HBox>
+						<children>
+							<Label text="B" prefWidth="30" />
+							<Slider fx:id="sldB" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblB" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+					<HBox>
+						<children>
+							<Label text="A" prefWidth="30" />
+							<Slider fx:id="sldA" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblA" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+
+					<AnchorPane VBox.vgrow="NEVER">
+						<Button fx:id="btnSaveAdvanced" onAction="#SaveAdvanced" AnchorPane.rightAnchor="0" />
+					</AnchorPane>
+				</VBox>
+			</Tab>
 		</TabPane>
 		<AnchorPane VBox.vgrow="NEVER">
    			<Button fx:id="btnCancel" cancelButton="true" onAction="#Cancel" AnchorPane.rightAnchor="0" />
