@@ -8,6 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import flagmaker.Color.* ?>
 <?import flagmaker.Overlays.* ?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flagmaker.MainWindowController">
@@ -284,9 +285,9 @@
 						
 						<HBox spacing="5.0">
 							<children>
-								<ColorPicker fx:id="divisionPicker1" minHeight="28.0" styleClass="colorPicker" />
-								<ColorPicker fx:id="divisionPicker2" minHeight="28.0" styleClass="colorPicker" />
-								<ColorPicker fx:id="divisionPicker3" minHeight="28.0" styleClass="colorPicker" />
+								<ColorButton fx:id="divisionPicker1" />
+								<ColorButton fx:id="divisionPicker2" />
+								<ColorButton fx:id="divisionPicker3" />
 							</children>
 							<padding>
 								<Insets bottom="5.0" top="5.0" />

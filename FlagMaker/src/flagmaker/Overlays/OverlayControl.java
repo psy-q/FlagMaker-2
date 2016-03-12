@@ -32,13 +32,13 @@ public class OverlayControl extends VBox
 	@FXML private Tooltip ttpMoveDown;
 	@FXML private Tooltip ttpClone;
 	
-	private Stage _stage;
+	public Stage Stage;
 	
 	private Overlay _overlay;
 	private int _defaultMaximumX;
 	private int _defaultMaximumY;
 	private boolean _isFirst;
-	private final MainWindowController _mainWindow;
+	public final MainWindowController MainWindow;
 	
 	public boolean IsLoading;
 	public boolean WasCanceled;
@@ -49,7 +49,7 @@ public class OverlayControl extends VBox
 		LoadLocalization();
 		
 		IsLoading = isLoading;
-		_mainWindow = mainWindow;
+		MainWindow = mainWindow;
 		_defaultMaximumX = defaultMaximumX;
 		_defaultMaximumY = defaultMaximumY;
 		_isFirst = true;
@@ -129,14 +129,14 @@ public class OverlayControl extends VBox
 			_overlay.SetValues(GetAttributeSliderValues());
 			Draw();
 		}
-		_mainWindow.SetAsUnsaved();
+		MainWindow.SetAsUnsaved();
 	}
 
 	@FXML private void OverlaySelect()
 	{
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
-		dialog.initOwner(_stage);
+		dialog.initOwner(Stage);
 		OverlaySelector control = new OverlaySelector(dialog, _defaultMaximumX, _defaultMaximumY);
 		Scene dialogScene = new Scene(control, 400, 300);
 		dialogScene.getStylesheets().add(UI.class.getResource("Style.css").toExternalForm());
@@ -156,27 +156,27 @@ public class OverlayControl extends VBox
 
 	private void Draw()
 	{
-		_mainWindow.Draw();
+		MainWindow.Draw();
 	}
 
 	@FXML private void Remove()
 	{
-		_mainWindow.Remove(this);
+		MainWindow.Remove(this);
 	}
 
 	@FXML private void MoveUp()
 	{
-		_mainWindow.MoveUp(this);
+		MainWindow.MoveUp(this);
 	}
 
 	@FXML private void MoveDown()
 	{
-		_mainWindow.MoveDown(this);
+		MainWindow.MoveDown(this);
 	}
 
 	@FXML private void Clone()
 	{
-		_mainWindow.Clone(this);
+		MainWindow.Clone(this);
 	}
 
 	@FXML private void SetVisibility()
@@ -195,7 +195,7 @@ public class OverlayControl extends VBox
 	
 	private void Load(Stage stage)
 	{
-		_stage = stage;
+		Stage = stage;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("OverlayControl.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);

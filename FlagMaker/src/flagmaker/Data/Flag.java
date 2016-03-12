@@ -134,7 +134,7 @@ public class Flag
 		}
 	}
 	
-	private Color[] ColorsUsed()
+	public Color[] ColorsUsed()
 	{
 		ArrayList<Color> colors = new ArrayList<>();
 		
