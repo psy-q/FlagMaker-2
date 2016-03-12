@@ -759,7 +759,7 @@ public class MainWindowController implements ColorButtonListener
 	{
 		Dialog<Size> dialog = new Dialog<>();
 		dialog.setTitle(LocalizationHandler.Get("ExportAsPng"));
-		dialog.setHeaderText("Enter desired PNG size, in pixels"); // TODO
+		dialog.setHeaderText(LocalizationHandler.Get("PngSizePrompt"));
 		ButtonType saveButtonType = new ButtonType(LocalizationHandler.Get("Save"), ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 		

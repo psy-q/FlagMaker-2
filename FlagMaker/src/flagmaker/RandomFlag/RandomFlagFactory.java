@@ -10,6 +10,8 @@ import flagmaker.Overlays.OverlayTypes.*;
 import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.*;
 import flagmaker.Data.Ratio;
+import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterLateral;
+import flagmaker.Overlays.OverlayTypes.RepeaterTypes.OverlayRepeaterRadial;
 import java.io.File;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
@@ -735,22 +737,22 @@ public class RandomFlagFactory
 
 	private void AddRepeater(double x, double y, double width, double height, Color color, boolean forceRadial)
 	{
-//		boolean big = forceRadial;
-//		if (!forceRadial && Randomizer.ProbabilityOfTrue(0.5))
-//		{
-//			_overlays.add(new OverlayRepeaterLateral(x, y, width, height,
-//				Randomizer.Clamp(Randomizer.NextNormalized(5, 2), 2, 8, false),
-//				Randomizer.Clamp(Randomizer.NextNormalized(4, 2), 2, 8), _gridSize.Width, _gridSize.Height, false));
-//		}
-//		else
-//		{
-//			big = true;
-//			_overlays.add(new OverlayRepeaterRadial(x, y, width / 3.0,
-//				Randomizer.Clamp(Randomizer.NextNormalized(12, 4), 4, 25, false),
-//				Randomizer.ProbabilityOfTrue(0.5) ? 0 : _gridSize.Width, _gridSize.Width, _gridSize.Height));
-//		}
-//
-//		AddEmblem(1, 0, 0, color, false, color, big);
+		boolean big = forceRadial;
+		if (!forceRadial && Randomizer.ProbabilityOfTrue(0.5))
+		{
+			_overlays.add(new OverlayRepeaterLateral(x, y, width, height,
+				Randomizer.Clamp(Randomizer.NextNormalized(5, 2), 2, 8, false),
+				Randomizer.Clamp(Randomizer.NextNormalized(4, 2), 2, 8, false), _gridSize.Width, _gridSize.Height));
+		}
+		else
+		{
+			big = true;
+			_overlays.add(new OverlayRepeaterRadial(x, y, width / 3.0,
+				Randomizer.Clamp(Randomizer.NextNormalized(12, 4), 4, 25, false),
+				Randomizer.ProbabilityOfTrue(0.5), _gridSize.Width, _gridSize.Height));
+		}
+
+		AddEmblem(1, 0, 0, color, false, color, big);
 	}
 
 	private void AddCircleEmblem(double probability, double x, double y, Color circleColor, Color emblemColor, Color colorIfStroke)
