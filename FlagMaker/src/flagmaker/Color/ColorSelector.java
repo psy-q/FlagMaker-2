@@ -2,19 +2,14 @@ package flagmaker.Color;
 
 import flagmaker.Files.LocalizationHandler;
 import java.util.ArrayList;
-import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -43,13 +38,14 @@ public class ColorSelector extends VBox
 	@FXML private Button btnCancel;
 	private Color _color;
 	
-	public ColorSelector(Stage stage, ArrayList<Color> usedColors)
+	public ColorSelector(Stage stage, ArrayList<Color> usedColors, ArrayList<Color> recentColors)
 	{
 		Load(stage);
 		SetWindowStrings();
 		FillNamedColorList(paneFotw, ColorList.FlagsOfTheWorld());
 		FillNamedColorList(paneFoan, ColorList.FlagsOfAllNations());
 		FillColorList(paneUsed, usedColors);
+		FillColorList(paneRecent, new ArrayList(new ArrayList(recentColors).subList(0, Math.min(recentColors.size(), 10))));
 		
 		stage.titleProperty().set(LocalizationHandler.Get("Color"));
 		stage.getIcons().add(new Image("flagmaker/Images/icon.png"));

@@ -62,7 +62,7 @@ public class ColorButton extends VBox
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		dialog.initOwner(_stage);
-		ColorSelector control = new ColorSelector(dialog, new ArrayList<>(Arrays.asList(_mainWindowController.Flag().ColorsUsed())));
+		ColorSelector control = new ColorSelector(dialog, new ArrayList<>(Arrays.asList(_mainWindowController.Flag().ColorsUsed())), _mainWindowController.RecentColors);
 		Scene dialogScene = new Scene(control, 400, 400);
 		dialogScene.getStylesheets().add(UI.class.getResource("Style.css").toExternalForm());
 		dialog.setScene(dialogScene);
@@ -73,6 +73,14 @@ public class ColorButton extends VBox
 		if (c != null)
 		{
 			SetValue(c);
+			
+			if (_mainWindowController.RecentColors.contains(c))
+			{
+				_mainWindowController.RecentColors.removeIf(r -> r.equals(c));
+			}
+			
+			_mainWindowController.RecentColors.add(0, c);
+			
 			_listener.ColorChanged(oldval, _value);
 		}
 	}

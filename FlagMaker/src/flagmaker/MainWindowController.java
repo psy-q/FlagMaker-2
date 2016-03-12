@@ -133,6 +133,8 @@ public class MainWindowController implements ColorButtonListener
 	private boolean _isUnsaved;
 
 	private Ratio _ratio;
+	
+	public ArrayList<Color> RecentColors;
 
 	@FXML
 	protected void initialize()
@@ -542,6 +544,7 @@ public class MainWindowController implements ColorButtonListener
 	{
 		SetDefaultColors();
 		
+		RecentColors = new ArrayList<Color>();
 		divisionPicker1.SetListener(this, _stage, this);
 		divisionPicker2.SetListener(this, _stage, this);
 		divisionPicker3.SetListener(this, _stage, this);
