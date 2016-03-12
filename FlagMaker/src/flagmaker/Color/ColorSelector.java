@@ -169,7 +169,8 @@ public class ColorSelector extends VBox
 	@FXML
 	private void SaveAdvanced()
 	{
-		
+		_color = new Color(sldR.getValue() / 255, sldG.getValue() / 255, sldB.getValue() / 255, sldA.getValue() / 255);
+		_stage.close();
 	}
 	
 	@FXML
