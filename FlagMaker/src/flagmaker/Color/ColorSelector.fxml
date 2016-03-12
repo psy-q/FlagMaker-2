@@ -27,8 +27,8 @@
 				<VBox fillWidth="true" style="-fx-padding: 5;">
 					<HBox spacing="10">
 						<children>
-							<Canvas fx:id="cnvSatLight" width="350" height="190" onMouseDragged="#CnvSatLightDrag" />
-							<Canvas fx:id="cnvHue" width="17" height="190" onMouseDragged="#CnvHueDrag" />
+							<Canvas fx:id="cnvSatLight" width="350" height="190" onMouseClicked="#CnvSatLightDrag" onMouseDragged="#CnvSatLightDrag" />
+							<Canvas fx:id="cnvHue" width="17" height="190" onMouseClicked="#CnvHueDrag" onMouseDragged="#CnvHueDrag" />
 						</children>
 					</HBox>
 					<HBox>
