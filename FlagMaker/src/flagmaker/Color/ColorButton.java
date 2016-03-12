@@ -1,6 +1,9 @@
 package flagmaker.Color;
 
+import flagmaker.MainWindowController;
 import flagmaker.UI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +17,7 @@ public class ColorButton extends VBox
 {
 	@FXML private Rectangle rect;
 	private Color _value;
+	private MainWindowController _mainWindowController;
 	private Stage _stage;
 	private ColorButtonListener _listener;
 	
@@ -33,8 +37,9 @@ public class ColorButton extends VBox
 		}
 	}
 	
-	public void SetListener(Stage stage, ColorButtonListener listener)
+	public void SetListener(MainWindowController mainWindowController, Stage stage, ColorButtonListener listener)
 	{
+		_mainWindowController = mainWindowController;
 		_stage = stage;
 		_listener = listener;
 	}
@@ -57,8 +62,8 @@ public class ColorButton extends VBox
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		dialog.initOwner(_stage);
-		ColorSelector control = new ColorSelector(dialog);
-		Scene dialogScene = new Scene(control, 400, 300);
+		ColorSelector control = new ColorSelector(dialog, new ArrayList<>(Arrays.asList(_mainWindowController.Flag().ColorsUsed())));
+		Scene dialogScene = new Scene(control, 400, 400);
 		dialogScene.getStylesheets().add(UI.class.getResource("Style.css").toExternalForm());
 		dialog.setScene(dialogScene);
 		dialog.setResizable(false);

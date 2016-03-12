@@ -38,7 +38,7 @@ public class OverlayControl extends VBox
 	private int _defaultMaximumX;
 	private int _defaultMaximumY;
 	private boolean _isFirst;
-	private final MainWindowController _mainWindow;
+	public final MainWindowController MainWindow;
 	
 	public boolean IsLoading;
 	public boolean WasCanceled;
@@ -49,7 +49,7 @@ public class OverlayControl extends VBox
 		LoadLocalization();
 		
 		IsLoading = isLoading;
-		_mainWindow = mainWindow;
+		MainWindow = mainWindow;
 		_defaultMaximumX = defaultMaximumX;
 		_defaultMaximumY = defaultMaximumY;
 		_isFirst = true;
@@ -129,7 +129,7 @@ public class OverlayControl extends VBox
 			_overlay.SetValues(GetAttributeSliderValues());
 			Draw();
 		}
-		_mainWindow.SetAsUnsaved();
+		MainWindow.SetAsUnsaved();
 	}
 
 	@FXML private void OverlaySelect()
@@ -156,27 +156,27 @@ public class OverlayControl extends VBox
 
 	private void Draw()
 	{
-		_mainWindow.Draw();
+		MainWindow.Draw();
 	}
 
 	@FXML private void Remove()
 	{
-		_mainWindow.Remove(this);
+		MainWindow.Remove(this);
 	}
 
 	@FXML private void MoveUp()
 	{
-		_mainWindow.MoveUp(this);
+		MainWindow.MoveUp(this);
 	}
 
 	@FXML private void MoveDown()
 	{
-		_mainWindow.MoveDown(this);
+		MainWindow.MoveDown(this);
 	}
 
 	@FXML private void Clone()
 	{
-		_mainWindow.Clone(this);
+		MainWindow.Clone(this);
 	}
 
 	@FXML private void SetVisibility()

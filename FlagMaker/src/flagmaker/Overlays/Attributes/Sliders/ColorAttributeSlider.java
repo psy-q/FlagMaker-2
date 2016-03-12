@@ -4,7 +4,6 @@ import flagmaker.Color.ColorButton;
 import flagmaker.Color.ColorButtonListener;
 import flagmaker.Files.LocalizationHandler;
 import flagmaker.Overlays.OverlayControl;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -20,7 +19,7 @@ public class ColorAttributeSlider extends AttributeSlider implements ColorButton
 	{
 		super(parent, name);
 		Load();
-		picker.SetListener(parent.Stage, this);
+		picker.SetListener(parent.MainWindow, parent.Stage, this);
 		
 		String label = LocalizationHandler.Get(name);
 		lblName.setText(label);

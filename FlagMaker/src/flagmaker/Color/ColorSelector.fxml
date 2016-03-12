@@ -6,19 +6,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root type="javafx.scene.layout.VBox" id="vbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="vbox" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 		<TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-			<Tab fx:id="tabStandard">
-				<VBox fillWidth="true">
-					<FlowPane fx:id="paneFotw" alignment="TOP_LEFT" hgap="1" vgap="1" orientation="HORIZONTAL" />
-					<FlowPane fx:id="paneFoan" alignment="TOP_LEFT" hgap="1" vgap="1" orientation="HORIZONTAL" />
+   			<Tab fx:id="tabStandard">
+				<VBox fillWidth="true" style="-fx-padding: 5;">
+					<Label fx:id="labelFoan" />
+					<FlowPane fx:id="paneFoan" alignment="TOP_LEFT" orientation="HORIZONTAL" />
+					<Label fx:id="labelFotw" style="-fx-padding: 8 0 0 0;" />
+					<FlowPane fx:id="paneFotw" alignment="TOP_LEFT" orientation="HORIZONTAL" />
+					<Label fx:id="labelRecent" style="-fx-padding: 8 0 0 0;" />
+					<FlowPane fx:id="paneRecent" alignment="TOP_LEFT" orientation="HORIZONTAL" />
+					<Label fx:id="labelUsed" style="-fx-padding: 8 0 0 0;" />
+					<FlowPane fx:id="paneUsed" alignment="TOP_LEFT" orientation="HORIZONTAL" />
 				</VBox>
-			</Tab>
-			<Tab fx:id="tabAdvanced" />
+   			</Tab>
+   			<Tab fx:id="tabAdvanced" />
 		</TabPane>
 		<AnchorPane VBox.vgrow="NEVER">
-			<Button fx:id="btnCancel" onAction="#Cancel" cancelButton="true" AnchorPane.rightAnchor="0"  />
+   			<Button fx:id="btnCancel" cancelButton="true" onAction="#Cancel" AnchorPane.rightAnchor="0" />
 		</AnchorPane>
 	</children>
 </fx:root>

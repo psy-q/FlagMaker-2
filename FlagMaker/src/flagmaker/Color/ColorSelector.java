@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -27,23 +28,42 @@ public class ColorSelector extends VBox
 
 	@FXML private TabPane tabs;
 	@FXML private Tab tabStandard;
+	
+	@FXML private Label labelFotw;
 	@FXML private FlowPane paneFotw;
+	@FXML private Label labelFoan;
 	@FXML private FlowPane paneFoan;
+	@FXML private Label labelRecent;
+	@FXML private FlowPane paneRecent;
+	@FXML private Label labelUsed;
+	@FXML private FlowPane paneUsed;
+	
 	@FXML private Tab tabAdvanced;
+	
 	@FXML private Button btnCancel;
 	private Color _color;
 	
-	public ColorSelector(Stage stage)
+	public ColorSelector(Stage stage, ArrayList<Color> usedColors)
 	{
 		Load(stage);
-		FillColorList(paneFotw, ColorList.FlagsOfTheWorld());
-		FillColorList(paneFoan, ColorList.FlagsOfAllNations());
+		SetWindowStrings();
+		FillNamedColorList(paneFotw, ColorList.FlagsOfTheWorld());
+		FillNamedColorList(paneFoan, ColorList.FlagsOfAllNations());
+		FillColorList(paneUsed, usedColors);
 		
 		stage.titleProperty().set(LocalizationHandler.Get("Color"));
 		stage.getIcons().add(new Image("flagmaker/Images/icon.png"));
+	}
+
+	private void SetWindowStrings()
+	{
 		btnCancel.setText(LocalizationHandler.Get("Cancel"));
 		tabStandard.setText(LocalizationHandler.Get("Standard"));
 		tabAdvanced.setText(LocalizationHandler.Get("Advanced"));
+		labelFotw.setText(LocalizationHandler.Get("LargePaletteName"));
+		labelFoan.setText(LocalizationHandler.Get("SmallPaletteName"));
+		labelRecent.setText(LocalizationHandler.Get("RecentPaletteName"));
+		labelUsed.setText(LocalizationHandler.Get("UsedPaletteName"));
 	}
 	
 	private void Load(Stage stage)
@@ -63,7 +83,7 @@ public class ColorSelector extends VBox
 		}
 	}
 
-	private void FillColorList(FlowPane pane, ArrayList<NamedColor> colors)
+	private void FillNamedColorList(FlowPane pane, ArrayList<NamedColor> colors)
 	{
 		for (NamedColor c : colors)
 		{
@@ -77,6 +97,22 @@ public class ColorSelector extends VBox
 			b.setGraphic(p);
 			b.setTooltip(new Tooltip(c.Name));
 			b.setOnAction(o -> { _color = c.Color; _stage.close(); });
+		}
+	}
+	
+	private void FillColorList(FlowPane pane, ArrayList<Color> colors)
+	{
+		for (Color c : colors)
+		{
+			Button b = new Button();
+			pane.getChildren().add(b);
+			Rectangle r = new Rectangle(20, 20);
+			r.setFill(c);
+			r.setStroke(Color.SILVER);
+			Pane p = new Pane();
+			p.getChildren().add(r);
+			b.setGraphic(p);
+			b.setOnAction(o -> { _color = c; _stage.close(); });
 		}
 	}
 	

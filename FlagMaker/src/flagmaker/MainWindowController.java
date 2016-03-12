@@ -542,9 +542,9 @@ public class MainWindowController implements ColorButtonListener
 	{
 		SetDefaultColors();
 		
-		divisionPicker1.SetListener(_stage, this);
-		divisionPicker2.SetListener(_stage, this);
-		divisionPicker3.SetListener(_stage, this);
+		divisionPicker1.SetListener(this, _stage, this);
+		divisionPicker2.SetListener(this, _stage, this);
+		divisionPicker3.SetListener(this, _stage, this);
 
 		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
