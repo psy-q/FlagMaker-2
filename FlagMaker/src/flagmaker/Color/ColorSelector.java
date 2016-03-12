@@ -16,6 +16,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -40,6 +41,7 @@ public class ColorSelector extends VBox
 	@FXML private FlowPane paneUsed;
 	
 	@FXML private Tab tabAdvanced;
+	private boolean _shouldTrigger;
 	@FXML private Slider sldR;
 	@FXML private Label lblR;
 	@FXML private Slider sldG;
@@ -53,6 +55,8 @@ public class ColorSelector extends VBox
 	@FXML private Canvas cnvHue;
 	
 	@FXML private Button btnCancel;
+	
+	private Image _colorCircle;
 	private Color _color;
 	
 	public ColorSelector(Stage stage, Color currentColor, ArrayList<Color> usedColors, ArrayList<Color> recentColors)
@@ -134,35 +138,75 @@ public class ColorSelector extends VBox
 
 	private void SetAdvanced(Color currentColor)
 	{
+		_color = currentColor;
+		_colorCircle = new Image("flagmaker/Images/color-circle.png");
 		FillHueCanvas();
-		FillSatLightCanvas(currentColor);
+		FillSatLightCanvas(_color);
+		SetColorCircle(_color);
 		
-		lblR.setText(Integer.toString((int)(currentColor.getRed() * 255)));
-		lblG.setText(Integer.toString((int)(currentColor.getGreen() * 255)));
-		lblB.setText(Integer.toString((int)(currentColor.getBlue() * 255)));
-		lblA.setText(Integer.toString((int)(currentColor.getOpacity() * 255)));
+		lblR.setText(Integer.toString((int)(_color.getRed() * 255)));
+		lblG.setText(Integer.toString((int)(_color.getGreen() * 255)));
+		lblB.setText(Integer.toString((int)(_color.getBlue() * 255)));
+		lblA.setText(Integer.toString((int)(_color.getOpacity() * 255)));
 		
-		sldR.setValue(currentColor.getRed() * 255);
-		sldG.setValue(currentColor.getGreen() * 255);
-		sldB.setValue(currentColor.getBlue() * 255);
-		sldA.setValue(currentColor.getOpacity() * 255);
+		sldR.setValue(_color.getRed() * 255);
+		sldG.setValue(_color.getGreen() * 255);
+		sldB.setValue(_color.getBlue() * 255);
+		sldA.setValue(_color.getOpacity() * 255);
 		
 		sldR.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval)) { SetNumberLabel(sldR, lblR); SetColor(); FillSatLightCanvas(_color); }
+			if (_shouldTrigger && !oldval.equals(newval)) SliderChanged(sldR, lblR);
 		});
 		sldG.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval)) { SetNumberLabel(sldG, lblG); SetColor(); FillSatLightCanvas(_color); }
+			if (_shouldTrigger && !oldval.equals(newval)) SliderChanged(sldG, lblG);
 		});
 		sldB.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval)) { SetNumberLabel(sldB, lblB); SetColor(); FillSatLightCanvas(_color); }
+			if (_shouldTrigger && !oldval.equals(newval)) SliderChanged(sldB, lblB);
 		});
 		sldA.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval)) SetNumberLabel(sldA, lblA);
+			if (_shouldTrigger && !oldval.equals(newval)) SetNumberLabel(sldA, lblA);
 		});
+	}
+	
+	private void SliderChanged(Slider slider, Label label)
+	{
+		SetNumberLabel(slider, label);
+		SetColorFromSliders();
+		FillSatLightCanvas(_color);
+		SetColorCircle(_color);
+	}
+	
+	private void SetColorCircle(Color color)
+	{
+		double brightness = color.getBrightness();
+		double y = (1 - brightness) * cnvSatLight.getHeight();
+		
+		double saturation = color.getSaturation();
+		double x = saturation * cnvSatLight.getWidth();
+		
+		GraphicsContext gc = cnvSatLight.getGraphicsContext2D();
+		gc.drawImage(_colorCircle, x - 5, y - 5);
+	}
+	
+	@FXML private void CnvSatLightClick(MouseEvent e)
+	{
+		
+	}
+	
+	@FXML private void CnvSatLightDrag(MouseEvent e)
+	{
+		_shouldTrigger = false;
+		double x = e.getX() / cnvSatLight.getWidth();
+		double y = 1 - (e.getY() / cnvSatLight.getHeight());
+		_color = Color.hsb(_color.getHue(), Clamp(x), Clamp(y));
+		FillSatLightCanvas(_color);
+		SetColorCircle(_color);
+		SetSlidersFromColor();
+		_shouldTrigger = true;
 	}
 
 	private void FillHueCanvas()
@@ -218,18 +262,36 @@ public class ColorSelector extends VBox
 	@FXML
 	private void SaveAdvanced()
 	{
-		SetColor();
+		SetColorFromSliders();
 		_stage.close();
 	}
 
-	private void SetColor()
+	private void SetColorFromSliders()
 	{
 		_color = new Color(sldR.getValue() / 255, sldG.getValue() / 255, sldB.getValue() / 255, sldA.getValue() / 255);
+	}
+	
+	private void SetSlidersFromColor()
+	{
+		sldR.setValue(_color.getRed() * 255);
+		sldG.setValue(_color.getGreen() * 255);
+		sldB.setValue(_color.getBlue() * 255);
+		sldA.setValue(_color.getOpacity() * 255);
+		
+		SetNumberLabel(sldR, lblR);
+		SetNumberLabel(sldG, lblG);
+		SetNumberLabel(sldB, lblB);
+		SetNumberLabel(sldA, lblA);
 	}
 	
 	@FXML
 	private void Cancel()
 	{
 		_stage.close();
+	}
+	
+	private double Clamp(double input)
+	{
+		return Math.max(0, Math.min(1, input));
 	}
 }
