@@ -1,12 +1,25 @@
 package flagmaker.Color;
 
+import flagmaker.MainWindowController;
+import java.awt.Event;
+import java.util.Random;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class ColorButton extends VBox
 {
+	@FXML private Rectangle rect;
+	private Color _value;
+	private MainWindowController _mainWindowController;
+	private Random _random;
+	
 	public ColorButton()
 	{
+		_random = new Random();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ColorButton.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
@@ -19,5 +32,32 @@ public class ColorButton extends VBox
 		{
 			String s = ex.getMessage();
 		}
+	}
+	
+	public void SetMainWindow(MainWindowController mainWindowController)
+	{
+		_mainWindowController = mainWindowController;
+	}
+	
+	public Color GetValue()
+	{
+		return _value;
+	}
+	
+	public void SetValue(Color value)
+	{
+		_value = value;
+		rect.setFill(value);
+	}
+	
+	@FXML private void OnClicked()
+	{
+		double newR = _random.nextDouble();
+		double newG = _random.nextDouble();
+		double newB = _random.nextDouble();
+		Color newColor = new Color(newR, newG, newB, 1.0);
+		
+		SetValue(newColor);
+		_mainWindowController.DivisionColorChanged();
 	}
 }

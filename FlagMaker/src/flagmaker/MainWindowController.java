@@ -104,10 +104,9 @@ public class MainWindowController
 	@FXML private Label divisionLabel1;
 	@FXML private Label divisionLabel2;
 	@FXML private Label divisionLabel3;
-	@FXML private ColorButton colorButton;
-	@FXML private ColorPicker divisionPicker1;
-	@FXML private ColorPicker divisionPicker2;
-	@FXML private ColorPicker divisionPicker3;
+	@FXML private ColorButton divisionPicker1;
+	@FXML private ColorButton divisionPicker2;
+	@FXML private ColorButton divisionPicker3;
 	@FXML private ComboBox cmbPresets;
 
 	@FXML private VBox lstOverlays;
@@ -288,15 +287,15 @@ public class MainWindowController
 	}
 
 	// Division
-	private void DivisionColorChanged()
+	public void DivisionColorChanged()
 	{
 		if (_isLoading) return;
 
 		_division.SetColors(new Color[]
 		{
-			divisionPicker1.getValue(),
-			divisionPicker2.getValue(),
-			divisionPicker3.getValue()
+			divisionPicker1.GetValue(),
+			divisionPicker2.GetValue(),
+			divisionPicker3.GetValue()
 		});
 		Draw();
 		SetAsUnsaved();
@@ -319,12 +318,12 @@ public class MainWindowController
 
 	private void SetDivisionVisibility()
 	{
-		divisionPicker1.setValue(_division.Colors[0]);
-		divisionPicker2.setValue(_division.Colors[1]);
+		divisionPicker1.SetValue(_division.Colors[0]);
+		divisionPicker2.SetValue(_division.Colors[1]);
 
 		if (_division.Colors.length > 2)
 		{
-			divisionPicker3.setValue(_division.Colors[2]);
+			divisionPicker3.SetValue(_division.Colors[2]);
 			ControlExtensions.ShowControl(divisionPicker3);
 		}
 		else
@@ -360,7 +359,7 @@ public class MainWindowController
 
 	@FXML private void DivisionGridClick()
 	{
-		_division = new DivisionGrid(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue());
+		_division = new DivisionGrid(divisionPicker1.GetValue(), divisionPicker2.GetValue(), divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -368,7 +367,7 @@ public class MainWindowController
 
 	@FXML private void DivisionFessesClick()
 	{
-		_division = new DivisionFesses(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionPicker3.getValue(),
+		_division = new DivisionFesses(divisionPicker1.GetValue(), divisionPicker2.GetValue(), divisionPicker3.GetValue(),
 				divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
@@ -377,7 +376,7 @@ public class MainWindowController
 
 	@FXML private void DivisionPalesClick()
 	{
-		_division = new DivisionPales(divisionPicker1.getValue(), divisionPicker2.getValue(), divisionPicker3.getValue(),
+		_division = new DivisionPales(divisionPicker1.GetValue(), divisionPicker2.GetValue(), divisionPicker3.GetValue(),
 				divisionSlider1.valueProperty().intValue(), divisionSlider2.valueProperty().intValue(), divisionSlider3.valueProperty().intValue());
 		SetDivisionVisibility();
 		Draw();
@@ -386,7 +385,7 @@ public class MainWindowController
 
 	@FXML private void DivisionBendsForwardClick()
 	{
-		_division = new DivisionBendsForward(divisionPicker1.getValue(), divisionPicker2.getValue());
+		_division = new DivisionBendsForward(divisionPicker1.GetValue(), divisionPicker2.GetValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -394,7 +393,7 @@ public class MainWindowController
 
 	@FXML private void DivisionBendsBackwardClick()
 	{
-		_division = new DivisionBendsBackward(divisionPicker1.getValue(), divisionPicker2.getValue());
+		_division = new DivisionBendsBackward(divisionPicker1.GetValue(), divisionPicker2.GetValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -402,7 +401,7 @@ public class MainWindowController
 
 	@FXML private void DivisionXClick()
 	{
-		_division = new DivisionX(divisionPicker1.getValue(), divisionPicker2.getValue());
+		_division = new DivisionX(divisionPicker1.GetValue(), divisionPicker2.GetValue());
 		SetDivisionVisibility();
 		Draw();
 		SetAsUnsaved();
@@ -532,19 +531,10 @@ public class MainWindowController
 	private void SetColorsAndSliders()
 	{
 		SetDefaultColors();
-
-		divisionPicker1.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
-		{
-			if (!oldval.equals(newval)) DivisionColorChanged();
-		});
-		divisionPicker2.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
-		{
-			if (!oldval.equals(newval)) DivisionColorChanged();
-		});
-		divisionPicker3.valueProperty().addListener((ObservableValue<? extends Color> ov, Color oldval, Color newval) ->
-		{
-			if (!oldval.equals(newval)) DivisionColorChanged();
-		});
+		
+		divisionPicker1.SetMainWindow(this);
+		divisionPicker2.SetMainWindow(this);
+		divisionPicker3.SetMainWindow(this);
 
 		divisionSlider1.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
@@ -562,9 +552,9 @@ public class MainWindowController
 
 	private void SetDefaultColors()
 	{
-		divisionPicker1.setValue(Color.rgb(198, 12, 48));
-		divisionPicker2.setValue(Color.rgb(253, 200, 47));
-		divisionPicker3.setValue(Color.rgb(0, 38, 100));
+		divisionPicker1.SetValue(Color.rgb(198, 12, 48));
+		divisionPicker2.SetValue(Color.rgb(253, 200, 47));
+		divisionPicker3.SetValue(Color.rgb(0, 38, 100));
 	}
 
 	@FXML
