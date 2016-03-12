@@ -12,5 +12,6 @@
 		<Label fx:id="lblValue" style="-fx-cursor: HAND;" minWidth="40" text="1.3" HBox.hgrow="ALWAYS" onMouseClicked="#Clicked" />
 		<TextField fx:id="txtValue" minWidth="40" />
 		<Slider fx:id="slider" blockIncrement="1" snapToTicks="true" majorTickUnit="1" min="0" minorTickCount="0" showTickMarks="true" HBox.hgrow="ALWAYS" />
+		<CheckBox visible="false" HBox.hgrow="NEVER" /> <!-- hacky, but makes the sliders line up consistently -->
 	</children>
 </fx:root>
