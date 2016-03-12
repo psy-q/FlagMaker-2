@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.shape.Rectangle?>
 
 <fx:root id="vbox" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -26,8 +27,8 @@
 				<VBox fillWidth="true" style="-fx-padding: 5;">
 					<HBox spacing="10">
 						<children>
-							<Canvas fx:id="cnvSatLight" width="350" height="200" onMouseDragged="#CnvSatLightDrag" />
-							<Canvas fx:id="cnvHue" width="17" height="200" onMouseDragged="#CnvHueDrag" />
+							<Canvas fx:id="cnvSatLight" width="350" height="190" onMouseDragged="#CnvSatLightDrag" />
+							<Canvas fx:id="cnvHue" width="17" height="190" onMouseDragged="#CnvHueDrag" />
 						</children>
 					</HBox>
 					<HBox>
@@ -58,6 +59,8 @@
 							<Label fx:id="lblA" prefWidth="50" alignment="CENTER_RIGHT" />
 						</children>
 					</HBox>
+					
+					<Rectangle fx:id="rctPreview" height="50" width="380" />
 
 					<AnchorPane VBox.vgrow="NEVER">
 						<Button fx:id="btnSaveAdvanced" onAction="#SaveAdvanced" AnchorPane.rightAnchor="0" />

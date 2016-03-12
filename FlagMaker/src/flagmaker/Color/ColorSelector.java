@@ -53,6 +53,7 @@ public class ColorSelector extends VBox
 	@FXML private Button btnSaveAdvanced;
 	@FXML private Canvas cnvSatLight;
 	@FXML private Canvas cnvHue;
+	@FXML private Rectangle rctPreview;
 	
 	@FXML private Button btnCancel;
 	
@@ -195,6 +196,8 @@ public class ColorSelector extends VBox
 		
 		GraphicsContext gc = cnvSatLight.getGraphicsContext2D();
 		gc.drawImage(_colorCircle, x - 5, y - 5);
+		
+		rctPreview.setFill(color);
 	}
 	
 	private void SetColorTriangles(Color color)
