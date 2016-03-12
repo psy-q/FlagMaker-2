@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -12,6 +14,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -45,6 +49,8 @@ public class ColorSelector extends VBox
 	@FXML private Slider sldA;
 	@FXML private Label lblA;
 	@FXML private Button btnSaveAdvanced;
+	@FXML private Canvas cnvSatLight;
+	@FXML private Canvas cnvHue;
 	
 	@FXML private Button btnCancel;
 	private Color _color;
@@ -128,6 +134,9 @@ public class ColorSelector extends VBox
 
 	private void SetAdvanced(Color currentColor)
 	{
+		FillHueCanvas();
+		FillSatLightCanvas(currentColor);
+		
 		lblR.setText(Integer.toString((int)(currentColor.getRed() * 255)));
 		lblG.setText(Integer.toString((int)(currentColor.getGreen() * 255)));
 		lblB.setText(Integer.toString((int)(currentColor.getBlue() * 255)));
@@ -140,20 +149,60 @@ public class ColorSelector extends VBox
 		
 		sldR.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval)) SetNumberLabel(sldR, lblR);
+			if (!oldval.equals(newval)) { SetNumberLabel(sldR, lblR); SetColor(); FillSatLightCanvas(_color); }
 		});
 		sldG.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval)) SetNumberLabel(sldG, lblG);
+			if (!oldval.equals(newval)) { SetNumberLabel(sldG, lblG); SetColor(); FillSatLightCanvas(_color); }
 		});
 		sldB.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
-			if (!oldval.equals(newval)) SetNumberLabel(sldB, lblB);
+			if (!oldval.equals(newval)) { SetNumberLabel(sldB, lblB); SetColor(); FillSatLightCanvas(_color); }
 		});
 		sldA.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
 			if (!oldval.equals(newval)) SetNumberLabel(sldA, lblA);
 		});
+	}
+
+	private void FillHueCanvas()
+	{
+		int width = (int)cnvHue.getWidth();
+		int height = (int)cnvHue.getHeight();
+		WritableImage img = new WritableImage(width, height);
+		PixelWriter pw = img.getPixelWriter();
+		
+		for (int y = 0; y < height; y++)
+		{
+			Color color = Color.hsb(360.0 * y / height, 1, 1);
+			for (int x = 0; x < width; x++)
+			{
+				pw.setColor(x, y, color);
+			}
+		}
+		
+		GraphicsContext gc = cnvHue.getGraphicsContext2D();
+		gc.drawImage(img, 0, 0);
+	}
+	
+	private void FillSatLightCanvas(Color input)
+	{
+		int width = (int)cnvSatLight.getWidth();
+		int height = (int)cnvSatLight.getHeight();
+		WritableImage img = new WritableImage(width, height);
+		PixelWriter pw = img.getPixelWriter();
+		
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++)
+			{
+				Color color = Color.hsb(input.getHue(), x / (double)width, 1 - y / (double)height);
+				pw.setColor(x, y, color);
+			}
+		}
+		
+		GraphicsContext gc = cnvSatLight.getGraphicsContext2D();
+		gc.drawImage(img, 0, 0);
 	}
 	
 	private void SetNumberLabel(Slider slider, Label label)
@@ -169,8 +218,13 @@ public class ColorSelector extends VBox
 	@FXML
 	private void SaveAdvanced()
 	{
-		_color = new Color(sldR.getValue() / 255, sldG.getValue() / 255, sldB.getValue() / 255, sldA.getValue() / 255);
+		SetColor();
 		_stage.close();
+	}
+
+	private void SetColor()
+	{
+		_color = new Color(sldR.getValue() / 255, sldG.getValue() / 255, sldB.getValue() / 255, sldA.getValue() / 255);
 	}
 	
 	@FXML

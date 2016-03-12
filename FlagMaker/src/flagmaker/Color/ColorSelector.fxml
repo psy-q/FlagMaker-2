@@ -5,6 +5,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
 
 <fx:root id="vbox" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -23,6 +24,12 @@
    			</Tab>
 			<Tab fx:id="tabAdvanced">
 				<VBox fillWidth="true" style="-fx-padding: 5;">
+					<HBox spacing="10">
+						<children>
+							<Canvas fx:id="cnvSatLight" width="300" height="200" />
+							<Canvas fx:id="cnvHue" width="20" height="200" />
+						</children>
+					</HBox>
 					<HBox>
 						<children>
 							<Label text="R" prefWidth="30" />
