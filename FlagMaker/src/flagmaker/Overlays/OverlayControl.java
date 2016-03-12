@@ -32,7 +32,7 @@ public class OverlayControl extends VBox
 	@FXML private Tooltip ttpMoveDown;
 	@FXML private Tooltip ttpClone;
 	
-	private Stage _stage;
+	public Stage Stage;
 	
 	private Overlay _overlay;
 	private int _defaultMaximumX;
@@ -136,7 +136,7 @@ public class OverlayControl extends VBox
 	{
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
-		dialog.initOwner(_stage);
+		dialog.initOwner(Stage);
 		OverlaySelector control = new OverlaySelector(dialog, _defaultMaximumX, _defaultMaximumY);
 		Scene dialogScene = new Scene(control, 400, 300);
 		dialogScene.getStylesheets().add(UI.class.getResource("Style.css").toExternalForm());
@@ -195,7 +195,7 @@ public class OverlayControl extends VBox
 	
 	private void Load(Stage stage)
 	{
-		_stage = stage;
+		Stage = stage;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("OverlayControl.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);

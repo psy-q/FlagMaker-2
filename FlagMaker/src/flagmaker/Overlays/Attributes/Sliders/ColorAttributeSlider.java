@@ -20,7 +20,7 @@ public class ColorAttributeSlider extends AttributeSlider implements ColorButton
 	{
 		super(parent, name);
 		Load();
-		picker.SetListener(this);
+		picker.SetListener(parent.Stage, this);
 		
 		String label = LocalizationHandler.Get(name);
 		lblName.setText(label);
