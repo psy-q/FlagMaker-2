@@ -8,7 +8,15 @@
 
 <fx:root type="javafx.scene.layout.VBox" id="vbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-		<TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" />
+		<TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+			<Tab fx:id="tabStandard">
+				<VBox fillWidth="true">
+					<FlowPane fx:id="paneFotw" alignment="TOP_LEFT" hgap="1" vgap="1" orientation="HORIZONTAL" />
+					<FlowPane fx:id="paneFoan" alignment="TOP_LEFT" hgap="1" vgap="1" orientation="HORIZONTAL" />
+				</VBox>
+			</Tab>
+			<Tab fx:id="tabAdvanced" />
+		</TabPane>
 		<AnchorPane VBox.vgrow="NEVER">
 			<Button fx:id="btnCancel" onAction="#Cancel" cancelButton="true" AnchorPane.rightAnchor="0"  />
 		</AnchorPane>
