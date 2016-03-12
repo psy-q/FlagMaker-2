@@ -57,7 +57,9 @@ public class ColorSelector extends VBox
 	@FXML private Button btnCancel;
 	
 	private Image _colorCircle;
+	private Image _colorTriangles;
 	private Color _color;
+	private Color _tempColor;
 	
 	public ColorSelector(Stage stage, Color currentColor, ArrayList<Color> usedColors, ArrayList<Color> recentColors)
 	{
@@ -138,21 +140,23 @@ public class ColorSelector extends VBox
 
 	private void SetAdvanced(Color currentColor)
 	{
-		_color = currentColor;
+		_tempColor = currentColor;
+		_shouldTrigger = true;
 		_colorCircle = new Image("flagmaker/Images/color-circle.png");
-		FillHueCanvas();
-		FillSatLightCanvas(_color);
-		SetColorCircle(_color);
+		_colorTriangles = new Image("flagmaker/Images/color-triangles.png");
+		FillSatLightCanvas(_tempColor);
+		SetColorCircle(_tempColor);
+		SetColorTriangles(_tempColor);
 		
-		lblR.setText(Integer.toString((int)(_color.getRed() * 255)));
-		lblG.setText(Integer.toString((int)(_color.getGreen() * 255)));
-		lblB.setText(Integer.toString((int)(_color.getBlue() * 255)));
-		lblA.setText(Integer.toString((int)(_color.getOpacity() * 255)));
+		lblR.setText(Integer.toString((int)(_tempColor.getRed() * 255)));
+		lblG.setText(Integer.toString((int)(_tempColor.getGreen() * 255)));
+		lblB.setText(Integer.toString((int)(_tempColor.getBlue() * 255)));
+		lblA.setText(Integer.toString((int)(_tempColor.getOpacity() * 255)));
 		
-		sldR.setValue(_color.getRed() * 255);
-		sldG.setValue(_color.getGreen() * 255);
-		sldB.setValue(_color.getBlue() * 255);
-		sldA.setValue(_color.getOpacity() * 255);
+		sldR.setValue(_tempColor.getRed() * 255);
+		sldG.setValue(_tempColor.getGreen() * 255);
+		sldB.setValue(_tempColor.getBlue() * 255);
+		sldA.setValue(_tempColor.getOpacity() * 255);
 		
 		sldR.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldval, Number newval) ->
 		{
@@ -176,8 +180,9 @@ public class ColorSelector extends VBox
 	{
 		SetNumberLabel(slider, label);
 		SetColorFromSliders();
-		FillSatLightCanvas(_color);
-		SetColorCircle(_color);
+		SetColorTriangles(_tempColor);
+		FillSatLightCanvas(_tempColor);
+		SetColorCircle(_tempColor);
 	}
 	
 	private void SetColorCircle(Color color)
@@ -192,9 +197,14 @@ public class ColorSelector extends VBox
 		gc.drawImage(_colorCircle, x - 5, y - 5);
 	}
 	
-	@FXML private void CnvSatLightClick(MouseEvent e)
+	private void SetColorTriangles(Color color)
 	{
+		FillHueCanvas();
+		double hue = color.getHue();
+		double y = hue / 360 * cnvHue.getHeight();
 		
+		GraphicsContext gc = cnvHue.getGraphicsContext2D();
+		gc.drawImage(_colorTriangles, 0, y - 4);
 	}
 	
 	@FXML private void CnvSatLightDrag(MouseEvent e)
@@ -202,9 +212,21 @@ public class ColorSelector extends VBox
 		_shouldTrigger = false;
 		double x = e.getX() / cnvSatLight.getWidth();
 		double y = 1 - (e.getY() / cnvSatLight.getHeight());
-		_color = Color.hsb(_color.getHue(), Clamp(x), Clamp(y));
-		FillSatLightCanvas(_color);
-		SetColorCircle(_color);
+		_tempColor = Color.hsb(_tempColor.getHue(), Clamp(x), Clamp(y));
+		FillSatLightCanvas(_tempColor);
+		SetColorCircle(_tempColor);
+		SetSlidersFromColor();
+		_shouldTrigger = true;
+	}
+	
+	@FXML private void CnvHueDrag(MouseEvent e)
+	{
+		_shouldTrigger = false;
+		double y = 360 * (e.getY() / cnvSatLight.getHeight());
+		_tempColor = Color.hsb(y, _tempColor.getSaturation(), _tempColor.getBrightness());
+		FillSatLightCanvas(_tempColor);
+		SetColorTriangles(_tempColor);
+		SetColorCircle(_tempColor);
 		SetSlidersFromColor();
 		_shouldTrigger = true;
 	}
@@ -263,20 +285,21 @@ public class ColorSelector extends VBox
 	private void SaveAdvanced()
 	{
 		SetColorFromSliders();
+		_color = _tempColor;
 		_stage.close();
 	}
 
 	private void SetColorFromSliders()
 	{
-		_color = new Color(sldR.getValue() / 255, sldG.getValue() / 255, sldB.getValue() / 255, sldA.getValue() / 255);
+		_tempColor = new Color(sldR.getValue() / 255, sldG.getValue() / 255, sldB.getValue() / 255, sldA.getValue() / 255);
 	}
 	
 	private void SetSlidersFromColor()
 	{
-		sldR.setValue(_color.getRed() * 255);
-		sldG.setValue(_color.getGreen() * 255);
-		sldB.setValue(_color.getBlue() * 255);
-		sldA.setValue(_color.getOpacity() * 255);
+		sldR.setValue(_tempColor.getRed() * 255);
+		sldG.setValue(_tempColor.getGreen() * 255);
+		sldB.setValue(_tempColor.getBlue() * 255);
+		sldA.setValue(_tempColor.getOpacity() * 255);
 		
 		SetNumberLabel(sldR, lblR);
 		SetNumberLabel(sldG, lblG);
