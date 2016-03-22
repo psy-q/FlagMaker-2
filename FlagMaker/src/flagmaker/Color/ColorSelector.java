@@ -55,7 +55,8 @@ public class ColorSelector extends VBox
 	@FXML private Canvas cnvHue;
 	@FXML private Rectangle rctPreview;
 	
-	@FXML private Button btnCancel;
+	@FXML private Button btnCancelStandard;
+	@FXML private Button btnCancelAdvanced;
 	
 	private Image _colorCircle;
 	private Image _colorTriangles;
@@ -79,7 +80,8 @@ public class ColorSelector extends VBox
 
 	private void SetWindowStrings()
 	{
-		btnCancel.setText(LocalizationHandler.Get("Cancel"));
+		btnCancelStandard.setText(LocalizationHandler.Get("Cancel"));
+		btnCancelAdvanced.setText(LocalizationHandler.Get("Cancel"));
 		tabStandard.setText(LocalizationHandler.Get("Standard"));
 		tabAdvanced.setText(LocalizationHandler.Get("Advanced"));
 		labelFotw.setText(LocalizationHandler.Get("LargePaletteName"));
