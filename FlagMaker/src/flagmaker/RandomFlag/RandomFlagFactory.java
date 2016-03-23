@@ -268,8 +268,8 @@ public class RandomFlagFactory
 
 					if (hasFimbriations)
 					{
-						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / 3.0, _gridSize.Height / 20.0, _gridSize.Width, _gridSize.Height));
-						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), 2 * _gridSize.Height / 3.0, _gridSize.Height / 20.0, _gridSize.Width, _gridSize.Height));
+						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), isSpanish ? _gridSize.Height / 4.0 : _gridSize.Height / 3.0, _gridSize.Height / 20.0, _gridSize.Width, _gridSize.Height));
+						_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), isSpanish ? 3 * _gridSize.Height / 4.0 : 2 * _gridSize.Height / 3.0, _gridSize.Height / 20.0, _gridSize.Width, _gridSize.Height));
 					}
 				}
 				else
@@ -468,8 +468,8 @@ public class RandomFlagFactory
 				return _colorScheme.Color1();
 			default:
 				// Stripes
-				_overlays.add(new OverlayLineHorizontal(_colorScheme.Color1(), _gridSize.Height / 8.0, _gridSize.Height * (1 / 6.0), _gridSize.Width, _gridSize.Height));
-				_overlays.add(new OverlayLineHorizontal(_colorScheme.Color1(), _gridSize.Height / 8.0, _gridSize.Height * (5 / 6.0), _gridSize.Width, _gridSize.Height));
+				_overlays.add(new OverlayLineHorizontal(_colorScheme.Color1(), _gridSize.Height * (1 / 6.0), _gridSize.Height / 8.0, _gridSize.Width, _gridSize.Height));
+				_overlays.add(new OverlayLineHorizontal(_colorScheme.Color1(), _gridSize.Height * (5 / 6.0), _gridSize.Height / 8.0, _gridSize.Width, _gridSize.Height));
 				AddEmblem(1.0, _gridSize.Width / 2.0, _gridSize.Height / 2.0, _colorScheme.Color1(), false, _colorScheme.Color2(), false);
 				return _colorScheme.Metal();
 		}
@@ -630,14 +630,14 @@ public class RandomFlagFactory
 	{
 		if (Randomizer.ProbabilityOfTrue(0.142))
 		{
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / 6.0, _gridSize.Height / 2.0, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / 2.0, _gridSize.Height / 6.0, _gridSize.Width, _gridSize.Height));
 			AddEmblem(0.75, _gridSize.Width / 3.0, _gridSize.Height / 1.333, _colorScheme.Metal(), false, _colorScheme.Metal(), false);
 		}
 		else
 		{
 			boolean isThick = Randomizer.ProbabilityOfTrue(0.66667);
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / (isThick ? 1.5 : 3.0), _gridSize.Height / 2.0, _gridSize.Width, _gridSize.Height));
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color2(), _gridSize.Height / (isThick ? 3.0 : 4.0), _gridSize.Height / 2.0, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / 2.0, _gridSize.Height / (isThick ? 1.5 : 3.0), _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color2(), _gridSize.Height / 2.0, _gridSize.Height / (isThick ? 3.0 : 4.0), _gridSize.Width, _gridSize.Height));
 			AddEmblem(isThick ? 0.5 : 0.0, _gridSize.Width / 2.0, _gridSize.Height / 2.0, _colorScheme.Metal(), false, _colorScheme.Metal(), false);
 		}
 
@@ -650,9 +650,9 @@ public class RandomFlagFactory
 		{
 			// Symmetric
 			boolean swap = Randomizer.ProbabilityOfTrue(0.5);
-			_overlays.add(new OverlayLineHorizontal(swap ? _colorScheme.Color2() : _colorScheme.Metal(), _gridSize.Height / 1.4, _gridSize.Height / 2.0, _gridSize.Width, _gridSize.Height));
-			_overlays.add(new OverlayLineHorizontal(swap ? _colorScheme.Metal() : _colorScheme.Color2(), _gridSize.Height / 2.3333, _gridSize.Height / 2.0, _gridSize.Width, _gridSize.Height));
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color3(), _gridSize.Height / 7.0, _gridSize.Height / 2.0, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(swap ? _colorScheme.Color2() : _colorScheme.Metal(), _gridSize.Height / 2.0, _gridSize.Height / 1.4, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(swap ? _colorScheme.Metal() : _colorScheme.Color2(), _gridSize.Height / 2.0, _gridSize.Height / 2.3333, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color3(), _gridSize.Height / 2.0, _gridSize.Height / 7.0, _gridSize.Width, _gridSize.Height));
 		}
 		else if (Randomizer.ProbabilityOfTrue(0.75))
 		{
@@ -665,10 +665,10 @@ public class RandomFlagFactory
 		else
 		{
 			// Uganda
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / 6.0, _gridSize.Height * 3 / 12.0, _gridSize.Width, _gridSize.Height));
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color2(), _gridSize.Height / 6.0, _gridSize.Height * 5 / 12.0, _gridSize.Width, _gridSize.Height));
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height / 6.0, _gridSize.Height * 9 / 12.0, _gridSize.Width, _gridSize.Height));
-			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color2(), _gridSize.Height / 6.0, _gridSize.Height * 11 / 12.0, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height * 3 / 12.0, _gridSize.Height / 6.0, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color2(), _gridSize.Height * 5 / 12.0, _gridSize.Height / 6.0, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Metal(), _gridSize.Height * 9 / 12.0, _gridSize.Height / 6.0, _gridSize.Width, _gridSize.Height));
+			_overlays.add(new OverlayLineHorizontal(_colorScheme.Color2(), _gridSize.Height * 11 / 12.0, _gridSize.Height / 6.0, _gridSize.Width, _gridSize.Height));
 		}
 
 		if (Randomizer.ProbabilityOfTrue(0.4))
