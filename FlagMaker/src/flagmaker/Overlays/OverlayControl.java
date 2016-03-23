@@ -4,6 +4,7 @@ import flagmaker.Files.LocalizationHandler;
 import flagmaker.MainWindowController;
 import flagmaker.Overlays.Attributes.Attribute;
 import flagmaker.Overlays.Attributes.Sliders.*;
+import flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPath;
 import flagmaker.UI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,10 +68,32 @@ public class OverlayControl extends VBox
 	
 	public void SetOverlay(Overlay value)
 	{
+		Attribute[] oldAttributes = SaveOldEmblemAttributes(value);
+		
 		_overlay = value;
 		btnOverlay.graphicProperty().set(_overlay.PaneThumbnail());
 		btnOverlay.tooltipProperty().set(new Tooltip(_overlay.Name));
 		
+		SetAttributesFromSliders();		
+		SetVisibilityButton();
+		AddSliders();
+		CopyOldEmblemAttributes(oldAttributes);
+		
+		_isFirst = false;
+		IsLoading = false;
+	}
+
+	private void AddSliders()
+	{
+		pnlSliders.getChildren().clear();
+		for (Attribute a : _overlay.Attributes)
+		{
+			pnlSliders.getChildren().add(a.GetSlider(this));
+		}
+	}
+
+	private void SetAttributesFromSliders()
+	{
 		if (!_isFirst && !IsLoading)
 		{
 			HashMap<String, Object> sliderValues = GetAttributeSliderValues();
@@ -80,17 +103,28 @@ public class OverlayControl extends VBox
 				_overlay.SetValues(sliderValues);
 			}
 		}
-		
-		SetVisibilityButton();
-		
-		pnlSliders.getChildren().clear();
-		for (Attribute a : _overlay.Attributes)
+	}
+
+	private Attribute[] SaveOldEmblemAttributes(Overlay value)
+	{
+		if (_overlay != null && _overlay instanceof OverlayPath && value instanceof OverlayPath)
 		{
-			pnlSliders.getChildren().add(a.GetSlider(this));
+			return ((OverlayPath)_overlay).Attributes;
 		}
 		
-		_isFirst = false;
-		IsLoading = false;
+		return null;
+	}
+
+	private void CopyOldEmblemAttributes(Attribute[] oldAttributes)
+	{
+		if (oldAttributes != null)
+		{
+			for (int i = 0; i < oldAttributes.length; i++)
+			{
+				AttributeSlider slider = (AttributeSlider)pnlSliders.getChildren().get(i);
+				slider.SetValue(oldAttributes[i].GetValue());
+			}
+		}
 	}
 	
 	public void SetMaximum(int maximumX, int maximumY)
