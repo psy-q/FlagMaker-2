@@ -35,10 +35,10 @@ size4=0
 overlay
 type=star
 color=ffffff
-size1=8.7
-size2=2.95
-size3=1.5
-size4=1.6
-size5=0
-size6=0
-stroke=00000000
+X=8.7
+Y=2.95
+Size=1.5
+Rotation=1.6
+Stroke=0
+StrokeCurved=0
+StrokeColor=00000000

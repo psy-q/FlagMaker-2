@@ -19,7 +19,7 @@ size4=0
 overlay
 type=sword
 color=ffffff
-size1=6
-size2=6
-size3=4
-size4=0
+X=6
+Y=5.8
+Size=4.5
+Rotation=0

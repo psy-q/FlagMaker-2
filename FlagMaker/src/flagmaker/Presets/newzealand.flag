@@ -24,7 +24,7 @@ y=2
 size=1.2
 rotation=0
 stroke=3
-strokewidth=0
+strokecurved=0
 strokecolor=ffffff
 
 overlay
@@ -35,7 +35,7 @@ y=3.73
 size=1.05
 rotation=0
 stroke=2.65
-strokewidth=0
+strokecurved=0
 strokecolor=ffffff
 
 overlay
@@ -46,7 +46,7 @@ y=4.33
 size=1.2
 rotation=0
 stroke=2.75
-strokewidth=0
+strokecurved=0
 strokecolor=ffffff
 
 overlay
@@ -57,5 +57,5 @@ y=8
 size=1.4
 rotation=0
 stroke=3
-strokewidth=0
+strokecurved=0
 strokecolor=ffffff

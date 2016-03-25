@@ -6,25 +6,23 @@ division
 type=grid
 color1=ffffff
 color2=8d1b3d
-color3=d91023
 size1=2
 size2=1
-size3=1
 
 overlay
 type=repeater lateral
 color=0065bd
-size1=20.57
-size2=5.5
-size3=15
-size4=11
-size5=1
-size6=10
+X=20
+Y=5.5
+Width=15
+Height=11
+CountX=1
+CountY=10
 
 overlay
 type=diamond
 color=8d1b3d
-size1=0
-size2=0
-size3=16
-size4=2.3
+X=0
+Y=0
+Width=16
+Height=2.3

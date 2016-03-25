@@ -72,21 +72,21 @@ size5=14
 overlay
 type=swastika
 color=000000
-size1=5.7
-size2=4.5
-size3=5
-size4=0
-size5=0
-size6=0
-stroke=ffffff
+X=5.7
+Y=4.5
+Size=5
+Rotation=0
+Stroke=0
+StrokeCurved=0
+StrokeColor=ffffff
 
 overlay
 type=iron cross
 color=000000
-size1=1.89
-size2=1.65
-size3=1.87
-size4=0
-size5=4
-size6=0
-stroke=ffffff
+X=1.89
+Y=1.65
+Size=1.87
+Rotation=0
+Stroke=4
+StrokeCurved=0
+StrokeColor=ffffff

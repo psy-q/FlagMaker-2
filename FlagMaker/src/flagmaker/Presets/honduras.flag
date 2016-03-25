@@ -22,12 +22,12 @@ size4=0
 overlay
 type=repeater lateral
 color=0065bd
-size1=1.5
-size2=0.84
-size3=1
-size4=0.33
-size5=2
-size6=2
+X=1.5
+Y=0.84
+Width=1
+Height=0.33
+CountX=2
+CountY=2
 
 overlay
 type=star

@@ -20,12 +20,12 @@ size4=2.667
 overlay
 type=repeater lateral
 color=0065bd
-size1=2
-size2=1.333
-size3=3
-size4=1.425
-size5=4
-size6=2
+X=2
+Y=1.333
+Width=3
+Height=1.425
+CountX=4
+CountY=2
 
 overlay
 type=ermine
@@ -38,12 +38,12 @@ size4=0
 overlay
 type=repeater lateral
 color=0065bd
-size1=1.77
-size2=2
-size3=2
-size4=2
-size5=3
-size6=1
+X=1.77
+Y=2
+Width=2
+Height=2
+CountX=3
+CountY=1
 
 overlay
 type=ermine

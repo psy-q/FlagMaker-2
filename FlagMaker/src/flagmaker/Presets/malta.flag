@@ -14,10 +14,10 @@ size3=1
 overlay
 type=equatorial cross
 color=cccccc
-size1=0.7
-size2=0.7
-size3=1
-size4=0
-size5=1
-size6=0
-stroke=cf142b
+X=0.7
+Y=0.7
+Size=1
+Rotation=0
+Stroke=1
+StrokeCurved=0
+StrokeColor=cf142b

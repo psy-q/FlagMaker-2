@@ -11,23 +11,23 @@ size2=1
 overlay
 type=repeater lateral
 color=00ffffff
-size1=1.5
-size2=1
-size3=1.65
-size4=1.14
-size5=2
-size6=2
+X=1.5
+Y=1
+Width=1.65
+Height=1.14
+CountX=2
+CountY=2
 
 overlay
 type=snake
 color=ffffff
-size1=0
-size2=0
-size3=1.22
-size4=0
-size5=0
-size6=0
-stroke=ffffff
+X=0
+Y=0
+Size=1.22
+Rotation=0
+stroke=0
+StrokeCurved=0
+StrokeColor=ffffff
 
 overlay
 type=cross
