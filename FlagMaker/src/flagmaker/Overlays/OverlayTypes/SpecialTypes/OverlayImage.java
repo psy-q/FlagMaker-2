@@ -1,6 +1,10 @@
 package flagmaker.Overlays.OverlayTypes.SpecialTypes;
 
 import flagmaker.Extensions.StringExtensions;
+import flagmaker.Overlays.Attributes.Attribute;
+import flagmaker.Overlays.Attributes.ColorAttribute;
+import flagmaker.Overlays.Attributes.DoubleAttribute;
+import flagmaker.Overlays.Overlay;
 import flagmaker.Overlays.OverlayTypes.ShapeTypes.OverlayShape;
 import java.io.File;
 import java.io.IOException;
@@ -18,25 +22,43 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class OverlayImage extends OverlayShape
+public class OverlayImage extends Overlay
 {
 	private File _path;
 	private Image _bitmap;
 
 	public OverlayImage(int maximumX, int maximumY)
 	{
-		super("image", maximumX, maximumY);
+		super("image", new Attribute[]
+		{
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new DoubleAttribute("Width", 1, maximumX, true),
+			new DoubleAttribute("Height", 1, maximumY, false)
+		}, maximumX, maximumY);
 	}
 	
 	public OverlayImage(File path, int maximumX, int maximumY)
 	{
-		super("image", maximumX, maximumY);
+		super("image", new Attribute[]
+		{
+			new DoubleAttribute("X", 1, maximumX, true),
+			new DoubleAttribute("Y", 1, maximumY, false),
+			new DoubleAttribute("Width", 1, maximumX, true),
+			new DoubleAttribute("Height", 1, maximumY, false)
+		}, maximumX, maximumY);
 		SetPath(path);
 	}
 	
 	public OverlayImage(File path, double x, double y, double width, double height, int maximumX, int maximumY)
 	{
-		super("image", x, y, width, height, maximumX, maximumY);
+		super("image", new Attribute[]
+		{
+			new DoubleAttribute("X", x, maximumX, true),
+			new DoubleAttribute("Y", y, maximumY, false),
+			new DoubleAttribute("Width", width, maximumX, true),
+			new DoubleAttribute("Height", height, maximumY, false)
+		}, maximumX, maximumY);
 		SetPath(path);
 	}
 	
