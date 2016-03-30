@@ -72,8 +72,6 @@ public class OverlaySelector extends VBox
 		scrollPane.setFitToWidth(true);
 		
 		panel.setPadding(new Insets(5));
-		panel.hgapProperty().set(5);
-		panel.vgapProperty().set(5);
 		
 		for (Overlay overlay : overlays)
 		{

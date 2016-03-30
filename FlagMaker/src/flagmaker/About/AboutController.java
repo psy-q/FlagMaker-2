@@ -112,11 +112,13 @@ public class AboutController extends VBox
 		AddFeature("Brand-new random flag generation engine");
 		AddFeature("Polish translation");
 		AddFeature("Can rotate rays overlay");
-		AddFeature("New emblems: Albania, albatross, allahu, arrowhead, banner (2 versions), bear, beaver, bee, Bhutan, bison, compass, " +
-				"condor, Cyprus, eagle (Iowa), Eritrea, Ethiopia, fasces, fern, Greenland, Khazak banner and emblem, keystone, Kosovo, " +
-				"Kyrgyzstan, laurel, Lesotho, lion, Malawi, maple triple, mjolnir, Nunavut, oak, Ontario, pine, rooster, rose, " +
-				"sagebrush (2 versions), Saskatchewan, Scotland lion, shamrock (2 versions), shield (6 versions), star (Chicago), " +
-				"star (Marshall Islands), star shadow, Tajikistan, torch, UN, Vanuatu, dragon (Wales), wheat");
+		AddFeature("New emblems: Albania, albatross, allahu, arevakhach, arrowhead, banner (2 versions), bear, beaver, " +
+				"bee, Bhutan, bison, bottany cross, castle, compass, condor, Cyprus, dove, dragon (Wales), eagle (Iowa), " +
+				"Eritrea, Ethiopia, fasces, fern, gear (2 versions), globe, Greenland, key (2 versions), Khazak banner and " +
+				"emblem, keystone, Kosovo, Kyrgyzstan, Kuwait, laurel, Lesotho, lion, lotus, Malawi, maple triple, Mexico, " +
+				"mjolnir, Nunavut, oak, Occitania, octagram, Oman, Ontario, pine, rooster, rose, sagebrush (2 versions), " +
+				"Saskatchewan, Scotland lion, shamrock (2 versions), shield (7 versions), star (Chicago), star (Marshall " +
+				"Islands), star shadow, Sudan, Tajikistan, torch, UN, Vanuatu, Venice, vergina, wheat, zia");
 		AddFeature("Attribute handling overhaul");
 		AddFeature("Minor bug fixes");
 

@@ -52,6 +52,7 @@ public class OverlayFactory
 		_typeMap.put("allahu", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAllahu");
 		_typeMap.put("anchor", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAnchor");
 		_typeMap.put("angola", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayAngola");
+		_typeMap.put("arevakhach", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayArevakhach");
 		_typeMap.put("arrowhead", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayArrowhead");
 		_typeMap.put("banner", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBanner");
 		_typeMap.put("banner 2", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBanner2");
@@ -62,6 +63,7 @@ public class OverlayFactory
 		_typeMap.put("bison", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBison");
 		_typeMap.put("bolnisi cross", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBolnisiCross");
 		_typeMap.put("branches", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayBranches");
+		_typeMap.put("castle", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCastle");
 		_typeMap.put("cedar", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCedar");
 		_typeMap.put("chakra", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayChakra");
 		_typeMap.put("chicago", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayChicago");
@@ -71,7 +73,9 @@ public class OverlayFactory
 		_typeMap.put("cpusa", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCpusa");
 		_typeMap.put("crescent", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrescent");
 		_typeMap.put("crown", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrown");
+		_typeMap.put("cross bottany", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCrossBottany");
 		_typeMap.put("cyprus", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayCyprus");
+		_typeMap.put("dove", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayDove");
 		_typeMap.put("eagle", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayEagle");
 		_typeMap.put("eagle american", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayEagleAmerican");
 		_typeMap.put("eagle outline", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayEagleOutline");
@@ -87,6 +91,9 @@ public class OverlayFactory
 		_typeMap.put("flash", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayFlash");
 		_typeMap.put("fleur de lis", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayFleurDeLis");
 		_typeMap.put("forth international", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayForthInternational");
+		_typeMap.put("gear", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayGear");
+		_typeMap.put("gear 2", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayGear2");
+		_typeMap.put("globe", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayGlobe");
 		_typeMap.put("greenland", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayGreenland");
 		_typeMap.put("hammer and sickle", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHammerSickle");
 		_typeMap.put("hand", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayHand");
@@ -96,23 +103,31 @@ public class OverlayFactory
 		_typeMap.put("kangaroo", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKangaroo");
 		_typeMap.put("kazakh banner", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKazakhBanner");
 		_typeMap.put("kazakh center", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKazakhCenter");
+		_typeMap.put("key", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKey");
+		_typeMap.put("key 2", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKey2");
 		_typeMap.put("keystone", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKeystone");
 		_typeMap.put("kiwi", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKiwi");
 		_typeMap.put("kosovo", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKosovo");
+		_typeMap.put("kuwait", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKuwait");
 		_typeMap.put("kyrgyzstan", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayKyrgyzstan");
 		_typeMap.put("laurel", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayLaurel");
 		_typeMap.put("laurel 2", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayLaurel2");
 		_typeMap.put("lesotho", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayLesotho");
 		_typeMap.put("lion", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayLion");
+		_typeMap.put("lotus", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayLotus");
 		_typeMap.put("malawi", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMalawi");
 		_typeMap.put("maltese cross", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMalteseCross");
 		_typeMap.put("manitoba", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayManitoba");
 		_typeMap.put("maple leaf", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMapleLeaf");
 		_typeMap.put("maple triple", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMapleTriple");
+		_typeMap.put("mexico", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMexico");
 		_typeMap.put("mjolnir", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMjolnir");
 		_typeMap.put("mozambique", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayMozambique");
 		_typeMap.put("nunavut", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayNunavut");
 		_typeMap.put("oak", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayOak");
+		_typeMap.put("occitania", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayOccitania");
+		_typeMap.put("octagram", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayOccitania");
+		_typeMap.put("oman", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayOman");
 		_typeMap.put("ontario", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayOntario");
 		_typeMap.put("palm", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPalm");
 		_typeMap.put("papua new guinea", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayPapuaNewGuinea");
@@ -136,6 +151,7 @@ public class OverlayFactory
 		_typeMap.put("shield 5", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield5");
 		_typeMap.put("shield 6", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield6");
 		_typeMap.put("shield 7", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield7");
+		_typeMap.put("shield 8", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayShield8");
 		_typeMap.put("sikh", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySikh");
 		_typeMap.put("snake", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySnake");
 		_typeMap.put("springbok", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySpringbok");
@@ -147,6 +163,7 @@ public class OverlayFactory
 		_typeMap.put("star seven", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarSeven");
 		_typeMap.put("star shadow", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarShadow");
 		_typeMap.put("star six", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayStarSix");
+		_typeMap.put("sudan", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySudan");
 		_typeMap.put("sun", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySun");
 		_typeMap.put("swastika", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySwastika");
 		_typeMap.put("sword", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlaySword");
@@ -158,11 +175,14 @@ public class OverlayFactory
 		_typeMap.put("triskele", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayTriskele");
 		_typeMap.put("un", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayUN");
 		_typeMap.put("vanuatu", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayVanuatu");
+		_typeMap.put("venice", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayVenice");
+		_typeMap.put("vergina", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayVergina");
 		_typeMap.put("wales", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayWales");
 		_typeMap.put("wave", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayWave");
 		_typeMap.put("wheat", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayWheat");
 		_typeMap.put("yang", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayYang");
 		_typeMap.put("yin", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayYin");
+		_typeMap.put("zia", "flagmaker.Overlays.OverlayTypes.PathTypes.OverlayZia");
 	}
 	
 	public static Overlay[] GetShapes()
@@ -200,6 +220,7 @@ public class OverlayFactory
 			new OverlayAllahu(0, 0),
 			new OverlayAnchor(0, 0),
 			new OverlayAngola(0, 0),
+			new OverlayArevakhach(0, 0),
 			new OverlayArrowhead(0, 0),
 			new OverlayBanner(0, 0),
 			new OverlayBanner2(0, 0),
@@ -210,6 +231,7 @@ public class OverlayFactory
 			new OverlayBison(0, 0),
 			new OverlayBolnisiCross(0, 0),
 			new OverlayBranches(0, 0),
+			new OverlayCastle(0, 0),
 			new OverlayCedar(0, 0),
 			new OverlayChakra(0, 0),
 			new OverlayChicago(0, 0),
@@ -218,8 +240,10 @@ public class OverlayFactory
 			new OverlayCoronet(0, 0),
 			new OverlayCpusa(0, 0),
 			new OverlayCrescent(0, 0),
+			new OverlayCrossBottany(0, 0),
 			new OverlayCrown(0, 0),
 			new OverlayCyprus(0, 0),
+			new OverlayDove(0, 0),
 			new OverlayEagle(0, 0),
 			new OverlayEagleAmerican(0, 0),
 			new OverlayEagleOutline(0, 0),
@@ -235,6 +259,9 @@ public class OverlayFactory
 			new OverlayFlash(0, 0),
 			new OverlayFleurDeLis(0, 0),
 			new OverlayForthInternational(0, 0),
+			new OverlayGear(0, 0),
+			new OverlayGear2(0, 0),
+			new OverlayGlobe(0, 0),
 			new OverlayGreenland(0, 0),
 			new OverlayHammerSickle(0, 0),
 			new OverlayHand(0, 0),
@@ -244,23 +271,31 @@ public class OverlayFactory
 			new OverlayKangaroo(0, 0),
 			new OverlayKazakhBanner(0, 0),
 			new OverlayKazakhCenter(0, 0),
+			new OverlayKey(0, 0),
+			new OverlayKey2(0, 0),
 			new OverlayKeystone(0, 0),
 			new OverlayKiwi(0, 0),
 			new OverlayKosovo(0, 0),
+			new OverlayKuwait(0, 0),
 			new OverlayKyrgyzstan(0, 0),
 			new OverlayLaurel(0, 0),
 			new OverlayLaurel2(0, 0),
 			new OverlayLesotho(0, 0),
 			new OverlayLion(0, 0),
+			new OverlayLotus(0, 0),
 			new OverlayMalawi(0, 0),
 			new OverlayMalteseCross(0, 0),
 			new OverlayManitoba(0, 0),
 			new OverlayMapleLeaf(0, 0),
 			new OverlayMapleTriple(0, 0),
+			new OverlayMexico(0, 0),
 			new OverlayMjolnir(0, 0),
 			new OverlayMozambique(0, 0),
 			new OverlayNunavut(0, 0),
 			new OverlayOak(0, 0),
+			new OverlayOccitania(0, 0),
+			new OverlayOctagram(0, 0),
+			new OverlayOman(0, 0),
 			new OverlayOntario(0, 0),
 			new OverlayPalm(0, 0),
 			new OverlayPapuaNewGuinea(0, 0),
@@ -284,6 +319,7 @@ public class OverlayFactory
 			new OverlayShield5(0, 0),
 			new OverlayShield6(0, 0),
 			new OverlayShield7(0, 0),
+			new OverlayShield8(0, 0),
 			new OverlaySikh(0, 0),
 			new OverlaySnake(0, 0),
 			new OverlaySpringbok(0, 0),
@@ -295,6 +331,7 @@ public class OverlayFactory
 			new OverlayStarSeven(0, 0),
 			new OverlayStarShadow(0, 0),
 			new OverlayStarSix(0, 0),
+			new OverlaySudan(0, 0),
 			new OverlaySun(0, 0),
 			new OverlaySwastika(0, 0),
 			new OverlaySword(0, 0),
@@ -306,11 +343,14 @@ public class OverlayFactory
 			new OverlayTriskele(0, 0),
 			new OverlayUN(0, 0),
 			new OverlayVanuatu(0, 0),
+			new OverlayVenice(0, 0),
+			new OverlayVergina(0, 0),
 			new OverlayWales(0, 0),
 			new OverlayWave(0, 0),
 			new OverlayWheat(0, 0),
 			new OverlayYang(0, 0),
-			new OverlayYin(0, 0)
+			new OverlayYin(0, 0),
+			new OverlayZia(0, 0)
 		};
 	}
 	
