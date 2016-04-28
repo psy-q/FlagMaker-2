@@ -1,0 +1,12 @@
+name=Ireland
+ratio=1:2
+gridSize=1:2
+
+division
+type=pales
+color1=009a49
+color2=ffffff
+color3=ff7900
+size1=1
+size2=1
+size3=1

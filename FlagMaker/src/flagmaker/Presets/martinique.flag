@@ -1,0 +1,37 @@
+name=France - Martinique
+ratio=2:3
+gridSize=2:3
+
+division
+type=grid
+color1=21428e
+size1=1
+size2=1
+
+overlay
+type=repeater lateral
+color=00ffffff
+X=1.5
+Y=1
+Width=1.65
+Height=1.14
+CountX=2
+CountY=2
+
+overlay
+type=snake
+color=ffffff
+X=0
+Y=0
+Size=1.22
+Rotation=0
+stroke=0
+StrokeCurved=0
+StrokeColor=ffffff
+
+overlay
+type=cross
+color=ffffff
+size1=1.5
+size2=1
+size3=0.29

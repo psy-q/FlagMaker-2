@@ -1,0 +1,37 @@
+name=Northern Cyprus
+ratio=2:3
+gridSize=14:21
+
+division
+type=grid
+color1=ffffff
+size1=1
+size2=1
+
+overlay
+type=crescent
+color=e30a17
+size1=7.5
+size2=7
+size3=8
+size4=0
+
+overlay
+type=star
+color=e30a17
+size1=12
+size2=7
+size3=4
+size4=15.75
+
+overlay
+type=line horizontal
+color=e30a17
+size1=2.1
+size2=1.4
+
+overlay
+type=line horizontal
+color=e30a17
+size1=11.9
+size2=1.4

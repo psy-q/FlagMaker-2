@@ -1,0 +1,54 @@
+name=Burundi
+ratio=3:5
+gridSize=12:20
+
+division
+type=bends both
+color1=ce1126
+color2=1eb53a
+
+overlay
+type=saltire
+color=ffffff
+size1=3
+
+overlay
+type=ellipse
+color=ffffff
+size1=10
+size2=6
+size3=7
+size4=0
+
+overlay
+type=star six
+color=ce1126
+x=10
+y=4.2
+size=1.1
+rotation=0
+stroke=3
+StrokeCurved=false
+strokeColor=1eb53a
+
+overlay
+type=star six
+color=ce1126
+x=11.5
+y=6.8
+size=1.1
+rotation=0
+stroke=3
+StrokeCurved=false
+strokeColor=1eb53a
+
+overlay
+type=star six
+color=ce1126
+x=8.5
+y=6.8
+size=1.1
+rotation=0
+stroke=3
+StrokeCurved=false
+strokeColor=1eb53a

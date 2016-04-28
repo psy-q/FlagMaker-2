@@ -1,0 +1,39 @@
+name=Nauru
+ratio=1:2
+gridSize=3:6
+
+division
+type=grid
+color1=002b7f
+size1=1
+size2=1
+
+overlay
+type=star four
+color=ffffff
+size1=1.5
+size2=2
+size3=0.85
+size4=0
+
+overlay
+type=star four
+color=ffffff
+size1=1.5
+size2=2
+size3=0.85
+size4=1
+
+overlay
+type=star four
+color=ffffff
+size1=1.5
+size2=2
+size3=0.85
+size4=2
+
+overlay
+type=line horizontal
+color=ffc61e
+size1=1.5
+size2=0.25

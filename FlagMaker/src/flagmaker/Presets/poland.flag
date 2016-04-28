@@ -1,0 +1,12 @@
+name=Poland
+ratio=5:8
+gridSize=5:8
+
+division
+type=grid
+color1=ffffff
+color2=dc143c
+color3=21168b
+size1=1
+size2=2
+size3=1

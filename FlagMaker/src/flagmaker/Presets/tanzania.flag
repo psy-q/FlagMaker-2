@@ -1,0 +1,22 @@
+name=Tanzania
+ratio=2:3
+gridSize=2:3
+
+division
+type=bends forward
+color1=1eb53a
+color2=00a3dd
+color3=284e36
+size1=2
+size2=2
+size3=1
+
+overlay
+type=fimbriation forward
+color=fcd116
+size1=1.5
+
+overlay
+type=fimbriation forward
+color=000000
+size1=1

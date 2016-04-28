@@ -1,0 +1,13 @@
+name=Jamaica
+ratio=1:2
+gridSize=4:8
+
+division
+type=bends both
+color1=009B3A
+color2=000000
+
+overlay
+type=saltire
+color=fed100
+size1=1.5

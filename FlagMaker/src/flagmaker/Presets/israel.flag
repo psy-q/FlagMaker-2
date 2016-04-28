@@ -1,0 +1,29 @@
+name=Israel
+ratio=8:11
+gridSize=8:11
+
+division
+type=grid
+color1=ffffff
+size1=1
+size2=1
+
+overlay
+type=line horizontal
+color=002664
+size1=1.375
+size2=1.25
+
+overlay
+type=line horizontal
+color=002664
+size1=6.625
+size2=1.25
+
+overlay
+type=star of david
+color=002664
+size1=5.5
+size2=4
+size3=2.75
+size4=0

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.shape.Rectangle?>
+
+<fx:root id="vbox" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+		<TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+   			<Tab fx:id="tabStandard">
+				<VBox fillWidth="true" style="-fx-padding: 5;" VBox.vgrow="ALWAYS">
+					<Label fx:id="labelFoan" />
+					<FlowPane fx:id="paneFoan" alignment="TOP_LEFT" orientation="HORIZONTAL" />
+					<Label fx:id="labelFotw" style="-fx-padding: 8 0 0 0;" />
+					<FlowPane fx:id="paneFotw" alignment="TOP_LEFT" orientation="HORIZONTAL" />
+					<Label fx:id="labelRecent" style="-fx-padding: 8 0 0 0;" />
+					<FlowPane fx:id="paneRecent" alignment="TOP_LEFT" orientation="HORIZONTAL" />
+					<Label fx:id="labelUsed" style="-fx-padding: 8 0 0 0;" />
+					<FlowPane fx:id="paneUsed" alignment="TOP_LEFT" orientation="HORIZONTAL" />
+					<AnchorPane VBox.vgrow="ALWAYS">
+						<Button fx:id="btnCancelStandard" cancelButton="true" onAction="#Cancel" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" />
+					</AnchorPane>
+				</VBox>
+   			</Tab>
+			<Tab fx:id="tabAdvanced">
+				<VBox fillWidth="true" style="-fx-padding: 5;">
+					<HBox spacing="10">
+						<children>
+							<Canvas fx:id="cnvSatLight" width="350" height="190" onMouseClicked="#CnvSatLightDrag" onMouseDragged="#CnvSatLightDrag" />
+							<Canvas fx:id="cnvHue" width="17" height="190" onMouseClicked="#CnvHueDrag" onMouseDragged="#CnvHueDrag" />
+						</children>
+					</HBox>
+					<HBox>
+						<children>
+							<Label text="R" prefWidth="30" />
+							<Slider fx:id="sldR" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblR" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+					<HBox>
+						<children>
+							<Label text="G" prefWidth="30" />
+							<Slider fx:id="sldG" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblG" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+					<HBox>
+						<children>
+							<Label text="B" prefWidth="30" />
+							<Slider fx:id="sldB" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblB" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+					<HBox>
+						<children>
+							<Label text="A" prefWidth="30" />
+							<Slider fx:id="sldA" max="255" min="0" HBox.hgrow="ALWAYS" />
+							<Label fx:id="lblA" prefWidth="50" alignment="CENTER_RIGHT" />
+						</children>
+					</HBox>
+					
+					<Rectangle fx:id="rctPreview" height="50" width="380" />
+
+					<AnchorPane VBox.vgrow="ALWAYS">
+						<HBox AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+							<Button fx:id="btnSaveAdvanced" onAction="#SaveAdvanced" />
+							<Button fx:id="btnCancelAdvanced" cancelButton="true" onAction="#Cancel" />
+						</HBox>
+					</AnchorPane>
+				</VBox>
+			</Tab>
+		</TabPane>
+	</children>
+</fx:root>

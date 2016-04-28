@@ -1,0 +1,34 @@
+name=Saint Kitts and Nevis
+ratio=2:3
+gridSize=2:3
+
+division
+type=bends forward
+color1=009e49
+color2=ce1126
+
+overlay
+type=fimbriation forward
+color=fcd116
+size1=2
+
+overlay
+type=fimbriation forward
+color=000000
+size1=1.25
+
+overlay
+type=star
+color=ffffff
+size1=0.94
+size2=1.4
+size3=0.5
+size4=1.5
+
+overlay
+type=star
+color=ffffff
+size1=2.06
+size2=0.66
+size3=0.5
+size4=1.5

@@ -1,0 +1,12 @@
+name=Colombia
+ratio=2:3
+gridSize=2:3
+
+division
+type=fesses
+color1=fcd116
+color2=003893
+color3=ce1126
+size1=2
+size2=1
+size3=1

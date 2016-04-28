@@ -1,0 +1,43 @@
+name=Brazil - Naval Jack
+ratio=2:3
+gridSize=10:15
+
+division
+type=grid
+color1=002664
+size1=1
+size2=1
+
+overlay
+type=repeater lateral
+x=7.5
+y=5
+width=0
+height=8
+countx=1
+county=9
+
+overlay
+type=star
+color=ffffff
+size1=0
+size2=0
+size3=1
+size4=0
+
+overlay
+type=repeater lateral
+x=7.5
+y=5
+width=13
+height=0
+countx=13
+county=1
+
+overlay
+type=star
+color=ffffff
+size1=0
+size2=0
+size3=0.6
+size4=0

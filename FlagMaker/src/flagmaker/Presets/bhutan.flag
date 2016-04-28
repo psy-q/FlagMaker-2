@@ -1,0 +1,17 @@
+name=Bhutan (approx.)
+ratio=2:3
+gridSize=2:3
+
+type=bends forward
+color1=efb22d
+color2=e23d28
+
+type=bhutan
+Color=ffffff
+X=1.5
+Y=1
+Size=2
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false

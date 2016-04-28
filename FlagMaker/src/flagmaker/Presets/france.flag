@@ -1,0 +1,12 @@
+name=France
+ratio=11:18
+gridSize=11:18
+
+division
+type=pales
+color1=0055a4
+color2=ffffff
+color3=ef4135
+size1=1
+size2=1
+size3=1

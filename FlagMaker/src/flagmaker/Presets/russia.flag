@@ -1,0 +1,12 @@
+name=Russia
+ratio=2:3
+gridSize=2:3
+
+division
+type=fesses
+color1=ffffff
+color2=0039a6
+color3=d52b1e
+size1=1
+size2=1
+size3=1

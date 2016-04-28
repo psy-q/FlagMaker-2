@@ -1,0 +1,34 @@
+name=North Korea
+ratio=1:2
+gridSize=9:18
+
+division
+type=fesses
+color1=024fa2
+color2=ffffff
+color3=024fa2
+size1=1
+size2=4
+size3=1
+
+overlay
+type=line horizontal
+color=ed1c27
+size1=4.5
+size2=5.5
+
+overlay
+type=ellipse
+color=ffffff
+size1=6
+size2=4.5
+size3=4
+size4=0
+
+overlay
+type=star
+color=ed1c27
+size1=6
+size2=4.5
+size3=4
+size4=0

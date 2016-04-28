@@ -1,0 +1,26 @@
+name=Bahrain
+ratio=3:5
+gridSize=6:10
+
+type=pales
+color1=ffffff
+color2=ce1126
+color3=ce1126
+size1=2
+size2=2
+size3=1
+
+type=repeater lateral
+X=6.6
+Y=3
+Width=5
+Height=6
+CountX=6
+CountY=6
+
+type=diamond
+Color=ce1126
+X=0
+Y=0
+Width=6.5
+Height=1.36

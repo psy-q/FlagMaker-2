@@ -1,0 +1,20 @@
+name=Switzerland
+ratio=1:1
+gridSize=1:1
+
+division
+type=grid
+color1=d52b1e
+color2=0039a6
+color3=d52b1e
+size1=1
+size2=1
+size3=1
+
+overlay
+type=equatorial cross
+color=ffffff
+size1=0.5
+size2=0.5
+size3=0.625
+size4=0

@@ -1,0 +1,12 @@
+name=Bulgaria
+ratio=3:5
+gridSize=3:5
+
+division
+type=fesses
+color1=ffffff
+color2=00966e
+color3=d62612
+size1=1
+size2=1
+size3=1

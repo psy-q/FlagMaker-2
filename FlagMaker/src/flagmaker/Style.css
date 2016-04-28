@@ -1,0 +1,29 @@
+.window {
+	-fx-background-color: linear-gradient(#F0F0F0, #D0D0D0);
+}
+
+.scroll-pane, .scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.toggle_button, .button, .transparent {
+	-fx-background-color: transparent;
+}
+
+.colorPicker {
+	-fx-color-label-visible: false;
+}
+
+.header {
+	-fx-font-weight: bold;
+	-fx-font-size: 24;
+}
+
+.button:hover {
+	-fx-background-color: linear-gradient(#FFD449, #FFA03F);
+	-fx-cursor: hand;
+}
+
+.padding {
+	-fx-padding: 10;
+}

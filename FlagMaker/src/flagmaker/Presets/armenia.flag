@@ -1,0 +1,12 @@
+name=Armenia
+ratio=1:2
+gridSize=1:2
+
+division
+type=fesses
+color1=d90012
+color2=0033a0
+color3=f2a800
+size1=1
+size2=1
+size3=1

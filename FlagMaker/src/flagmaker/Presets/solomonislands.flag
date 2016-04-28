@@ -1,0 +1,38 @@
+name=Solomon Islands
+ratio=1:2
+gridSize=8:16
+
+division
+type=bends forward
+color1=0051ba
+color2=215b33
+
+overlay
+type=fimbriation forward
+color=fcd116
+size1=2
+
+overlay
+type=repeater lateral
+x=2.5
+y=2.5
+width=2.75
+height=2.75
+countx=2
+county=2
+
+overlay
+type=star
+color=ffffff
+size1=0
+size2=0
+size3=8
+size4=0
+
+overlay
+type=star
+color=ffffff
+size1=2.5
+size2=2.5
+size3=1.4
+size4=0

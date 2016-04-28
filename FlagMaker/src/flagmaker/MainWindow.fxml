@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import flagmaker.Color.* ?>
+<?import flagmaker.Overlays.* ?>
+
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flagmaker.MainWindowController">
+	<children>
+		<MenuBar VBox.vgrow="NEVER">
+			<menus>
+				<Menu fx:id="mnuFile">
+					<items>
+						<MenuItem fx:id="mnuNew" accelerator="Ctrl+N" onAction="#New" />
+						<MenuItem fx:id="mnuOpen" accelerator="Ctrl+O" onAction="#Open" />
+						<MenuItem fx:id="mnuSave" accelerator="Ctrl+S" onAction="#Save" />
+						<MenuItem fx:id="mnuSaveAs" accelerator="Ctrl+Shift+S" onAction="#SaveAs" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnuExportPng" onAction="#MenuExportPngClick" />
+						<MenuItem fx:id="mnuExportSvg" onAction="#MenuExportSvgClick" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnuBulkExportPng" onAction="#MenuExportBulkPngClick" />
+						<MenuItem fx:id="mnuBulkExportSvg" onAction="#MenuExportBulkSvgClick" />
+					</items>
+				</Menu>
+				<Menu fx:id="mnuPresets" />
+				<Menu fx:id="mnuLanguages" />
+				<Menu fx:id="mnuHelp">
+					<MenuItem fx:id="mnuAbout" onAction="#MenuAbout" accelerator="Ctrl+A" />
+				</Menu>
+			</menus>
+		</MenuBar>
+		<ToolBar prefHeight="40.0">
+			<items>
+				<Label fx:id="lblRatio" />
+				<TextField fx:id="txtRatioHeight" prefHeight="39.0" prefWidth="43.0" text="2" />
+				<Label>:</Label>
+				<TextField fx:id="txtRatioWidth" prefHeight="39.0" prefWidth="43.0" text="3" />
+				
+				<Label fx:id="lblGridSize" />
+				<ComboBox fx:id="cmbRatio" prefWidth="150.0" />
+				
+				<ToggleButton onAction="#GridOnChanged" styleClass="button">
+					<tooltip>
+						<Tooltip fx:id="ttpShowGrid" />
+					</tooltip>
+					<graphic>
+						<Pane>
+							<children>
+								<Line endX="30" endY="5" startX="0" startY="5" stroke="GRAY" strokeWidth="2" />
+								<Line endX="30" endY="10" startX="0" startY="10" stroke="GRAY" strokeWidth="2" />
+								<Line endX="30" endY="15" startX="0" startY="15" stroke="GRAY" strokeWidth="2" />
+   							
+								<Line endX="5" endY="20" startX="5" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="10" endY="20" startX="10" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="15" endY="20" startX="15" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="20" endY="20" startX="20" startY="0" stroke="GRAY" strokeWidth="2" />
+								<Line endX="25" endY="20" startX="25" startY="0" stroke="GRAY" strokeWidth="2" />
+							</children>
+						</Pane>
+					</graphic>
+				</ToggleButton>
+				
+				<TextField fx:id="txtName" style="-fx-pref-width: 200;" />
+				
+				<Button onAction="#ShuffleColors">
+					<tooltip>
+						<Tooltip fx:id="ttpShuffleColors" />
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="32.0" fitWidth="32.0">
+							<image>
+								<Image url="flagmaker/Images/rotate.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button onAction="#ToggleTexture">
+					<tooltip>
+						<Tooltip fx:id="ttpToggleTexture" />
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="32.0" fitWidth="51.0">
+							<image>
+								<Image url="flagmaker/Images/Texture/1.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button onAction="#GenerateRandomFlag">
+					<tooltip>
+						<Tooltip fx:id="ttpRandomFlag" />
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="32.0" fitWidth="32.0">
+							<image>
+								<Image url="flagmaker/Images/die.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+			</items>
+		</ToolBar>
+		<SplitPane fx:id="splitPane" dividerPositions="0.6" prefHeight="160.0" prefWidth="200.0" styleClass="window" VBox.vgrow="ALWAYS">
+			<items>
+				<AnchorPane fx:id="leftAnchor" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0" styleClass="transparent">
+					<children>
+						<StackPane fx:id="leftStack" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+					</children>
+				</AnchorPane>
+				<VBox fillWidth="true" SplitPane.resizableWithParent="false">
+					<children>
+						<Label fx:id="lblDivisions" styleClass="header" />
+						<FlowPane alignment="TOP_LEFT" hgap="4" orientation="HORIZONTAL" vgap="4">
+							<children>
+								<Button onAction="#DivisionGridClick">
+									<tooltip>
+										<Tooltip fx:id="ttpDivisionGrid" />
+									</tooltip>
+									<graphic>
+										<Pane>
+											<children>
+												<VBox>
+													<children>
+														<HBox>
+															<children>
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+															</children>
+														</HBox>
+														<HBox>
+															<children>
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+															</children>
+														</HBox>
+														<HBox>
+															<children>
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+															</children>
+														</HBox>
+														<HBox>
+															<children>
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+																<Rectangle fill="RED" height="5" width="6" />
+																<Rectangle fill="BLUE" height="5" width="6" />
+															</children>
+														</HBox>
+													</children>
+												</VBox>
+											</children>
+										</Pane>
+									</graphic>
+								</Button>
+								<Button onAction="#DivisionFessesClick">
+									<tooltip>
+										<Tooltip fx:id="ttpDivisionFesses" />
+									</tooltip>
+									<graphic>
+										<Pane>
+											<children>
+												<VBox>
+													<children>
+														<Rectangle fill="RED" height="7" width="30" />
+														<Rectangle fill="WHITE" height="6" width="30" />
+														<Rectangle fill="BLUE" height="7" width="30" />
+													</children>
+												</VBox>
+											</children>
+										</Pane>
+									</graphic>
+								</Button>
+								<Button onAction="#DivisionPalesClick">
+									<tooltip>
+										<Tooltip fx:id="ttpDivisionPales" />
+									</tooltip>
+									<graphic>
+										<Pane>
+											<children>
+												<HBox>
+													<children>
+														<Rectangle fill="RED" height="20" width="10" />
+														<Rectangle fill="WHITE" height="20" width="10" />
+														<Rectangle fill="BLUE" height="20" width="10" />
+													</children>
+												</HBox>
+											</children>
+										</Pane>
+									</graphic>
+								</Button>
+								<Button onAction="#DivisionBendsForwardClick">
+									<tooltip>
+										<Tooltip fx:id="ttpDivisionBendsForward" />
+									</tooltip>
+									<graphic>
+										<Pane>
+											<children>
+												<Rectangle fill="RED" height="20" width="30" />
+												<Path fill="BLUE" strokeWidth="0">
+													<elements>
+														<MoveTo x="30" y="0" />
+														<LineTo x="30" y="20" />
+														<LineTo x="0" y="20" />
+														<LineTo x="30" y="0" />
+													</elements>
+												</Path>
+											</children>
+										</Pane>
+									</graphic>
+								</Button>
+								<Button onAction="#DivisionBendsBackwardClick">
+									<tooltip>
+										<Tooltip fx:id="ttpDivisionBendsBackward" />
+									</tooltip>
+									<graphic>
+										<Pane>
+											<children>
+												<Rectangle fill="RED" height="20" width="30" />
+												<Path fill="BLUE" strokeWidth="0">
+													<elements>
+														<MoveTo x="30" y="20" />
+														<LineTo x="0" y="20" />
+														<LineTo x="0" y="0" />
+														<LineTo x="30" y="20" />
+													</elements>
+												</Path>
+											</children>
+										</Pane>
+									</graphic>
+								</Button>
+								<Button onAction="#DivisionXClick">
+									<tooltip>
+										<Tooltip fx:id="ttpDivisionBendsBoth" />
+									</tooltip>
+									<graphic>
+										<Pane>
+											<children>
+												<Rectangle fill="RED" height="20" width="30" />
+												<Path fill="BLUE" strokeWidth="0">
+													<elements>
+														<MoveTo x="30" y="0" />
+														<LineTo x="0" y="20" />
+														<LineTo x="0" y="0" />
+														<LineTo x="30" y="20" />
+													</elements>
+												</Path>
+											</children>
+										</Pane>
+									</graphic>
+								</Button>
+							</children>
+						</FlowPane>
+						
+						<HBox alignment="CENTER_LEFT">
+							<children>
+								<Label fx:id="lblPresets" HBox.hgrow="NEVER">
+									<padding>
+										<Insets right="10.0" />
+									</padding>
+								</Label>
+								<ComboBox fx:id="cmbPresets" />
+							</children>
+							<padding>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</padding>
+						</HBox>
+						
+						<HBox spacing="5.0">
+							<children>
+								<ColorButton fx:id="divisionPicker1" />
+								<ColorButton fx:id="divisionPicker2" />
+								<ColorButton fx:id="divisionPicker3" />
+							</children>
+							<padding>
+								<Insets bottom="5.0" top="5.0" />
+							</padding>
+						</HBox>
+						
+						<HBox>
+							<children>
+								<Label fx:id="divisionLabel1" text="1" HBox.hgrow="NEVER" /> 
+								<Slider fx:id="divisionSlider1" blockIncrement="1" majorTickUnit="1" max="8" min="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
+							</children>
+						</HBox>
+						<HBox>
+							<children>
+								<Label fx:id="divisionLabel2" text="1" HBox.hgrow="NEVER" /> 
+								<Slider fx:id="divisionSlider2" blockIncrement="1" majorTickUnit="1" max="8" min="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
+							</children>
+						</HBox>
+						<HBox>
+							<children>
+								<Label fx:id="divisionLabel3" text="1" HBox.hgrow="NEVER" /> 
+								<Slider fx:id="divisionSlider3" blockIncrement="1" majorTickUnit="1" max="8" min="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
+							</children>
+						</HBox>
+						<HBox alignment="CENTER_LEFT">
+							<children>
+								<Label fx:id="lblOverlays" styleClass="header" />
+								<Button onAction="#OverlayAdd">
+									<HBox.margin>
+										<Insets left="10.0" />
+									</HBox.margin>
+									<tooltip>
+										<Tooltip fx:id="ttpOverlayAddNew" />
+									</tooltip>
+									<graphic>
+										<ImageView fitHeight="32.0" fitWidth="32.0">
+											<image>
+												<Image url="flagmaker/Images/add.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+							</children>
+						</HBox>
+						<ScrollPane fitToWidth="true">
+							<content>
+								<VBox fx:id="lstOverlays" />
+							</content>
+							<padding>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</padding>
+						</ScrollPane>
+					</children>
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+				</VBox>
+			</items>
+		</SplitPane>
+	</children>
+</VBox>

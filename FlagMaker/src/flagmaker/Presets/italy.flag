@@ -1,0 +1,12 @@
+name=Italy
+ratio=2:3
+gridSize=2:3
+
+division
+type=pales
+color1=009246
+color2=ffffff
+color3=ce2b37
+size1=1
+size2=1
+size3=1

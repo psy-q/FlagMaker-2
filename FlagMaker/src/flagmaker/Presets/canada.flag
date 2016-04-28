@@ -1,0 +1,21 @@
+name=Canada
+ratio=1:2
+gridSize=10:20
+
+division
+type=pales
+color1=ff0000
+color2=ffffff
+color3=ff0000
+size1=1
+size2=2
+size3=1
+
+overlay
+type=maple leaf
+color=ff0000
+size1=10
+size2=5
+size3=7
+size4=0
+size5=0

@@ -1,0 +1,17 @@
+name=United States - Alabama
+ratio=3:5
+gridSize=6:10
+
+division
+type=grid
+color1=ffffff
+color2=ffffff
+color3=9e1b34
+size1=1
+size2=1
+size3=2
+
+overlay
+type=saltire
+color=c60c30
+size1=2

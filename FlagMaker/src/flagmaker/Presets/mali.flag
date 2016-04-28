@@ -1,0 +1,12 @@
+name=Mali
+ratio=2:3
+gridSize=2:3
+
+division
+type=pales
+color1=14b53a
+color2=fcd116
+color3=ce1126
+size1=1
+size2=1
+size3=1

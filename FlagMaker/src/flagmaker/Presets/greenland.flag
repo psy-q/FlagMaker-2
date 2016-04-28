@@ -1,0 +1,28 @@
+name=Denmark - Greenland
+ratio=2:3
+gridSize=12:18
+
+division
+type=grid
+color1=ffffff
+color2=d00c33
+size1=1
+size2=2
+
+overlay
+type=half ellipse
+color=d00c33
+size1=7
+size2=6
+size3=8
+size4=4
+size5=0
+
+overlay
+type=half ellipse
+color=ffffff
+size1=7
+size2=6
+size3=8
+size4=4
+size5=9

@@ -1,0 +1,12 @@
+name=Chad
+ratio=2:3
+gridSize=2:3
+
+division
+type=pales
+color1=002664
+color2=fecb00
+color3=c60c30
+size1=1
+size2=1
+size3=1

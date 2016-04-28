@@ -1,0 +1,20 @@
+name=Burkina Faso
+ratio=2:3
+gridSize=2:3
+
+division
+type=grid
+color1=ef2b2d
+color2=009e49
+color3=d62612
+size1=1
+size2=2
+size3=1
+
+overlay
+type=star
+color=fcd116
+size1=1.5
+size2=1
+size3=0.75
+size4=0

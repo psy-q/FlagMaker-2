@@ -1,0 +1,65 @@
+name=Australia
+ratio=1:2
+gridSize=10:20
+
+division
+type=grid
+color1=002b7f
+size1=1
+size2=1
+
+overlay
+type=flag
+path=uk.flag
+x=0
+y=0
+width=10
+height=5
+
+overlay
+type=star seven
+color=ffffff
+size1=5
+size2=7.5
+size3=3
+size4=0
+
+overlay
+type=star seven
+color=ffffff
+size1=15
+size2=1.667
+size3=1.428
+size4=0
+
+overlay
+type=star seven
+color=ffffff
+size1=17.222
+size2=3.708
+size3=1.428
+size4=0
+
+overlay
+type=star seven
+color=ffffff
+size1=12.5
+size2=4.375
+size3=1.428
+size4=0
+
+overlay
+type=star
+color=ffffff
+size1=16
+size2=5.417
+size3=0.833
+size4=0
+
+overlay
+type=star seven
+color=ffffff
+size1=15
+size2=8.333
+size3=1.428
+size4=0

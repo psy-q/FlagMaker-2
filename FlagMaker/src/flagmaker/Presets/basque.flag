@@ -1,0 +1,21 @@
+name=Spain - Basque Country
+ratio=14:25
+gridSize=14:25
+
+division
+type=grid
+color1=dc241f
+size1=1
+size2=1
+
+overlay
+type=saltire
+color=009543
+size1=4
+
+overlay
+type=cross
+color=ffffff
+size1=12.5
+size2=7
+size3=2

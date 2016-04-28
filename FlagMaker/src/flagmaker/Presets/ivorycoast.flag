@@ -1,0 +1,12 @@
+name=Ivory Coast
+ratio=2:3
+gridSize=2:3
+
+division
+type=pales
+color1=f77f00
+color2=ffffff
+color3=009e60
+size1=1
+size2=1
+size3=1

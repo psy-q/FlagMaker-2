@@ -1,0 +1,36 @@
+name=Netherlands - Amsterdam
+ratio=2:3
+gridSize=6:9
+
+division
+type=fesses
+color1=ff0000
+color2=000000
+color3=ff0000
+size1=1
+size2=1
+size3=1
+
+overlay
+type=equatorial cross
+color=ffffff
+size1=2
+size2=3
+size3=2
+size4=1.11808854016322
+
+overlay
+type=equatorial cross
+color=ffffff
+size1=4.5
+size2=3
+size3=2
+size4=1.11808854016322
+
+overlay
+type=equatorial cross
+color=ffffff
+size1=7
+size2=3
+size3=2
+size4=1.11808854016322

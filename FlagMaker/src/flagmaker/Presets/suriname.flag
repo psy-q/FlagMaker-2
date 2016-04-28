@@ -1,0 +1,26 @@
+name=Suriname
+ratio=2:3
+gridSize=2:3
+
+division
+type=fesses
+color1=377e3f
+color2=ffffff
+color3=377e3f
+size1=1
+size2=3
+size3=1
+
+overlay
+type=line horizontal
+color=b40a2d
+size1=1
+size2=0.8
+
+overlay
+type=star
+color=ecc81d
+size1=1.5
+size2=1.04
+size3=0.82
+size4=0

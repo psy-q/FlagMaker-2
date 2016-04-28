@@ -1,0 +1,40 @@
+name=Netherlands - Aruba
+ratio=2:3
+gridSize=2:3
+
+division
+type=grid
+color1=4189dd
+color2=fedd00
+color3=007a3d
+size1=1
+size2=1
+size3=1
+
+overlay
+type=line horizontal
+color=f9d616
+size1=1.39
+size2=0.11
+
+overlay
+type=line horizontal
+color=f9d616
+size1=1.61
+size2=0.11
+
+overlay
+type=star four
+color=ffffff
+size1=0.45
+size2=0.45
+size3=0.7
+size4=0
+
+overlay
+type=star four
+color=d21034
+size1=0.45
+size2=0.45
+size3=0.55
+size4=0

@@ -1,0 +1,12 @@
+name=Guinea
+ratio=2:3
+gridSize=2:3
+
+division
+type=pales
+color1=ce1126
+color2=fcd116
+color3=009460
+size1=1
+size2=1
+size3=1

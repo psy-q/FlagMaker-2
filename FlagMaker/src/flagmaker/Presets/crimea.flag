@@ -1,0 +1,12 @@
+name=Ukraine - Crimea
+ratio=1:2
+gridSize=2:4
+
+division
+type=fesses
+color1=0065bd
+color2=ffffff
+color3=d52b1e
+size1=1
+size2=4
+size3=1

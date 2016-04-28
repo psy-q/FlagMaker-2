@@ -1,0 +1,12 @@
+name=Monaco
+ratio=4:5
+gridSize=4:5
+
+division
+type=grid
+color1=ce1126
+color2=ffffff
+color3=00a1de
+size1=1
+size2=2
+size3=1

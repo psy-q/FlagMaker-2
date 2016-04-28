@@ -1,0 +1,12 @@
+name=Bolivia
+ratio=2:3
+gridSize=2:3
+
+division
+type=fesses
+color1=d52b1e
+color2=fcd116
+color3=007934
+size1=1
+size2=1
+size3=1

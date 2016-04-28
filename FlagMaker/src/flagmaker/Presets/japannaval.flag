@@ -1,0 +1,25 @@
+name=Japan (naval ensign)
+ratio=2:3
+gridSize=12:18
+
+division
+type=grid
+color1=ffffff
+size1=1
+size2=1
+
+overlay
+type=ellipse
+color=bc002d
+size1=7
+size2=6
+size3=6
+size4=0
+
+overlay
+type=rays
+color=bc002d
+size1=7
+size2=6
+size3=16
+size4=13.5

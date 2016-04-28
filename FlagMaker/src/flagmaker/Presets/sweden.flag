@@ -1,0 +1,16 @@
+name=Sweden
+ratio=5:8
+gridSize=5:8
+
+division
+type=grid
+color1=005293
+size1=1
+size2=1
+
+overlay
+type=cross
+color=fecb00
+size1=3
+size2=2.5
+size3=1

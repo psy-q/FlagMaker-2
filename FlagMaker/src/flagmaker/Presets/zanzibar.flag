@@ -1,0 +1,20 @@
+name=Tanzania - Zanzibar
+ratio=2:3
+gridSize=6:9
+
+division
+type=fesses
+color1=00a3dd
+color2=000000
+color3=1eb53a
+size1=1
+size2=1
+size3=1
+
+overlay
+type=flag
+path=tanzania.flag
+x=0
+y=0
+width=3
+height=2

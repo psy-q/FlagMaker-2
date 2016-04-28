@@ -1,0 +1,12 @@
+name=Peru
+ratio=2:3
+gridSize=2:3
+
+division
+type=pales
+color1=d91023
+color2=ffffff
+color3=d91023
+size1=1
+size2=1
+size3=1

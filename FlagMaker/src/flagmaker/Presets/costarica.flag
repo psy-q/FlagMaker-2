@@ -1,0 +1,18 @@
+name=Costa Rica
+ratio=2:3
+gridSize=6:9
+
+division
+type=fesses
+color1=002b7f
+color2=ffffff
+color3=002b7f
+size1=1
+size2=4
+size3=1
+
+overlay
+type=line horizontal
+color=ce1126
+size1=3
+size2=2

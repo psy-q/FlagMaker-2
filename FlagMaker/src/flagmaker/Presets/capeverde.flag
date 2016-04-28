@@ -1,0 +1,34 @@
+name=Cape Verde
+ratio=2:3
+gridSize=12:18
+
+division
+type=fesses
+color1=003893
+color2=ffffff
+color3=003893
+size1=2
+size2=1
+size3=1
+
+overlay
+type=line horizontal
+color=ce1126
+size1=7.5
+size2=1
+
+overlay
+type=repeater radial
+x=6.75
+y=7.5
+radius=3
+count=10
+rotate=false
+
+overlay
+type=star
+color=fdc82f
+size1=0
+size2=0
+size3=7
+size4=0

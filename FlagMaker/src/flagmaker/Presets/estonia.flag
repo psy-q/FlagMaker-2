@@ -1,0 +1,12 @@
+name=Estonia
+ratio=7:11
+gridSize=7:11
+
+division
+type=fesses
+color1=4891d9
+color2=000000
+color3=ffffff
+size1=1
+size2=1
+size3=1

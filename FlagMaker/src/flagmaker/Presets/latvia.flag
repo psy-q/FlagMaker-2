@@ -1,0 +1,12 @@
+name=Latvia
+ratio=1:2
+gridSize=1:2
+
+division
+type=fesses
+color1=9e1b34
+color2=ffffff
+color3=9e1b34
+size1=2
+size2=1
+size3=2

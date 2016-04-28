@@ -1,0 +1,18 @@
+name=Botswana
+ratio=2:3
+gridSize=24:36
+
+division
+type=fesses
+color1=75aadb
+color2=ffffff
+color3=75aadb
+size1=9
+size2=6
+size3=9
+
+overlay
+type=line horizontal
+color=000000
+size1=12
+size2=4

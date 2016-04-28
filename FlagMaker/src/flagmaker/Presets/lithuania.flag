@@ -1,0 +1,12 @@
+name=Lithuania
+ratio=3:5
+gridSize=3:5
+
+division
+type=fesses
+color1=fdb913
+color2=006a44
+color3=c1272d
+size1=1
+size2=1
+size3=1

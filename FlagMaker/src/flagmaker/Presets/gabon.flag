@@ -1,0 +1,12 @@
+name=Gabon
+ratio=3:4
+gridSize=3:4
+
+division
+type=fesses
+color1=009e60
+color2=fcd116
+color3=3a75c4
+size1=1
+size2=1
+size3=1

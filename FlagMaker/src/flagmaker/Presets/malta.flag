@@ -1,0 +1,23 @@
+name=Malta
+ratio=2:3
+gridSize=4:6
+
+division
+type=grid
+color1=ffffff
+color2=cf142b
+color3=284e36
+size1=2
+size2=1
+size3=1
+
+overlay
+type=equatorial cross
+color=cccccc
+X=0.7
+Y=0.7
+Size=1
+Rotation=0
+Stroke=1
+StrokeCurved=0
+StrokeColor=cf142b

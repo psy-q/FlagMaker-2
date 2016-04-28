@@ -1,0 +1,29 @@
+name=Soviet Union
+ratio=1:2
+gridSize=6:12
+
+type=grid
+color1=cc0000
+color2=ffffff
+size1=1
+size2=1
+
+type=hammer and sickle
+Color=ffd700
+X=2
+Y=1.91
+Size=2
+Rotation=0
+Stroke=0
+StrokeColor=000000
+StrokeCurved=false
+
+type=star
+Color=00000000
+X=2
+Y=0.75
+Size=0.75
+Rotation=0
+Stroke=2
+StrokeColor=ffd700
+StrokeCurved=false

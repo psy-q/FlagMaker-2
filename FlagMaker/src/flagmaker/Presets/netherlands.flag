@@ -1,0 +1,12 @@
+name=Netherlands
+ratio=2:3
+gridSize=2:3
+
+division
+type=fesses
+color1=ae1c28
+color2=ffffff
+color3=21168b
+size1=1
+size2=1
+size3=1

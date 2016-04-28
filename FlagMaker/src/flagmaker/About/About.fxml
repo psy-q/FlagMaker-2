@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root id="vbox" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+			<tabs>
+				<Tab fx:id="tabCredits">
+					<content>
+						<ScrollPane fitToWidth="true">
+							<content>
+								<VBox fx:id="CreditBox" styleClass="padding">
+									<children>
+										<Label styleClass="header" fx:id="lblVersion" />
+									</children>
+								</VBox>
+							</content>
+						</ScrollPane>
+					</content>
+				</Tab>
+				<Tab fx:id="tabHistory">
+					<content>
+						<ScrollPane fitToWidth="true">
+							<content>
+								<VBox fx:id="HistoryBox" styleClass="padding" />
+							</content>
+						</ScrollPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
+</fx:root>

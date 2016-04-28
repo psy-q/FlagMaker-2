@@ -1,0 +1,19 @@
+name=United States - New Mexico
+ratio=2:3
+gridSize=8:12
+
+division
+type=grid
+color1=ffd700
+color2=fedd00
+color3=284e36
+size1=1
+size2=1
+size3=1
+
+overlay
+type=zia
+x=6
+y=4
+size=4
+color=bf0a30

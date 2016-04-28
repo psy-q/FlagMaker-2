@@ -1,0 +1,12 @@
+name=Belgium
+ratio=13:15
+gridSize=13:15
+
+division
+type=pales
+color1=000000
+color2=ffe936
+color3=ff0f21
+size1=1
+size2=1
+size3=1
