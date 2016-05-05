@@ -4,4 +4,4 @@ dist: trusty
 jdk:
   - oraclejdk8
   - oraclejdk7
-script: ant test
+script: cd FlagMaker && ant test
